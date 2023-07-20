@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+
+//navigates between different sections of the app
+
+
 struct ContentView: View {
     var body: some View {
         VStack {
