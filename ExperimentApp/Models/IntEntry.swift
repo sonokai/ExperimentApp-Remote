@@ -35,4 +35,7 @@ extension IntEntry {
         IntEntry(date: "7/4/23", independent: 7, dependent: 7),
         IntEntry(date: "7/5/23", independent: 8, dependent: 8)
     ]
+    static var newEntry : IntEntry{
+        IntEntry(date:"", independent: 0, dependent: 0)
+    }
 }

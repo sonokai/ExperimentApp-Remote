@@ -34,7 +34,7 @@ struct SleepView: View {
                         }
                     }) {
                         Image(systemName: "plus.circle.fill")
-                            .accessibilityLabel("Add attendee")
+                            .accessibilityLabel("Add new entry")
                     }
                     .disabled(date.isEmpty || dependent.isEmpty || independent.isEmpty)
                     

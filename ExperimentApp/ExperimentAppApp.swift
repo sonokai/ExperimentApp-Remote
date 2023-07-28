@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct ExperimentAppApp: App {
+    @State private var sleepEntries: [IntEntry] = IntEntry.sampleData
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ExperimentView(sleepEntries: $sleepEntries)
         }
     }
 }

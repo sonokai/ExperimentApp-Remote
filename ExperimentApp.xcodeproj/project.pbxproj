@@ -14,6 +14,10 @@
 		59EEFAEA2A58E7F500DA7D84 /* ExperimentAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEFAE92A58E7F500DA7D84 /* ExperimentAppTests.swift */; };
 		59EEFAF42A58E7F500DA7D84 /* ExperimentAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEFAF32A58E7F500DA7D84 /* ExperimentAppUITests.swift */; };
 		59EEFAF62A58E7F500DA7D84 /* ExperimentAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEFAF52A58E7F500DA7D84 /* ExperimentAppUITestsLaunchTests.swift */; };
+		6F7750A12A71A92B003BFA65 /* SleepView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A02A71A92B003BFA65 /* SleepView2.swift */; };
+		6F7750A32A71A9CE003BFA65 /* SleepProcedureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */; };
+		6F7750A52A71B08C003BFA65 /* SleepEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A42A71B08C003BFA65 /* SleepEditView.swift */; };
+		6F7750A92A745B7E003BFA65 /* ExperimentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A82A745B7E003BFA65 /* ExperimentView.swift */; };
 		6FDA3E492A6911040074A50C /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDA3E482A6911040074A50C /* SleepView.swift */; };
 		6FDA3E4E2A6921770074A50C /* IntEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDA3E4D2A6921770074A50C /* IntEntry.swift */; };
 		6FDA3E512A69E5510074A50C /* IntEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDA3E502A69E5510074A50C /* IntEntryView.swift */; };
@@ -47,6 +51,10 @@
 		59EEFAEF2A58E7F500DA7D84 /* ExperimentAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExperimentAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59EEFAF32A58E7F500DA7D84 /* ExperimentAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentAppUITests.swift; sourceTree = "<group>"; };
 		59EEFAF52A58E7F500DA7D84 /* ExperimentAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6F7750A02A71A92B003BFA65 /* SleepView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView2.swift; sourceTree = "<group>"; };
+		6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepProcedureView.swift; sourceTree = "<group>"; };
+		6F7750A42A71B08C003BFA65 /* SleepEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepEditView.swift; sourceTree = "<group>"; };
+		6F7750A82A745B7E003BFA65 /* ExperimentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentView.swift; sourceTree = "<group>"; };
 		6FDA3E482A6911040074A50C /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
 		6FDA3E4D2A6921770074A50C /* IntEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntEntry.swift; sourceTree = "<group>"; };
 		6FDA3E502A69E5510074A50C /* IntEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntEntryView.swift; sourceTree = "<group>"; };
@@ -140,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				6FDA3E482A6911040074A50C /* SleepView.swift */,
+				6F7750A02A71A92B003BFA65 /* SleepView2.swift */,
 			);
 			path = Experiments;
 			sourceTree = "<group>";
@@ -156,6 +165,9 @@
 			isa = PBXGroup;
 			children = (
 				6FDA3E502A69E5510074A50C /* IntEntryView.swift */,
+				6F7750A42A71B08C003BFA65 /* SleepEditView.swift */,
+				6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */,
+				6F7750A82A745B7E003BFA65 /* ExperimentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -290,9 +302,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F7750A92A745B7E003BFA65 /* ExperimentView.swift in Sources */,
+				6F7750A52A71B08C003BFA65 /* SleepEditView.swift in Sources */,
+				6F7750A32A71A9CE003BFA65 /* SleepProcedureView.swift in Sources */,
 				59EEFADB2A58E7F400DA7D84 /* ContentView.swift in Sources */,
 				59EEFAD92A58E7F400DA7D84 /* ExperimentAppApp.swift in Sources */,
 				6FDA3E4E2A6921770074A50C /* IntEntry.swift in Sources */,
+				6F7750A12A71A92B003BFA65 /* SleepView2.swift in Sources */,
 				6FDA3E492A6911040074A50C /* SleepView.swift in Sources */,
 				6FDA3E512A69E5510074A50C /* IntEntryView.swift in Sources */,
 			);
