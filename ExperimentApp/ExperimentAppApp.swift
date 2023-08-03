@@ -9,10 +9,11 @@ import SwiftUI
 
 @main
 struct ExperimentAppApp: App {
-    @State private var sleepEntries: [IntEntry] = IntEntry.sampleData
+    @State private var sleepEntries: [SleepEntry] = SleepEntry.sampleData
+    @State private var dayEntries: [DayEntry] = DayEntry.sampleData
     var body: some Scene {
         WindowGroup {
-            ExperimentView(sleepEntries: $sleepEntries)
+            ExperimentView(sleepEntries: $sleepEntries, dayEntries: $dayEntries)
         }
     }
 }
