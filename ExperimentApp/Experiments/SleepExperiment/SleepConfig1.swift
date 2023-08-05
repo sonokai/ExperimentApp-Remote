@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct SleepConfig1: View {
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
+        
         NavigationStack{
             VStack{
                 Text("Firstly, choose how you'd like to track your sleep")

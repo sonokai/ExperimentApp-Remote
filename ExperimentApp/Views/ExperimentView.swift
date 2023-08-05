@@ -25,7 +25,9 @@ struct ExperimentView: View {
                     }
                 }
                 Section(header: Text("Start a new experiment")){
-                    
+                    NavigationLink(destination:SleepIntroView()){
+                        Text("Start a sleep experiment")
+                    }
                 }
             
             }.navigationTitle("Experiments")

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SleepIntroView: View {
-    
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         NavigationStack{
             VStack{

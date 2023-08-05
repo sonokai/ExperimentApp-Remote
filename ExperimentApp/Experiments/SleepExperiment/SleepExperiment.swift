@@ -14,6 +14,7 @@ struct SleepExperiment: Identifiable{
     let independentVariable: IndependentVariable //ask user if they want to guess how much hours they slept on their own or only track bedtime, waketime, or both bedtime and waketime for the maximum data
     var entries: [SleepEntry] = []
     var notes: String = "Take notes here"
+    var name: String = "Sleep Experiment"
     
     
     init(id: UUID = UUID(), goalEntries: Int, dependentVariable: DependentVariable, independentVariable: IndependentVariable) {
@@ -22,6 +23,17 @@ struct SleepExperiment: Identifiable{
         self.dependentVariable = dependentVariable
         self.independentVariable = independentVariable
     }
+    //for testing
+    init(id: UUID = UUID(), goalEntries: Int, dependentVariable: DependentVariable, independentVariable: IndependentVariable, entries: [SleepEntry], name: String, notes: String) {
+        self.id = id
+        self.goalEntries = goalEntries
+        self.dependentVariable = dependentVariable
+        self.independentVariable = independentVariable
+        self.entries = entries
+        self.name = name
+        self.notes = notes
+    }
+    
 }
 enum DependentVariable: String{
     case productivity = "productivity"
@@ -33,6 +45,15 @@ enum IndependentVariable: String{
     case both = "both"
     case bedtime = "bedtime"
     case waketime = "waketime"
+}
+
+extension SleepExperiment{
+    static let emptyExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime)
+    
+    static let sampleExperiment1: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime, entries: SleepEntry.sampleData, name: "Customized Sleep Experiment", notes: "I took notes")
+    
+    
+    
 }
 //eventually make these enums private
 // eventually add functions here to calculate results
