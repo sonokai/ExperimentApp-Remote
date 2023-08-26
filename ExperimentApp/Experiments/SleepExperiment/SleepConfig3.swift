@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SleepConfig3: View {
-    let independentConfig: IndependentVariable
-    let dependentConfig: DependentVariable
+    let independentConfig: SleepExperiment.IndependentVariable
+    let dependentConfig: SleepExperiment.DependentVariable
     @State var sliderValue: Double = 20
     @State var entries: Int = 20
     
@@ -39,6 +39,6 @@ struct SleepConfig3: View {
 
 struct SleepConfig3_Previews: PreviewProvider {
     static var previews: some View {
-        SleepConfig3(independentConfig: .both, dependentConfig: .productivity)
+        SleepConfig3(independentConfig: SleepExperiment.IndependentVariable.both, dependentConfig: SleepExperiment.DependentVariable.productivity)
     }
 }

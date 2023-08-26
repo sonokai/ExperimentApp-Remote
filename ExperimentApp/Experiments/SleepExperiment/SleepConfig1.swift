@@ -18,7 +18,7 @@ struct SleepConfig1: View {
                 Text("Firstly, choose how you'd like to track your sleep")
                 
                 //make choice view to make this better
-                NavigationLink(destination: SleepConfig2(independentConfig: .bedtime)){
+                NavigationLink(destination: SleepConfig2(independentConfig: SleepExperiment.IndependentVariable.bedtime)){
                     Text("Bedtime")
                 }
                 NavigationLink(destination: SleepConfig2(independentConfig: .waketime)){

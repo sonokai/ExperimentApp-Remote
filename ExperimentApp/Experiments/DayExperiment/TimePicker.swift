@@ -14,7 +14,10 @@ struct TimePicker: View {
         Picker("Time",selection:$selection){
             ForEach(Time.allCases){time in
                 //ThemeView(theme: theme).tag(time)
-                TimeView(time:time)
+                HStack{
+                    TimeView(time:time).tag(time)
+                    Spacer()
+                }
             }
         }
         .pickerStyle(.navigationLink)

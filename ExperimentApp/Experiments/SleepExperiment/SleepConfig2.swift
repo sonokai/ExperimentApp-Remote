@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SleepConfig2: View {
-    let independentConfig: IndependentVariable
+    let independentConfig: SleepExperiment.IndependentVariable
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         NavigationStack{
@@ -18,7 +18,7 @@ struct SleepConfig2: View {
                 
                 Text("Next, choose a question (or both).")
                 
-                NavigationLink(destination: SleepConfig3(independentConfig: independentConfig, dependentConfig: .productivity)){
+                NavigationLink(destination: SleepConfig3(independentConfig: independentConfig, dependentConfig: SleepExperiment.DependentVariable.productivity)){
                     Text("How does \(independentConfig.rawValue) affect my productivity the next day?")
                 }
                 NavigationLink(destination: SleepConfig3(independentConfig: independentConfig, dependentConfig: .quality)){

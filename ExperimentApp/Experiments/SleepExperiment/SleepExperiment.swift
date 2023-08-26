@@ -35,16 +35,18 @@ struct SleepExperiment: Identifiable{
     }
     
 }
-enum DependentVariable: String{
-    case productivity = "productivity"
-    case quality = "quality"
-    case both = "both"
-}
-enum IndependentVariable: String{
-    case hoursSlept = "hours slept"
-    case both = "both"
-    case bedtime = "bedtime"
-    case waketime = "waketime"
+extension SleepExperiment{
+    enum DependentVariable: String{
+        case productivity = "productivity"
+        case quality = "quality"
+        case both = "both"
+    }
+    enum IndependentVariable: String{
+        case hoursSlept = "hours slept"
+        case both = "both"
+        case bedtime = "bedtime"
+        case waketime = "waketime"
+    }
 }
 
 extension SleepExperiment{

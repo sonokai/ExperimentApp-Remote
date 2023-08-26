@@ -14,6 +14,7 @@
 		59EEFAEA2A58E7F500DA7D84 /* ExperimentAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEFAE92A58E7F500DA7D84 /* ExperimentAppTests.swift */; };
 		59EEFAF42A58E7F500DA7D84 /* ExperimentAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEFAF32A58E7F500DA7D84 /* ExperimentAppUITests.swift */; };
 		59EEFAF62A58E7F500DA7D84 /* ExperimentAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEFAF52A58E7F500DA7D84 /* ExperimentAppUITestsLaunchTests.swift */; };
+		6F28AFEE2A9AA5D300FDCA0A /* DayExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFED2A9AA5D300FDCA0A /* DayExperiment.swift */; };
 		6F7750A12A71A92B003BFA65 /* SleepView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A02A71A92B003BFA65 /* SleepView2.swift */; };
 		6F7750A32A71A9CE003BFA65 /* SleepProcedureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */; };
 		6F7750A52A71B08C003BFA65 /* SleepEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A42A71B08C003BFA65 /* SleepEditView.swift */; };
@@ -69,6 +70,7 @@
 		59EEFAEF2A58E7F500DA7D84 /* ExperimentAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExperimentAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59EEFAF32A58E7F500DA7D84 /* ExperimentAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentAppUITests.swift; sourceTree = "<group>"; };
 		59EEFAF52A58E7F500DA7D84 /* ExperimentAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6F28AFED2A9AA5D300FDCA0A /* DayExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayExperiment.swift; sourceTree = "<group>"; };
 		6F7750A02A71A92B003BFA65 /* SleepView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView2.swift; sourceTree = "<group>"; };
 		6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepProcedureView.swift; sourceTree = "<group>"; };
 		6F7750A42A71B08C003BFA65 /* SleepEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepEditView.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 				6F7750BE2A7B7071003BFA65 /* TimePicker.swift */,
 				6F7750C12A7B70EE003BFA65 /* Time.swift */,
 				6F7750C32A7B74D3003BFA65 /* TimeView.swift */,
+				6F28AFED2A9AA5D300FDCA0A /* DayExperiment.swift */,
 			);
 			path = DayExperiment;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F7750C42A7B74D3003BFA65 /* TimeView.swift in Sources */,
+				6F28AFEE2A9AA5D300FDCA0A /* DayExperiment.swift in Sources */,
 				6F7750CC2A7C40BA003BFA65 /* SleepConfig1.swift in Sources */,
 				6F7750A92A745B7E003BFA65 /* ExperimentView.swift in Sources */,
 				6F7750A52A71B08C003BFA65 /* SleepEditView.swift in Sources */,
