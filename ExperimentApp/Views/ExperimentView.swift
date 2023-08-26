@@ -12,6 +12,8 @@ struct ExperimentView: View {
     
     @Binding var sleepEntries: [SleepEntry]
     @Binding var dayEntries: [DayEntry]
+    @Binding var sleepExperiments: [SleepExperiment]
+    
     
     var body: some View {
         NavigationStack{
@@ -29,6 +31,13 @@ struct ExperimentView: View {
                         Text("Start a sleep experiment")
                     }
                 }
+                Section(header: Text("Sleep Experiments")){
+                    ForEach($sleepExperiments) { sleepExperiment in
+                        NavigationLink(destination: SleepView3(sleepExperiment: sleepExperiment)
+                            .navigationTitle("Edit entry")) {
+                        }
+                    }
+                }
             
             }.navigationTitle("Experiments")
         }.navigationTitle("Experiments")
@@ -36,7 +45,7 @@ struct ExperimentView: View {
     
     struct ExperimentView_Previews: PreviewProvider {
         static var previews: some View {
-            ExperimentView(sleepEntries: .constant(SleepEntry.sampleData), dayEntries: .constant(DayEntry.sampleData))
+            ExperimentView(sleepEntries: .constant(SleepEntry.sampleData), dayEntries: .constant(DayEntry.sampleData), sleepExperiments: .constant(SleepExperiment.experimentArray))
         }
     }
 }

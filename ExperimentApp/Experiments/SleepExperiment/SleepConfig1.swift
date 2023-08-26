@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SleepConfig1: View {
     @Environment(\.presentationMode) var presentationMode
+    
+    
     var body: some View {
         
         NavigationStack{

@@ -183,7 +183,6 @@
 		6F7750AC2A74ABAD003BFA65 /* SleepExperiment */ = {
 			isa = PBXGroup;
 			children = (
-				6F7750D52A7DC8F6003BFA65 /* SleepExperimentV2 */,
 				6F7750A02A71A92B003BFA65 /* SleepView2.swift */,
 				6F7750AA2A748AEA003BFA65 /* SleepEntry.swift */,
 				6F7750AD2A74B9D6003BFA65 /* SimplifiedSleepView.swift */,
@@ -224,13 +223,6 @@
 				6F7750D12A7D0ADB003BFA65 /* Test.swift */,
 			);
 			path = wWhoops;
-			sourceTree = "<group>";
-		};
-		6F7750D52A7DC8F6003BFA65 /* SleepExperimentV2 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SleepExperimentV2;
 			sourceTree = "<group>";
 		};
 		6FDA3E472A6910C50074A50C /* Experiments */ = {

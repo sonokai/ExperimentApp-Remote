@@ -52,7 +52,9 @@ extension SleepExperiment{
     
     static let sampleExperiment1: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime, entries: SleepEntry.sampleData, name: "Customized Sleep Experiment", notes: "I took notes")
     
-    
+    static let experimentArray: [SleepExperiment] = [
+    sampleExperiment1, sampleExperiment1, sampleExperiment1
+    ]
     
 }
 //eventually make these enums private
