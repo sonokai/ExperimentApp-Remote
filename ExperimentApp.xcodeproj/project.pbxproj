@@ -18,6 +18,7 @@
 		6F28AFF02A9BBE3E00FDCA0A /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFEF2A9BBE3E00FDCA0A /* AppData.swift */; };
 		6F28AFF22A9BBFA300FDCA0A /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFF12A9BBFA300FDCA0A /* DataStore.swift */; };
 		6F28AFF42A9BCD2100FDCA0A /* ExperimentView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFF32A9BCD2100FDCA0A /* ExperimentView2.swift */; };
+		6F28AFF62A9BF7BB00FDCA0A /* NewExperimentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFF52A9BF7BB00FDCA0A /* NewExperimentView.swift */; };
 		6F7750A12A71A92B003BFA65 /* SleepView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A02A71A92B003BFA65 /* SleepView2.swift */; };
 		6F7750A32A71A9CE003BFA65 /* SleepProcedureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */; };
 		6F7750A52A71B08C003BFA65 /* SleepEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A42A71B08C003BFA65 /* SleepEditView.swift */; };
@@ -77,6 +78,7 @@
 		6F28AFEF2A9BBE3E00FDCA0A /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		6F28AFF12A9BBFA300FDCA0A /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		6F28AFF32A9BCD2100FDCA0A /* ExperimentView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentView2.swift; sourceTree = "<group>"; };
+		6F28AFF52A9BF7BB00FDCA0A /* NewExperimentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExperimentView.swift; sourceTree = "<group>"; };
 		6F7750A02A71A92B003BFA65 /* SleepView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView2.swift; sourceTree = "<group>"; };
 		6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepProcedureView.swift; sourceTree = "<group>"; };
 		6F7750A42A71B08C003BFA65 /* SleepEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepEditView.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			children = (
 				6F7750A82A745B7E003BFA65 /* ExperimentView.swift */,
 				6F28AFF32A9BCD2100FDCA0A /* ExperimentView2.swift */,
+				6F28AFF52A9BF7BB00FDCA0A /* NewExperimentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				6F28AFF42A9BCD2100FDCA0A /* ExperimentView2.swift in Sources */,
 				6FDA3E4E2A6921770074A50C /* IntEntry.swift in Sources */,
 				6F7750A12A71A92B003BFA65 /* SleepView2.swift in Sources */,
+				6F28AFF62A9BF7BB00FDCA0A /* NewExperimentView.swift in Sources */,
 				6FDA3E492A6911040074A50C /* SleepView.swift in Sources */,
 				6F7750D72A7DD14E003BFA65 /* Todo.swift in Sources */,
 				6F7750CE2A7C4374003BFA65 /* SleepConfig2.swift in Sources */,

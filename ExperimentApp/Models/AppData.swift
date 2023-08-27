@@ -17,4 +17,5 @@ struct AppData: Codable{
     }
     
     static var emptyData: AppData = AppData(sleepExperiments: [], dayExperiments: [])
+    static var sampleData: AppData = AppData(sleepExperiments: [SleepExperiment.sampleExperiment1], dayExperiments: [DayExperiment.sampleExperiment])
 }
