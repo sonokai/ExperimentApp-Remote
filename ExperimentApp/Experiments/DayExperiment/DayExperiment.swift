@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DayExperiment: Identifiable{
+struct DayExperiment: Identifiable, Codable{
     let id: UUID
     let goalEntries: Int //ask user how many entries they want to have
    // let time: Time //will be the independent variable
@@ -15,7 +15,7 @@ struct DayExperiment: Identifiable{
     var entries: [DayEntry] = []
     var notes: String = "Take notes here"
     var name: String = "Time of day Experiment"
-    var variableType: VariableType = .twoTimesOfDay
+  
     
     
     
@@ -38,12 +38,13 @@ struct DayExperiment: Identifiable{
 
 extension DayExperiment{
     
-    enum VariableType: String{
+    enum VariableType: String, Codable{
         case twoTimesOfDay = "twoTimesOfDay"
         case threeTimesOfDay = "threeTimesOfDay"
         case fourTimesOfDay = "fourTimesOfDay"
     }  //might be totally unnecessary
-    struct IndependentVariable: Identifiable{
+    
+    struct IndependentVariable: Identifiable, Codable{
         let id: UUID
         let variableType: VariableType
         let hasMorning: Bool

@@ -41,7 +41,7 @@ struct SleepView3: View {
                         Text("Notes")
                     }
                 }
-                .navigationTitle(Text("Sleep Experiment"))
+                .navigationTitle(Text("\(sleepExperiment.name)"))
                 
                 
                 Section(header: Text("Entries")) {

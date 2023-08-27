@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SleepExperiment: Identifiable{
+struct SleepExperiment: Identifiable, Codable{
     let id: UUID
     let goalEntries: Int //ask user how many entries they want to have
     let dependentVariable: DependentVariable //ask user if they want to track how sleep affects their productivity or quality of day
@@ -36,12 +36,12 @@ struct SleepExperiment: Identifiable{
     
 }
 extension SleepExperiment{
-    enum DependentVariable: String{
+    enum DependentVariable: String, Codable{
         case productivity = "productivity"
         case quality = "quality"
         case both = "both"
     }
-    enum IndependentVariable: String{
+    enum IndependentVariable: String, Codable{
         case hoursSlept = "hours slept"
         case both = "both"
         case bedtime = "bedtime"
@@ -52,10 +52,12 @@ extension SleepExperiment{
 extension SleepExperiment{
     static let emptyExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime)
     
-    static let sampleExperiment1: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime, entries: SleepEntry.sampleData, name: "Customized Sleep Experiment", notes: "I took notes")
+    static let sampleExperiment1: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime, entries: SleepEntry.sampleData, name: "Sleep Experiment 1", notes: "I took notes")
+    static let sampleExperiment2: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime, entries: SleepEntry.sampleData, name: "Sleep Experiment 2", notes: "I took notes")
+    static let sampleExperiment3: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime, entries: SleepEntry.sampleData, name: "Sleep Experiment 3", notes: "I took notes")
     
     static let experimentArray: [SleepExperiment] = [
-    sampleExperiment1, sampleExperiment1, sampleExperiment1
+    sampleExperiment1, sampleExperiment2, sampleExperiment3
     ]
     
 }

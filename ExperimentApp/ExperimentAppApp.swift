@@ -10,11 +10,32 @@ import SwiftUI
 @main
 struct ExperimentAppApp: App {
     @State private var sleepEntries: [SleepEntry] = SleepEntry.sampleData
-    @State private var dayEntries: [DayEntry] = DayEntry.sampleData
+    @State private var dayExperiment: DayExperiment = DayExperiment.sampleExperiment
     @State private var sleepExperiments: [SleepExperiment] = []
+    
+    @StateObject private var store = DataStore()
+    
     var body: some Scene {
         WindowGroup {
-            ExperimentView(sleepEntries: $sleepEntries, dayEntries: $dayEntries, sleepExperiments: $sleepExperiments)
+            ExperimentView(sleepEntries: $sleepEntries, dayExperiment: $dayExperiment, sleepExperiments: $sleepExperiments){
+                //we want to have experimentview(data: $store.data)
+                Task {
+                    do {
+                        try await store.save(appdata: store.data)
+                    } catch {
+                        fatalError(error.localizedDescription)
+                    }
+                }
+            }
+            .task{
+                do {
+                    try await store.load()
+                } catch {
+                    fatalError(error.localizedDescription)
+                }
+            }
+            
+            
         }
     }
 }

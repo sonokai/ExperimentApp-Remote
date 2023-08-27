@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DayEntry: Identifiable{
+struct DayEntry: Identifiable, Codable{
     let id: UUID
     var date: Date
     var time: Time

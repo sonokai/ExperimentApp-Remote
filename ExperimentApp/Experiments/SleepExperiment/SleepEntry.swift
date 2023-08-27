@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SleepEntry: Identifiable {
+struct SleepEntry: Identifiable, Codable {
     let id: UUID
     var date: Date
     var bedtime: Date

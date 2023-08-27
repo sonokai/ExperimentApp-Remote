@@ -6,7 +6,7 @@
 //
 
 import Foundation
-enum Time: String, CaseIterable, Identifiable{
+enum Time: String, CaseIterable, Identifiable, Codable{
     case morning = "Morning"
     case afternoon = "Afternoon"
     case evening = "Evening"
