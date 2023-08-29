@@ -36,16 +36,34 @@ struct SleepExperiment: Identifiable, Codable{
     
 }
 extension SleepExperiment{
-    enum DependentVariable: String, Codable{
+    enum DependentVariable: String, Codable, CaseIterable, Identifiable{
+        var id: Self{
+            return self
+        }
         case productivity = "productivity"
         case quality = "quality"
         case both = "both"
+        
+        var name: String {
+            rawValue.capitalized
+        }
     }
-    enum IndependentVariable: String, Codable{
-        case hoursSlept = "hours slept"
-        case both = "both"
+    enum IndependentVariable: String, Codable, CaseIterable, Identifiable{
+        var id: Self {
+            
+            return self
+        }
+        
+        
+        
         case bedtime = "bedtime"
         case waketime = "waketime"
+        case both = "both"
+        case hoursSlept = "hours slept"
+        
+        var name: String {
+            rawValue.capitalized
+        }
     }
 }
 

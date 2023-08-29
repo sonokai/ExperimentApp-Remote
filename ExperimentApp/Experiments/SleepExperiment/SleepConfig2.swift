@@ -8,27 +8,64 @@
 import SwiftUI
 
 struct SleepConfig2: View {
-    let independentConfig: SleepExperiment.IndependentVariable
-    @Environment(\.presentationMode) var presentationMode
+    
+    
+    @Binding var dependentVariable: SleepExperiment.DependentVariable
+    @State var hasSelected = false
     var body: some View {
+        
         NavigationStack{
+            
             VStack{
-                Text("You chose to track \(independentConfig.rawValue)")
+                Text("Choose a question.")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.headline)
+                    .padding(1)
+                ForEach(SleepExperiment.DependentVariable.allCases){ variable in
+                    
+                        
+                        HStack{
+                            VStack{
+                                Text(variable.name)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                switch(variable.name){
+                                case "Productivity":
+                                    Text("How do my sleep patterns affect my productivity?")
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .font(.caption)
+                                case "Quality":
+                                    Text("How do my sleep patterns affect the quality of my day?")
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .font(.caption)
+                                case "Both":
+                                    Text("How do my sleep patterns affect my productivity and my quality of day?")
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .font(.caption)
+                                default:
+                                    Text("default")
+                                }
+                            }
+                            Spacer()
+                            if(hasSelected == false || dependentVariable != variable){
+                                Button("Choose"){
+                                    dependentVariable = variable
+                                    hasSelected = true
+                                }
+                            } else {
+                                Text("Selected")
+                            }
+                            
+                            
+                            
+                        }
+                        .padding(.horizontal)
+                        .padding(.vertical,1)
+                       
+                        
+                    
+                    
+                }.buttonStyle(.borderless)
                 
-                
-                Text("Next, choose a question (or both).")
-                
-                NavigationLink(destination: SleepConfig3(independentConfig: independentConfig, dependentConfig: SleepExperiment.DependentVariable.productivity)){
-                    Text("How does \(independentConfig.rawValue) affect my productivity the next day?")
-                }
-                NavigationLink(destination: SleepConfig3(independentConfig: independentConfig, dependentConfig: .quality)){
-                    Text("How does \(independentConfig.rawValue) affect the quality of my next day?")
-                }
-                NavigationLink(destination: SleepConfig3(independentConfig: independentConfig, dependentConfig: .both)){
-                    Text("Both questions")
-                }
-                ProgressView(value: 2, total: 3)
-                Text("Page 2/3")
             }
         }
     }
@@ -36,7 +73,7 @@ struct SleepConfig2: View {
 
 struct SleepConfig2_Previews: PreviewProvider {
     static var previews: some View {
-        SleepConfig2(independentConfig: .bedtime)
+        SleepConfig2(dependentVariable: .constant(.both))
         
     }
 }

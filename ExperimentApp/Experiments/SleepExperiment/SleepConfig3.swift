@@ -8,30 +8,43 @@
 import SwiftUI
 
 struct SleepConfig3: View {
-    let independentConfig: SleepExperiment.IndependentVariable
-    let dependentConfig: SleepExperiment.DependentVariable
     @State var sliderValue: Double = 20
-    @State var entries: Int = 20
+    @Binding var goalEntries: Int
     
-    @Environment(\.presentationMode) var presentationMode
+    
     
     var body: some View {
         VStack{
-            Text("You chose \(dependentConfig.rawValue)")
-            Text("Finally, choose a goal amount of entries")
+            
+            Text("Choose a goal amount of entries.")
+                .padding(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.headline)
+            Text("The more entries you have, the more your results can conclude.")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.caption)
+                .padding(.horizontal).padding(.vertical, 1)
+            Text("5+ entries: A general idea of how much sleep affects your day")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.caption)
+                .padding(.horizontal).padding(.vertical, 1)
+            Text("20+ entries: Statistical significance")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.caption)
+                .padding(.horizontal).padding(.vertical, 1)
+            Text("30+ entries: Make conclusions about how sleep affects your day")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.caption)
+                .padding(.horizontal).padding(.vertical, 1)
+            
+            //review the statistics behind this
             HStack{
                 Slider(value: $sliderValue, in: 5...40, step: 0.1).onChange(of: sliderValue) { newValue in
-                    entries = Int(newValue)
+                    goalEntries = Int(newValue)
                 }
-                Text("\(entries)")
+                Text("\(goalEntries)")
             }
-            Button("Return to Main View") {
-                presentationMode.wrappedValue.dismiss()
-                presentationMode.wrappedValue.dismiss()
-                presentationMode.wrappedValue.dismiss()
-                presentationMode.wrappedValue.dismiss()
-            }
-            //doesn't work yet
+            
         }
         
     }
@@ -39,6 +52,6 @@ struct SleepConfig3: View {
 
 struct SleepConfig3_Previews: PreviewProvider {
     static var previews: some View {
-        SleepConfig3(independentConfig: SleepExperiment.IndependentVariable.both, dependentConfig: SleepExperiment.DependentVariable.productivity)
+        SleepConfig3(goalEntries: .constant(20))
     }
 }

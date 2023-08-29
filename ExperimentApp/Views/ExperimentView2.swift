@@ -42,7 +42,7 @@ struct ExperimentView2: View {
             }
             .sheet(isPresented: $isPresentingSheetView){
                 NavigationStack{
-                    NewExperimentView(appData: $appData)
+                    NewExperimentView(appData: $appData, isPresentingSheetView: $isPresentingSheetView)
                         .navigationTitle("New Experiment")
                         .toolbar{
                             ToolbarItem(placement: .confirmationAction){

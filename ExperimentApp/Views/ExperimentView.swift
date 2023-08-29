@@ -28,7 +28,7 @@ struct ExperimentView: View {
                     }
                 }
                 Section(header: Text("Start a new experiment")){
-                    NavigationLink(destination:SleepIntroView()){
+                    NavigationLink(destination:SleepIntroView(sleepExperiments: .constant(SleepExperiment.experimentArray), isPresentingSheetView: .constant(true))){
                         Text("Start a sleep experiment")
                     }
                 }
