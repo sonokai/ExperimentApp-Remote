@@ -9,9 +9,10 @@ import SwiftUI
 
 struct ExperimentView2: View {
     @Environment (\.scenePhase) private var scenePhase
-    let saveAction : () -> Void
+    
     @Binding var appData: AppData
     @State var isPresentingSheetView = false
+    let saveAction : () -> Void
     
     var body: some View {
         NavigationStack{
@@ -65,6 +66,6 @@ struct ExperimentView2: View {
 
 struct ExperimentView2_Previews: PreviewProvider {
     static var previews: some View {
-        ExperimentView2(saveAction: {}, appData: .constant(AppData.sampleData))
+        ExperimentView2(appData: .constant(AppData.sampleData), saveAction: {})
     }
 }

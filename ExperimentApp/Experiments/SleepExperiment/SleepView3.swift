@@ -25,9 +25,10 @@ struct SleepView3: View {
                         .toolbar {
                         Button("New entry") {
                             sleepExperiment.entries.append(newEntry)
-                            //immediately add a new entry and present a sleepeditview as a sheet to edit that entry
-                            isAddingNew = true
-                            
+                            //immediately add a new entry and present a sleepeditview as a sheet to edit that entry'
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
+                                isAddingNew = true
+                            }
                         }
                     }
                     
@@ -45,20 +46,24 @@ struct SleepView3: View {
                 
                 
                 Section(header: Text("Entries")) {
+                    
                     ForEach($sleepExperiment.entries) { entryBinding in
-                        NavigationLink(destination: SleepEditView(entry:entryBinding).navigationTitle("Edit entry")) {
-                            SimplifiedSleepView(entry: entryBinding)
+                        NavigationLink(destination: SleepEditView(entry:entryBinding, sleepExperiment: sleepExperiment).navigationTitle("Edit entry")) {
+                            SimplifiedSleepView(sleepExperiment: sleepExperiment, entry: entryBinding)
                         }
                     }
                     .onDelete { indices in
                         deleteEntries(at: indices)
                     }
+                     
+                    
                 }
                                 
             }.sheet(isPresented: $isAddingNew) {
                 
                 NavigationStack {
-                    SleepEditView(entry: $sleepExperiment.entries[sleepExperiment.entries.count-1])// return the last item in entries because when the button was pressed, an empty entry was added
+                    
+                    SleepEditView(entry: $sleepExperiment.entries[sleepExperiment.entries.count-1], sleepExperiment: sleepExperiment)// return the last item in entries because when the button was pressed, an empty entry was added
                         .navigationTitle("New Entry")
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction) {
@@ -69,6 +74,7 @@ struct SleepView3: View {
                             }
                         }
                 }
+                 
             }
 
             

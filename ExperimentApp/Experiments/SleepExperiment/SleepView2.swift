@@ -45,8 +45,8 @@ struct SleepView2: View {
                 
                 Section(header: Text("Entries")) {
                     ForEach($entries) { entryBinding in
-                        NavigationLink(destination: SleepEditView(entry:entryBinding).navigationTitle("Edit entry")) {
-                            SimplifiedSleepView(entry: entryBinding)
+                        NavigationLink(destination: SleepEditView(entry:entryBinding, sleepExperiment: SleepExperiment.sampleExperiment1).navigationTitle("Edit entry")) {
+                            SimplifiedSleepView(sleepExperiment: SleepExperiment.sampleExperiment1, entry: entryBinding)
                         }
                     }
                     .onDelete { indices in
@@ -57,7 +57,7 @@ struct SleepView2: View {
             }.sheet(isPresented: $isAddingNew) {
                 
                 NavigationStack {
-                    SleepEditView(entry: $entries[entries.count-1])// return the last item in entries because when the button was pressed, an empty entry was added
+                    SleepEditView(entry: $entries[entries.count-1], sleepExperiment: SleepExperiment.sampleExperiment1)// return the last item in entries because when the button was pressed, an empty entry was added
                         .navigationTitle("New Entry")
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction) {

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SimplifiedSleepView: View {
+    var sleepExperiment: SleepExperiment
     @Binding var entry : SleepEntry
     var body: some View {
         VStack(alignment: .leading) {
@@ -17,10 +18,28 @@ struct SimplifiedSleepView: View {
                 .accessibilityAddTraits(.isHeader)
             Spacer()
             HStack {
-                Label("Hours of sleep: \(entry.timeSlept)", systemImage: "clock")
+                switch(sleepExperiment.independentVariable){
+                case .bedtime:
+                    Label("Bedtime: \(hourAndMinute(date: entry.bedtime))", systemImage: "clock")
+                case .waketime:
+                    Label("Wake time: \(hourAndMinute(date: entry.waketime))", systemImage: "clock")
+                case .both:
+                    Label("Hours of sleep: \(entry.timeSlept)", systemImage: "clock")
+                case .hoursSlept:
+                    Label("Hours of sleep: \(entry.hoursSlept):\(entry.minutesSlept)", systemImage: "clock")
+                }
+                
                 Spacer()
-                Label("Quality of day: \(entry.quality)", systemImage: "person")
-                    
+                
+                switch(sleepExperiment.dependentVariable){
+                case .productivity:
+                    Label("Productivity: \(entry.productivity)", systemImage: "person")
+                case .quality:
+                    Label("Quality of day: \(entry.quality)", systemImage: "person")
+                case .both:
+                    Label("Quality of day: \(entry.quality)", systemImage: "person")
+                }
+                            
             }
             .font(.caption)
         }
@@ -29,15 +48,27 @@ struct SimplifiedSleepView: View {
 }
 
 private func formattedDate(date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        return dateFormatter.string(from: date)
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .medium
+    dateFormatter.timeStyle = .none
+    return String(dateFormatter.string(from: date).dropLast(6))
+}
+/// returns hour and minute string from a Date ex: (3:26)
+private func hourAndMinute(date: Date) -> String{
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "HH:mm"
+    
+    var time = dateFormatter.string(from: date)
+    if(time.first == "0") {
+        return String(time.dropFirst())  //string is necessary here because dropFirst() returns a substring
+    }
+    return time
+        
 }
 
 struct SimplifiedSleepView_Previews: PreviewProvider {
     static var previews: some View {
-        SimplifiedSleepView(entry:.constant(SleepEntry.newEntry))
+        SimplifiedSleepView(sleepExperiment: SleepExperiment.sampleExperiment1, entry:.constant(SleepEntry.newEntry))
     }
 }
 
