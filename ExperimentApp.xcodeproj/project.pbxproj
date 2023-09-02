@@ -199,20 +199,19 @@
 		6F7750AC2A74ABAD003BFA65 /* SleepExperiment */ = {
 			isa = PBXGroup;
 			children = (
-				6F7750A02A71A92B003BFA65 /* SleepView2.swift */,
+				6F7750C92A7BA50E003BFA65 /* SleepExperiment.swift */,
 				6F7750AA2A748AEA003BFA65 /* SleepEntry.swift */,
+				6F7750D32A7D12CA003BFA65 /* SleepView3.swift */,
+				6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */,
 				6F7750AD2A74B9D6003BFA65 /* SimplifiedSleepView.swift */,
 				6F7750A42A71B08C003BFA65 /* SleepEditView.swift */,
 				6F28AFFB2A9F6D8000FDCA0A /* SliderView.swift */,
 				6F28AFF92A9F612D00FDCA0A /* TimeSelector.swift */,
-				6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */,
 				6F7750C52A7BA3F5003BFA65 /* SleepIntroView.swift */,
 				6F7750CB2A7C40BA003BFA65 /* SleepConfig1.swift */,
 				6F7750CD2A7C4374003BFA65 /* SleepConfig2.swift */,
 				6F7750CF2A7C4382003BFA65 /* SleepConfig3.swift */,
 				6F28AFF72A9E46EC00FDCA0A /* SleepConfig4.swift */,
-				6F7750C92A7BA50E003BFA65 /* SleepExperiment.swift */,
-				6F7750D32A7D12CA003BFA65 /* SleepView3.swift */,
 			);
 			path = SleepExperiment;
 			sourceTree = "<group>";
@@ -220,6 +219,7 @@
 		6F7750B02A7B40F2003BFA65 /* DayExperiment */ = {
 			isa = PBXGroup;
 			children = (
+				6F28AFED2A9AA5D300FDCA0A /* DayExperiment.swift */,
 				6F7750B12A7B41B9003BFA65 /* DayProcedureView.swift */,
 				6F7750B32A7B4370003BFA65 /* DayEntry.swift */,
 				6F7750B62A7B4772003BFA65 /* DayView.swift */,
@@ -228,7 +228,6 @@
 				6F7750BE2A7B7071003BFA65 /* TimePicker.swift */,
 				6F7750C12A7B70EE003BFA65 /* Time.swift */,
 				6F7750C32A7B74D3003BFA65 /* TimeView.swift */,
-				6F28AFED2A9AA5D300FDCA0A /* DayExperiment.swift */,
 			);
 			path = DayExperiment;
 			sourceTree = "<group>";
@@ -241,6 +240,7 @@
 				6FDA3E4D2A6921770074A50C /* IntEntry.swift */,
 				6FDA3E502A69E5510074A50C /* IntEntryView.swift */,
 				6F7750D12A7D0ADB003BFA65 /* Test.swift */,
+				6F7750A02A71A92B003BFA65 /* SleepView2.swift */,
 			);
 			path = wWhoops;
 			sourceTree = "<group>";

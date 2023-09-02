@@ -71,71 +71,8 @@ struct SleepConfig1: View {
                     .padding(.horizontal)
                     .padding(.vertical, 1)
                 
-                //this doesn't work because the button just assigns the selected value to the last possible case idk how to fix so we will just use inefficient code
-                //it actually does work if we use .buttonStyle(BorderlessButtonStyle() bc for some reason using a button in form presses every single button in it
-                /*
-                 
-                 HStack{
-                 
-                 Text("Bedtime")
-                 Spacer()
-                 if(hasSelected == false || independentVariable != .bedtime){
-                 Button("Choose"){
-                 independentVariable = .bedtime
-                 hasSelected = true
-                 }
-                 } else {
-                 Text("Selected")
-                 }
-                 
-                 }.padding(.horizontal)
-                 
-                 HStack{
-                 
-                 Text("Waketime")
-                 Spacer()
-                 if(hasSelected == false || independentVariable != .waketime){
-                 Button("Choose"){
-                 independentVariable = .waketime
-                 hasSelected = true
-                 }
-                 } else {
-                 Text("Selected")
-                 }
-                 
-                 }.padding(.horizontal)
-                 
-                 HStack{
-                 
-                 Text("Both bedtime and waketime")
-                 Spacer()
-                 if(hasSelected == false || independentVariable != .both){
-                 Button("Choose"){
-                 independentVariable = .both
-                 hasSelected = true
-                 }
-                 } else {
-                 Text("Selected")
-                 }
-                 
-                 }.padding(.horizontal)
-                 
-                 HStack{
-                 
-                 Text("Hours slept")
-                 Spacer()
-                 if(hasSelected == false || independentVariable != .hoursSlept){
-                 Button("Choose"){
-                 independentVariable = .hoursSlept
-                 hasSelected = true
-                 }
-                 } else {
-                 Text("Selected")
-                 }
-                 
-                 }.padding(.horizontal)
-                 
-                 */
+
+                //the code only works if we use .buttonStyle(BorderlessButtonStyle() bc for some reason using a button in form presses every single button in it
                 
                 
                 
