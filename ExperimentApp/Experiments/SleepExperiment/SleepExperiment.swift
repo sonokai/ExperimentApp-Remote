@@ -79,5 +79,5 @@ extension SleepExperiment{
     ]
     
 }
-//eventually make these enums private
+
 // eventually add functions here to calculate results

@@ -14,8 +14,8 @@ struct TimeSelector: View {
         HStack{
             
             Picker("Hours", selection: $hours) {
-                Text("").tag("")
-                ForEach(0...12, id: \.self) { hour in
+                
+                ForEach(0...23, id: \.self) { hour in
                     Text("\(hour)")
                 }
             }.pickerStyle(.wheel)
@@ -23,8 +23,8 @@ struct TimeSelector: View {
             Text("Hours")
             
             Picker("Minutes", selection: $minutes) {
-                Text("").tag("") //??
-                ForEach(0...12, id: \.self) { hour in
+                
+                ForEach(0...59, id: \.self) { hour in
                     Text("\(hour)")
                 }
             }.pickerStyle(.wheel)
