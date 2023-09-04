@@ -10,7 +10,7 @@ import SwiftUI
 struct DayEditView: View {
     @Binding var entry: DayEntry
     @State var date: Date = Date()
-    @State var time: Time = .morning
+    @State var time: DayExperiment.Time = .morning
     @State var productivity: Int = 1
     @State private var sliderValue: Double = 5
     @Environment(\.presentationMode) private var presentationMode

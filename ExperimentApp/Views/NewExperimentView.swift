@@ -18,7 +18,7 @@ struct NewExperimentView: View {
                     NavigationLink(destination: SleepIntroView(sleepExperiments: $appData.sleepExperiments, isPresentingSheetView: $isPresentingSheetView)){
                         Text("Start a sleep experiment")
                     }
-                    NavigationLink(destination: Text("Day config view")){
+                    NavigationLink(destination: DaySetupView(dayExperiments: $appData.dayExperiments)){
                         Text("Start a day experiment")
                     }
                 }

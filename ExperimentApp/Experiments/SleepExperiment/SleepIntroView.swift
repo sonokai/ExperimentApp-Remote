@@ -22,8 +22,8 @@ struct SleepIntroView: View {
             Form{
                 
                 Text("Let's set up your sleep experiment.")
-                SleepConfig1(independentVariable: $independentVariable)
-                SleepConfig2(dependentVariable: $dependentVariable)
+                SleepSetup1(independentVariable: $independentVariable)
+                SleepSetup2(dependentVariable: $dependentVariable)
                 SleepConfig3(goalEntries: $goalEntries)
                 SleepConfig4(name: $name)
                 

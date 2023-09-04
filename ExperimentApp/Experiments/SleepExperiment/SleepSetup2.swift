@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SleepConfig2: View {
+struct SleepSetup2: View {
     
     
     @Binding var dependentVariable: SleepExperiment.DependentVariable
@@ -73,7 +73,7 @@ struct SleepConfig2: View {
 
 struct SleepConfig2_Previews: PreviewProvider {
     static var previews: some View {
-        SleepConfig2(dependentVariable: .constant(.both))
+        SleepSetup2(dependentVariable: .constant(.both))
         
     }
 }

@@ -12,6 +12,7 @@ struct DayExperiment: Identifiable, Codable{
     let goalEntries: Int //ask user how many entries they want to have
    // let time: Time //will be the independent variable
     let independentVariable: IndependentVariable
+   // let dependentVariable: DependentVariable
     var entries: [DayEntry] = []
     var notes: String = "Take notes here"
     var name: String = "Time of day Experiment"
@@ -23,12 +24,14 @@ struct DayExperiment: Identifiable, Codable{
         self.id = id
         self.goalEntries = goalEntries
         self.independentVariable = independentVariable
+     //   self.dependentVariable = dependentVariable
     }
     //for testing
     init(id: UUID = UUID(), goalEntries: Int, independentVariable: IndependentVariable, entries: [DayEntry], name: String, notes: String) {
         self.id = id
         self.goalEntries = goalEntries
         self.independentVariable = independentVariable
+   //     self.dependentVariable = dependentVariable
         self.entries = entries
         self.name = name
         self.notes = notes
@@ -36,34 +39,73 @@ struct DayExperiment: Identifiable, Codable{
     
 }
 
+
 extension DayExperiment{
+    enum DependentVariable: String, CaseIterable, Codable{
+        case plannedToDoneRatio = "Ratio"
+        case focus = "Focus"
+        case time = "Time"
+        
+        var id: String{
+            rawValue
+        }
+    }
+      
     
-    enum VariableType: String, Codable{
-        case twoTimesOfDay = "twoTimesOfDay"
-        case threeTimesOfDay = "threeTimesOfDay"
-        case fourTimesOfDay = "fourTimesOfDay"
-    }  //might be totally unnecessary
+    enum Time: String, CaseIterable, Identifiable, Codable{
+        case morning = "Morning"
+        case afternoon = "Afternoon"
+        case evening = "Evening"
+        
+        var id: String {
+            rawValue
+        }
+    }
     
     struct IndependentVariable: Identifiable, Codable{
         let id: UUID
-        let variableType: VariableType
-        let hasMorning: Bool
-        let hasAfternoon: Bool
-        let hasEvening: Bool
+       
+        var times: [String]
+        var customtimes: [customTime] = []
         
-        init(id: UUID = UUID(), variableType: VariableType, hasMorning: Bool, hasAfternoon: Bool, hasEvening: Bool){
+        init(id: UUID = UUID(), times: [String]){
             self.id = id
-            self.hasMorning = hasMorning
-            self.hasAfternoon = hasAfternoon
-            self.hasEvening = hasEvening
-            self.variableType = variableType
+            self.times = times
+            
+        }
+        
+        init(id: UUID = UUID(), times: [String], customtimes: [customTime]){
+            self.id = id
+            self.times = times
+            self.customtimes = customtimes
+        }
+        
+        struct customTime: Identifiable, Codable{
+            let id: UUID
+            let name: String
+            init(id: UUID = UUID(), name: String) {
+                self.id = id
+                self.name = name
+            }
         }
         
     }
     
-    static let sampleIndependentVariable = IndependentVariable(variableType : .twoTimesOfDay, hasMorning :  true, hasAfternoon : true, hasEvening : false)
+    
+    
+    static let sampleCustomTime1 = IndependentVariable.customTime(name: "Before dinner")
+    static let sampleCustomTime2 = IndependentVariable.customTime(name: "After school")
+    static let sampleCustomTimes = [
+    sampleCustomTime1, sampleCustomTime2
+    ]
+    static let sampleIndependentVariable = IndependentVariable(times: [], customtimes: sampleCustomTimes)
     
     static let sampleExperiment: DayExperiment = DayExperiment(goalEntries: 50, independentVariable: sampleIndependentVariable, entries: DayEntry.sampleData, name: "Sample Day Experiment", notes: "yay")
+    
+    
+    static let sampleExperimentArray: [DayExperiment] = [
+    sampleExperiment, sampleExperiment
+    ]
     
 }
 

@@ -10,11 +10,11 @@ import Foundation
 struct DayEntry: Identifiable, Codable{
     let id: UUID
     var date: Date
-    var time: Time
+    var time: DayExperiment.Time
     //enum for time of day (morning afternoon evening) independent variable
     var productivity: Int //dependent variable
     
-    init(id: UUID = UUID(), date: Date, time: Time, productivity: Int) {
+    init(id: UUID = UUID(), date: Date, time: DayExperiment.Time, productivity: Int) {
         self.id = id
         self.date = date
         self.time = time

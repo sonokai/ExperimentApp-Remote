@@ -9,7 +9,7 @@ import SwiftUI
 
 
 
-struct SleepConfig1: View {
+struct SleepSetup1: View {
     
     @Binding var independentVariable: SleepExperiment.IndependentVariable
     @State var hasSelected = false
@@ -83,6 +83,6 @@ struct SleepConfig1: View {
 
 struct SleepConfig1_Previews: PreviewProvider {
     static var previews: some View {
-        SleepConfig1(independentVariable: .constant(SleepExperiment.IndependentVariable.bedtime))
+        SleepSetup1(independentVariable: .constant(SleepExperiment.IndependentVariable.bedtime))
     }
 }

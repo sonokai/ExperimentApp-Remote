@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct TimePicker: View {
-    @Binding var selection: Time
+    @Binding var selection: DayExperiment.Time
 
     var body: some View {
         Picker("Time",selection:$selection){
-            ForEach(Time.allCases){time in
+            ForEach(DayExperiment.Time.allCases){time in
                 //ThemeView(theme: theme).tag(time)
                 HStack{
                     TimeView(time:time).tag(time)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimeView: View {
-    var time: Time
+    var time: DayExperiment.Time
     var body: some View {
         Text(time.rawValue)
             .padding(4)
