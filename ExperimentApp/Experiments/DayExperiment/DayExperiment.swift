@@ -13,25 +13,26 @@ struct DayExperiment: Identifiable, Codable{
    // let time: Time //will be the independent variable
     let independentVariable: IndependentVariable
    // let dependentVariable: DependentVariable
+    let dependentVariable: DependentVariable
     var entries: [DayEntry] = []
     var notes: String = "Take notes here"
     var name: String = "Time of day Experiment"
-  
     
     
     
-    init(id: UUID = UUID(), goalEntries: Int, independentVariable: IndependentVariable) {
+    
+    init(id: UUID = UUID(), goalEntries: Int, independentVariable: IndependentVariable, dependentVariable: DependentVariable) {
         self.id = id
         self.goalEntries = goalEntries
         self.independentVariable = independentVariable
-     //   self.dependentVariable = dependentVariable
+        self.dependentVariable = dependentVariable
     }
     //for testing
-    init(id: UUID = UUID(), goalEntries: Int, independentVariable: IndependentVariable, entries: [DayEntry], name: String, notes: String) {
+    init(id: UUID = UUID(), goalEntries: Int, independentVariable: IndependentVariable, dependentVariable: DependentVariable, entries: [DayEntry], name: String, notes: String) {
         self.id = id
         self.goalEntries = goalEntries
         self.independentVariable = independentVariable
-   //     self.dependentVariable = dependentVariable
+        self.dependentVariable = dependentVariable
         self.entries = entries
         self.name = name
         self.notes = notes
@@ -41,12 +42,15 @@ struct DayExperiment: Identifiable, Codable{
 
 
 extension DayExperiment{
-    enum DependentVariable: String, CaseIterable, Codable{
+    enum DependentVariable: String, CaseIterable, Codable, Identifiable{
+        var id: Self{
+            return self
+        }
         case plannedToDoneRatio = "Ratio"
         case focus = "Focus"
         case time = "Time"
         
-        var id: String{
+        var name: String{
             rawValue
         }
     }
@@ -100,7 +104,7 @@ extension DayExperiment{
     ]
     static let sampleIndependentVariable = IndependentVariable(times: [], customtimes: sampleCustomTimes)
     
-    static let sampleExperiment: DayExperiment = DayExperiment(goalEntries: 50, independentVariable: sampleIndependentVariable, entries: DayEntry.sampleData, name: "Sample Day Experiment", notes: "yay")
+    static let sampleExperiment: DayExperiment = DayExperiment(goalEntries: 50, independentVariable: sampleIndependentVariable,dependentVariable: .focus, entries:  DayEntry.sampleData, name: "Sample Day Experiment", notes: "yay")
     
     
     static let sampleExperimentArray: [DayExperiment] = [

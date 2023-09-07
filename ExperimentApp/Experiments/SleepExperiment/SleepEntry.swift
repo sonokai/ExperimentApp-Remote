@@ -27,6 +27,7 @@ struct SleepEntry: Identifiable, Codable {
         self.timeSlept = "0"
         self.productivity = 1
     }
+    
     /// allows for initialization no matter the independent and dependent variables stated
     init(id: UUID = UUID(), date: Date, bedtime: Date?, waketime: Date?, timeSlept: String?, quality: Int?, productivity: Int?) {
         self.id = id
