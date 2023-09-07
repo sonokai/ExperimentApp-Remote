@@ -21,6 +21,9 @@ struct NewExperimentView: View {
                     NavigationLink(destination: DaySetupView(dayExperiments: $appData.dayExperiments)){
                         Text("Start a day experiment")
                     }
+                    NavigationLink(destination: Text("yippeedoodle")){
+                        Text("Start a mood experiment")
+                    }
                 }
             }
         }
