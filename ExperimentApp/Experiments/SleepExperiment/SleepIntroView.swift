@@ -21,7 +21,7 @@ struct SleepIntroView: View {
         NavigationStack{
             Form{
                 
-                Text("Let's set up your sleep experiment.")
+                Text("Let's set up your sleep experiment.").font(.headline)
                 SleepSetup1(independentVariable: $independentVariable)
                 SleepSetup2(dependentVariable: $dependentVariable)
                 SleepConfig3(goalEntries: $goalEntries)

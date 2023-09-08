@@ -13,7 +13,7 @@ struct TimePicker: View {
     var body: some View {
         Picker("Time",selection:$selection){
             ForEach(DayExperiment.Time.allCases){time in
-                //ThemeView(theme: theme).tag(time)
+                
                 HStack{
                     TimeView(time:time).tag(time)
                     Spacer()
@@ -26,6 +26,6 @@ struct TimePicker: View {
 
 struct TimePicker_Previews: PreviewProvider {
     static var previews: some View {
-        TimePicker(selection: .constant(.morning))
+        TimePicker(selection: .constant(.afternoon))
     }
 }

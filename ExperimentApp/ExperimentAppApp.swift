@@ -17,7 +17,7 @@ struct ExperimentAppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ExperimentView2(appData: $store.data){
+            ExperimentView(appData: $store.data){
                 //we want to have experimentview(data: $store.data)
                 Task {
                     do {

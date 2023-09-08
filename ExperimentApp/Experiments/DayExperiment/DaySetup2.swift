@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DaySetup2: View {
     @Binding var dependentVariable: DayExperiment.DependentVariable
+    @Binding var hasSelectedDependentVariable: Bool
     var body: some View {
         VStack{
             Text("Choose a dependent variable")
@@ -40,12 +41,14 @@ struct DaySetup2: View {
                     }
                     
                     
-                    if(dependentVariable != variable){
+                    if(hasSelectedDependentVariable == false || dependentVariable != variable){
                         Spacer().frame(maxWidth: 50)
-                        Button("Add"){
+                        Button("Choose"){
                             dependentVariable = variable
+                            hasSelectedDependentVariable = true
                         }.buttonStyle(.borderless)
                     } else {
+                        Spacer().frame(maxWidth:10)
                         Text("Selected")
                     }
                     
@@ -53,8 +56,7 @@ struct DaySetup2: View {
                 
                     
             }
-            .padding(.horizontal)
-            .padding(.vertical,1)
+            .padding(1)
         }
     }
     
@@ -62,6 +64,6 @@ struct DaySetup2: View {
 
 struct DaySetup2_Previews: PreviewProvider {
     static var previews: some View {
-        DaySetup2(dependentVariable: .constant(.focus))
+        DaySetup2(dependentVariable: .constant(.focus), hasSelectedDependentVariable: .constant(false))
     }
 }

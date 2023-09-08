@@ -65,11 +65,16 @@ extension DayExperiment{
     }
     
     struct IndependentVariable: Identifiable, Codable{
+        
+        
         let id: UUID
        
         var times: [String]
         var customtimes: [customTime] = []
         
+        func hasEmptyCustomTimes() -> Bool{
+            return customtimes.count == 0
+        }
         init(id: UUID = UUID(), times: [String]){
             self.id = id
             self.times = times
@@ -83,6 +88,8 @@ extension DayExperiment{
         }
         
         struct customTime: Identifiable, Codable{
+            
+            
             let id: UUID
             let name: String
             init(id: UUID = UUID(), name: String) {

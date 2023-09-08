@@ -21,19 +21,19 @@ struct DaySetup3: View {
             Text("The more entries you have, the more your results can conclude.")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.caption)
-                .padding(.horizontal).padding(.vertical, 1)
+                .padding(1)
             Text("5+ entries: A general idea of how much time of day affects your work")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.caption)
-                .padding(.horizontal).padding(.vertical, 1)
+                .padding(1)
             Text("20+ entries: Statistical significance")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.caption)
-                .padding(.horizontal).padding(.vertical, 1)
+                .padding(1)
             Text("30+ entries: Make conclusions about how sleep affects your day")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.caption)
-                .padding(.horizontal).padding(.vertical, 1)
+                .padding(1)
             
             //review the statistics behind this
             HStack{

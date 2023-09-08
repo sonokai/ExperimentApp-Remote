@@ -18,6 +18,7 @@ struct ExperimentNameView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.headline)
             TextField(defaultValue , text: $name)
+                .padding(1)
         }
     }
 }

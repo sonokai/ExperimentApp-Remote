@@ -58,8 +58,8 @@ struct SleepSetup2: View {
                             
                             
                         }
-                        .padding(.horizontal)
-                        .padding(.vertical,1)
+                        
+                        .padding(1)
                        
                         
                     

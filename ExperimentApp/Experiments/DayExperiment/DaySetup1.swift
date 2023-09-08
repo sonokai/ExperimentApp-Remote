@@ -36,10 +36,9 @@ struct DaySetup1: View {
                     
                 }
             }
-            .padding(.horizontal)
-            .padding(.vertical,1)
+            .padding(1)
             
-            Text("(And/or) add custom times:")
+            Text("And/or add custom times:")
                 .padding(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.headline)
@@ -54,8 +53,7 @@ struct DaySetup1: View {
                     
                     
                 }
-                .padding(.horizontal)
-                .padding(.vertical,1)
+                .padding(1)
             }
             HStack{
                 TextField("Enter custom time: (ex: before bed)", text: $textFieldValue)
@@ -72,8 +70,7 @@ struct DaySetup1: View {
                 .disabled(checkTextValue(text: textFieldValue))
                 
             }
-            .padding(.horizontal)
-            .padding(.vertical,1)
+            .padding(1)
             
         }.buttonStyle(.borderless)
     }

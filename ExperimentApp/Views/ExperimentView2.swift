@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ExperimentView2: View {
+struct ExperimentView: View {
     @Environment (\.scenePhase) private var scenePhase
     
     @Binding var appData: AppData
@@ -66,6 +66,6 @@ struct ExperimentView2: View {
 
 struct ExperimentView2_Previews: PreviewProvider {
     static var previews: some View {
-        ExperimentView2(appData: .constant(AppData.sampleData), saveAction: {})
+        ExperimentView(appData: .constant(AppData.sampleData), saveAction: {})
     }
 }

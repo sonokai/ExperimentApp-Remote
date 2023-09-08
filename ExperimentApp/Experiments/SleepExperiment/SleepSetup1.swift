@@ -67,9 +67,9 @@ struct SleepSetup1: View {
                     
                     
                     
-                }.buttonStyle(BorderlessButtonStyle())
-                    .padding(.horizontal)
-                    .padding(.vertical, 1)
+                }
+                .buttonStyle(BorderlessButtonStyle())
+                .padding(1)
                 
 
                 //the code only works if we use .buttonStyle(BorderlessButtonStyle() bc for some reason using a button in form presses every single button in it
