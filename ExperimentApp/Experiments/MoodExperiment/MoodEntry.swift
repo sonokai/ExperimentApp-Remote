@@ -3,12 +3,14 @@ import Foundation
 struct MoodEntry: Identifiable, Codable {
     let id: UUID
     var date: Date
-    var mood: Int
+    let rating: Int
     
-    init(id: UUID = UUID(), date: Date, mood: Int) {
+    private var moodEntries: [MoodEntry] = []
+    
+    init(id: UUID = UUID(), date: Date, rating: Int) {
         self.id = id
         self.date = date
-        self.mood = mood
+        self.rating = rating
     }
     
     func getHour(date: Date) -> (Int) {
@@ -32,5 +34,27 @@ struct MoodEntry: Identifiable, Codable {
     
     
     
+    
+}
+
+extension MoodEntry {
+    static let sampleData: [MoodEntry] =
+    [
+        MoodEntry(
+            date: Date(),
+            rating: 5
+            ),
+        
+        MoodEntry(
+            date: Date(),
+            rating: 6
+            ),
+        
+        MoodEntry(
+            date: Date(),
+            rating: 8
+            )
+    
+    ]
     
 }

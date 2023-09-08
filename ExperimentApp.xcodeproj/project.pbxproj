@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		593974992AAA8F45005D95D3 /* MoodSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593974982AAA8F45005D95D3 /* MoodSetupView.swift */; };
+		59702D4F2AABD2A100B296EB /* MoodRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59702D4E2AABD2A100B296EB /* MoodRatingView.swift */; };
 		598DDA7B2AA2BEB300784BD9 /* MoodExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598DDA7A2AA2BEB300784BD9 /* MoodExperiment.swift */; };
 		598DDA7D2AA2BEDA00784BD9 /* MoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598DDA7C2AA2BEDA00784BD9 /* MoodEntry.swift */; };
 		59EEFAD92A58E7F400DA7D84 /* ExperimentAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEFAD82A58E7F400DA7D84 /* ExperimentAppApp.swift */; };
@@ -74,6 +75,7 @@
 
 /* Begin PBXFileReference section */
 		593974982AAA8F45005D95D3 /* MoodSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodSetupView.swift; sourceTree = "<group>"; };
+		59702D4E2AABD2A100B296EB /* MoodRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodRatingView.swift; sourceTree = "<group>"; };
 		598DDA7A2AA2BEB300784BD9 /* MoodExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodExperiment.swift; sourceTree = "<group>"; };
 		598DDA7C2AA2BEDA00784BD9 /* MoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodEntry.swift; sourceTree = "<group>"; };
 		59EEFAD52A58E7F400DA7D84 /* ExperimentApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExperimentApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +157,7 @@
 				598DDA7A2AA2BEB300784BD9 /* MoodExperiment.swift */,
 				598DDA7C2AA2BEDA00784BD9 /* MoodEntry.swift */,
 				593974982AAA8F45005D95D3 /* MoodSetupView.swift */,
+				59702D4E2AABD2A100B296EB /* MoodRatingView.swift */,
 			);
 			path = MoodExperiment;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				6F28B0822AA55D6F00FDCA0A /* DaySetup2.swift in Sources */,
 				6F7750B42A7B4370003BFA65 /* DayEntry.swift in Sources */,
 				59EEFADB2A58E7F400DA7D84 /* ContentView.swift in Sources */,
+				59702D4F2AABD2A100B296EB /* MoodRatingView.swift in Sources */,
 				6F7750B92A7B4825003BFA65 /* DayEntryView.swift in Sources */,
 				6F7750CA2A7BA50E003BFA65 /* SleepExperiment.swift in Sources */,
 				6F7750D42A7D12CA003BFA65 /* SleepView3.swift in Sources */,
