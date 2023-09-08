@@ -46,8 +46,8 @@
 		6F7750CA2A7BA50E003BFA65 /* SleepExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750C92A7BA50E003BFA65 /* SleepExperiment.swift */; };
 		6F7750CC2A7C40BA003BFA65 /* SleepSetup1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750CB2A7C40BA003BFA65 /* SleepSetup1.swift */; };
 		6F7750CE2A7C4374003BFA65 /* SleepSetup2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750CD2A7C4374003BFA65 /* SleepSetup2.swift */; };
-		6F7750D02A7C4382003BFA65 /* SleepConfig3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750CF2A7C4382003BFA65 /* SleepConfig3.swift */; };
-		6F7750D42A7D12CA003BFA65 /* SleepView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750D32A7D12CA003BFA65 /* SleepView3.swift */; };
+		6F7750D02A7C4382003BFA65 /* SleepSetup3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750CF2A7C4382003BFA65 /* SleepSetup3.swift */; };
+		6F7750D42A7D12CA003BFA65 /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750D32A7D12CA003BFA65 /* SleepView.swift */; };
 		6F7750D72A7DD14E003BFA65 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750D62A7DD14E003BFA65 /* Todo.swift */; };
 /* End PBXBuildFile section */
 
@@ -111,8 +111,8 @@
 		6F7750C92A7BA50E003BFA65 /* SleepExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepExperiment.swift; sourceTree = "<group>"; };
 		6F7750CB2A7C40BA003BFA65 /* SleepSetup1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepSetup1.swift; sourceTree = "<group>"; };
 		6F7750CD2A7C4374003BFA65 /* SleepSetup2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepSetup2.swift; sourceTree = "<group>"; };
-		6F7750CF2A7C4382003BFA65 /* SleepConfig3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepConfig3.swift; sourceTree = "<group>"; };
-		6F7750D32A7D12CA003BFA65 /* SleepView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView3.swift; sourceTree = "<group>"; };
+		6F7750CF2A7C4382003BFA65 /* SleepSetup3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepSetup3.swift; sourceTree = "<group>"; };
+		6F7750D32A7D12CA003BFA65 /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
 		6F7750D62A7DD14E003BFA65 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -216,7 +216,7 @@
 			children = (
 				6F7750C92A7BA50E003BFA65 /* SleepExperiment.swift */,
 				6F7750AA2A748AEA003BFA65 /* SleepEntry.swift */,
-				6F7750D32A7D12CA003BFA65 /* SleepView3.swift */,
+				6F7750D32A7D12CA003BFA65 /* SleepView.swift */,
 				6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */,
 				6F7750AD2A74B9D6003BFA65 /* SimplifiedSleepView.swift */,
 				6F7750A42A71B08C003BFA65 /* SleepEditView.swift */,
@@ -225,7 +225,7 @@
 				6F7750C52A7BA3F5003BFA65 /* SleepIntroView.swift */,
 				6F7750CB2A7C40BA003BFA65 /* SleepSetup1.swift */,
 				6F7750CD2A7C4374003BFA65 /* SleepSetup2.swift */,
-				6F7750CF2A7C4382003BFA65 /* SleepConfig3.swift */,
+				6F7750CF2A7C4382003BFA65 /* SleepSetup3.swift */,
 			);
 			path = SleepExperiment;
 			sourceTree = "<group>";
@@ -430,7 +430,7 @@
 				59702D4F2AABD2A100B296EB /* MoodRatingView.swift in Sources */,
 				6F7750B92A7B4825003BFA65 /* DayEntryView.swift in Sources */,
 				6F7750CA2A7BA50E003BFA65 /* SleepExperiment.swift in Sources */,
-				6F7750D42A7D12CA003BFA65 /* SleepView3.swift in Sources */,
+				6F7750D42A7D12CA003BFA65 /* SleepView.swift in Sources */,
 				6F28AFF22A9BBFA300FDCA0A /* DataStore.swift in Sources */,
 				6F28B0802AA39E6100FDCA0A /* DaySetup1.swift in Sources */,
 				6F35C9B62AABD2980019D839 /* DescriptionView.swift in Sources */,
@@ -451,7 +451,7 @@
 				6F28AFF02A9BBE3E00FDCA0A /* AppData.swift in Sources */,
 				593974992AAA8F45005D95D3 /* MoodSetupView.swift in Sources */,
 				6F28AFF82A9E46EC00FDCA0A /* ExperimentNameView.swift in Sources */,
-				6F7750D02A7C4382003BFA65 /* SleepConfig3.swift in Sources */,
+				6F7750D02A7C4382003BFA65 /* SleepSetup3.swift in Sources */,
 				6F35C9B42AAA9C9B0019D839 /* DaySetup3.swift in Sources */,
 				6F28AFFC2A9F6D8000FDCA0A /* SliderView.swift in Sources */,
 				598DDA7D2AA2BEDA00784BD9 /* MoodEntry.swift in Sources */,

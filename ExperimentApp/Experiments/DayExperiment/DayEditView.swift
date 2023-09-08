@@ -14,31 +14,26 @@ struct DayEditView: View {
     @State var productivity: Int = 5
     @State private var sliderValue: Double = 5
     @Environment(\.presentationMode) private var presentationMode
+    var independentVariable: DayExperiment.IndependentVariable
+    var dependentVariable: DayExperiment.DependentVariable
     
     var body: some View {
         NavigationStack{
             Form{
                 DatePicker("Entry date", selection: $date, in: ...Date(),displayedComponents: [.date])
                 
-                TimePicker(selection: $time) //doesnt work yet
+                TimePicker(selection: $time, independentVariable: DayExperiment.sampleIndependentVariable) //doesnt work yet
                 
-                VStack{
-                    Text("Productivity")
-                    HStack{
-                        Slider(value: $sliderValue, in: 1...10, step: 0.1).onChange(of: sliderValue) { newValue in
-                            productivity = Int(newValue)
-                        }
-                        Text("\(productivity)")
-                    }
-                }
+                SliderView(name:"hi", value: $productivity)
+                
                 
             }.toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
                         //update the entry binding when and if the done button is pressed
                         entry.date = date
-                        entry.time = time
-                        entry.productivity = productivity
+                        entry.time = ""
+                //        entry.productivity = productivity
                         presentationMode.wrappedValue.dismiss()
                     }
                 }
@@ -49,6 +44,6 @@ struct DayEditView: View {
 
 struct DayEditView_Previews: PreviewProvider {
     static var previews: some View {
-        DayEditView(entry:.constant(DayEntry.newEntry))
+        DayEditView(entry:.constant(DayEntry.newEntry), independentVariable: DayExperiment.sampleIndependentVariable, dependentVariable: .focus)
     }
 }

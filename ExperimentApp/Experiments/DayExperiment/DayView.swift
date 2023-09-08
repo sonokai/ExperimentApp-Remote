@@ -35,25 +35,35 @@ struct DayView: View {
                     NavigationLink(destination: Text("in development lol")){
                         Text("Results")
                     }
+                    
                     NavigationLink(destination: Text("Notes view")){
                         Text("Notes")
                     }
                 }
                 .navigationTitle(Text("Daily Productivity"))
+                
                 Section(header: Text("Entries")){
+                    
                     ForEach($dayExperiment.entries) { entry in
-                        NavigationLink(destination: DayEditView(entry:entry).navigationTitle("Edit entry")){
-                            DayEntryView(entry:entry)
+                        
+                        NavigationLink(destination: DayEditView(
+                            entry:entry,
+                            independentVariable: dayExperiment.independentVariable,
+                            dependentVariable: dayExperiment.dependentVariable
+                        )){
+                            DayEntryView(entry:entry, independentVariable: dayExperiment.independentVariable)
                         }
-
+                        
                     }
                     .onDelete { indices in
                         deleteEntries(at: indices)
                     }
+                    
                 }
-            }.sheet(isPresented: $isAddingNew){
+            } //form ends
+            .sheet(isPresented: $isAddingNew){
                 NavigationStack{
-                    DayEditView(entry:$dayExperiment.entries[entries.count-1])
+                    DayEditView(entry:$dayExperiment.entries[entries.count-1], independentVariable: dayExperiment.independentVariable, dependentVariable: dayExperiment.dependentVariable )
                         .navigationTitle("New Entry")
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction) {
@@ -65,6 +75,7 @@ struct DayView: View {
                         }
                 }
             }
+            
         }
     }
     private func deleteEntries(at indices: IndexSet) {

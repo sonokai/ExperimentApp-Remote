@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DayEntryView: View {
     @Binding var entry : DayEntry
+    var independentVariable: DayExperiment.IndependentVariable
     var body: some View {
         VStack(alignment: .leading) {
             
@@ -17,9 +18,9 @@ struct DayEntryView: View {
                 .accessibilityAddTraits(.isHeader)
             Spacer()
             HStack {
-                Label("\(entry.time.rawValue)", systemImage: "clock")
+                Label("\(entry.time)", systemImage: "clock")
                 Spacer()
-                Label("Productivity: \(entry.productivity)", systemImage: "person")
+             //   Label("Productivity: \(entry.productivity)", systemImage: "person")
                     
             }
             .font(.caption)
@@ -38,7 +39,7 @@ private func formattedDate(date: Date) -> String {
 
 struct DayEntryView_Previews: PreviewProvider {
     static var previews: some View {
-        DayEntryView(entry:.constant(DayEntry.newEntry))
+        DayEntryView(entry:.constant(DayEntry.newEntry), independentVariable: DayExperiment.sampleIndependentVariable)
     }
 }
 

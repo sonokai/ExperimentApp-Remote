@@ -22,8 +22,6 @@ struct SleepSetup2: View {
                     .font(.headline)
                     .padding(1)
                 ForEach(SleepExperiment.DependentVariable.allCases){ variable in
-                    
-                        
                         HStack{
                             VStack{
                                 Text(variable.name)

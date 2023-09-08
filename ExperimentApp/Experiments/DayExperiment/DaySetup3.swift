@@ -30,7 +30,7 @@ struct DaySetup3: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.caption)
                 .padding(1)
-            Text("30+ entries: Make conclusions about how sleep affects your day")
+            Text("30+ entries: Make conclusions about what time of day you should work")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.caption)
                 .padding(1)

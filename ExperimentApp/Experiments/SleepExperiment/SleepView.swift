@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SleepView3: View {
+struct SleepView: View {
     @Binding var sleepExperiment: SleepExperiment
     @State private var isAddingNew = false
     @State private var newEntry = SleepEntry.newEntry
@@ -88,6 +88,6 @@ struct SleepView3: View {
 
 struct SleepView3_Previews: PreviewProvider {
     static var previews: some View {
-        SleepView3(sleepExperiment: .constant(SleepExperiment.sampleExperiment1))
+        SleepView(sleepExperiment: .constant(SleepExperiment.sampleExperiment1))
     }
 }

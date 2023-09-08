@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SleepConfig3: View {
+struct SleepSetup3: View {
     @State var sliderValue: Double = 20
     @Binding var goalEntries: Int
     
@@ -52,6 +52,6 @@ struct SleepConfig3: View {
 
 struct SleepConfig3_Previews: PreviewProvider {
     static var previews: some View {
-        SleepConfig3(goalEntries: .constant(20))
+        SleepSetup3(goalEntries: .constant(20))
     }
 }
