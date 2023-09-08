@@ -12,8 +12,9 @@ struct MoodSetupView: View {
     @State private var startDate = Date()
     @State private var endDate = Date()
     @State private var duration: Int = 0
-    
+    @State private var notificationInterval: String = "Every 2 Hours"
 
+    let intervals = ["Every Hour", "Every 2 hours", "Every 3 Hours"]
     
     var body: some View {
         NavigationStack{
@@ -35,9 +36,11 @@ struct MoodSetupView: View {
                     Text("Days")
                 }
                 
-                
-                
-                
+                Picker("Notify", selection: $notificationInterval) {
+                    ForEach(intervals, id: \.self) {
+                        Text($0)
+                    }
+                }
             }
         }
     }
