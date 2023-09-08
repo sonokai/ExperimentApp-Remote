@@ -10,9 +10,7 @@ import Foundation
 struct DayExperiment: Identifiable, Codable{
     let id: UUID
     let goalEntries: Int //ask user how many entries they want to have
-   // let time: Time //will be the independent variable
     let independentVariable: IndependentVariable
-   // let dependentVariable: DependentVariable
     let dependentVariable: DependentVariable
     var entries: [DayEntry] = []
     var notes: String = "Take notes here"

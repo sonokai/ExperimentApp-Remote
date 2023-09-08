@@ -25,7 +25,7 @@ struct SleepIntroView: View {
                 SleepSetup1(independentVariable: $independentVariable)
                 SleepSetup2(dependentVariable: $dependentVariable)
                 SleepConfig3(goalEntries: $goalEntries)
-                SleepConfig4(name: $name)
+                ExperimentNameView(name: $name, defaultValue: "Sleep Experiment")
                 
                 
             }

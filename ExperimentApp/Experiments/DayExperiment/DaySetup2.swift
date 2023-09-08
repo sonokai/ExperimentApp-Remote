@@ -25,22 +25,26 @@ struct DaySetup2: View {
                             Text("Take the ratio of how much you planned to get done and how much you actually got done")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .font(.caption)
+                                .multilineTextAlignment(.leading)
                         case .focus:
                             Text("Record how focused you were during your work session")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .font(.caption)
                         case .time:
-                            Text("description")
+                            Text("Record how much time you worked (only pick if working for long periods is something inconsistent)")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .font(.caption)
                         
                         }
                         
                     }
+                    
+                    
                     if(dependentVariable != variable){
+                        Spacer().frame(maxWidth: 50)
                         Button("Add"){
                             dependentVariable = variable
-                        }
+                        }.buttonStyle(.borderless)
                     } else {
                         Text("Selected")
                     }
