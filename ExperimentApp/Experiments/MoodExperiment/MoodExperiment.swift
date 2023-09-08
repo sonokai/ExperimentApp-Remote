@@ -15,4 +15,10 @@ struct MoodExperiment: Identifiable, Codable {
         self.name = name
     }
 }
-
+extension MoodExperiment{
+    static let sampleExperiment1: MoodExperiment = MoodExperiment(duration: 40, entries: MoodEntry.sampleData, name: "Mood Experiment")
+    
+    static let sampleExperiments: [MoodExperiment] = [
+    sampleExperiment1
+    ]
+}

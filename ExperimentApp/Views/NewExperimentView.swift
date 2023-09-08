@@ -21,7 +21,7 @@ struct NewExperimentView: View {
                     NavigationLink(destination: DaySetupView(dayExperiments: $appData.dayExperiments, isPresentingSheetView: $isPresentingSheetView)){
                         Text("Start a day experiment")
                     }
-                    NavigationLink(destination: Text("yippeedoodle")){
+                    NavigationLink(destination: MoodSetupView(moodExperiments: $appData.moodExperiments)){
                         Text("Start a mood experiment")
                     }
                 }

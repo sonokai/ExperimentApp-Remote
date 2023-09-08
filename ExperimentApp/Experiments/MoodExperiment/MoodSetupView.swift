@@ -9,11 +9,12 @@ import SwiftUI
 
 struct MoodSetupView: View {
     
+    @Binding var moodExperiments: [MoodExperiment]
     @State private var startDate = Date()
     @State private var endDate = Date()
     @State private var duration: Int = 0
     @State private var notificationInterval: String = "Every 2 Hours"
-
+    
     let intervals = ["Every Hour", "Every 2 hours", "Every 3 Hours"]
     
     var body: some View {
@@ -60,7 +61,7 @@ struct MoodSetupView: View {
     
     struct MoodSetupView_Previews: PreviewProvider {
         static var previews: some View {
-            MoodSetupView()
+            MoodSetupView(moodExperiments: .constant(MoodExperiment.sampleExperiments))
         }
     }
 }

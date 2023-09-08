@@ -22,18 +22,25 @@ struct DayEditView: View {
             Form{
                 DatePicker("Entry date", selection: $date, in: ...Date(),displayedComponents: [.date])
                 
-                TimePicker(selection: $time, independentVariable: DayExperiment.sampleIndependentVariable) //doesnt work yet
-                
-                SliderView(name:"hi", value: $productivity)
+                TimePicker(selection: $time, independentVariable: DayExperiment.sampleIndependentVariable)
+                switch(dependentVariable){
+                case .focus:
+                    SliderView(name:"hi", value: $productivity)
+                case .plannedToDoneRatio:
+                    Text("ratio picker")
+                case .time:
+                    Text("time")
+                }
                 
                 
             }.toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Done") {
-                        //update the entry binding when and if the done button is pressed
+                        
                         entry.date = date
                         entry.time = ""
-                //        entry.productivity = productivity
+                //update everything
+                        
                         presentationMode.wrappedValue.dismiss()
                     }
                 }

@@ -9,10 +9,6 @@ import SwiftUI
 
 @main
 struct ExperimentAppApp: App {
-    @State private var sleepEntries: [SleepEntry] = SleepEntry.sampleData
-    @State private var dayExperiment: DayExperiment = DayExperiment.sampleExperiment
-    @State private var sleepExperiments: [SleepExperiment] = []
-    
     @StateObject private var store = DataStore()
     
     var body: some Scene {

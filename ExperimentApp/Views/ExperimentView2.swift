@@ -28,6 +28,11 @@ struct ExperimentView: View {
                             Text("\(dayExperiment.name)")
                         }
                     }
+                    ForEach($appData.moodExperiments){ $moodExperiment in
+                        NavigationLink(destination: Text("Put mood experiment main view here")){
+                            Text(moodExperiment.name)
+                        }
+                    }
                 }
                 
                 
