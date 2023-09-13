@@ -11,6 +11,7 @@ struct SliderView: View {
     var name: String
     @Binding var value: Int
     @State private var sliderValue: Double = 5
+    
     var body: some View {
         VStack{
             Text(name)

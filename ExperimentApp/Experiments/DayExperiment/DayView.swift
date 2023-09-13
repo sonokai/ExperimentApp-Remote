@@ -51,7 +51,7 @@ struct DayView: View {
                             independentVariable: dayExperiment.independentVariable,
                             dependentVariable: dayExperiment.dependentVariable
                         )){
-                            DayEntryView(entry:entry, independentVariable: dayExperiment.independentVariable)
+                            DayEntryView(entry:entry, dependentVariable: dayExperiment.dependentVariable)
                         }
                         
                     }

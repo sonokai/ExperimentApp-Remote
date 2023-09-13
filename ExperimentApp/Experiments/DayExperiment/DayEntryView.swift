@@ -9,18 +9,27 @@ import SwiftUI
 
 struct DayEntryView: View {
     @Binding var entry : DayEntry
-    var independentVariable: DayExperiment.IndependentVariable
+    var dependentVariable: DayExperiment.DependentVariable
     var body: some View {
         VStack(alignment: .leading) {
             
             Text("\(formattedDate(date:entry.date))")
                 .font(.headline)
                 .accessibilityAddTraits(.isHeader)
-            Spacer()
+            Spacer().frame(maxHeight: 100)
             HStack {
                 Label("\(entry.time)", systemImage: "clock")
                 Spacer()
              //   Label("Productivity: \(entry.productivity)", systemImage: "person")
+                switch(dependentVariable){
+                case .focus:
+                    Text("Focus:")
+                case .plannedToDoneRatio:
+                    Text("ratio picker")
+                case .time:
+                    Text("time")
+                
+                }
                     
             }
             .font(.caption)
@@ -39,7 +48,7 @@ private func formattedDate(date: Date) -> String {
 
 struct DayEntryView_Previews: PreviewProvider {
     static var previews: some View {
-        DayEntryView(entry:.constant(DayEntry.newEntry), independentVariable: DayExperiment.sampleIndependentVariable)
+        DayEntryView(entry:.constant(DayEntry.newEntry), dependentVariable: .focus)
     }
 }
 

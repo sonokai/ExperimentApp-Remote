@@ -10,6 +10,7 @@ import SwiftUI
 struct DaySetup1: View {
     @Binding var independentVariable: DayExperiment.IndependentVariable
     @State var textFieldValue: String = ""
+    let defaultTimes: Set<String> = ["Morning, Afternoon, Evening"]
     var body: some View {
         VStack{
             Text("Choose parts of the day to track:")
@@ -22,15 +23,15 @@ struct DaySetup1: View {
                     Text(time.rawValue)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    if(!independentVariable.times.contains(time.rawValue)){
+                    //if we don't have the time in our array, display "Add", otherwise, display "Remove"
+                    if(!independentVariable.containsTime(time:time.rawValue)){
                         Button("Add"){
-                            independentVariable.times.append(time.rawValue)
+                            let newTime = DayExperiment.IndependentVariable.timeOfDay(name: time.rawValue)
+                            independentVariable.timesOfDay.append(newTime)
                         }
                     } else {
                         Button("Remove"){
-                            if let i = independentVariable.times.firstIndex(of: time.rawValue) {
-                                independentVariable.times.remove(at: i)
-                            }
+                            independentVariable.removeTime(time: time.rawValue)
                         }
                     }
                     
@@ -43,24 +44,26 @@ struct DaySetup1: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.headline)
             
-            ForEach(independentVariable.customtimes.indices, id: \.self){ index in
-                HStack{
-                    Text(independentVariable.customtimes[index].name)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Button("Remove"){
-                        independentVariable.customtimes.remove(at: index)
+            ForEach(independentVariable.timesOfDay.indices, id: \.self){ index in
+                //As long as the time of day isn't found in the default times, display it
+                if(!independentVariable.findIndexesToAvoid().contains(index)){
+                    HStack{
+                        Text(independentVariable.timesOfDay[index].name)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Button("Remove"){
+                            independentVariable.timesOfDay.remove(at: index)
+                        }
+                        
                     }
-                    
-                    
+                    .padding(1)
                 }
-                .padding(1)
             }
             HStack{
                 TextField("Enter custom time: (ex: before bed)", text: $textFieldValue)
                 Button(action :{
                     withAnimation{
-                        let newCustomTime = DayExperiment.IndependentVariable.customTime(name: textFieldValue)
-                        independentVariable.customtimes.append(newCustomTime)
+                        let newTime = DayExperiment.IndependentVariable.timeOfDay(name: textFieldValue)
+                        independentVariable.timesOfDay.append(newTime)
                         textFieldValue = ""
                         
                     }
@@ -83,7 +86,7 @@ struct DaySetup1: View {
             return true
         }
         var customTimesArray: [String] = []
-        for customTime in independentVariable.customtimes{
+        for customTime in independentVariable.timesOfDay{
             customTimesArray.append(customTime.name)
         }
         if(customTimesArray.contains(text)){

@@ -53,6 +53,7 @@ extension DayExperiment{
         }
     }
       
+    static let timeArray: [String] = ["Morning, Afternoon, Evening"]
     
     enum Time: String, CaseIterable, Identifiable, Codable{
         case morning = "Morning"
@@ -69,25 +70,53 @@ extension DayExperiment{
         
         let id: UUID
        
-        var times: [String]
-        var customtimes: [customTime] = []
         
-        func hasEmptyCustomTimes() -> Bool{
-            return customtimes.count == 0
+        var timesOfDay: [timeOfDay] = []
+        ///returns whether or not the times is empty
+        func timesOfDayIsEmpty() -> Bool{
+            return timesOfDay.count == 0
         }
-        init(id: UUID = UUID(), times: [String]){
-            self.id = id
-            self.times = times
+        
+        func containsTime(time: String) -> Bool{
+            for timeOfDay in timesOfDay{
+                if(timeOfDay.name == time){
+                    return true
+                }
+            }
+            return false
+        }
+        ///looks through time array to see if a time with a given string is present, if yes, then it removes it. If not, prints a message saying it failed to find the time
+        mutating func removeTime(time: String) {
+            for index in 0..<timesOfDay.count{
+                if(timesOfDay[index].name == time){
+                    timesOfDay.remove(at: index)
+                    print("Removed time: \(time)")
+                    return
+                }
+            }
             
+            print("Failed to find time: \(time)")
         }
         
-        init(id: UUID = UUID(), times: [String], customtimes: [customTime]){
+        ///used in daySetupView to resolve an error where the default times showed up twice
+        func findIndexesToAvoid()-> Set<Int>{
+            var set: Set<Int> = []
+            for index in 0..<timesOfDay.count{
+                if(timesOfDay[index].name == "Afternoon" || timesOfDay[index].name == "Morning" || timesOfDay[index].name == "Evening"){
+                    set.insert(index)
+                }
+            }
+            return set
+        }
+        
+        
+        init(id: UUID = UUID(), timesOfDay: [timeOfDay]){
             self.id = id
-            self.times = times
-            self.customtimes = customtimes
+            
+            self.timesOfDay = timesOfDay
         }
         
-        struct customTime: Identifiable, Codable{
+        struct timeOfDay: Identifiable, Codable, Hashable{
             
             
             let id: UUID
@@ -102,12 +131,12 @@ extension DayExperiment{
     
     
     
-    static let sampleCustomTime1 = IndependentVariable.customTime(name: "Before dinner")
-    static let sampleCustomTime2 = IndependentVariable.customTime(name: "After school")
+    static let sampleCustomTime1 = IndependentVariable.timeOfDay(name: "Before dinner")
+    static let sampleCustomTime2 = IndependentVariable.timeOfDay(name: "After school")
     static let sampleCustomTimes = [
     sampleCustomTime1, sampleCustomTime2
     ]
-    static let sampleIndependentVariable = IndependentVariable(times: [], customtimes: sampleCustomTimes)
+    static let sampleIndependentVariable = IndependentVariable(timesOfDay: sampleCustomTimes)
     
     static let sampleExperiment: DayExperiment = DayExperiment(goalEntries: 50, independentVariable: sampleIndependentVariable,dependentVariable: .focus, entries:  DayEntry.sampleData, name: "Sample Day Experiment", notes: "yay")
     

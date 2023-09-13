@@ -10,9 +10,8 @@ import SwiftUI
 struct DayEditView: View {
     @Binding var entry: DayEntry
     @State var date: Date = Date()
-    @State var time: DayExperiment.Time = .morning
+    @State var time: String = "Morning"
     @State var productivity: Int = 5
-    @State private var sliderValue: Double = 5
     @Environment(\.presentationMode) private var presentationMode
     var independentVariable: DayExperiment.IndependentVariable
     var dependentVariable: DayExperiment.DependentVariable
@@ -25,7 +24,7 @@ struct DayEditView: View {
                 TimePicker(selection: $time, independentVariable: DayExperiment.sampleIndependentVariable)
                 switch(dependentVariable){
                 case .focus:
-                    SliderView(name:"hi", value: $productivity)
+                    SliderView(name: "Focus", value: $productivity)
                 case .plannedToDoneRatio:
                     Text("ratio picker")
                 case .time:

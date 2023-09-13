@@ -35,7 +35,7 @@ struct DaySetupView: View {
                     Button("Create experiment"){
                         isPresentingSheetView = false
                         dayExperiments.append(DayExperiment(goalEntries: goalEntries,independentVariable: independentVariable, dependentVariable: dependentVariable, entries: [], name: name, notes: ""))
-                    }.disabled(independentVariable.times == []||independentVariable.hasEmptyCustomTimes() || !hasSelectedDependentVariable)
+                    }.disabled(independentVariable.timesOfDayIsEmpty() || !hasSelectedDependentVariable)
                 }
             }
         }
