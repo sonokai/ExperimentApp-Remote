@@ -69,9 +69,24 @@ extension DayExperiment{
         
         
         let id: UUID
-       
-        
         var timesOfDay: [timeOfDay] = []
+        
+        init(id: UUID = UUID(), timesOfDay: [timeOfDay]){
+            self.id = id
+            self.timesOfDay = timesOfDay
+        }
+        
+        struct timeOfDay: Identifiable, Codable, Hashable{
+            
+            
+            let id: UUID
+            let name: String
+            init(id: UUID = UUID(), name: String) {
+                self.id = id
+                self.name = name
+            }
+        }
+        
         ///returns whether or not the times is empty
         func timesOfDayIsEmpty() -> Bool{
             return timesOfDay.count == 0
@@ -109,32 +124,21 @@ extension DayExperiment{
             return set
         }
         
-        
-        init(id: UUID = UUID(), timesOfDay: [timeOfDay]){
-            self.id = id
-            
-            self.timesOfDay = timesOfDay
-        }
-        
-        struct timeOfDay: Identifiable, Codable, Hashable{
-            
-            
-            let id: UUID
-            let name: String
-            init(id: UUID = UUID(), name: String) {
-                self.id = id
-                self.name = name
-            }
-        }
+    
         
     }
     
     
-    
+    //sample data
     static let sampleCustomTime1 = IndependentVariable.timeOfDay(name: "Before dinner")
     static let sampleCustomTime2 = IndependentVariable.timeOfDay(name: "After school")
+    
     static let sampleCustomTimes = [
-    sampleCustomTime1, sampleCustomTime2
+    IndependentVariable.timeOfDay(name: "Before dinner"),
+    IndependentVariable.timeOfDay(name: "After school"),
+    IndependentVariable.timeOfDay(name: "Morning"),
+    IndependentVariable.timeOfDay(name: "Afternoon"),
+    IndependentVariable.timeOfDay(name: "Evening")
     ]
     static let sampleIndependentVariable = IndependentVariable(timesOfDay: sampleCustomTimes)
     
@@ -147,3 +151,42 @@ extension DayExperiment{
     
 }
 
+extension DayExperiment{
+    //note that the dependent variables focus and minutesWorked are ints, and ratio is a double.
+    func getAverageArray() -> [Double]{
+        //this is the array that will be added to
+        var averageArray: [Double] = []
+        
+        let timesOfDay = self.independentVariable.timesOfDay
+        //first, iterate through all the times because we need to find the averages for all the times
+        for index in 0..<timesOfDay.count{
+            let timeName = timesOfDay[index].name
+            
+            
+            //scan the entries array for entries with this time
+            // then if it is the time being scanned, it adds its own value to the sum and adds it to the count
+            var sum: Double = 0
+            var count: Double = 0
+            for entry in self.entries{
+                //note that you cannot add ints to doubles, so for focus and minutes worked, we need to cast it to double
+                if(entry.time == timeName){
+                    count+=1
+                    switch(self.dependentVariable){
+                    case .focus:
+                        sum += Double(entry.focus)
+                    case .plannedToDoneRatio:
+                        sum += entry.plannedToDoneRatio
+                    case .time:
+                        sum += Double(entry.minutesWorked)
+                    
+                    }
+                }
+            }
+            //After scanning the entry array and adding everything all up, finish calculating the average
+            let average: Double = sum/count
+            averageArray.append(average)
+        }
+        return averageArray
+    }
+    
+}

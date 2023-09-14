@@ -1,20 +1,20 @@
 //
-//  SliderView.swift
+//  DoubleSliderView.swift
 //  ExperimentApp
 //
-//  Created by Bell Chen on 8/30/23.
+//  Created by Bell Chen on 9/13/23.
 //
 
 import SwiftUI
 
-struct SliderView: View {
+struct DoubleSliderView: View {
     var name: String
-    @Binding var value: Int
-    
+    @Binding var value: Double
     @State private var sliderValue: Double = 5
     var lowValue : Double = 1
     var highValue: Double = 10
     
+    var decimalPlaces: Double = 2
     
     var body: some View {
         VStack{
@@ -24,19 +24,19 @@ struct SliderView: View {
             
             HStack{
                 Slider(value: $sliderValue, in: lowValue...highValue, step: 0.01).onChange(of: sliderValue) { newValue in
-                    value = Int(newValue)
+                    value = newValue
                 }
-                Text("\(value)")
+                let number = String(format: "%.2f", value)
+                Text(number)
             }
             
         }
     }
-    
-
+    //Rounds to the appropriate number of decimal place
 }
 
-struct SliderView_Previews: PreviewProvider {
+struct DoubleSliderView_Previews: PreviewProvider {
     static var previews: some View {
-        SliderView(name: "productivity", value: .constant(5))
+        DoubleSliderView(name: "Value", value: .constant(5))
     }
 }

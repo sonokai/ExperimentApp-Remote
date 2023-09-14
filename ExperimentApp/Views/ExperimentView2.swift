@@ -24,7 +24,7 @@ struct ExperimentView: View {
                         }
                     }
                     ForEach($appData.dayExperiments) { $dayExperiment in
-                        NavigationLink(destination:DayView(dayExperiment: $dayExperiment)){
+                        NavigationLink(destination:DayView(experiment: $dayExperiment)){
                             Text("\(dayExperiment.name)")
                         }
                     }

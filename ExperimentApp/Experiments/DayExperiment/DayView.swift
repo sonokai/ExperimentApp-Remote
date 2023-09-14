@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct DayView: View {
-    @Binding var dayExperiment: DayExperiment
+    @Binding var experiment: DayExperiment
     
     
     @State private var isAddingNew = false
     
     
     var body: some View {
-        var entries: [DayEntry] = dayExperiment.entries
+        var entries: [DayEntry] = experiment.entries
         NavigationStack{
             Form{
                 Section(header: Text("Experiment Info")){
@@ -32,7 +32,7 @@ struct DayView: View {
                     NavigationLink(destination: DayProcedureView()){
                         Text("Procedure")
                     }
-                    NavigationLink(destination: Text("in development lol")){
+                    NavigationLink(destination: DayChart(experiment: experiment)){
                         Text("Results")
                     }
                     
@@ -44,14 +44,14 @@ struct DayView: View {
                 
                 Section(header: Text("Entries")){
                     
-                    ForEach($dayExperiment.entries) { entry in
+                    ForEach($experiment.entries) { entry in
                         
                         NavigationLink(destination: DayEditView(
                             entry:entry,
-                            independentVariable: dayExperiment.independentVariable,
-                            dependentVariable: dayExperiment.dependentVariable
+                            independentVariable: experiment.independentVariable,
+                            dependentVariable: experiment.dependentVariable
                         )){
-                            DayEntryView(entry:entry, dependentVariable: dayExperiment.dependentVariable)
+                            DayEntryView(entry:entry, dependentVariable: experiment.dependentVariable)
                         }
                         
                     }
@@ -63,7 +63,7 @@ struct DayView: View {
             } //form ends
             .sheet(isPresented: $isAddingNew){
                 NavigationStack{
-                    DayEditView(entry:$dayExperiment.entries[entries.count-1], independentVariable: dayExperiment.independentVariable, dependentVariable: dayExperiment.dependentVariable )
+                    DayEditView(entry:$experiment.entries[entries.count-1], independentVariable: experiment.independentVariable, dependentVariable: experiment.dependentVariable )
                         .navigationTitle("New Entry")
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction) {
@@ -79,11 +79,11 @@ struct DayView: View {
         }
     }
     private func deleteEntries(at indices: IndexSet) {
-        dayExperiment.entries.remove(atOffsets: indices)
+        experiment.entries.remove(atOffsets: indices)
     }
 }
 struct DayView_Previews: PreviewProvider {
     static var previews: some View {
-        DayView(dayExperiment: .constant(DayExperiment.sampleExperiment))
+        DayView(experiment: .constant(DayExperiment.sampleExperiment))
     }
 }

@@ -20,14 +20,13 @@ struct DayEntryView: View {
             HStack {
                 Label("\(entry.time)", systemImage: "clock")
                 Spacer()
-             //   Label("Productivity: \(entry.productivity)", systemImage: "person")
                 switch(dependentVariable){
                 case .focus:
-                    Text("Focus:")
+                    Text("Focus: \(entry.focus) ")
                 case .plannedToDoneRatio:
-                    Text("ratio picker")
+                    Text("Ratio: \(entry.plannedToDoneRatio) ")
                 case .time:
-                    Text("time")
+                    Text("\(entry.minutesWorked) minutes")
                 
                 }
                     
