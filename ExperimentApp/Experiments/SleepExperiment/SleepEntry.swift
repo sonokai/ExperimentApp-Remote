@@ -18,7 +18,7 @@ struct SleepEntry: Identifiable, Codable {
     var hoursSlept: Int = 0
     var minutesSlept: Int = 0
     
-    init(id: UUID = UUID(), date: Date, bedtime: Date, waketime: Date, quality: Int) { //both bedtime and waketime, quality
+    init(id: UUID = UUID(), date: Date, bedtime: Date, waketime: Date = Date(), quality: Int) { //both bedtime and waketime, quality
         self.id = id
         self.date = date
         self.bedtime = bedtime
@@ -131,7 +131,11 @@ extension SleepEntry {
     
     static let sampleData: [SleepEntry] =
     [
-        newEntry, newEntry, newEntry
+        
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 9, minute: 30, second: 0, of: Date())!, quality: 5),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 30, second: 0, of: Date())!, quality: 6),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 11, minute: 30, second: 0, of: Date())!, quality: 7)
+        
     ]
     
     static var newEntry : SleepEntry{
