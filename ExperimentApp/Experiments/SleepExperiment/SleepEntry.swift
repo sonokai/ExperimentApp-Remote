@@ -29,45 +29,16 @@ struct SleepEntry: Identifiable, Codable {
     }
     
     /// allows for initialization no matter the independent and dependent variables stated
-    init(id: UUID = UUID(), date: Date, bedtime: Date?, waketime: Date?, timeSlept: String?, quality: Int?, productivity: Int?) {
+    init(id: UUID = UUID(), date: Date, bedtime: Date = Date(), waketime: Date = Date(), timeSlept: String = "", quality: Int = 1, productivity: Int = 1, hoursSlept: Int = 1, minutesSlept: Int = 1) {
         self.id = id
         self.date = date
-        
-        
-        if let assignedBedtime = bedtime{
-            self.bedtime = assignedBedtime
-        }
-        else{
-            self.bedtime = Date()
-        }
-        
-        if let assignedWaketime = waketime{
-            self.waketime = assignedWaketime
-        }
-        else{
-            self.waketime = Date()
-        }
-        
-        if let assignedQuality = quality{
-            self.quality = assignedQuality
-        }
-        else {
-            self.quality = 1
-        }
-        
-        if let assignedProductivity = productivity{
-            self.productivity = assignedProductivity
-        }
-        else {
-            self.productivity = 1
-        }
-        
-        if let assignedTimeSlept = timeSlept{
-            self.timeSlept = assignedTimeSlept
-        }
-        else {
-            self.timeSlept = "0"
-        }
+        self.bedtime = bedtime
+        self.waketime = waketime
+        self.quality = quality
+        self.productivity = productivity
+        self.timeSlept = timeSlept
+        self.hoursSlept = hoursSlept
+        self.minutesSlept = minutesSlept
     }
     
     

@@ -70,9 +70,51 @@ extension SleepExperiment{
 extension SleepExperiment{
     static let emptyExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime)
     
-    static let sampleExperiment1: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime, entries: SleepEntry.sampleData, name: "Sleep Experiment 1", notes: "I took notes")
-    static let sampleExperiment2: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime, entries: SleepEntry.sampleData, name: "Sleep Experiment 2", notes: "I took notes")
-    static let sampleExperiment3: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime, entries: SleepEntry.sampleData, name: "Sleep Experiment 3", notes: "I took notes")
+    static let sampleExperiment1: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime, entries: SleepEntry.sampleData, name: "Sleep Experiment 1", notes: "notes")
+    
+    static let sampleExperiment2: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .both, entries: sampleDataForExperiment2, name: "Sleep Experiment 2", notes: "notes")
+    
+    static let sampleDataForExperiment2: [SleepEntry] =
+    [
+        
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 9, minute: 30, second: 0, of: Date())!,
+                   waketime: Calendar.current.date(bySettingHour: 10, minute: 30, second: 0, of: Date())!,
+                   quality: 5,
+                   productivity: 5),
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 10, minute: 30, second: 0, of: Date())!,
+                   waketime: Calendar.current.date(bySettingHour: 11, minute: 30, second: 0, of: Date())!,
+                   quality: 6,
+                   productivity: 7),
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 11, minute: 30, second: 0, of: Date())!,
+                   waketime: Calendar.current.date(bySettingHour: 9, minute: 30, second: 0, of: Date())!,
+                   quality: 7,
+                   productivity: 8)
+        
+    ]
+    
+    
+    static let sampleExperiment3: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .hoursSlept, entries: sampleDataForExperiment3, name: "Sleep Experiment 3", notes: "notes")
+    
+    static let sampleDataForExperiment3: [SleepEntry] =
+    [
+        
+        SleepEntry(date: Date(),
+                   quality: 5,
+                   productivity: 5,
+                   hoursSlept: 10),
+        SleepEntry(date: Date(),
+                   quality: 6,
+                   productivity: 7,
+                   hoursSlept: 11),
+        SleepEntry(date: Date(),
+                   quality: 7,
+                   productivity: 8,
+                   hoursSlept: 10)
+        
+    ]
     
     static let experimentArray: [SleepExperiment] = [
     sampleExperiment1, sampleExperiment2, sampleExperiment3

@@ -24,6 +24,10 @@ struct DayChart: View {
                     y: .value(experiment.dependentVariable.name, averages[index])
                 )
             }
+            .chartYAxisLabel("\(experiment.dependentVariable)")
+            .chartXAxisLabel("Time of day")
+            .padding()
+            Spacer().frame(minHeight: 100)
         }
         
     }
