@@ -33,6 +33,7 @@ struct BedtimeChart: View {
             .chartXScale()
             .chartYAxisLabel(getYAxisLabel())
             .chartXAxisLabel("Bedtime")
+            .chartForegroundStyleScale(legendStyle())
             .chartXAxis{
                 AxisMarks(
                     values: [0,6, 12, 18,24]
@@ -44,6 +45,15 @@ struct BedtimeChart: View {
         }
         .padding()
         
+    }
+    private func legendStyle() -> KeyValuePairs<String, Color> {
+        if (dependent == .both) {
+            return [
+                "Productivity": .blue, "Quality": .red
+            ]
+        } else {
+            return [:] // Empty KeyValuePairs if the condition is not met
+        }
     }
     private func getYAxisLabel() -> String{
         switch(dependent){
