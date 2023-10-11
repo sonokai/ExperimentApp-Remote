@@ -9,7 +9,8 @@ import SwiftUI
 
 struct Test: View {
     var body: some View {
-        Text("can i do this")
+        Text("can i do this?")
+        Text("Can i do this again?")
     }
 }
 
