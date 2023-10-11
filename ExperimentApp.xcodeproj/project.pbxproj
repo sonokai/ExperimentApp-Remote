@@ -53,6 +53,7 @@
 		6F7750D02A7C4382003BFA65 /* SleepSetup3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750CF2A7C4382003BFA65 /* SleepSetup3.swift */; };
 		6F7750D42A7D12CA003BFA65 /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750D32A7D12CA003BFA65 /* SleepView.swift */; };
 		6F7750D72A7DD14E003BFA65 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750D62A7DD14E003BFA65 /* Todo.swift */; };
+		6FF3978F2AD64E480096B143 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3978E2AD64E480096B143 /* Test.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,7 @@
 		6F7750CF2A7C4382003BFA65 /* SleepSetup3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepSetup3.swift; sourceTree = "<group>"; };
 		6F7750D32A7D12CA003BFA65 /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
 		6F7750D62A7DD14E003BFA65 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		6FF3978E2AD64E480096B143 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +239,7 @@
 				6F35C9C12AB65E740019D839 /* BedtimeChart.swift */,
 				6F35C9BF2AB658040019D839 /* WaketimeChart.swift */,
 				6F35C9C32AB65F320019D839 /* SleepTimeChart.swift */,
+				6FF3978E2AD64E480096B143 /* Test.swift */,
 			);
 			path = SleepExperiment;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				6F28AFF22A9BBFA300FDCA0A /* DataStore.swift in Sources */,
 				6F28B0802AA39E6100FDCA0A /* DaySetup1.swift in Sources */,
 				6F35C9B62AABD2980019D839 /* DescriptionView.swift in Sources */,
+				6FF3978F2AD64E480096B143 /* Test.swift in Sources */,
 				6F7750AB2A748AEA003BFA65 /* SleepEntry.swift in Sources */,
 				6F35C9C42AB65F320019D839 /* SleepTimeChart.swift in Sources */,
 				6F28AFFA2A9F612D00FDCA0A /* TimeSelector.swift in Sources */,
