@@ -11,6 +11,9 @@ struct SleepChart: View {
     var experiment: SleepExperiment
     @State var buttonValue: ButtonValue = .bedtime
     //for both bedtime and waketime, create a button that switches the charts, for bedtime, waketime, and total time slept
+    var interval: Date
+    var size: Int
+    var showRange = false
     enum ButtonValue: String{
         case bedtime = "Bedtime"
         case waketime = "WakeTime"
@@ -26,41 +29,20 @@ struct SleepChart: View {
         VStack{
             switch(experiment.independentVariable){
             case .bedtime:
-                
-                BedtimeChart(entries: experiment.entries, dependent: experiment.dependentVariable)
+                BedtimeChart(experiment: experiment, interval: interval, size: size, showRange: showRange)
             case .waketime:
-                WaketimeChart(entries: experiment.entries, dependent: experiment.dependentVariable)
+                WaketimeChart(experiment: experiment)
             case .both:
-                Text("this is a button for toggling")
-                Picker("display", selection: $buttonValue){
-                    Text("Bedtime").tag(ButtonValue.bedtime)
-                    Text("Waketime").tag(ButtonValue.waketime)
-                    Text("Total time slept").tag(ButtonValue.hoursSlept)
-                }.pickerStyle(.segmented)
-                
-                switch(buttonValue){
-                case .bedtime:
-                    Text("display bedtime here")
-                    BedtimeChart(entries: experiment.entries, dependent: experiment.dependentVariable)
-                case .waketime:
-                    Text("display waketime")
-                    WaketimeChart(entries: experiment.entries, dependent: experiment.dependentVariable)
-                case .hoursSlept:
-                    Text("display hours slept on x axis")
-                }
+                BothtimeChart(experiment: experiment)
             case .hoursSlept:
-                SleepTimeChart(entries: experiment.entries, dependent: experiment.dependentVariable)
+                SleepTimeChart(experiment: experiment)
             }
-            
-            
-            
-            
         }
     }
 }
 
 struct SleepChart_Previews: PreviewProvider {
     static var previews: some View {
-        SleepChart(experiment: SleepExperiment.sampleExperiment2)
+        SleepChart(experiment: SleepExperiment.bothTimesSampleExperiment, interval: Date(), size: 15)
     }
 }

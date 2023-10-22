@@ -75,6 +75,6 @@ struct SleepEditView: View {
 }
 struct SleepEditView_Previews: PreviewProvider {
     static var previews: some View {
-        SleepEditView(entry: .constant(SleepEntry.newEntry),sleepExperiment: SleepExperiment.sampleExperiment3)
+        SleepEditView(entry: .constant(SleepEntry.newEntry),sleepExperiment: SleepExperiment.hoursSleptSampleExperiment)
     }
 }

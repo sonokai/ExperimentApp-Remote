@@ -58,7 +58,7 @@ private func hourAndMinute(date: Date) -> String{
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "HH:mm"
     
-    var time = dateFormatter.string(from: date)
+    let time = dateFormatter.string(from: date)
     if(time.first == "0") {
         return String(time.dropFirst())  //string is necessary here because dropFirst() returns a substring
     }
@@ -68,7 +68,7 @@ private func hourAndMinute(date: Date) -> String{
 
 struct SimplifiedSleepView_Previews: PreviewProvider {
     static var previews: some View {
-        SimplifiedSleepView(sleepExperiment: SleepExperiment.sampleExperiment1, entry:.constant(SleepEntry.newEntry))
+        SimplifiedSleepView(sleepExperiment: SleepExperiment.bedtimeSampleExperiment, entry:.constant(SleepEntry.newEntry))
     }
 }
 

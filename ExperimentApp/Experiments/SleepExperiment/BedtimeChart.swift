@@ -9,24 +9,57 @@ import SwiftUI
 import Charts
 
 struct BedtimeChart: View {
-    var entries: [SleepEntry]
-    var dependent: SleepExperiment.DependentVariable
+    var experiment: SleepExperiment
+    @State var picker: pickerValues = .none
+    var interval: Date
+    var size: Int
+    var showRange: Bool = false
     
+    enum pickerValues : String{
+        case none = ""
+        case quality = "Quality"
+        case productivity = "Productivity"
+        case compare = "Compare"
+    }
     var body: some View {
-        VStack{
-            Chart(entries){ entry in
-                if(dependent == .quality || dependent == .both){
-                    PointMark(
-                        x: .value("Bedtime", entry.bedtime.timeIntervalSince1970.truncatingRemainder(dividingBy: 86400)/3600),
-                        y: .value("Quality", entry.quality)
-                    ).foregroundStyle(.red)
+        VStack(alignment:.leading){
+            Text(experiment.getTitle())
+            if(experiment.dependentVariable == .both){
+                Picker("Chart Y axis",selection: $picker){
+                    Text("Quality").tag(pickerValues.quality)
+                    Text("Productivity").tag(pickerValues.productivity)
+                    Text("Compare").tag(pickerValues.compare)
                 }
-                if(dependent == .productivity || dependent == .both){
-                    PointMark(
-                        x: .value("Bedtime", entry.bedtime.timeIntervalSince1970.truncatingRemainder(dividingBy: 86400)/3600),
-                        y: .value("Productivity", entry.productivity)
-                    ).foregroundStyle(.blue)
+                .pickerStyle(.segmented)
+                .onAppear(){
+                    picker = .quality
                 }
+            }
+            Chart(){
+                if(showRange){
+                    RectangleMark(
+                        xStart: .value("Start of interval", convertDate(from: interval)),
+                        xEnd: .value("End of best interval", addMinutesToDate(date: interval, minutesToAdd: size)),
+                        yStart: nil,
+                        yEnd: nil
+                    ).foregroundStyle(.green)
+                }
+                
+                ForEach(experiment.entries){ entry in
+                    if(experiment.dependentVariable == .quality || picker == .quality || picker == .compare ){
+                        PointMark(
+                            x: .value("Bedtime", convertDate(from: entry.bedtime)),
+                            y: .value("Quality", entry.quality)
+                        ).foregroundStyle(.red)
+                    }
+                    if(experiment.dependentVariable == .productivity || picker == .productivity || picker == .compare){
+                        PointMark(
+                            x: .value("Bedtime", convertDate(from: entry.bedtime)),
+                            y: .value("Productivity", entry.productivity)
+                        ).foregroundStyle(.blue)
+                    }
+                }
+                
                 
             }
             
@@ -34,20 +67,14 @@ struct BedtimeChart: View {
             .chartYAxisLabel(getYAxisLabel())
             .chartXAxisLabel("Bedtime")
             .chartForegroundStyleScale(legendStyle())
-            .chartXAxis{
-                AxisMarks(
-                    values: [0,6, 12, 18,24]
-                ) {
-                    AxisValueLabel()
-                }
-            }
-            Spacer().frame(minHeight:100)
+            .frame(height:300)
+            Spacer()
         }
         .padding()
         
     }
     private func legendStyle() -> KeyValuePairs<String, Color> {
-        if (dependent == .both) {
+        if (experiment.dependentVariable == .both) {
             return [
                 "Productivity": .blue, "Quality": .red
             ]
@@ -56,16 +83,32 @@ struct BedtimeChart: View {
         }
     }
     private func getYAxisLabel() -> String{
-        switch(dependent){
+        switch(experiment.dependentVariable){
         case .quality: return "Quality of day"
         case .productivity: return "Productivity"
         case .both: return ""
         }
     }
+    func convertDate(from date: Date) -> Date{
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "h:mm a"
+        let dateString = dateformatter.string(from: date)
+        let newDate = dateformatter.date(from: dateString)
+        return newDate!
+        
+    }
+    func addMinutesToDate(date: Date, minutesToAdd: Int) -> Date {
+        let calendar = Calendar.current
+        let updatedDate = calendar.date(byAdding: .minute, value: minutesToAdd, to: date)
+        return convertDate(from: updatedDate!)
+        
+    }
+    
 }
 
 struct BedtimeChart_Previews: PreviewProvider {
+    static let testInterval: Date = Calendar.current.date(bySettingHour: 10, minute: 50, second: 0, of: Date())!
     static var previews: some View {
-        BedtimeChart(entries: SleepEntry.sampleData, dependent: .quality)
+        BedtimeChart(experiment: SleepExperiment.bedtimebothExperiment, interval: testInterval, size: 15)
     }
 }

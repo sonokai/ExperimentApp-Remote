@@ -105,8 +105,23 @@ extension SleepEntry {
         
         SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 9, minute: 30, second: 0, of: Date())!, quality: 5),
         SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 30, second: 0, of: Date())!, quality: 6),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 11, minute: 30, second: 0, of: Date())!, quality: 7)
-        
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 11, minute: 30, second: 0, of: Date())!, quality: 7),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 10, second: 0, of: Date())!, quality: 6),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 11, minute: 20, second: 0, of: Date())!, quality: 7),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 40, second: 0, of: Date())!, quality: 5),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 50, second: 0, of: Date())!, quality: 7),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 20, second: 0, of: Date())!, quality: 6),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 9, minute: 40, second: 0, of: Date())!, quality: 5),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 9, minute: 45, second: 0, of: Date())!, quality: 4),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 0, second: 0, of: Date())!, quality: 9),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 05, second: 0, of: Date())!, quality: 10),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 10, second: 0, of: Date())!, quality: 10),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 15, second: 0, of: Date())!, quality: 10),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 07, second: 0, of: Date())!, quality: 10),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 11, second: 0, of: Date())!, quality: 10),
+        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 13, second: 0, of: Date())!, quality: 10),
+        //SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 12, minute: 13, second: 0, of: Date())!, quality: 0),
+
     ]
     
     static var newEntry : SleepEntry{

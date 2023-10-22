@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+// add any settings, experiments, and things the app needs to load and save here
 struct AppData: Codable{
     var sleepExperiments: [SleepExperiment]
     var dayExperiments: [DayExperiment]
@@ -19,5 +19,5 @@ struct AppData: Codable{
     }
     
     static var emptyData: AppData = AppData(sleepExperiments: [], dayExperiments: [], moodExperiments: [])
-    static var sampleData: AppData = AppData(sleepExperiments: [SleepExperiment.sampleExperiment1], dayExperiments: [DayExperiment.sampleExperiment], moodExperiments: MoodExperiment.sampleExperiments)
+    static var sampleData: AppData = AppData(sleepExperiments: [SleepExperiment.bedtimeSampleExperiment], dayExperiments: [DayExperiment.sampleExperiment], moodExperiments: MoodExperiment.sampleExperiments)
 }

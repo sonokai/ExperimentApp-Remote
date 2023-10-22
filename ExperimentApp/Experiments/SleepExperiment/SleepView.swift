@@ -88,6 +88,6 @@ struct SleepView: View {
 
 struct SleepView3_Previews: PreviewProvider {
     static var previews: some View {
-        SleepView(sleepExperiment: .constant(SleepExperiment.sampleExperiment1))
+        SleepView(sleepExperiment: .constant(SleepExperiment.bedtimeSampleExperiment))
     }
 }

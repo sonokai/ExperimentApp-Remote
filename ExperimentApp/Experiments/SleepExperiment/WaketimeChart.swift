@@ -7,23 +7,40 @@
 
 import SwiftUI
 import Charts
-//hey does this work
+
 struct WaketimeChart: View {
-    var entries: [SleepEntry]
-    var dependent: SleepExperiment.DependentVariable
+    @State var picker: pickerValues = .none
+    enum pickerValues : String{
+        case none = ""
+        case quality = "Quality"
+        case productivity = "Productivity"
+        case compare = "Compare"
+    }
+    var experiment: SleepExperiment
     var body: some View {
-        VStack{
-            Text("this is a title yay")
-            Chart(entries){ entry in
-                if(dependent == .quality || dependent == .both){
+        VStack(alignment:.leading){
+            Text(experiment.getTitle())
+            if(experiment.dependentVariable == .both){
+                Picker("Chart Y axis",selection: $picker){
+                    Text("Quality").tag(pickerValues.quality)
+                    Text("Productivity").tag(pickerValues.productivity)
+                    Text("Compare").tag(pickerValues.compare)
+                }
+                .pickerStyle(.segmented)
+                .onAppear(){
+                    picker = .quality
+                }
+            }
+            Chart(experiment.entries){ entry in
+                if(experiment.dependentVariable == .quality || picker == .quality || picker == .compare){
                     PointMark(
-                        x: .value("Waketime", entry.waketime.timeIntervalSince1970.truncatingRemainder(dividingBy: 86400)/3600),
+                        x: .value("Waketime", convertDate(from: entry.waketime)),
                         y: .value("Quality", entry.quality)
                     ).foregroundStyle(.red)
                 }
-                if(dependent == .productivity || dependent == .both){
+                if(experiment.dependentVariable == .productivity || picker == .productivity || picker == .compare){
                     PointMark(
-                        x: .value("Waketime", entry.waketime.timeIntervalSince1970.truncatingRemainder(dividingBy: 86400)/3600),
+                        x: .value("Waketime", convertDate(from: entry.waketime)),
                         y: .value("Productivity", entry.productivity)
                     ).foregroundStyle(.blue)
                 }
@@ -34,27 +51,21 @@ struct WaketimeChart: View {
             .chartYAxisLabel(getYAxisLabel())
             .chartXAxisLabel("Waketime")
             .chartForegroundStyleScale(legendStyle())
-            .chartXAxis{
-                AxisMarks(
-                    values: [0,6, 12, 18,24]
-                ) {
-                    AxisValueLabel()
-                }
-            }
+            .frame(height: 300)
             Spacer().frame(minHeight:100)
         }
         .padding()
     }
     
     private func getYAxisLabel() -> String{
-        switch(dependent){
+        switch(experiment.dependentVariable){
         case .quality: return "Quality of day"
         case .productivity: return "Productivity"
         case .both: return ""
         }
     }
     private func legendStyle() -> KeyValuePairs<String, Color> {
-        if (dependent == .both) {
+        if (experiment.dependentVariable == .both) {
             return [
                 "Productivity": .blue, "Quality": .red
             ]
@@ -62,10 +73,20 @@ struct WaketimeChart: View {
             return [:] // Empty KeyValuePairs if the condition is not met
         }
     }
+    func convertDate(from date: Date) -> Date{
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "h:mm a"
+        let dateString = dateformatter.string(from: date)
+        let newDate = dateformatter.date(from: dateString)
+        return newDate!
+        
+    }
+    
+    
 }
 
 struct WaketimeChart_Previews: PreviewProvider {
     static var previews: some View {
-        WaketimeChart(entries: SleepExperiment.sampleDataForExperiment2, dependent: .both)
+        WaketimeChart(experiment: SleepExperiment.bedtimeSampleExperiment)
     }
 }
