@@ -10,6 +10,7 @@ import Charts
 
 struct WaketimeChart: View {
     @State var picker: pickerValues = .none
+    
     enum pickerValues : String{
         case none = ""
         case quality = "Quality"
@@ -17,6 +18,10 @@ struct WaketimeChart: View {
         case compare = "Compare"
     }
     var experiment: SleepExperiment
+    var interval: Date
+    var size: Int
+    var showRange: Bool = false
+    
     var body: some View {
         VStack(alignment:.leading){
             Text(experiment.getTitle())
@@ -31,18 +36,28 @@ struct WaketimeChart: View {
                     picker = .quality
                 }
             }
-            Chart(experiment.entries){ entry in
-                if(experiment.dependentVariable == .quality || picker == .quality || picker == .compare){
-                    PointMark(
-                        x: .value("Waketime", convertDate(from: entry.waketime)),
-                        y: .value("Quality", entry.quality)
-                    ).foregroundStyle(.red)
+            Chart(){
+                if(showRange){
+                    RectangleMark(
+                        xStart: .value("Start of interval", convertDate(from: interval)),
+                        xEnd: .value("End of best interval", addMinutesToDate(date: interval, minutesToAdd: size)),
+                        yStart: nil,
+                        yEnd: nil
+                    ).foregroundStyle(.green)
                 }
-                if(experiment.dependentVariable == .productivity || picker == .productivity || picker == .compare){
-                    PointMark(
-                        x: .value("Waketime", convertDate(from: entry.waketime)),
-                        y: .value("Productivity", entry.productivity)
-                    ).foregroundStyle(.blue)
+                ForEach(experiment.entries){ entry in
+                    if(experiment.dependentVariable == .quality || picker == .quality || picker == .compare){
+                        PointMark(
+                            x: .value("Waketime", convertDate(from: entry.waketime)),
+                            y: .value("Quality", entry.quality)
+                        ).foregroundStyle(.red)
+                    }
+                    if(experiment.dependentVariable == .productivity || picker == .productivity || picker == .compare){
+                        PointMark(
+                            x: .value("Waketime", convertDate(from: entry.waketime)),
+                            y: .value("Productivity", entry.productivity)
+                        ).foregroundStyle(.blue)
+                    }
                 }
                 
             }
@@ -52,7 +67,7 @@ struct WaketimeChart: View {
             .chartXAxisLabel("Waketime")
             .chartForegroundStyleScale(legendStyle())
             .frame(height: 300)
-            Spacer().frame(minHeight:100)
+            
         }
         .padding()
     }
@@ -81,12 +96,19 @@ struct WaketimeChart: View {
         return newDate!
         
     }
+    func addMinutesToDate(date: Date, minutesToAdd: Int) -> Date {
+        let calendar = Calendar.current
+        let updatedDate = calendar.date(byAdding: .minute, value: minutesToAdd, to: date)
+        return convertDate(from: updatedDate!)
+        
+    }
     
     
 }
 
 struct WaketimeChart_Previews: PreviewProvider {
+    static let testInterval: Date = Calendar.current.date(bySettingHour: 10, minute: 50, second: 0, of: Date())!
     static var previews: some View {
-        WaketimeChart(experiment: SleepExperiment.bedtimeSampleExperiment)
+        WaketimeChart(experiment: SleepExperiment.waketimeSampleExperiment, interval: testInterval, size: 15)
     }
 }

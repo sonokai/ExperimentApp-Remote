@@ -49,7 +49,7 @@ struct SleepTimeChart: View {
             .chartXAxisLabel("Hours slept")
             .frame(height: 300)
             .chartXAxis {
-                AxisMarks(values: .stride(by: .minute, count: 15)) { value in
+                AxisMarks(values: .stride(by: .minute, count: experiment.getAppropriateLengthOfChartAxisMarks())) { value in
                     if let date = value.as(Date.self) {
                         let hour = Calendar.current.component(.hour, from: date)
                         AxisValueLabel {

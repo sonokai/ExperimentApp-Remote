@@ -29,7 +29,8 @@ struct BothtimeChart: View {
             //BedtimeChart(experiment: experiment)
             Text("Temporary")
         case .waketime:
-            WaketimeChart(experiment: experiment)
+           // WaketimeChart(experiment: experiment)
+            Text("Temporary")
         case .hoursSlept:
             SleepTimeChart(experiment: experiment)
         }

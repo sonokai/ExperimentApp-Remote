@@ -12,7 +12,7 @@ struct IntervalTester: View {
     var body: some View {
         VStack{
             Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            Text("Interval: \(experiment.averageOfInterval(at: 600, for: 15))")
+            Text("Interval: \(experiment.averageOfBedtimeInterval(at: 600, for: 15))")
             
         }
     }

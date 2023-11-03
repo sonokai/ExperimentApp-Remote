@@ -109,6 +109,6 @@ struct BedtimeChart: View {
 struct BedtimeChart_Previews: PreviewProvider {
     static let testInterval: Date = Calendar.current.date(bySettingHour: 10, minute: 50, second: 0, of: Date())!
     static var previews: some View {
-        BedtimeChart(experiment: SleepExperiment.bedtimebothExperiment, interval: testInterval, size: 15)
+        BedtimeChart(experiment: SleepExperiment.bedtimeSampleExperiment, interval: testInterval, size: 15)
     }
 }
