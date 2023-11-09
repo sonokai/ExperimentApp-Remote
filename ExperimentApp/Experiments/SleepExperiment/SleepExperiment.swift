@@ -71,9 +71,32 @@ extension SleepExperiment{
     static let emptyExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime)
     
     static let bedtimeSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime, entries: SleepEntry.sampleData, name: "Sleep Experiment 1", notes: "notes")
-    
+    static let bedtimeSampleExperiment2: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .productivity, independentVariable: .bedtime, entries: sampleDataForBedtime2, name: "Sleep Experiment 2", notes: "notes")
+    static let sampleDataForBedtime2: [SleepEntry] = [
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 9, minute: 30, second: 0, of: Date())!,
+                   productivity: 5),
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 9, minute: 35, second: 0, of: Date())!,
+                   productivity: 5),
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 9, minute: 40, second: 0, of: Date())!,
+                   productivity: 5),
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 9, minute: 45, second: 0, of: Date())!,
+                   productivity: 5),
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 9, minute: 50, second: 0, of: Date())!,
+                   productivity: 5),
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 9, minute: 55, second: 0, of: Date())!,
+                   productivity: 5),
+    ]
+    static let bedtimeSampleExperiment3: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .bedtime, entries: sampleDataForBedtime2, name: "Sleep Experiment 3", notes: "notes")
     static let bothTimesSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .both, entries: sampleDataForExperiment2, name: "Sleep Experiment 2", notes: "notes")
-    static let waketimeSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .productivity, independentVariable: .waketime, entries: sampleDataForExperiment2, name: "Waketime experiment", notes: "notes?")
+    static let waketimeSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .productivity, independentVariable: .waketime, entries: sampleDataForExperiment2, name: "Waketime experiment 1 ", notes: "notes?")
+    static let waketimeSampleExperiment2: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .waketime, entries: sampleDataForExperiment2, name: "Waketime experiment 2", notes: "notes?")
+    static let waketimeSampleExperiment3: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .waketime, entries: sampleDataForExperiment2, name: "Waketime experiment 3", notes: "notes?")
     static let sampleDataForExperiment2: [SleepEntry] =
     [
         
@@ -203,7 +226,7 @@ extension SleepExperiment{
 // bedtime stats
 extension SleepExperiment{
     //returns the best time to sleep
-    func getOptimalBedtimeInterval(size: Int) -> Date?{
+    func getOptimalBedtimeInterval(size: Int, dependentVariable: SleepExperiment.DependentVariable) -> Date?{
         if(independentVariable != .bedtime){
             print("Called get optimal bedtime interval but independent variable is not bedtime")
             return nil
@@ -217,11 +240,11 @@ extension SleepExperiment{
         
         //iterate through the range, changing the optimal interval if needed. this will find the optimal minute to start with
         for i in least..<(most-size){
-            if(averageOfBedtimeInterval(at: i, for: size) > optimalIntervalAverage){
-                optimalIntervalAverage = averageOfBedtimeInterval(at: i, for: size)
+            if(averageOfBedtimeInterval(at: i, for: size, dependentVariable: dependentVariable) > optimalIntervalAverage){
+                optimalIntervalAverage = averageOfBedtimeInterval(at: i, for: size, dependentVariable: dependentVariable)
                 optimalInterval = i
             }
-            print("i = \(i)")
+            
         }
         //convert minutes back into date
         
@@ -267,17 +290,26 @@ extension SleepExperiment{
         }
         return most
     }
+    func getBedtimeRange() -> Int{
+        return getMostBedtimeMinutes()-getLeastBedtimeMinutes()
+    }
     
     
     //returns average of bedtime interval for a certain dependent variable
-    func averageOfBedtimeInterval(at startingMinutes: Int, for size: Int, dependentVariable: DependentVariable = .quality) -> Double{
+    func averageOfBedtimeInterval(at startingMinutes: Int, for size: Int, dependentVariable: SleepExperiment.DependentVariable) -> Double{
         var sum = 0
         var count = 0
         //scans the entire entries array for bedtimes between the starting minutes and starting minutes + size. if it finds one, it increments count and adds the quality to sum.
         for entry in entries{
             let minutes = SleepExperiment.getMinutes(from: entry.bedtime)
             if(minutes >= startingMinutes && minutes < startingMinutes + size){
-                sum += entry.quality
+                if(dependentVariable == .quality){
+                    sum += entry.quality
+                }
+                if(dependentVariable == .productivity){
+                    sum += entry.productivity
+                }
+                
                 count += 1
             }
             
@@ -291,10 +323,14 @@ extension SleepExperiment{
     
     //returns average bedtime in string format
     func getAverageBedtime() -> String{
+        if (entries.count == 0){
+            return "No entries"
+        }
         var total = 0
         for entry in entries{
             total += SleepExperiment.getMinutes(from: entry.bedtime)
         }
+        
         let averageminutes: Int = total/entries.count
         
         return dateStringFromMinutes(minutes: averageminutes)
@@ -350,7 +386,7 @@ extension SleepExperiment{
         if let date = Calendar.current.date(bySettingHour: minutes/60, minute: minutes % 60, second: 0, of: Date()){
             let dateFormatter = DateFormatter()
             dateFormatter.timeStyle = .short
-            dateFormatter.dateFormat = "HH:mm a"
+            dateFormatter.dateFormat = "H:mm a"
             return dateFormatter.string(from: date)
         } else {
             return "i broke"
@@ -361,7 +397,7 @@ extension SleepExperiment{
 // waketime stats
 extension SleepExperiment{
     //returns best time to wake up
-    func getOptimalWaketimeInterval(size: Int) -> Date?{
+    func getOptimalWaketimeInterval(size: Int, dependentVariable: SleepExperiment.DependentVariable) -> Date?{
         if(independentVariable != .waketime){
             print("This is a waketime interval and you're not using the right method")
             return nil
@@ -375,11 +411,11 @@ extension SleepExperiment{
         
         //iterate through the range, changing the optimal interval if needed. this will find the optimal minute to start at
         for i in least..<(most-size){
-            if(averageOfWaketimeInterval(at: i, for: size) > optimalIntervalAverage){
-                optimalIntervalAverage = averageOfWaketimeInterval(at: i, for: size)
+            if(averageOfWaketimeInterval(at: i, for: size, dependentVariable: dependentVariable) > optimalIntervalAverage){
+                optimalIntervalAverage = averageOfWaketimeInterval(at: i, for: size, dependentVariable: dependentVariable)
                 optimalInterval = i
             }
-            print("i = \(i)")
+           
         }
         // next convert minutes back into a date
         return Calendar.current.date(bySettingHour: optimalInterval/60, minute: optimalInterval % 60, second: 0, of: Date())
@@ -405,16 +441,25 @@ extension SleepExperiment{
         }
         return most
     }
+    func getWaketimeRange() -> Int{
+        return getMostWaketimeMinutes()-getLeastWaketimeMinutes()
+    }
     
     // returns average of waketime interval for a certain dependent variable
-    func averageOfWaketimeInterval(at startingMinutes: Int, for size: Int, dependentVariable: DependentVariable = .productivity) -> Double{
+    func averageOfWaketimeInterval(at startingMinutes: Int, for size: Int, dependentVariable: SleepExperiment.DependentVariable) -> Double{
         var sum = 0
         var count = 0
         //scans the entire entries array for bedtimes between the starting minutes and starting minutes + size. if it finds one, it increments count and adds the quality to sum.
         for entry in entries{
             let minutes = SleepExperiment.getMinutes(from: entry.waketime)
             if(minutes >= startingMinutes && minutes < startingMinutes + size){
-                sum += entry.productivity
+                if(dependentVariable == .quality){
+                    sum += entry.quality
+                }
+                if(dependentVariable == .productivity){
+                    sum += entry.productivity
+                }
+                
                 count += 1
             }
             
@@ -504,13 +549,15 @@ extension SleepExperiment{
         }
         return most
     }
+    func getSleepTimeRange() -> Int{
+        return getMostSleepTimeMinutes()-getLeastSleepTimeMinutes()
+    }
     func getAppropriateLengthOfChartAxisMarks() -> Int{
-        let difference = getMostBedtimeMinutes() - getLeastBedtimeMinutes()
-        print("Difference: \(difference)" )
-        if(difference > 250){
+        let difference = getMostSleepTimeMinutes() - getLeastSleepTimeMinutes()
+        if(difference > 200){
             return 60
         }
-        if(difference > 150){
+        if(difference > 100){
             return 30
         }
         if(difference > 50){
@@ -518,6 +565,113 @@ extension SleepExperiment{
         }
         return 5
     }
+    //returns average of sleep time interval for a certain dependent variable
+    func averageOfSleepTimeInterval(at startingMinutes: Int, for size: Int, dependentVariable: SleepExperiment.DependentVariable) -> Double{
+        var sum = 0
+        var count = 0
+        //scans the entire entries array for bedtimes between the starting minutes and starting minutes + size. if it finds one, it increments count and adds the quality to sum.
+        for entry in entries{
+            let minutes = entry.hoursSlept*60 + entry.minutesSlept
+            if(minutes >= startingMinutes && minutes < startingMinutes + size){
+                if(dependentVariable == .quality){
+                    sum += entry.quality
+                }
+                if(dependentVariable == .productivity){
+                    sum += entry.productivity
+                }
+                count += 1
+            }
+        }
+     
+        if(count == 0){
+            return 0
+        }
+        return (Double)(sum)/(Double)(count)
+    }
+    //returns the best amount of sleep time
+    func getOptimalSleepTimeInterval(size: Int, dependentVariable: SleepExperiment.DependentVariable) -> Date?{
+        if(independentVariable == .bedtime || independentVariable == .waketime){
+            print("Called get optimal sleeptime interval but independent variable is either bedtime or waketime")
+            return nil
+        }
+        //first find bounds of our for loop before iterating through it
+        let least = getLeastSleepTimeMinutes()
+        let most = getMostSleepTimeMinutes()
+        //set up variables to store where the optimal interval is
+        var optimalIntervalAverage: Double = 0
+        var optimalInterval = least
+        
+        //iterate through the range, changing the optimal interval if needed. this will find the optimal minute to start with
+        for i in least..<(most-size){
+            if(averageOfSleepTimeInterval(at: i, for: size, dependentVariable: dependentVariable) > optimalIntervalAverage){
+                optimalIntervalAverage = averageOfSleepTimeInterval(at: i, for: size, dependentVariable: dependentVariable)
+                optimalInterval = i
+            }
+            
+        }
+        //convert minutes back into date
+        
+        return Calendar.current.date(bySettingHour: optimalInterval/60, minute: optimalInterval % 60, second: 0, of: Date())
+    }
+    
+    
+    
+    func getMedianSleepTime() -> String{
+        var entries = self.entries
+        
+        //remove the max and the min as long as entries size is more than 2
+        while(entries.count>2){
+            var most = 0
+            var least = 10000000
+            var mostIndex = -1
+            var leastIndex = -1
+            for i in 0..<entries.count{
+                let minutes = entries[i].hoursSlept * 60 + entries[i].minutesSlept
+                if(minutes>most){
+                    most = minutes
+                    mostIndex = i
+                } else if(minutes<least){
+                    least = minutes
+                    leastIndex = i
+                }
+            }
+            //note that if we remove the smaller index first, the larger index will remove what we did not initially intend for it to remove
+            //so we will remove the larger index first
+            //also note that if the remaining values are all the same,
+            //mostIndex = leastIndex = entries.count-1
+            //in that case (the else case), we remove the last two items in entries
+            if(mostIndex<leastIndex){
+                entries.remove(at: leastIndex)
+                entries.remove(at: mostIndex)
+            }else if (leastIndex>mostIndex){
+                entries.remove(at: mostIndex)
+                entries.remove(at: leastIndex)
+            }else {
+                entries.remove(at: mostIndex)
+                entries.remove(at: mostIndex-1)
+            }
+        }
+        //if there are a final two, mean the last two and return, otherwise, return the last
+        if(entries.count == 2){
+            let minutes = ((entries[0].hoursSlept * 60 + entries[0].minutesSlept) + (entries[1].hoursSlept * 60 + entries[1].minutesSlept))/2
+            return dateStringFromMinutes(minutes: minutes)
+        }
+        
+        let minutes = entries[0].hoursSlept * 60 + entries[0].minutesSlept
+        return dateStringFromMinutes(minutes: minutes)
+    }
+    
+    //returns average waketime in string format
+    func getAverageSleepTime() -> String{
+        var minutes = 0
+        for entry in entries{
+            minutes += entry.hoursSlept * 60 + entry.minutesSlept
+        }
+        let averageminutes: Int = minutes/entries.count
+        
+        return dateStringFromMinutes(minutes: averageminutes)
+    }
+    
 }
 //independent variable stats
 extension SleepExperiment{

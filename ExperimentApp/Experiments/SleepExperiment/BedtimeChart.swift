@@ -14,7 +14,7 @@ struct BedtimeChart: View {
     var interval: Date
     var size: Int
     var showRange: Bool = false
-    
+    @Binding var dependentVariable: SleepExperiment.DependentVariable
     enum pickerValues : String{
         case none = ""
         case quality = "Quality"
@@ -23,7 +23,6 @@ struct BedtimeChart: View {
     }
     var body: some View {
         VStack(alignment:.leading){
-            Text(experiment.getTitle())
             if(experiment.dependentVariable == .both){
                 Picker("Chart Y axis",selection: $picker){
                     Text("Quality").tag(pickerValues.quality)
@@ -34,7 +33,30 @@ struct BedtimeChart: View {
                 .onAppear(){
                     picker = .quality
                 }
+                .onChange(of: picker){ newValue in
+                    if(newValue == .quality){
+                        dependentVariable = .quality
+                    }
+                    if(newValue == .productivity){
+                        dependentVariable = .productivity
+                    }
+                }
             }
+            if(experiment.dependentVariable == .both){
+                switch(picker){
+                case .none:
+                    Text("Loading chart...")
+                case .quality:
+                    Text("Bedtime vs. quality of day")
+                case .productivity:
+                    Text("Bedtime vs. productivity")
+                case .compare:
+                    Text("Bedtime vs. quality of day and productivity")
+                }
+            }else{
+                Text(experiment.getTitle())
+            }
+            
             Chart(){
                 if(showRange){
                     RectangleMark(
@@ -109,6 +131,6 @@ struct BedtimeChart: View {
 struct BedtimeChart_Previews: PreviewProvider {
     static let testInterval: Date = Calendar.current.date(bySettingHour: 10, minute: 50, second: 0, of: Date())!
     static var previews: some View {
-        BedtimeChart(experiment: SleepExperiment.bedtimeSampleExperiment, interval: testInterval, size: 15)
+        BedtimeChart(experiment: SleepExperiment.bedtimeSampleExperiment, interval: testInterval, size: 15, dependentVariable: .constant(.quality))
     }
 }

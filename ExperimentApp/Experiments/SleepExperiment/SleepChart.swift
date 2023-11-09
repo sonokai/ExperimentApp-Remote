@@ -29,13 +29,16 @@ struct SleepChart: View {
         VStack{
             switch(experiment.independentVariable){
             case .bedtime:
-                BedtimeChart(experiment: experiment, interval: interval, size: size, showRange: showRange)
+                Text("Temporary")
+                //BedtimeChart(experiment: experiment, interval: interval, size: size, showRange: showRange, dependentVariable: .quality)
             case .waketime:
-                WaketimeChart(experiment: experiment, interval: interval, size: size, showRange: showRange)
+                Text("Temp")
+               // WaketimeChart(experiment: experiment, interval: interval, size: size, showRange: showRange)
             case .both:
                 BothtimeChart(experiment: experiment)
             case .hoursSlept:
-                SleepTimeChart(experiment: experiment)
+               // SleepTimeChart(experiment: experiment, interval: interval, size: size, showRange: showRange, depende)
+                Text("temp")
             }
         }
     }

@@ -16,6 +16,10 @@ struct SleepTimeChart: View {
         case compare = "Compare"
     }
     var experiment: SleepExperiment
+    var interval: Date
+    var size: Int
+    var showRange: Bool = false
+    @Binding var dependentVariable: SleepExperiment.DependentVariable
     var body: some View {
         VStack(alignment: .leading){
             Text(experiment.getTitle())
@@ -28,20 +32,37 @@ struct SleepTimeChart: View {
                 .pickerStyle(.segmented)
                 .onAppear(){
                     picker = .quality
+                }.onChange(of: picker){ newValue in
+                    if(newValue == .quality){
+                        dependentVariable = .quality
+                    }
+                    if(newValue == .productivity){
+                        dependentVariable = .productivity
+                    }
                 }
             }
-            Chart(experiment.entries){ entry in
-                if(experiment.dependentVariable == .quality || picker == .quality || picker == .compare){
-                    PointMark(
-                        x: .value("Hours Slept", formatTime(hour:entry.hoursSlept, minute: entry.minutesSlept)),
-                        y: .value("Quality", entry.quality)
-                    ).foregroundStyle(.red)
+            Chart(){
+                if(showRange){
+                    RectangleMark(
+                        xStart: .value("Start of interval", convertDate(from: interval)),
+                        xEnd: .value("End of best interval", addMinutesToDate(date: interval, minutesToAdd: size)),
+                        yStart: nil,
+                        yEnd: nil
+                    ).foregroundStyle(.green)
                 }
-                if(experiment.dependentVariable == .productivity || picker == .productivity || picker == .compare){
-                    PointMark(
-                        x: .value("Hours Slept", formatTime(hour:entry.hoursSlept, minute: entry.minutesSlept)),
-                        y: .value("Productivity", entry.productivity)
-                    ).foregroundStyle(.blue)
+                ForEach(experiment.entries){ entry in
+                    if(experiment.dependentVariable == .quality || picker == .quality || picker == .compare){
+                        PointMark(
+                            x: .value("Hours Slept", formatTime(hour:entry.hoursSlept, minute: entry.minutesSlept)),
+                            y: .value("Quality", entry.quality)
+                        ).foregroundStyle(.red)
+                    }
+                    if(experiment.dependentVariable == .productivity || picker == .productivity || picker == .compare){
+                        PointMark(
+                            x: .value("Hours Slept", formatTime(hour:entry.hoursSlept, minute: entry.minutesSlept)),
+                            y: .value("Productivity", entry.productivity)
+                        ).foregroundStyle(.blue)
+                    }
                 }
                 
             }
@@ -98,14 +119,29 @@ struct SleepTimeChart: View {
     func timeString(date: Date)->String{
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
-        dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.dateFormat = "H:mm"
         let formattedTime = dateFormatter.string(from: date)
         return formattedTime
+    }
+    func convertDate(from date: Date) -> Date{
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "h:mm a"
+        let dateString = dateformatter.string(from: date)
+        let newDate = dateformatter.date(from: dateString)
+        return newDate!
+        
+    }
+    func addMinutesToDate(date: Date, minutesToAdd: Int) -> Date {
+        let calendar = Calendar.current
+        let updatedDate = calendar.date(byAdding: .minute, value: minutesToAdd, to: date)
+        return convertDate(from: updatedDate!)
+        
     }
 }
 
 struct SleepTimeChart_Previews: PreviewProvider {
+    static let testInterval: Date = Calendar.current.date(bySettingHour: 10, minute: 50, second: 0, of: Date())!
     static var previews: some View {
-        SleepTimeChart(experiment: SleepExperiment.hoursSleptSampleExperiment)
+        SleepTimeChart(experiment: SleepExperiment.hoursSleptSampleExperiment, interval: testInterval, size: 15, showRange: true, dependentVariable: .constant(.both))
     }
 }

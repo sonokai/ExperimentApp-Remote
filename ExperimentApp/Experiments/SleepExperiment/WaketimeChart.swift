@@ -21,10 +21,10 @@ struct WaketimeChart: View {
     var interval: Date
     var size: Int
     var showRange: Bool = false
+    @Binding var dependentVariable: SleepExperiment.DependentVariable
     
     var body: some View {
         VStack(alignment:.leading){
-            Text(experiment.getTitle())
             if(experiment.dependentVariable == .both){
                 Picker("Chart Y axis",selection: $picker){
                     Text("Quality").tag(pickerValues.quality)
@@ -35,7 +35,17 @@ struct WaketimeChart: View {
                 .onAppear(){
                     picker = .quality
                 }
+                .onChange(of: picker){ newValue in
+                    if(newValue == .quality){
+                        dependentVariable = .quality
+                    }
+                    if(newValue == .productivity){
+                        dependentVariable = .productivity
+                    }
+                }
             }
+            Text(experiment.getTitle())
+            
             Chart(){
                 if(showRange){
                     RectangleMark(
@@ -109,6 +119,6 @@ struct WaketimeChart: View {
 struct WaketimeChart_Previews: PreviewProvider {
     static let testInterval: Date = Calendar.current.date(bySettingHour: 10, minute: 50, second: 0, of: Date())!
     static var previews: some View {
-        WaketimeChart(experiment: SleepExperiment.waketimeSampleExperiment, interval: testInterval, size: 15)
+        WaketimeChart(experiment: SleepExperiment.waketimeSampleExperiment, interval: testInterval, size: 15, dependentVariable: .constant(.productivity))
     }
 }

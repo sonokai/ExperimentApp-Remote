@@ -53,10 +53,9 @@
 		6F7750D02A7C4382003BFA65 /* SleepSetup3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750CF2A7C4382003BFA65 /* SleepSetup3.swift */; };
 		6F7750D42A7D12CA003BFA65 /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750D32A7D12CA003BFA65 /* SleepView.swift */; };
 		6F7750D72A7DD14E003BFA65 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750D62A7DD14E003BFA65 /* Todo.swift */; };
+		6FA619B32AFA0BCE00CD9572 /* SleepTimeStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619B22AFA0BCE00CD9572 /* SleepTimeStats.swift */; };
 		6FF397972ADAF7F70096B143 /* BothtimeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF397962ADAF7F70096B143 /* BothtimeChart.swift */; };
 		6FF397E32AE1E7600096B143 /* BedtimeStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF397E22AE1E7600096B143 /* BedtimeStats.swift */; };
-		6FF397E72AE323BE0096B143 /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF397E62AE323BE0096B143 /* Interval.swift */; };
-		6FF397E92AE333400096B143 /* IntervalTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF397E82AE333400096B143 /* IntervalTester.swift */; };
 		6FF3982D2AF45D850096B143 /* WaketimeStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3982C2AF45D850096B143 /* WaketimeStats.swift */; };
 /* End PBXBuildFile section */
 
@@ -127,10 +126,9 @@
 		6F7750CF2A7C4382003BFA65 /* SleepSetup3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepSetup3.swift; sourceTree = "<group>"; };
 		6F7750D32A7D12CA003BFA65 /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
 		6F7750D62A7DD14E003BFA65 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		6FA619B22AFA0BCE00CD9572 /* SleepTimeStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTimeStats.swift; sourceTree = "<group>"; };
 		6FF397962ADAF7F70096B143 /* BothtimeChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BothtimeChart.swift; sourceTree = "<group>"; };
 		6FF397E22AE1E7600096B143 /* BedtimeStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeStats.swift; sourceTree = "<group>"; };
-		6FF397E62AE323BE0096B143 /* Interval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interval.swift; sourceTree = "<group>"; };
-		6FF397E82AE333400096B143 /* IntervalTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTester.swift; sourceTree = "<group>"; };
 		6FF3982C2AF45D850096B143 /* WaketimeStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimeStats.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -234,8 +232,6 @@
 			children = (
 				6FF3982E2AF46ED90096B143 /* Setup */,
 				6F7750C92A7BA50E003BFA65 /* SleepExperiment.swift */,
-				6FF397E82AE333400096B143 /* IntervalTester.swift */,
-				6FF397E62AE323BE0096B143 /* Interval.swift */,
 				6F7750AA2A748AEA003BFA65 /* SleepEntry.swift */,
 				6F7750D32A7D12CA003BFA65 /* SleepView.swift */,
 				6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */,
@@ -243,6 +239,7 @@
 				6F7750A42A71B08C003BFA65 /* SleepEditView.swift */,
 				6FF397E22AE1E7600096B143 /* BedtimeStats.swift */,
 				6FF3982C2AF45D850096B143 /* WaketimeStats.swift */,
+				6FA619B22AFA0BCE00CD9572 /* SleepTimeStats.swift */,
 				6F35C9BB2AB451460019D839 /* SleepChart.swift */,
 				6F35C9C12AB65E740019D839 /* BedtimeChart.swift */,
 				6FF397962ADAF7F70096B143 /* BothtimeChart.swift */,
@@ -446,13 +443,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F35C9BC2AB451460019D839 /* SleepChart.swift in Sources */,
+				6FA619B32AFA0BCE00CD9572 /* SleepTimeStats.swift in Sources */,
 				6F28AFEE2A9AA5D300FDCA0A /* DayExperiment.swift in Sources */,
 				6F7750CC2A7C40BA003BFA65 /* SleepSetup1.swift in Sources */,
 				6F7750A52A71B08C003BFA65 /* SleepEditView.swift in Sources */,
 				6F7750C62A7BA3F5003BFA65 /* SleepIntroView.swift in Sources */,
 				6F35C9BA2AB2A6850019D839 /* DoubleSliderView.swift in Sources */,
 				6F7750A32A71A9CE003BFA65 /* SleepProcedureView.swift in Sources */,
-				6FF397E92AE333400096B143 /* IntervalTester.swift in Sources */,
 				6F28B0822AA55D6F00FDCA0A /* DaySetup2.swift in Sources */,
 				6F7750B42A7B4370003BFA65 /* DayEntry.swift in Sources */,
 				59702D4F2AABD2A100B296EB /* MoodRatingView.swift in Sources */,
@@ -489,7 +486,6 @@
 				6F35C9B42AAA9C9B0019D839 /* DaySetup3.swift in Sources */,
 				6F28AFFC2A9F6D8000FDCA0A /* SliderView.swift in Sources */,
 				598DDA7D2AA2BEDA00784BD9 /* MoodEntry.swift in Sources */,
-				6FF397E72AE323BE0096B143 /* Interval.swift in Sources */,
 				6F35C9C02AB658040019D839 /* WaketimeChart.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
