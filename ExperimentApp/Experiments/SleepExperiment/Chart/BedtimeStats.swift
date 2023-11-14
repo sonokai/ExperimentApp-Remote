@@ -35,7 +35,7 @@ struct BedtimeStats: View {
                     HStack{
                         Text("Optimal interval:")
                         Spacer()
-                        Text("\(convertDate(from: interval)) - \(addMinutesToDate(date: interval, minutesToAdd: size))")
+                        Text("\(interval.simplifyDateToTimeString()) - \(interval.addMinutesToDate(minutesToAdd: size).simplifyDateToTimeString())")
                     }
                     HStack{
                         if(dependentVariable == .quality){
@@ -97,21 +97,9 @@ struct BedtimeStats: View {
             interval = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
         }
     }
-    func convertDate(from date: Date) -> String{
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "h:mm a"
-        let dateString = dateformatter.string(from: date)
-        return dateString
-    }
-    func addMinutesToDate(date: Date, minutesToAdd: Int) -> String {
-        let calendar = Calendar.current
-        let updatedDate = calendar.date(byAdding: .minute, value: minutesToAdd, to: date)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "h:mm a"
-        return dateFormatter.string(from: updatedDate ?? date)
-    }
+    
     func calculateAverage()-> String{
-        let average = experiment.averageOfBedtimeInterval(at: SleepExperiment.getMinutes(from: interval), for: size, dependentVariable: dependentVariable)
+        let average = experiment.averageOfBedtimeInterval(at: SleepExperiment.getBedtimeMinutes(from: interval), for: size, dependentVariable: dependentVariable)
         var hundredths = Int(average*100)
         let ones = hundredths / 100
         hundredths = hundredths % 100

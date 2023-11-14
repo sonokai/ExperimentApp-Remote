@@ -34,7 +34,7 @@ struct WaketimeStats: View {
                     HStack{
                         Text("Optimal interval:")
                         Spacer()
-                        Text("\(convertDate(from: interval)) - \(addMinutesToDate(date: interval, minutesToAdd: size))")
+                        Text("\(interval.simplifyDateToTimeString()) - \(interval.addMinutesToDate(minutesToAdd: size).simplifyDateToTimeString())")
                     }
                     HStack{
                         if(dependentVariable == .quality){
@@ -85,19 +85,8 @@ struct WaketimeStats: View {
             }
         }
     }
-    func convertDate(from date: Date) -> String{
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "h:mm a"
-        let dateString = dateformatter.string(from: date)
-        return dateString
-    }
-    func addMinutesToDate(date: Date, minutesToAdd: Int) -> String {
-        let calendar = Calendar.current
-        let updatedDate = calendar.date(byAdding: .minute, value: minutesToAdd, to: date)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "h:mm a"
-        return dateFormatter.string(from: updatedDate ?? date)
-    }
+    
+    
     //returns the average of the dependent variable within the optimal interval
     func calculateAverage()-> String{
         let average = experiment.averageOfWaketimeInterval(at: SleepExperiment.getMinutes(from: interval), for: size, dependentVariable: dependentVariable)

@@ -9,7 +9,7 @@ import SwiftUI
 import Charts
 
 struct WaketimeChart: View {
-    @State var picker: pickerValues = .none
+    @State var pickerValue: ChartPicker.pickerValues = .none
     
     enum pickerValues : String{
         case none = ""
@@ -25,46 +25,27 @@ struct WaketimeChart: View {
     
     var body: some View {
         VStack(alignment:.leading){
-            if(experiment.dependentVariable == .both){
-                Picker("Chart Y axis",selection: $picker){
-                    Text("Quality").tag(pickerValues.quality)
-                    Text("Productivity").tag(pickerValues.productivity)
-                    Text("Compare").tag(pickerValues.compare)
-                }
-                .pickerStyle(.segmented)
-                .onAppear(){
-                    picker = .quality
-                }
-                .onChange(of: picker){ newValue in
-                    if(newValue == .quality){
-                        dependentVariable = .quality
-                    }
-                    if(newValue == .productivity){
-                        dependentVariable = .productivity
-                    }
-                }
-            }
-            Text(experiment.getTitle())
-            
+            ChartPicker(experiment: experiment, pickerValue: $pickerValue, dependentVariable: $dependentVariable)
+            Text(experiment.getChartTitle(buttonValue: pickerValue.rawValue, independentVariable: .bedtime))
             Chart(){
                 if(showRange){
                     RectangleMark(
-                        xStart: .value("Start of interval", convertDate(from: interval)),
-                        xEnd: .value("End of best interval", addMinutesToDate(date: interval, minutesToAdd: size)),
+                        xStart: .value("Start of interval", interval.formatDateForChart()),
+                        xEnd: .value("End of best interval", interval.addMinutesToDate(minutesToAdd: size)),
                         yStart: nil,
                         yEnd: nil
                     ).foregroundStyle(.green)
                 }
                 ForEach(experiment.entries){ entry in
-                    if(experiment.dependentVariable == .quality || picker == .quality || picker == .compare){
+                    if(experiment.dependentVariable == .quality || pickerValue == .quality || pickerValue == .compare){
                         PointMark(
-                            x: .value("Waketime", convertDate(from: entry.waketime)),
+                            x: .value("Waketime", entry.waketime.formatDateForChart()),
                             y: .value("Quality", entry.quality)
                         ).foregroundStyle(.red)
                     }
-                    if(experiment.dependentVariable == .productivity || picker == .productivity || picker == .compare){
+                    if(experiment.dependentVariable == .productivity || pickerValue == .productivity || pickerValue == .compare){
                         PointMark(
-                            x: .value("Waketime", convertDate(from: entry.waketime)),
+                            x: .value("Waketime", entry.waketime.formatDateForChart()),
                             y: .value("Productivity", entry.productivity)
                         ).foregroundStyle(.blue)
                     }
@@ -77,6 +58,19 @@ struct WaketimeChart: View {
             .chartXAxisLabel("Waketime")
             .chartForegroundStyleScale(legendStyle())
             .frame(height: 300)
+            .chartXAxis {
+                AxisMarks() { value in
+                    if let date = value.as(Date.self) {
+                        AxisValueLabel {
+                            VStack(alignment: .leading) {
+                                Text(date.simplifyDateToTimeString())
+                            }
+                        }
+                        AxisGridLine()
+                        AxisTick()
+                    }
+                }
+            }
             
         }
         .padding()
@@ -98,22 +92,6 @@ struct WaketimeChart: View {
             return [:] // Empty KeyValuePairs if the condition is not met
         }
     }
-    func convertDate(from date: Date) -> Date{
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "h:mm a"
-        let dateString = dateformatter.string(from: date)
-        let newDate = dateformatter.date(from: dateString)
-        return newDate!
-        
-    }
-    func addMinutesToDate(date: Date, minutesToAdd: Int) -> Date {
-        let calendar = Calendar.current
-        let updatedDate = calendar.date(byAdding: .minute, value: minutesToAdd, to: date)
-        return convertDate(from: updatedDate!)
-        
-    }
-    
-    
 }
 
 struct WaketimeChart_Previews: PreviewProvider {

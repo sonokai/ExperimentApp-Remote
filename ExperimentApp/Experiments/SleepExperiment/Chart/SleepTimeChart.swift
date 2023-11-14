@@ -8,7 +8,7 @@
 import SwiftUI
 import Charts
 struct SleepTimeChart: View {
-    @State var picker: pickerValues = .none
+    @State var pickerValue: ChartPicker.pickerValues = .none
     enum pickerValues : String{
         case none = ""
         case quality = "Quality"
@@ -22,25 +22,8 @@ struct SleepTimeChart: View {
     @Binding var dependentVariable: SleepExperiment.DependentVariable
     var body: some View {
         VStack(alignment: .leading){
-            Text(experiment.getTitle())
-            if(experiment.dependentVariable == .both){
-                Picker("Chart Y axis",selection: $picker){
-                    Text("Quality").tag(pickerValues.quality)
-                    Text("Productivity").tag(pickerValues.productivity)
-                    Text("Compare").tag(pickerValues.compare)
-                }
-                .pickerStyle(.segmented)
-                .onAppear(){
-                    picker = .quality
-                }.onChange(of: picker){ newValue in
-                    if(newValue == .quality){
-                        dependentVariable = .quality
-                    }
-                    if(newValue == .productivity){
-                        dependentVariable = .productivity
-                    }
-                }
-            }
+            Text(experiment.getChartTitle(buttonValue: pickerValue.rawValue, independentVariable: .bedtime))
+            ChartPicker(experiment: experiment, pickerValue: $pickerValue, dependentVariable: $dependentVariable)
             Chart(){
                 if(showRange){
                     RectangleMark(
@@ -51,13 +34,13 @@ struct SleepTimeChart: View {
                     ).foregroundStyle(.green)
                 }
                 ForEach(experiment.entries){ entry in
-                    if(experiment.dependentVariable == .quality || picker == .quality || picker == .compare){
+                    if(experiment.dependentVariable == .quality || pickerValue == .quality || pickerValue == .compare){
                         PointMark(
                             x: .value("Hours Slept", formatTime(hour:entry.hoursSlept, minute: entry.minutesSlept)),
                             y: .value("Quality", entry.quality)
                         ).foregroundStyle(.red)
                     }
-                    if(experiment.dependentVariable == .productivity || picker == .productivity || picker == .compare){
+                    if(experiment.dependentVariable == .productivity || pickerValue == .productivity || pickerValue == .compare){
                         PointMark(
                             x: .value("Hours Slept", formatTime(hour:entry.hoursSlept, minute: entry.minutesSlept)),
                             y: .value("Productivity", entry.productivity)

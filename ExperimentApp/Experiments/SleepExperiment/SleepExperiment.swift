@@ -40,8 +40,8 @@ extension SleepExperiment{
         var id: Self{
             return self
         }
-        case productivity = "productivity"
-        case quality = "quality"
+        case productivity = "Productivity"
+        case quality = "Quality"
         case both = "both"
         
         var name: String {
@@ -50,16 +50,12 @@ extension SleepExperiment{
     }
     enum IndependentVariable: String, Codable, CaseIterable, Identifiable{
         var id: Self {
-            
             return self
         }
-        
-        
-        
-        case bedtime = "bedtime"
-        case waketime = "waketime"
-        case both = "both"
-        case hoursSlept = "hours slept"
+        case bedtime = "Bedtime"
+        case waketime = "Waketime"
+        case both = "Both"
+        case hoursSlept = "Hours slept"
         
         var name: String {
             rawValue.capitalized
@@ -198,6 +194,26 @@ extension SleepExperiment{
                    hoursSlept: 12, minutesSlept: 30)
         
     ]
+    static let sampleDataForCrossMidnight: [SleepEntry] = [
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 1, minute: 0, second: 0, of: Date())!,
+                   quality: 9,
+                   productivity: 10),
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 23, minute: 0, second: 0, of: Date())!,
+                   quality: 6,
+                   productivity: 10),
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 23, minute: 30, second: 0, of: Date())!,
+                   quality: 7,
+                   productivity: 10),
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 0, minute: 30, second: 0, of: Date())!,
+                   quality: 8,
+                   productivity: 10),
+    ]
+    static let midnightSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .bedtime, entries: sampleDataForCrossMidnight, name: "Sleep Experiment 12", notes: "notes")
+    
     
     static let experimentArray: [SleepExperiment] = [
     bedtimeSampleExperiment, bothTimesSampleExperiment, hoursSleptSampleExperiment
@@ -219,8 +235,26 @@ extension SleepExperiment{
         
         return string1 + " vs. " + string2
     }
-    
-    
+    func getChartTitle(buttonValue: String, independentVariable: IndependentVariable) -> String{
+        if(dependentVariable == .both){
+            switch(buttonValue){
+            case "none":
+                return "Loading chart..."
+            case "quality":
+                return "\(independentVariable.rawValue) vs. quality of day"
+            case "productivity":
+                return "\(independentVariable.rawValue) vs. productivity"
+            case "compare":
+                return "\(independentVariable.rawValue) vs. quality of day and productivity"
+            default:
+                return "AHHHHH IT broke "
+            }
+        
+        }else{
+            return self.getTitle()
+        }
+
+    }
 }
 
 // bedtime stats
@@ -242,6 +276,10 @@ extension SleepExperiment{
         var optimalInterval = least
         
         //iterate through the range, changing the optimal interval if needed. this will find the optimal minute to start with
+        if(least+size > most){
+            print("least is \(least) but most is \(most)")
+            return nil
+        }
         for i in least..<(most-size){
             if(averageOfBedtimeInterval(at: i, for: size, dependentVariable: dependentVariable) > optimalIntervalAverage){
                 optimalIntervalAverage = averageOfBedtimeInterval(at: i, for: size, dependentVariable: dependentVariable)
@@ -250,8 +288,13 @@ extension SleepExperiment{
             
         }
         //convert minutes back into date
+        var day = 1
+        if(optimalInterval > 1440){
+            optimalInterval = optimalInterval - 1440
+            day = 2
+        }
         
-        return Calendar.current.date(bySettingHour: optimalInterval/60, minute: optimalInterval % 60, second: 0, of: Date())
+        return Calendar.current.date(bySettingHour: optimalInterval/60, minute: optimalInterval % 60, second: 0, of: Date(timeIntervalSinceReferenceDate: TimeInterval(day * 24 * 3600)))
     }
     
     static func getHoursAndMinute(from date: Date) -> (Int, Int){
@@ -268,6 +311,16 @@ extension SleepExperiment{
         return (hour, minute)
     }
     
+    static func getBedtimeMinutes(from date: Date)-> Int {
+        let time = getHoursAndMinute(from: date)
+        var minutes = time.0*60+time.1
+        //if AM, consider it to be the next day
+        if(minutes<720){
+            minutes += 1440
+        }
+        return minutes
+    }
+    
     static func getMinutes(from date: Date)-> Int {
         let time = getHoursAndMinute(from: date)
         return time.0*60+time.1
@@ -276,7 +329,7 @@ extension SleepExperiment{
     func getLeastBedtimeMinutes() -> Int{
         var least = 100000000
         for entry in entries{
-            let minutes = SleepExperiment.getMinutes(from: entry.bedtime)
+            let minutes = SleepExperiment.getBedtimeMinutes(from: entry.bedtime)
             if(minutes < least){
                 least = minutes
             }
@@ -286,7 +339,7 @@ extension SleepExperiment{
     func getMostBedtimeMinutes() -> Int{
         var most = 0
         for entry in entries{
-            let minutes = SleepExperiment.getMinutes(from: entry.bedtime)
+            let minutes = SleepExperiment.getBedtimeMinutes(from: entry.bedtime)
             if(minutes > most){
                 most = minutes
             }
@@ -304,7 +357,7 @@ extension SleepExperiment{
         var count = 0
         //scans the entire entries array for bedtimes between the starting minutes and starting minutes + size. if it finds one, it increments count and adds the quality to sum.
         for entry in entries{
-            let minutes = SleepExperiment.getMinutes(from: entry.bedtime)
+            let minutes = SleepExperiment.getBedtimeMinutes(from: entry.bedtime)
             if(minutes >= startingMinutes && minutes < startingMinutes + size){
                 if(dependentVariable == .quality){
                     sum += entry.quality
@@ -332,11 +385,11 @@ extension SleepExperiment{
         }
         var total = 0
         for entry in entries{
-            total += SleepExperiment.getMinutes(from: entry.bedtime)
+            total += SleepExperiment.getBedtimeMinutes(from: entry.bedtime)
         }
         
         let averageminutes: Int = total/entries.count
-        
+        //since AM averages are in the next day, bring it back to the present day to convert to string
         return dateStringFromMinutes(minutes: averageminutes)
     }
     
@@ -355,7 +408,7 @@ extension SleepExperiment{
             var mostIndex = -1
             var leastIndex = -1
             for i in 0..<entries.count{
-                let minutes = SleepExperiment.getMinutes(from: entries[i].bedtime)
+                let minutes = SleepExperiment.getBedtimeMinutes(from: entries[i].bedtime)
                 if(minutes>most){
                     most = minutes
                     mostIndex = i
@@ -382,11 +435,11 @@ extension SleepExperiment{
         }
         //if there are a final two, mean the last two and return, otherwise, return the last
         if(entries.count == 2){
-            let minutes = (SleepExperiment.getMinutes(from: entries[0].bedtime) + SleepExperiment.getMinutes(from: entries[1].bedtime))/2
+            let minutes = (SleepExperiment.getBedtimeMinutes(from: entries[0].bedtime) + SleepExperiment.getBedtimeMinutes(from: entries[1].bedtime))/2
             return dateStringFromMinutes(minutes: minutes)
         }
         
-        let minutes = SleepExperiment.getMinutes(from: entries[0].bedtime)
+        let minutes = SleepExperiment.getBedtimeMinutes(from: entries[0].bedtime)
         return dateStringFromMinutes(minutes: minutes)
     }
     func dateStringFromMinutes(minutes: Int) -> String{
@@ -396,7 +449,15 @@ extension SleepExperiment{
             dateFormatter.dateFormat = "H:mm a"
             return dateFormatter.string(from: date)
         } else {
-            return "i broke"
+            if let date2 = Calendar.current.date(bySettingHour: ((minutes/60)-24), minute: minutes % 60, second: 0, of: Date()){
+                let dateFormatter = DateFormatter()
+                dateFormatter.timeStyle = .short
+                dateFormatter.dateFormat = "H:mm a"
+                return dateFormatter.string(from: date2)
+            }
+            else{
+                return "I broke"
+            }
         }
     }
     

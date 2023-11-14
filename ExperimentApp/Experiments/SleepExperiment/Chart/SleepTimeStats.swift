@@ -33,7 +33,7 @@ struct SleepTimeStats: View {
                     HStack{
                         Text("Optimal interval:")
                         Spacer()
-                        Text("\(convertDate(from: interval)) - \(addMinutesToDate(date: interval, minutesToAdd: size))")
+                        Text("\(interval.simplifyDateToTimeString()) - \(interval.addMinutesToDate(minutesToAdd: size).simplifyDateToTimeString())")
                     }
                     HStack{
                         if(dependentVariable == .quality){
@@ -86,21 +86,9 @@ struct SleepTimeStats: View {
             
         }
     }
-    func convertDate(from date: Date) -> String{
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "h:mm a"
-        let dateString = dateformatter.string(from: date)
-        return dateString
-    }
-    func addMinutesToDate(date: Date, minutesToAdd: Int) -> String {
-        let calendar = Calendar.current
-        let updatedDate = calendar.date(byAdding: .minute, value: minutesToAdd, to: date)
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "h:mm a"
-        return dateFormatter.string(from: updatedDate ?? date)
-    }
+   
     //returns the average of the dependent variable within the optimal interval
-    func calculateAverage()-> String{
+    private func calculateAverage()-> String{
         let average = experiment.averageOfSleepTimeInterval(at: SleepExperiment.getMinutes(from: interval), for: size, dependentVariable: dependentVariable)
         var hundredths = Int(average*100)
         let ones = hundredths / 100
@@ -110,7 +98,7 @@ struct SleepTimeStats: View {
         }
         return "\(ones).\(hundredths)"
     }
-    func updateOptimalInterval(){
+    private func updateOptimalInterval(){
         if let ainterval = experiment.getOptimalSleepTimeInterval(size: size, dependentVariable: dependentVariable){
             interval = ainterval
         } else {
