@@ -19,7 +19,7 @@ struct ExperimentView: View {
             Form{
                 Section(header: Text("Active Experiments")){
                     ForEach($appData.sleepExperiments) { $sleepExperiment in
-                        NavigationLink(destination: SleepView(sleepExperiment: $sleepExperiment)){
+                        NavigationLink(destination: SleepView(experiment: $sleepExperiment)){
                             Text("\(sleepExperiment.name)")
                         }
                     }

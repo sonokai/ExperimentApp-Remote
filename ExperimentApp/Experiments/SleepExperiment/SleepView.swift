@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SleepView: View {
-    @Binding var sleepExperiment: SleepExperiment
+    @Binding var experiment: SleepExperiment
     @State private var isAddingNew = false
     @State private var newEntry = SleepEntry.newEntry
     
@@ -24,7 +24,7 @@ struct SleepView: View {
                     Text("Q: How much sleep should you get?")
                         .toolbar {
                         Button("New entry") {
-                            sleepExperiment.entries.append(newEntry)
+                            experiment.entries.append(newEntry)
                             //immediately add a new entry and present a sleepeditview as a sheet to edit that entry'
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
                                 isAddingNew = true
@@ -35,21 +35,21 @@ struct SleepView: View {
                     NavigationLink(destination: SleepProcedureView()){
                         Text("Procedure")
                     }
-                    NavigationLink(destination: Text("in development lol")){
-                        Text("Results")
+                    NavigationLink(destination: SleepChart(experiment: experiment)){
+                        Text("Chart")
                     }
-                    NavigationLink(destination: Text("\(sleepExperiment.notes)")){
+                    NavigationLink(destination: Text("\(experiment.notes)")){
                         Text("Notes")
                     }
                 }
-                .navigationTitle(Text("\(sleepExperiment.name)"))
+                .navigationTitle(Text("\(experiment.name)"))
                 
                 
                 Section(header: Text("Entries")) {
                     
-                    ForEach($sleepExperiment.entries) { entryBinding in
-                        NavigationLink(destination: SleepEditView(entry:entryBinding, sleepExperiment: sleepExperiment).navigationTitle("Edit entry")) {
-                            SimplifiedSleepView(sleepExperiment: sleepExperiment, entry: entryBinding)
+                    ForEach($experiment.entries) { entryBinding in
+                        NavigationLink(destination: SleepEditView(entry:entryBinding, sleepExperiment: experiment).navigationTitle("Edit entry")) {
+                            SimplifiedSleepView(sleepExperiment: experiment, entry: entryBinding)
                         }
                     }
                     .onDelete { indices in
@@ -63,13 +63,13 @@ struct SleepView: View {
                 
                 NavigationStack {
                     
-                    SleepEditView(entry: $sleepExperiment.entries[sleepExperiment.entries.count-1], sleepExperiment: sleepExperiment)// return the last item in entries because when the button was pressed, an empty entry was added
+                    SleepEditView(entry: $experiment.entries[experiment.entries.count-1], sleepExperiment: experiment)// return the last item in entries because when the button was pressed, an empty entry was added
                         .navigationTitle("New Entry")
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction) {
                                 Button("Cancel") {
                                     isAddingNew = false
-                                    sleepExperiment.entries.removeLast()
+                                    experiment.entries.removeLast()
                                 }
                             }
                         }
@@ -81,13 +81,13 @@ struct SleepView: View {
         }
     }
     private func deleteEntries(at indices: IndexSet) {
-        sleepExperiment.entries.remove(atOffsets: indices)
+        experiment.entries.remove(atOffsets: indices)
     }
 }
 
 
 struct SleepView3_Previews: PreviewProvider {
     static var previews: some View {
-        SleepView(sleepExperiment: .constant(SleepExperiment.bedtimeSampleExperiment))
+        SleepView(experiment: .constant(SleepExperiment.bedtimeSampleExperiment))
     }
 }

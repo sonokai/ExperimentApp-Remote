@@ -1,13 +1,13 @@
 //
-//  SleepTimeStats.swift
+//  WaketimeStats.swift
 //  ExperimentApp
 //
-//  Created by Bell Chen on 11/6/23.
+//  Created by Bell Chen on 11/2/23.
 //
 
 import SwiftUI
 
-struct SleepTimeStats: View {
+struct WaketimeStats: View {
     var experiment: SleepExperiment
     @State var showRange = false
     @State var interval : Date = Date()
@@ -16,7 +16,8 @@ struct SleepTimeStats: View {
     var body: some View {
         Form{
             Section("Chart"){
-                SleepTimeChart(experiment: experiment, interval: interval, size: size, showRange: showRange, dependentVariable: $dependentVariable)
+                WaketimeChart(experiment: experiment, interval: interval, size: size, showRange: showRange, dependentVariable: $dependentVariable)
+                
             }.onAppear(){
                 if(experiment.dependentVariable == .quality){
                     dependentVariable = .quality
@@ -44,24 +45,28 @@ struct SleepTimeStats: View {
                         Spacer()
                         Text("\(calculateAverage())")
                     }
-                    SliderView(name: "Interval size (minutes)",value: $size, lowValue: 5, highValue: 30)
-                        .onChange(of: size){ _ in
-                       updateOptimalInterval()
+                    SliderView(name: "Interval size (minutes)",value: $size, lowValue: 5, highValue: 30 > experiment.getWaketimeRange() ?  (Double)(experiment.getWaketimeRange()) : 30)
+                    .onChange(of: size){ _ in
+                        updateOptimalInterval()
                     }.onAppear(){
                         updateOptimalInterval()
+                    }.disabled(experiment.getWaketimeRange()<5 || experiment.entries.count == 0)
+                    if(experiment.getWaketimeRange()<5){
+                        Text("You need more data!")
                     }
+                    
                 }
             }
             Section("Stats"){
                 HStack{
-                    Text("Average time slept: ")
+                    Text("Average waketime: ")
                     Spacer()
-                    Text("\(experiment.getAverageSleepTime())")
+                    Text("\(experiment.getAverageWaketime())")
                 }
                 HStack{
-                    Text("Median time slept:")
+                    Text("Median waketime:")
                     Spacer()
-                    Text("\(experiment.getAverageSleepTime())")
+                    Text("\(experiment.getMedianWaketime())")
                 }
                 if(dependentVariable == .quality){
                     HStack{
@@ -77,10 +82,7 @@ struct SleepTimeStats: View {
                         Text("\(experiment.getAverageProductivity())")
                     }
                 }
-                
-                
             }
-            
         }
     }
     func convertDate(from date: Date) -> String{
@@ -98,7 +100,7 @@ struct SleepTimeStats: View {
     }
     //returns the average of the dependent variable within the optimal interval
     func calculateAverage()-> String{
-        let average = experiment.averageOfSleepTimeInterval(at: SleepExperiment.getMinutes(from: interval), for: size, dependentVariable: dependentVariable)
+        let average = experiment.averageOfWaketimeInterval(at: SleepExperiment.getMinutes(from: interval), for: size, dependentVariable: dependentVariable)
         var hundredths = Int(average*100)
         let ones = hundredths / 100
         hundredths = hundredths % 100
@@ -108,7 +110,7 @@ struct SleepTimeStats: View {
         return "\(ones).\(hundredths)"
     }
     func updateOptimalInterval(){
-        if let ainterval = experiment.getOptimalSleepTimeInterval(size: size, dependentVariable: dependentVariable){
+        if let ainterval = experiment.getOptimalWaketimeInterval(size: size, dependentVariable: dependentVariable){
             interval = ainterval
         } else {
             interval = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
@@ -116,8 +118,8 @@ struct SleepTimeStats: View {
     }
 }
 
-struct SleepTimeStats_Previews: PreviewProvider {
+struct WaketimeStats_Previews: PreviewProvider {
     static var previews: some View {
-        SleepTimeStats(experiment: SleepExperiment.hoursSleptSampleExperiment)
+        WaketimeStats(experiment: SleepExperiment.waketimeSampleExperiment2)
     }
 }

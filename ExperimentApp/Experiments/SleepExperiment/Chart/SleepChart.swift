@@ -9,16 +9,9 @@ import SwiftUI
 import Charts
 struct SleepChart: View {
     var experiment: SleepExperiment
-    @State var buttonValue: ButtonValue = .bedtime
+    
     //for both bedtime and waketime, create a button that switches the charts, for bedtime, waketime, and total time slept
-    var interval: Date
-    var size: Int
-    var showRange = false
-    enum ButtonValue: String{
-        case bedtime = "Bedtime"
-        case waketime = "WakeTime"
-        case hoursSlept = "Hours Slept"
-    }
+    
     // for independent variable hours slept, just do normal display
     var body: some View {
         //if dependent var =  productivity or both display productivity chart
@@ -29,16 +22,13 @@ struct SleepChart: View {
         VStack{
             switch(experiment.independentVariable){
             case .bedtime:
-                Text("Temporary")
-                //BedtimeChart(experiment: experiment, interval: interval, size: size, showRange: showRange, dependentVariable: .quality)
+                BedtimeStats(experiment: experiment)
             case .waketime:
-                Text("Temp")
-               // WaketimeChart(experiment: experiment, interval: interval, size: size, showRange: showRange)
+                WaketimeStats(experiment: experiment)
             case .both:
                 BothtimeChart(experiment: experiment)
             case .hoursSlept:
-               // SleepTimeChart(experiment: experiment, interval: interval, size: size, showRange: showRange, depende)
-                Text("temp")
+                SleepTimeStats(experiment: experiment)
             }
         }
     }
@@ -46,6 +36,6 @@ struct SleepChart: View {
 
 struct SleepChart_Previews: PreviewProvider {
     static var previews: some View {
-        SleepChart(experiment: SleepExperiment.bothTimesSampleExperiment, interval: Date(), size: 15)
+        SleepChart(experiment: SleepExperiment.bothTimesSampleExperiment)
     }
 }

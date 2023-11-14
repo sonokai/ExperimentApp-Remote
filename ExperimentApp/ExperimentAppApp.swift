@@ -10,16 +10,17 @@ import SwiftUI
 @main
 struct ExperimentAppApp: App {
     @StateObject private var store = DataStore()
+    @State private var errorWrapper: ErrorWrapper?
     
     var body: some Scene {
         WindowGroup {
             ExperimentView(appData: $store.data){
-                //we want to have experimentview(data: $store.data)
+                
                 Task {
                     do {
                         try await store.save(appdata: store.data)
                     } catch {
-                        fatalError(error.localizedDescription)
+                        errorWrapper = ErrorWrapper(error: error, guidance: "Something with the saving went wrong")
                     }
                 }
             }
@@ -27,8 +28,13 @@ struct ExperimentAppApp: App {
                 do {
                     try await store.load()
                 } catch {
-                    fatalError(error.localizedDescription)
+                    errorWrapper = ErrorWrapper(error: error, guidance: "Something with the file loading went wrong")
                 }
+            }.sheet(item: $errorWrapper) {
+                
+                store.data = AppData.sampleData
+            } content: { wrapper in
+                ErrorView(errorWrapper: wrapper)
             }
             
             

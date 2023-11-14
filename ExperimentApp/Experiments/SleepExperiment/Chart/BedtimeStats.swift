@@ -1,23 +1,24 @@
 //
-//  WaketimeStats.swift
+//  SleepStats.swift
 //  ExperimentApp
 //
-//  Created by Bell Chen on 11/2/23.
+//  Created by Bell Chen on 10/19/23.
 //
 
 import SwiftUI
 
-struct WaketimeStats: View {
+struct BedtimeStats: View {
     var experiment: SleepExperiment
     @State var showRange = false
     @State var interval : Date = Date()
     @State var size: Int = 15
     @State var dependentVariable: SleepExperiment.DependentVariable = .quality
+    
     var body: some View {
+        
         Form{
             Section("Chart"){
-                WaketimeChart(experiment: experiment, interval: interval, size: size, showRange: showRange, dependentVariable: $dependentVariable)
-                
+                BedtimeChart(experiment: experiment, interval: interval, size: size, showRange: showRange, dependentVariable: $dependentVariable)
             }.onAppear(){
                 if(experiment.dependentVariable == .quality){
                     dependentVariable = .quality
@@ -26,7 +27,7 @@ struct WaketimeStats: View {
                     dependentVariable = .productivity
                 }
             }.onChange(of: dependentVariable){ _ in
-                updateOptimalInterval()
+                updateInterval()
             }
             Section("Settings"){
                 Toggle("Show optimal interval", isOn: $showRange)
@@ -45,25 +46,28 @@ struct WaketimeStats: View {
                         Spacer()
                         Text("\(calculateAverage())")
                     }
-                    SliderView(name: "Interval size (minutes)",value: $size, lowValue: 5, highValue: 30 > experiment.getWaketimeRange() ?  (Double)(experiment.getWaketimeRange()) : 30)
-                    .onChange(of: size){ _ in
-                        updateOptimalInterval()
-                    }.onAppear(){
-                        updateOptimalInterval()
-                    }
                     
+                    SliderView(name: "Interval size (minutes)",value: $size, lowValue: 5, highValue: 30 > experiment.getBedtimeRange() ?  (Double)(experiment.getBedtimeRange()) : 30)
+                        .onChange(of: size){ _ in
+                        updateInterval()
+                    }.onAppear(){
+                        updateInterval()
+                    }.disabled(experiment.getBedtimeRange()<5 || experiment.entries.count == 0)
+                    if(experiment.getBedtimeRange()<5){
+                        Text("You need more data!")
+                    }
                 }
             }
             Section("Stats"){
                 HStack{
-                    Text("Average waketime: ")
+                    Text("Average bedtime: ")
                     Spacer()
-                    Text("\(experiment.getAverageWaketime())")
+                    Text("\(experiment.getAverageBedtime())")
                 }
                 HStack{
-                    Text("Median waketime:")
+                    Text("Median bedtime: ")
                     Spacer()
-                    Text("\(experiment.getMedianWaketime())")
+                    Text("\(experiment.getMedianBedtime())")
                 }
                 if(dependentVariable == .quality){
                     HStack{
@@ -71,15 +75,26 @@ struct WaketimeStats: View {
                         Spacer()
                         Text("\(experiment.getAverageQuality())")
                     }
-                }
-                if(dependentVariable == .productivity){
+                } else{
                     HStack{
                         Text("Average productivity: ")
                         Spacer()
                         Text("\(experiment.getAverageProductivity())")
                     }
                 }
+                
+                
             }
+            
+        }
+        
+    }
+    func updateInterval(){
+        if let tempinterval =
+            experiment.getOptimalBedtimeInterval(size: size, dependentVariable: dependentVariable){
+            interval = tempinterval
+        } else {
+            interval = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
         }
     }
     func convertDate(from date: Date) -> String{
@@ -95,9 +110,8 @@ struct WaketimeStats: View {
         dateFormatter.dateFormat = "h:mm a"
         return dateFormatter.string(from: updatedDate ?? date)
     }
-    //returns the average of the dependent variable within the optimal interval
     func calculateAverage()-> String{
-        let average = experiment.averageOfWaketimeInterval(at: SleepExperiment.getMinutes(from: interval), for: size, dependentVariable: dependentVariable)
+        let average = experiment.averageOfBedtimeInterval(at: SleepExperiment.getMinutes(from: interval), for: size, dependentVariable: dependentVariable)
         var hundredths = Int(average*100)
         let ones = hundredths / 100
         hundredths = hundredths % 100
@@ -106,17 +120,10 @@ struct WaketimeStats: View {
         }
         return "\(ones).\(hundredths)"
     }
-    func updateOptimalInterval(){
-        if let ainterval = experiment.getOptimalWaketimeInterval(size: size, dependentVariable: dependentVariable){
-            interval = ainterval
-        } else {
-            interval = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
-        }
-    }
 }
 
-struct WaketimeStats_Previews: PreviewProvider {
+struct SleepStats_Previews: PreviewProvider {
     static var previews: some View {
-        WaketimeStats(experiment: SleepExperiment.waketimeSampleExperiment2)
+        BedtimeStats(experiment: SleepExperiment.bedtimeSampleExperiment3)
     }
 }

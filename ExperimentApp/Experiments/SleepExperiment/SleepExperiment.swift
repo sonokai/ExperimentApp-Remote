@@ -227,6 +227,9 @@ extension SleepExperiment{
 extension SleepExperiment{
     //returns the best time to sleep
     func getOptimalBedtimeInterval(size: Int, dependentVariable: SleepExperiment.DependentVariable) -> Date?{
+        if(entries.count == 0){
+            return nil
+        }
         if(independentVariable != .bedtime){
             print("Called get optimal bedtime interval but independent variable is not bedtime")
             return nil
@@ -323,6 +326,7 @@ extension SleepExperiment{
     
     //returns average bedtime in string format
     func getAverageBedtime() -> String{
+        
         if (entries.count == 0){
             return "No entries"
         }
@@ -339,6 +343,9 @@ extension SleepExperiment{
     
     
     func getMedianBedtime() -> String{
+        if(entries.count == 0){
+            return "Needs more data"
+        }
         var entries = self.entries
         
         //remove the max and the min as long as entries size is more than 2
@@ -398,6 +405,9 @@ extension SleepExperiment{
 extension SleepExperiment{
     //returns best time to wake up
     func getOptimalWaketimeInterval(size: Int, dependentVariable: SleepExperiment.DependentVariable) -> Date?{
+        if(entries.count == 0){
+            return nil
+        }
         if(independentVariable != .waketime){
             print("This is a waketime interval and you're not using the right method")
             return nil
@@ -482,6 +492,9 @@ extension SleepExperiment{
         return dateStringFromMinutes(minutes: averageminutes)
     }
     func getMedianWaketime() -> String{
+        if(entries.count == 0){
+            return "Needs more data"
+        }
         var entries = self.entries
         
         //remove the max and the min as long as entries size is more than 2
@@ -590,6 +603,9 @@ extension SleepExperiment{
     }
     //returns the best amount of sleep time
     func getOptimalSleepTimeInterval(size: Int, dependentVariable: SleepExperiment.DependentVariable) -> Date?{
+        if(entries.count == 0){
+            return nil
+        }
         if(independentVariable == .bedtime || independentVariable == .waketime){
             print("Called get optimal sleeptime interval but independent variable is either bedtime or waketime")
             return nil
@@ -617,6 +633,9 @@ extension SleepExperiment{
     
     
     func getMedianSleepTime() -> String{
+        if(entries.count == 0){
+            return "Needs more data"
+        }
         var entries = self.entries
         
         //remove the max and the min as long as entries size is more than 2
@@ -663,6 +682,9 @@ extension SleepExperiment{
     
     //returns average waketime in string format
     func getAverageSleepTime() -> String{
+        if(entries.count == 0){
+            return "Needs more data"
+        }
         var minutes = 0
         for entry in entries{
             minutes += entry.hoursSlept * 60 + entry.minutesSlept
@@ -676,6 +698,9 @@ extension SleepExperiment{
 //independent variable stats
 extension SleepExperiment{
     func getAverageQuality() -> String{
+        if(entries.count == 0){
+            return "Needs more data"
+        }
         var quality = 0
         for entry in entries{
             quality += entry.quality
@@ -683,6 +708,9 @@ extension SleepExperiment{
         return roundTwoDigits(from: (Double)(quality)/(Double)(entries.count))
     }
     func getAverageProductivity() -> String{
+        if(entries.count == 0){
+            return "Needs more data"
+        }
         var productivity = 0
         for entry in entries{
             productivity += entry.productivity
