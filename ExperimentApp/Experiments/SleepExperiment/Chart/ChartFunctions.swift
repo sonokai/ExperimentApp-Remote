@@ -21,7 +21,7 @@ extension Date{
         return dateFormatter.string(from: self)
     }
     func formatDateForChart() -> Date{
-        let day = self.getAMPM() == "PM" ? 1 : 2
+        let day = self.getAMPM() == "PM" ? 0 : 1
         let calendar = Calendar.current
         let components = calendar.dateComponents([.hour, .minute, .second], from: self)
         
@@ -31,13 +31,15 @@ extension Date{
         let second = components.second ?? 0
         
         // Create a new date with the specified day and the extracted time components
-        if let newDate = calendar.date(bySettingHour: hour, minute: minute, second: second, of: Date(timeIntervalSinceReferenceDate: TimeInterval(day * 24 * 3600))) {
+        if let newDate = calendar.date(bySettingHour: hour, minute: minute, second: second, of: Date(timeIntervalSince1970: TimeInterval(day * 24 * 3600))) {
             return newDate
         } else {
             // Return the original date in case of any issues
+            print("Date formatting failed")
             return self
         }
     }
+    
     func addMinutesToDate(minutesToAdd: Int) -> Date {
         let calendar = Calendar.current
         let updatedDate = calendar.date(byAdding: .minute, value: minutesToAdd, to: self)

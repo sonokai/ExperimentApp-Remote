@@ -100,26 +100,44 @@ struct SleepEntry: Identifiable, Codable {
 
 extension SleepEntry {
     
+    static func createDate(month: Int, day: Int, year: Int) -> Date? {
+        var dateComponents = DateComponents()
+        dateComponents.year = year
+        dateComponents.month = month
+        dateComponents.day = day
+
+        let calendar = Calendar.current
+        return calendar.date(from: dateComponents)
+    }
     static let sampleData: [SleepEntry] =
     [
         
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 9, minute: 30, second: 0, of: Date())!, quality: 5),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 30, second: 0, of: Date())!, quality: 6),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 11, minute: 30, second: 0, of: Date())!, quality: 7),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 10, second: 0, of: Date())!, quality: 6),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 11, minute: 20, second: 0, of: Date())!, quality: 7),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 40, second: 0, of: Date())!, quality: 5),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 50, second: 0, of: Date())!, quality: 7),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 20, second: 0, of: Date())!, quality: 6),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 9, minute: 40, second: 0, of: Date())!, quality: 5),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 9, minute: 45, second: 0, of: Date())!, quality: 4),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 0, second: 0, of: Date())!, quality: 9),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 05, second: 0, of: Date())!, quality: 10),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 10, second: 0, of: Date())!, quality: 10),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 15, second: 0, of: Date())!, quality: 10),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 07, second: 0, of: Date())!, quality: 10),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 11, second: 0, of: Date())!, quality: 10),
-        SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 10, minute: 13, second: 0, of: Date())!, quality: 10),
+       // SleepEntry(date: createDate(month: 10, day: 1, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 9, minute: 30, second: 0, of: Date())!, quality: 5),
+        SleepEntry(date: createDate(month: 10, day: 2, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 10, minute: 30, second: 0, of: Date())!, quality: 6),
+        
+        SleepEntry(date: createDate(month: 10, day: 3, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 11, minute: 30, second: 0, of: Date())!, quality: 7),
+        
+        SleepEntry(date: createDate(month: 10, day: 4, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 10, minute: 10, second: 0, of: Date())!, quality: 6),
+        
+        SleepEntry(date: createDate(month: 10, day: 5, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 11, minute: 20, second: 0, of: Date())!, quality: 7),
+        SleepEntry(date: createDate(month: 10, day: 6, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 10, minute: 40, second: 0, of: Date())!, quality: 5),
+        SleepEntry(date: createDate(month: 10, day: 7, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 10, minute: 50, second: 0, of: Date())!, quality: 7),
+        SleepEntry(date: createDate(month: 10, day: 8, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 10, minute: 20, second: 0, of: Date())!, quality: 6),
+        SleepEntry(date: createDate(month: 10, day: 9, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 9, minute: 40, second: 0, of: Date())!, quality: 5),
+        
+        SleepEntry(date: createDate(month: 10, day: 10, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 9, minute: 45, second: 0, of: Date())!, quality: 4),
+        SleepEntry(date: createDate(month: 10, day: 11, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 10, minute: 0, second: 0, of: Date())!, quality: 9),
+        SleepEntry(date: createDate(month: 10, day: 12, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 10, minute: 05, second: 0, of: Date())!, quality: 10),
+        SleepEntry(date: createDate(month: 10, day: 13, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 10, minute: 10, second: 0, of: Date())!, quality: 10),
+        SleepEntry(date: createDate(month: 10, day: 15, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 10, minute: 15, second: 0, of: Date())!, quality: 10),
+        /*
+        SleepEntry(date: createDate(month: 10, day: 15, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 10, minute: 07, second: 0, of: Date())!, quality: 10),
+        */
+        
+       // SleepEntry(date: createDate(month: 10, day: 16, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 10, minute: 11, second: 0, of: Date())!, quality: 10),
+        
+        //SleepEntry(date: createDate(month: 10, day: 17, year: 2023)!, bedtime: Calendar.current.date(bySettingHour: 10, minute: 13, second: 0, of: Date())!, quality: 10),
+         
         //SleepEntry(date: Date(), bedtime: Calendar.current.date(bySettingHour: 12, minute: 13, second: 0, of: Date())!, quality: 0),
 
     ]

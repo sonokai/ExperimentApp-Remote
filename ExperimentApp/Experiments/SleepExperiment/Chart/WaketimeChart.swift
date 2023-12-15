@@ -26,7 +26,7 @@ struct WaketimeChart: View {
     var body: some View {
         VStack(alignment:.leading){
             ChartPicker(experiment: experiment, pickerValue: $pickerValue, dependentVariable: $dependentVariable)
-            Text(experiment.getChartTitle(buttonValue: pickerValue.rawValue, independentVariable: .bedtime))
+            Text(experiment.getChartTitle(buttonValue: pickerValue.rawValue, independentVariable: .bedtime)).font(.headline)
             Chart(){
                 if(showRange){
                     RectangleMark(

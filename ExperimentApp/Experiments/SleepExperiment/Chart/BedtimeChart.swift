@@ -10,15 +10,15 @@ import Charts
 
 struct BedtimeChart: View {
     var experiment: SleepExperiment
-    @State var pickerValue: ChartPicker.pickerValues = .none
+    @Binding var pickerValue: ChartPicker.pickerValues
     var interval: Date
     var size: Int
     var showRange: Bool = false
     @Binding var dependentVariable: SleepExperiment.DependentVariable
     var body: some View {
         VStack(alignment:.leading){
-            ChartPicker(experiment: experiment, pickerValue: $pickerValue, dependentVariable: $dependentVariable)
-            Text(experiment.getChartTitle(buttonValue: pickerValue.rawValue, independentVariable: .bedtime))
+            
+            Text(experiment.getChartTitle(buttonValue: pickerValue.rawValue, independentVariable: .bedtime)).font(.headline)
             
             Chart(){
                 if(showRange){
@@ -44,8 +44,6 @@ struct BedtimeChart: View {
                         ).foregroundStyle(.blue)
                     }
                 }
-                
-                
             }
             
             .chartXScale()
@@ -66,7 +64,8 @@ struct BedtimeChart: View {
                 }
             }
             .frame(height:300)
-            Spacer()
+            
+            
         }
         .padding()
         
@@ -96,6 +95,6 @@ struct BedtimeChart: View {
 struct BedtimeChart_Previews: PreviewProvider {
     static let testInterval: Date = Calendar.current.date(bySettingHour: 10, minute: 50, second: 0, of: Date())!
     static var previews: some View {
-        BedtimeChart(experiment: SleepExperiment.midnightSampleExperiment, interval: testInterval, size: 15, dependentVariable: .constant(.quality))
+        BedtimeChart(experiment: SleepExperiment.midnightSampleExperiment, pickerValue: .constant(.quality) ,interval: testInterval, size: 15, dependentVariable: .constant(.quality))
     }
 }

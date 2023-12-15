@@ -13,12 +13,13 @@ struct BedtimeStats: View {
     @State var interval : Date = Date()
     @State var size: Int = 15
     @State var dependentVariable: SleepExperiment.DependentVariable = .quality
-    
+    @State var pickerValue: ChartPicker.pickerValues = .none
     var body: some View {
         
         Form{
             Section("Chart"){
-                BedtimeChart(experiment: experiment, interval: interval, size: size, showRange: showRange, dependentVariable: $dependentVariable)
+                BedtimeChart(experiment: experiment, pickerValue: $pickerValue, interval: interval, size: size, showRange: showRange, dependentVariable: $dependentVariable)
+                ChartPicker(experiment: experiment, pickerValue: $pickerValue, dependentVariable: $dependentVariable)
             }.onAppear(){
                 if(experiment.dependentVariable == .quality){
                     dependentVariable = .quality
@@ -89,7 +90,7 @@ struct BedtimeStats: View {
         }
         
     }
-    func updateInterval(){
+    private func updateInterval(){
         if let tempinterval =
             experiment.getOptimalBedtimeInterval(size: size, dependentVariable: dependentVariable){
             interval = tempinterval
@@ -98,7 +99,7 @@ struct BedtimeStats: View {
         }
     }
     
-    func calculateAverage()-> String{
+    private func calculateAverage()-> String{
         let average = experiment.averageOfBedtimeInterval(at: SleepExperiment.getBedtimeMinutes(from: interval), for: size, dependentVariable: dependentVariable)
         var hundredths = Int(average*100)
         let ones = hundredths / 100
@@ -112,6 +113,6 @@ struct BedtimeStats: View {
 
 struct SleepStats_Previews: PreviewProvider {
     static var previews: some View {
-        BedtimeStats(experiment: SleepExperiment.bedtimeSampleExperiment3)
+        BedtimeStats(experiment: SleepExperiment.midnightSampleExperiment)
     }
 }

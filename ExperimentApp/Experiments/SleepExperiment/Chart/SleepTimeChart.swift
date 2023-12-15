@@ -22,7 +22,7 @@ struct SleepTimeChart: View {
     @Binding var dependentVariable: SleepExperiment.DependentVariable
     var body: some View {
         VStack(alignment: .leading){
-            Text(experiment.getChartTitle(buttonValue: pickerValue.rawValue, independentVariable: .bedtime))
+            Text(experiment.getChartTitle(buttonValue: pickerValue.rawValue, independentVariable: .bedtime)).font(.headline)
             ChartPicker(experiment: experiment, pickerValue: $pickerValue, dependentVariable: $dependentVariable)
             Chart(){
                 if(showRange){
