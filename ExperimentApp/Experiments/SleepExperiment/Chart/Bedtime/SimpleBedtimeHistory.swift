@@ -11,7 +11,11 @@ struct SimpleBedtimeHistory: View {
     var experiment: SleepExperiment
     var body: some View {
         VStack(alignment: .leading){
-            Text("Bedtimes")
+            
+            HStack{
+                Image(systemName: "bed.double")
+                Text("Last week, you slept ") + Text("23 minutes").bold() + Text(" later than normal")
+            }
             Chart(experiment.entries){ entry in
                 BarMark(
                     x: .value("Date", convertToDate(entry.date), unit: .day),
@@ -30,7 +34,7 @@ struct SimpleBedtimeHistory: View {
                 AxisMarks(){
                     
                 }
-            }.frame(height: 150)
+            }.frame(height: 120)
             
             
             

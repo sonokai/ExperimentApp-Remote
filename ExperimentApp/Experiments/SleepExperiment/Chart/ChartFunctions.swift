@@ -13,7 +13,6 @@ extension Date{
         dateformatter.dateFormat = "h:mm a"
         let dateString = dateformatter.string(from: self)
         return dateString
-        
     }
     func getAMPM() -> String {
         let dateFormatter = DateFormatter()

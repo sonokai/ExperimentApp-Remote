@@ -12,40 +12,56 @@ struct BedtimeHistory: View {
     var experiment: SleepExperiment
     @State var showFullRange = false
     var body: some View {
-        VStack(alignment: .leading){
-            Text("Bedtimes")
-            Chart(experiment.entries){ entry in
-                PointMark(
-                    x: .value("Date", convertToDate(entry.date), unit: .day),
-                    y: .value("Bedtime", convertBedtime(entry: entry))
-                ).foregroundStyle(.red)
-            }.frame(height: 300)
-                .chartYAxis {
-                    AxisMarks(values: .stride(by: getYAxisTickSize())) { value in
-                        AxisGridLine()
-                        
-                        if let value = value.as(Double.self) {
-                            AxisValueLabel {
-                                Text(simplifySecondsToTimeString(value))
+        Form{
+            Section("Chart"){
+                VStack(alignment: .leading){
+                    Text("Bedtimes")
+                    Chart(experiment.entries){ entry in
+                        PointMark(
+                            x: .value("Date", convertToDate(entry.date), unit: .day),
+                            y: .value("Bedtime", convertBedtime(entry: entry))
+                        ).foregroundStyle(.red)
+                    }.frame(height: 300)
+                        .chartYAxis {
+                            AxisMarks(values: .stride(by: getYAxisTickSize())) { value in
+                                AxisGridLine()
+                                
+                                if let value = value.as(Double.self) {
+                                    AxisValueLabel {
+                                        Text(simplifySecondsToTimeString(value))
+                                    }
+                                }
                             }
                         }
-                    }
-                }
-                .chartYScale(domain: getYDomain())
-                .chartXAxis{
-                    AxisMarks(values: .stride(by: .day, count: getXAxisTickSize())){ value in
-                        if(xValueInRange(date: value.as(Date.self))){
-                            AxisValueLabel()
-                            AxisGridLine()
-                            AxisTick()
-                        }else {
-                            AxisGridLine()
-                            AxisTick()
+                        .chartYScale(domain: getYDomain())
+                        .chartXAxis{
+                            AxisMarks(values: .stride(by: .day, count: getXAxisTickSize())){ value in
+                                if(xValueInRange(date: value.as(Date.self))){
+                                    AxisValueLabel()
+                                    AxisGridLine()
+                                    AxisTick()
+                                }else {
+                                    AxisGridLine()
+                                    AxisTick()
+                                }
+                            }
                         }
-                    }
+                        .chartXScale(domain: getXDomain())
                 }
-                .chartXScale(domain: getXDomain())
-                
+            }
+            Section("Stats"){
+                HStack{
+                    Text("Average bedtime: ")
+                    Spacer()
+                    Text("\(experiment.getAverageBedtime())")
+                }
+                HStack{
+                    Text("Median bedtime: ")
+                    Spacer()
+                    Text("\(experiment.getMedianBedtime())")
+                }
+
+            }
         }
     }
     func convertToDate(_ date: Date) -> Date {
@@ -86,7 +102,7 @@ struct BedtimeHistory: View {
         }
         return (least, most)
     }
-    //returns the yDomain
+    
     func getYDomain() -> ClosedRange<Double>{
         let (least, most) = getBedtimeRange()
         let startHour = Double(floor(least/3600))
@@ -163,6 +179,6 @@ struct BedtimeHistory: View {
 
 struct BedtimeHistory_Previews: PreviewProvider {
     static var previews: some View {
-        BedtimeHistory(experiment: SleepExperiment.midnightSampleExperiment).padding()
+        BedtimeHistory(experiment: SleepExperiment.midnightSampleExperiment)
     }
 }

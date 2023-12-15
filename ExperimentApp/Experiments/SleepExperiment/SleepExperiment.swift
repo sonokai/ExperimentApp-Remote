@@ -101,6 +101,18 @@ extension SleepExperiment{
         }
 
     }
+    static func getChartTitle2(independentVariable: IndependentVariable, dependentVariable: DependentVariable) -> String{
+        
+        switch(dependentVariable){
+        case .quality:
+            return "\(independentVariable.rawValue) vs. quality of day"
+        case .productivity:
+            return "\(independentVariable.rawValue) vs. productivity"
+        default:
+            return "AHHHHH IT broke "
+        }
+        
+    }
 }
 
 // bedtime stats
