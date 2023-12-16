@@ -16,7 +16,7 @@ struct BedtimeBarChart: View {
     
     
     var body: some View {
-        Form{
+        VStack(alignment:.leading){
             Text("Hey :)")
             Chart(chartEntries){ entry in
                 if(entry.isOptimal){

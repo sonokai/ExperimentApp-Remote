@@ -41,23 +41,14 @@ struct SleepView: View {
                     NavigationLink(destination: Text("\(experiment.notes)")){
                         Text("Notes")
                     }
+                    NavigationLink(destination: SleepHistory(experiment: $experiment)){
+                        Text("History")
+                    }
                 }
                 .navigationTitle(Text("\(experiment.name)"))
                 
                 
-                Section(header: Text("Entries")) {
-                    
-                    ForEach($experiment.entries) { entryBinding in
-                        NavigationLink(destination: SleepEditView(entry:entryBinding, sleepExperiment: experiment).navigationTitle("Edit entry")) {
-                            SimplifiedSleepView(sleepExperiment: experiment, entry: entryBinding)
-                        }
-                    }
-                    .onDelete { indices in
-                        deleteEntries(at: indices)
-                    }
-                     
-                    
-                }
+                
                                 
             }.sheet(isPresented: $isAddingNew) {
                 
@@ -80,9 +71,7 @@ struct SleepView: View {
             
         }
     }
-    private func deleteEntries(at indices: IndexSet) {
-        experiment.entries.remove(atOffsets: indices)
-    }
+    
 }
 
 

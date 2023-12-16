@@ -48,6 +48,17 @@ extension Date{
             return self
         }
     }
+    func convertToMMDDYYYY() -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM dd yyyy"
+        
+        if let convertedDate = dateFormatter.date(from: dateFormatter.string(from: self)) {
+            return convertedDate
+        } else {
+            print("COULDNT CONVERT DATE")
+            return Date()
+        }
+    }
     
     
 }

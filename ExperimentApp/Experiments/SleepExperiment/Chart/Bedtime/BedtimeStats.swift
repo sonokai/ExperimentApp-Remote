@@ -13,44 +13,60 @@ struct BedtimeStats: View {
         NavigationStack{
             Form{
                 Section("Correlational data"){
-                    if(experiment.dependentVariable == .both){
-                        NavigationLink(destination: BedtimeScatterPlot(experiment: experiment, dependentVariable: .quality)){
-                            SimpleBedtimeBarChart(experiment: experiment, dependentVariable: .quality)
+                    if(experiment.entries.count>=14){
+                        if(experiment.dependentVariable == .both){
+                            //required: 14 entries
+                            NavigationLink(destination: BedtimeScatterPlot(experiment: experiment, dependentVariable: .quality)){
+                                SimpleBedtimeBarChart(experiment: experiment, dependentVariable: .quality)
+                            }
+                            NavigationLink(destination: BedtimeScatterPlot(experiment: experiment, dependentVariable: .productivity)){
+                                SimpleBedtimeBarChart(experiment: experiment, dependentVariable: .productivity)
+                            }
+                        } else{
+                            NavigationLink(destination: BedtimeScatterPlot(experiment: experiment, dependentVariable: experiment.dependentVariable)){
+                                SimpleBedtimeBarChart(experiment: experiment, dependentVariable: experiment.dependentVariable)
+                            }
                         }
-                        NavigationLink(destination: BedtimeScatterPlot(experiment: experiment, dependentVariable: .productivity)){
-                            SimpleBedtimeBarChart(experiment: experiment, dependentVariable: .productivity)
-                        }
-                    } else{
-                        NavigationLink(destination: BedtimeScatterPlot(experiment: experiment, dependentVariable: experiment.dependentVariable)){
-                            SimpleBedtimeChart(experiment: experiment, dependentVariable: experiment.dependentVariable)
-                        }
+                    }else {
+                        EntryProgressView(count: experiment.entries.count, needed: 14, text: "to view correlational data")
+                        BedtimeChartPreview(experiment: experiment)
+                        
                     }
                 }
                 Section("Independent variable data"){
-                    NavigationLink(destination: BedtimeHistory(experiment: experiment)){
-                        SimpleBedtimeHistory(experiment: experiment)
+                    //required: 7 entries
+                    if(experiment.entries.count>=7){
+                        NavigationLink(destination: BedtimeHistory(experiment: experiment)){
+                            SimpleBedtimeHistory(experiment: experiment)
+                        }
+                    } else{
+                        EntryProgressView(count: experiment.entries.count, needed: 7, text: "to view bedtime data")
                     }
                 }
                 Section("Dependent variable data"){
-                    /*
-                    if(dependentVariable == .quality){
-                        HStack{
-                            Text("Average quality of day: ")
-                            Spacer()
-                            Text("\(experiment.getAverageQuality())")
+                    //required: 1 entry
+                    if(experiment.entries.count>=1){
+                        if(experiment.dependentVariable == .both){
+                            NavigationLink(destination: SleepDependentHistory(experiment: experiment, dependentVariable: .quality)){
+                                SimpleSleepDependentHistory(experiment: experiment, dependentVariable: .quality)
+                            }
+                            NavigationLink(destination: SleepDependentHistory(experiment: experiment, dependentVariable: .productivity)){
+                                SimpleSleepDependentHistory(experiment: experiment, dependentVariable: .productivity)
+                            }
+                        }else{
+                            NavigationLink(destination: SleepDependentHistory(experiment: experiment)){
+                                SimpleSleepDependentHistory(experiment: experiment)
+                            }
                         }
                     } else{
-                        HStack{
-                            Text("Average productivity: ")
-                            Spacer()
-                            Text("\(experiment.getAverageProductivity())")
-                        }
+                        EntryProgressView(count: experiment.entries.count, needed: 1, text: "to view dependent variable data")
                     }
-                     */
+                    
+                    
                 }
                 
             }
-        }.navigationTitle(Text("Results"))
+        }.navigationTitle(Text("Experiment results"))
         
     }
     

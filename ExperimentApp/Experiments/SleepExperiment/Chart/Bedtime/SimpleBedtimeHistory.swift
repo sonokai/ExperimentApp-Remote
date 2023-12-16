@@ -7,10 +7,14 @@
 
 import SwiftUI
 import Charts
+//Required: 7 entries
 struct SimpleBedtimeHistory: View {
     var experiment: SleepExperiment
     var body: some View {
+        
         VStack(alignment: .leading){
+            
+            
             
             HStack{
                 Image(systemName: "bed.double")
@@ -35,6 +39,8 @@ struct SimpleBedtimeHistory: View {
                     
                 }
             }.frame(height: 120)
+            
+            
             
             
             
@@ -117,7 +123,8 @@ struct SimpleBedtimeHistory: View {
 
 
 struct SimpleBedtimeHistory_Previews: PreviewProvider {
+    static var sample = SleepExperiment(goalEntries: 50, dependentVariable: .productivity, independentVariable: .bedtime, entries: [SleepEntry(date: Date(), bedtime: Date(), quality: 3)], name: "", notes: "")
     static var previews: some View {
-        SimpleBedtimeHistory(experiment: SleepExperiment.midnightSampleExperiment).padding()
+        SimpleBedtimeHistory(experiment: sample).padding()
     }
 }

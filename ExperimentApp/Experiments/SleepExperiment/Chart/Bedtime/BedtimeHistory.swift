@@ -18,8 +18,8 @@ struct BedtimeHistory: View {
                     Text("Bedtimes")
                     Chart(experiment.entries){ entry in
                         PointMark(
-                            x: .value("Date", convertToDate(entry.date), unit: .day),
-                            y: .value("Bedtime", convertBedtime(entry: entry))
+                            x: .value("Date", entry.date.convertToMMDDYYYY(), unit: .day),
+                            y: .value("Bedtime", SleepExperiment.getBedtimeSeconds(from: entry.bedtime))
                         ).foregroundStyle(.red)
                     }.frame(height: 300)
                         .chartYAxis {
@@ -62,27 +62,11 @@ struct BedtimeHistory: View {
                 }
 
             }
+            
         }
     }
-    func convertToDate(_ date: Date) -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM dd yyyy"
-        
-        if let convertedDate = dateFormatter.date(from: dateFormatter.string(from: date)) {
-            return convertedDate
-        } else {
-            print("COULDNT CONVERT DATE")
-            return Date()
-        }
-    }
-    func convertBedtime(entry: SleepEntry) -> Double{
-        let seconds = entry.bedtime.timeIntervalSince1970.truncatingRemainder(dividingBy: 86_400)
-        //if am, pass it at the next day
-        if(seconds<43_200){
-            return seconds + 86_400
-        }
-        return seconds
-    }
+    
+    
     func getBedtimeRange() -> (Double, Double){
         var least = (Double)(0)
         var most = (Double)(0)
@@ -130,12 +114,10 @@ struct BedtimeHistory: View {
         }
         return 900
     }
-    func getEntryRange() -> (Date, Date){
-        return (experiment.entries[0].date, experiment.entries[experiment.entries.count-1].date)
-    }
+    
     //returns the number of days to stride by, assuming the total range is less than 3 months
     func getXAxisTickSize() -> Int{
-        let (startDate, endDate) = getEntryRange()
+        let (startDate, endDate) = experiment.getDateRange()
         let difference = endDate.timeIntervalSince(startDate)
         let daysDifference = difference / 86_400
         if(daysDifference >= 21){
@@ -150,7 +132,7 @@ struct BedtimeHistory: View {
         return 1
     }
     func getXDomain() -> ClosedRange<Date>{
-        let (startDate, endDate) = getEntryRange()
+        let (startDate, endDate) = experiment.getDateRange()
         let difference = endDate.timeIntervalSince(startDate)
         let daysDifference = difference / 86_400
         let tickSize = getXAxisTickSize()
@@ -167,7 +149,7 @@ struct BedtimeHistory: View {
         return dateString
     }
     func xValueInRange(date: Date?) -> Bool{
-        let (_, endDate) = getEntryRange()
+        let (_, endDate) = experiment.getDateRange()
         if let date1 = date{
             if(date1.timeIntervalSince1970>endDate.timeIntervalSince1970){
                 return false

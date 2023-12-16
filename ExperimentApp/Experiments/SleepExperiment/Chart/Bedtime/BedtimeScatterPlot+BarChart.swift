@@ -99,6 +99,9 @@ struct BedtimeScatterPlot: View {
                     }
                 }
             }
+            Section("Bar chart"){
+                BedtimeBarChart(experiment: experiment, dependentVariable: dependentVariable)
+            }
         }
         
     }

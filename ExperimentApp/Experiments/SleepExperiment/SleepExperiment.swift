@@ -178,6 +178,14 @@ extension SleepExperiment{
         }
         return minutes
     }
+    static func getBedtimeSeconds(from date: Date)-> Double{
+        let seconds = date.timeIntervalSince1970.truncatingRemainder(dividingBy: 86_400)
+        //if am, pass it at the next day
+        if(seconds<43_200){
+            return seconds + 86_400
+        }
+        return seconds
+    }
     
     static func getMinutes(from date: Date)-> Int {
         let time = getHoursAndMinute(from: date)
@@ -653,5 +661,38 @@ extension SleepExperiment{
         }
         return "\(ones).\(hundredths)"
     }
+    func getAverageQualityDouble()->Double{
+        if(entries.count == 0){
+            return 0
+        }
+        var quality = 0
+        for entry in entries{
+            quality += entry.quality
+        }
+        return (Double)(quality)/(Double)(entries.count)
+    }
+    func getAverageProductivityDouble()->Double{
+        if(entries.count == 0){
+            return 0
+        }
+        var productivity = 0
+        for entry in entries{
+            productivity += entry.productivity
+        }
+        return (Double)(productivity)/(Double)(entries.count)
+    }
 
+}
+
+
+//Other functions
+extension SleepExperiment{
+    //should not be called if entries.count = 0
+    //assumes that the entries are in order
+    func getDateRange() -> (Date, Date){
+        if(self.entries.isEmpty){
+            print("Called get date range but entries is empty")
+        }
+        return (self.entries[0].date, self.entries[self.entries.count-1].date)
+    }
 }
