@@ -16,7 +16,7 @@ struct SimplifiedSleepView: View {
             Text("\(formattedDate(date:entry.date))")
                 .font(.headline)
                 .accessibilityAddTraits(.isHeader)
-            Spacer()
+            Spacer().frame(maxHeight: 100)
             HStack {
                 switch(sleepExperiment.independentVariable){
                 case .bedtime:
@@ -68,7 +68,10 @@ private func hourAndMinute(date: Date) -> String{
 
 struct SimplifiedSleepView_Previews: PreviewProvider {
     static var previews: some View {
-        SimplifiedSleepView(sleepExperiment: SleepExperiment.bedtimeSampleExperiment, entry:.constant(SleepEntry.newEntry))
+        VStack{
+            SimplifiedSleepView(sleepExperiment: SleepExperiment.bedtimeSampleExperiment, entry:.constant(SleepEntry.newEntry))
+        
+        }
     }
 }
 

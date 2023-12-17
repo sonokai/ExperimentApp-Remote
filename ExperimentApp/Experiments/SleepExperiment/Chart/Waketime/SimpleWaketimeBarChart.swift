@@ -1,17 +1,17 @@
 //
-//  SimpleBedtimeBarChart.swift
+//  SimpleWaketimeBarChart.swift
 //  ExperimentApp
 //
-//  Created by Bell Chen on 12/15/23.
+//  Created by Bell Chen on 12/16/23.
 //
 
 import SwiftUI
 import Charts
-struct SimpleBedtimeBarChart: View {
+struct SimpleWaketimeBarChart: View {
     var experiment: SleepExperiment
     var dependentVariable: SleepExperiment.DependentVariable
     @State var interval: Date = Date()
-    @State var chartEntries: [BedtimeBarChartEntry] = []
+    @State var chartEntries: [WaketimeBarChartEntry] = []
     var body: some View {
         VStack(alignment: .leading){
             HStack{
@@ -35,42 +35,40 @@ struct SimpleBedtimeBarChart: View {
             .frame(height: 120)
         }.onAppear(){
             if let tempinterval =
-                experiment.getOptimalBedtimeInterval(size: 30, dependentVariable: dependentVariable){
+                experiment.getOptimalWaketimeInterval(size: 30, dependentVariable: dependentVariable){
                 interval = tempinterval
             } else {
                 interval = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
             }
-            var intervalMinutes = SleepExperiment.getMinutes(from: interval)
-            if(intervalMinutes<720){
-                intervalMinutes = intervalMinutes + 1440
-            }
-            //1. use least bedtime to find a smallest range that will generate a bar mark (in line with the optimal interval)
+            let intervalMinutes = SleepExperiment.getMinutes(from: interval)
+            
+            //1. use least waketime to find a smallest range that will generate a bar mark (in line with the optimal interval)
             var lowestChartBarMark = intervalMinutes
-            while(lowestChartBarMark > experiment.getLeastBedtimeMinutes()){
+            while(lowestChartBarMark > experiment.getLeastWaketimeMinutes()){
                 lowestChartBarMark = lowestChartBarMark - 30
             }
             
-            //2. use most bedtime to find a highest range that will generate a bar mark
+            //2. use most waketime to find a highest range that will generate a bar mark
             var highestChartBarMark = intervalMinutes
-            while(highestChartBarMark <= experiment.getMostBedtimeMinutes()){
+            while(highestChartBarMark <= experiment.getMostWaketimeMinutes()){
                 highestChartBarMark = highestChartBarMark + 30
             }
             if(highestChartBarMark > intervalMinutes){
                 highestChartBarMark = highestChartBarMark - 30
             }
             
-            //3. initiate the bedtimebarchartentries
+            //3. initiate the waketimebarchartentries
             for chartBarMark in stride(from: lowestChartBarMark, through: highestChartBarMark, by: 30){
                 
-                chartEntries.append(BedtimeBarChartEntry(experiment: experiment, dependentVariable: dependentVariable, time: chartBarMark, isOptimal: chartBarMark == intervalMinutes))
+                chartEntries.append(WaketimeBarChartEntry(experiment: experiment, dependentVariable: dependentVariable, time: chartBarMark, isOptimal: chartBarMark == intervalMinutes))
                  
             }
         }
     }
 }
 
-struct SimpleBedtimeBarChart_Previews: PreviewProvider {
+struct SimpleWaketimeBarChart_Previews: PreviewProvider {
     static var previews: some View {
-        SimpleBedtimeBarChart(experiment: SleepExperiment.bedtimeSampleExperiment, dependentVariable: .quality)
+        SimpleWaketimeBarChart(experiment: SleepExperiment.waketimeSampleExperiment, dependentVariable: .productivity)
     }
 }

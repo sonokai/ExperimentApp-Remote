@@ -15,7 +15,7 @@ struct SleepHistory: View {
                 Section(header: Text("Entries")) {
                     
                     ForEach($experiment.entries) { entryBinding in
-                        NavigationLink(destination: SleepEditView(entry:entryBinding, sleepExperiment: experiment).navigationTitle("Edit entry")) {
+                        NavigationLink(destination: SleepEditView(entry:entryBinding, experiment: $experiment).navigationTitle("Edit entry")) {
                             SimplifiedSleepView(sleepExperiment: experiment, entry: entryBinding)
                         }
                     }

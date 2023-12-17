@@ -168,7 +168,7 @@ extension SleepExperiment{
         }
         return (hour, minute)
     }
-    
+    //returns the converted minutes from a date (if part of AM, it counts as the second day)
     static func getBedtimeMinutes(from date: Date)-> Int {
         let time = getHoursAndMinute(from: date)
         var minutes = time.0*60+time.1
@@ -258,8 +258,71 @@ extension SleepExperiment{
         //since AM averages are in the next day, bring it back to the present day to convert to string
         return dateStringFromMinutes(minutes: averageminutes)
     }
-    
-    
+    //returns average bedtime from a entry array
+    //in the form of date
+    //not plottable since the day isnt adjusted for am pm
+    static func getAverageBedtimeFromEntries(entries: [SleepEntry])-> Date{
+        var total = 0.0
+        for entry in entries{
+            total += Double(SleepExperiment.getBedtimeMinutes(from: entry.bedtime))
+        }
+        var averageminutes = total/Double(entries.count)
+        if(averageminutes > 1440){
+            averageminutes = averageminutes - 1440
+        }
+       
+        
+        return Calendar.current.date(bySettingHour: Int(averageminutes/60), minute: Int(averageminutes) % 60, second: 0, of: Date()) ?? Date()
+    }
+    func getAverageBedtimeAsSeconds() -> Double{
+        if(entries.count == 0){
+            return 0
+        }
+        var total = 0.0
+        for entry in entries{
+            total += SleepExperiment.getBedtimeSeconds(from: entry.bedtime)
+        }
+        return total/Double(entries.count)
+        
+    }
+    //compares last week's average bedtime with the rest and returns minutes
+    //if not enough data, returns 0
+    func compareLastWeekBedtimeAverage() -> Int{
+        if(entries.count<8){
+            return 0
+        }
+        let normal = entries.dropLast(7)
+        let lastweek = entries.suffix(7)
+        
+        var total = 0
+        for entry in normal{
+            total += SleepExperiment.getBedtimeMinutes(from: entry.bedtime)
+        }
+        let averageMinutesOfNormal = total/normal.count
+        
+        
+        total = 0
+        for entry in lastweek{
+            total += SleepExperiment.getBedtimeMinutes(from: entry.bedtime)
+        }
+        let averageMinutesOfLastWeek = total/lastweek.count
+        
+        //print("Average of normal: \(averageMinutesOfNormal), average of lastweek: \(averageMinutesOfLastWeek)")
+        return averageMinutesOfLastWeek-averageMinutesOfNormal
+    }
+    //returns hour and minute of standard deviation of bedtime
+    func getBedtimeStandardDeviation() -> (Int, Int){
+        var total = 0.0
+        let average = getAverageBedtimeAsSeconds()
+        for entry in entries{
+            let difference = SleepExperiment.getBedtimeSeconds(from: entry.bedtime)-average
+            total += difference*difference
+        }
+        let standardDeviationSeconds = sqrt(total/Double(entries.count))
+        let hours = Int(standardDeviationSeconds/3600)
+        let minutes = Int(standardDeviationSeconds.truncatingRemainder(dividingBy: 3600))/60
+        return (hours, minutes)
+    }
     
     func getMedianBedtime() -> String{
         if(entries.count == 0){
@@ -289,11 +352,7 @@ extension SleepExperiment{
             //also note that if the remaining values are all the same,
             //mostIndex = leastIndex = entries.count-1
             //in that case (the else case), we remove the last two items in entries
-            //print("leastIndex: \(leastIndex)")
-            //print("mostIndex: \(mostIndex)")
-            //print("removed \(dateStringFromMinutes(minutes: SleepExperiment.getBedtimeMinutes(from: entries[leastIndex].bedtime)))")
-            //print("removed \(dateStringFromMinutes(minutes:SleepExperiment.getBedtimeMinutes(from: entries[mostIndex].bedtime)))")
-            //print("Entries left: \(entries.count-2)")
+            
             if(mostIndex<leastIndex){
                 entries.remove(at: leastIndex)
                 entries.remove(at: mostIndex)
@@ -362,14 +421,15 @@ extension SleepExperiment{
             }
            
         }
-        // next convert minutes back into a date
+        
+        
         return Calendar.current.date(bySettingHour: optimalInterval/60, minute: optimalInterval % 60, second: 0, of: Date())
         
     }
     func getLeastWaketimeMinutes() -> Int{
         var least = 100000000
         for entry in entries{
-            let minutes = SleepExperiment.getMinutes(from: entry.waketime)
+            let minutes = SleepExperiment.getWaketimeMinutes(from: entry.waketime)
             if(minutes < least){
                 least = minutes
             }
@@ -379,12 +439,18 @@ extension SleepExperiment{
     func getMostWaketimeMinutes() -> Int{
         var most = 0
         for entry in entries{
-            let minutes = SleepExperiment.getMinutes(from: entry.waketime)
+            let minutes = SleepExperiment.getWaketimeMinutes(from: entry.waketime)
             if(minutes > most){
                 most = minutes
             }
         }
         return most
+    }
+    static func getWaketimeSeconds(from date: Date)-> Double{
+        let seconds = date.timeIntervalSince1970.truncatingRemainder(dividingBy: 86_400)
+        //if am, dont pass it at the next day
+        
+        return seconds
     }
     func getWaketimeRange() -> Int{
         return getMostWaketimeMinutes()-getLeastWaketimeMinutes()
@@ -396,7 +462,7 @@ extension SleepExperiment{
         var count = 0
         //scans the entire entries array for bedtimes between the starting minutes and starting minutes + size. if it finds one, it increments count and adds the quality to sum.
         for entry in entries{
-            let minutes = SleepExperiment.getMinutes(from: entry.waketime)
+            let minutes = SleepExperiment.getWaketimeMinutes(from: entry.waketime)
             if(minutes >= startingMinutes && minutes < startingMinutes + size){
                 if(dependentVariable == .quality){
                     sum += entry.quality
@@ -473,6 +539,68 @@ extension SleepExperiment{
         let minutes = SleepExperiment.getMinutes(from: entries[0].waketime)
         return dateStringFromMinutes(minutes: minutes)
     }
+    //This should only return from 0 to 1440
+    static func getWaketimeMinutes(from date: Date)-> Int {
+        let time = getHoursAndMinute(from: date)
+        return time.0*60+time.1
+        
+    }
+    static func getAverageWaketimeFromEntries(entries: [SleepEntry])-> Date{
+        var total = 0.0
+        for entry in entries{
+            total += Double(SleepExperiment.getWaketimeMinutes(from: entry.waketime))
+        }
+        let averageminutes = total/Double(entries.count)
+        
+        return Calendar.current.date(bySettingHour: Int(averageminutes/60), minute: Int(averageminutes) % 60, second: 0, of: Date()) ?? Date()
+    }
+    func getAverageWaketimeAsSeconds() -> Double{
+        if(entries.count == 0){
+            return 0
+        }
+        var total = 0.0
+        for entry in entries{
+            total += SleepExperiment.getWaketimeSeconds(from: entry.waketime)
+        }
+        return total/Double(entries.count)
+    }
+    func compareLastWeekWaketimeAverage() -> Int{
+        if(entries.count<8){
+            return 0
+        }
+        let normal = entries.dropLast(7)
+        let lastweek = entries.suffix(7)
+        
+        var total = 0
+        for entry in normal{
+            total += SleepExperiment.getWaketimeMinutes(from: entry.waketime)
+        }
+        let averageMinutesOfNormal = total/normal.count
+        
+        
+        total = 0
+        for entry in lastweek{
+            total += SleepExperiment.getWaketimeMinutes(from: entry.waketime)
+        }
+        let averageMinutesOfLastWeek = total/lastweek.count
+        
+        //print("Average of normal: \(averageMinutesOfNormal), average of lastweek: \(averageMinutesOfLastWeek)")
+        return averageMinutesOfLastWeek-averageMinutesOfNormal
+    }
+    func getWaketimeStandardDeviation() -> (Int, Int){
+        var total = 0.0
+        let average = getAverageWaketimeAsSeconds()
+        for entry in entries{
+            let difference = SleepExperiment.getWaketimeSeconds(from: entry.waketime)-average
+            total += difference*difference
+        }
+        let standardDeviationSeconds = sqrt(total/Double(entries.count))
+        let hours = Int(standardDeviationSeconds/3600)
+        let minutes = Int(standardDeviationSeconds.truncatingRemainder(dividingBy: 3600))/60
+        return (hours, minutes)
+    }
+    
+    
     
 }
 //sleep time stats
@@ -681,6 +809,23 @@ extension SleepExperiment{
         }
         return (Double)(productivity)/(Double)(entries.count)
     }
+    func getProductivityStandardDeviation()->Double{
+        var sum = 0.0
+        let average = getAverageProductivityDouble()
+        for entry in entries{
+            sum += (Double(entry.productivity)-average)*(Double(entry.productivity)-average)
+        }
+        return sqrt(sum/Double(entries.count))
+    }
+    func getQualityStandardDeviation()->Double{
+        var sum = 0.0
+        let average = getAverageQualityDouble()
+        for entry in entries{
+            sum += (Double(entry.quality)-average)*(Double(entry.quality)-average)
+            
+        }
+        return sqrt(sum/Double(entries.count))
+    }
 
 }
 
@@ -694,5 +839,9 @@ extension SleepExperiment{
             print("Called get date range but entries is empty")
         }
         return (self.entries[0].date, self.entries[self.entries.count-1].date)
+    }
+    //sort entries in order from earliest to latest date
+    mutating func sortEntriesByDate() {
+        entries = entries.sorted(by: {$0.date < $1.date})
     }
 }

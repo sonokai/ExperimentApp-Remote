@@ -1,25 +1,24 @@
 //
-//  BedtimeHistory.swift
+//  WakeTimeHistory.swift
 //  ExperimentApp
 //
-//  Created by Bell Chen on 11/14/23.
+//  Created by Bell Chen on 12/16/23.
 //
 
 import SwiftUI
 import Charts
-//this crashes if you get two of the same date
-struct BedtimeHistory: View {
+struct WakeTimeHistory: View {
     var experiment: SleepExperiment
-    @State var showFullRange = false
+    
     var body: some View {
         Form{
             Section("Chart"){
                 VStack(alignment: .leading){
-                    Text("Bedtimes")
+                    Text("Waketimes")
                     Chart(experiment.entries){ entry in
                         PointMark(
                             x: .value("Date", entry.date.convertToMMDDYYYY(), unit: .day),
-                            y: .value("Bedtime", SleepExperiment.getBedtimeSeconds(from: entry.bedtime))
+                            y: .value("Waketime", SleepExperiment.getWaketimeSeconds(from: entry.waketime))
                         ).foregroundStyle(.red)
                     }.frame(height: 300)
                         .chartYAxis {
@@ -51,9 +50,9 @@ struct BedtimeHistory: View {
             }
             Section("Stats"){
                 HStack{
-                    Text("Average bedtime: ")
+                    Text("Average waketime: ")
                     Spacer()
-                    Text("\(experiment.getAverageBedtime())")
+                    Text("\(experiment.getAverageWaketime())")
                 }
                 HStack{
                     Text("Standard deviation:")
@@ -63,7 +62,7 @@ struct BedtimeHistory: View {
                 HStack{
                     Text("Median bedtime: ")
                     Spacer()
-                    Text("\(experiment.getMedianBedtime())")
+                    Text("\(experiment.getMedianWaketime())")
                 }
                 
 
@@ -71,20 +70,19 @@ struct BedtimeHistory: View {
             
         }
     }
-    
     func formatStandardDeviation() -> String{
-        let (hour, minute) = experiment.getBedtimeStandardDeviation()
+        let (hour, minute) = experiment.getWaketimeStandardDeviation()
         if(hour == 0){
             return "\(minute) minutes"
         }
         return "\(hour) hours, \(minute) minutes"
     }
-    func getBedtimeRange() -> (Double, Double){
+    func getWaketimeRange() -> (Double, Double){
         var least = (Double)(0)
         var most = (Double)(0)
         for entry in experiment.entries{
             
-            var seconds = entry.bedtime.timeIntervalSince1970.truncatingRemainder(dividingBy: 86400)
+            var seconds = entry.waketime.timeIntervalSince1970.truncatingRemainder(dividingBy: 86400)
             if(seconds<43_200){
                 seconds += 86_400
             }
@@ -100,7 +98,7 @@ struct BedtimeHistory: View {
     }
     
     func getYDomain() -> ClosedRange<Double>{
-        let (least, most) = getBedtimeRange()
+        let (least, most) = getWaketimeRange()
         let startHour = Double(floor(least/3600))
         let endHour = Double(floor(most/3600))
         return (startHour*3600-getYAxisTickSize()...endHour*3600+getYAxisTickSize())
@@ -108,7 +106,7 @@ struct BedtimeHistory: View {
     //returns seconds to stride the y axis by
     func getYAxisTickSize() -> Double{
         //want: 4 marks per chart at least
-        let (least, most) = getBedtimeRange()
+        let (least, most) = getWaketimeRange()
         let startHour = Double(floor(least/3600))
         let endHour = Double(floor(most/3600))
         let difference = endHour - startHour + 2
@@ -167,12 +165,13 @@ struct BedtimeHistory: View {
                 return false
             }
         }
+        
         return true
     }
 }
 
-struct BedtimeHistory_Previews: PreviewProvider {
+struct WakeTimeHistory_Previews: PreviewProvider {
     static var previews: some View {
-        BedtimeHistory(experiment: SleepExperiment.bedtimeSampleExperiment)
+        WakeTimeHistory(experiment: SleepExperiment.waketimeSampleExperiment)
     }
 }

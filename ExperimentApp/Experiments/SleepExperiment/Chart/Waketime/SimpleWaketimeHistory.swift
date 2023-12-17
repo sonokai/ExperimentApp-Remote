@@ -1,17 +1,15 @@
 //
-//  SimpleBedtimeHistory.swift
+//  SimpleWaketimeHistory.swift
 //  ExperimentApp
 //
-//  Created by Bell Chen on 12/14/23.
+//  Created by Bell Chen on 12/16/23.
 //
 
 import SwiftUI
 import Charts
-//Required: 7 entries
-struct SimpleBedtimeHistory: View {
+struct SimpleWaketimeHistory: View {
     var experiment: SleepExperiment
     var body: some View {
-        
         VStack(alignment: .leading){
             
             
@@ -19,13 +17,13 @@ struct SimpleBedtimeHistory: View {
             HStack{
                 Image(systemName: "bed.double")
                 //in the time of your last entry, you slept <minutes> <later or earlier> than normal
-                BedtimeHistoryMessage(experiment: experiment)
+                WaketimeHistoryMessage(experiment: experiment)
             }
             Chart(getLast7Entries()){ entry in
                 BarMark(
                     x: .value("Date", entry.date.convertToMMDDYYYY(), unit: .day),
                     yStart: .value("Min", getYDomain().lowerBound),
-                    yEnd: .value("Bedtime",SleepExperiment.getBedtimeSeconds(from: entry.bedtime))
+                    yEnd: .value("Bedtime",SleepExperiment.getWaketimeSeconds(from: entry.waketime))
                 ).foregroundStyle(.red)
             }
             .chartYAxis(.hidden)
@@ -42,12 +40,12 @@ struct SimpleBedtimeHistory: View {
         return experiment.entries.suffix(7)
     }
     
-    func getBedtimeRange() -> (Double, Double){
+    func getWaketimeRange() -> (Double, Double){
         var least = (Double)(0)
         var most = (Double)(0)
         for entry in experiment.entries{
             
-            var seconds = entry.bedtime.timeIntervalSince1970.truncatingRemainder(dividingBy: 86400)
+            var seconds = entry.waketime.timeIntervalSince1970.truncatingRemainder(dividingBy: 86400)
             if(seconds<43_200){
                 seconds += 86_400
             }
@@ -61,9 +59,9 @@ struct SimpleBedtimeHistory: View {
         }
         return (least, most)
     }
-    //returns the yDomain
+    
     func getYDomain() -> ClosedRange<Double>{
-        let (least, most) = getBedtimeRange()
+        let (least, most) = getWaketimeRange()
         let startHour = Double(floor(least/3600))
         let endHour = Double(floor(most/3600))
         return (startHour*3600-getYAxisTickSize()...endHour*3600+getYAxisTickSize())
@@ -71,7 +69,7 @@ struct SimpleBedtimeHistory: View {
     //returns seconds to stride the y axis by
     func getYAxisTickSize() -> Double{
         //want: 4 marks per chart at least
-        let (least, most) = getBedtimeRange()
+        let (least, most) = getWaketimeRange()
         let startHour = Double(floor(least/3600))
         let endHour = Double(floor(most/3600))
         let difference = endHour - startHour + 2
@@ -89,6 +87,33 @@ struct SimpleBedtimeHistory: View {
         }
         return 900
     }
+    
+    //returns the number of days to stride by, assuming the total range is less than 3 months
+    func getXAxisTickSize() -> Int{
+        let (startDate, endDate) = experiment.getDateRange()
+        let difference = endDate.timeIntervalSince(startDate)
+        let daysDifference = difference / 86_400
+        if(daysDifference >= 21){
+            return 7
+        }
+        if(daysDifference >= 9){
+            return 3
+        }
+        if(daysDifference >= 6){
+            return 2
+        }
+        return 1
+    }
+    func getXDomain() -> ClosedRange<Date>{
+        let (startDate, endDate) = experiment.getDateRange()
+        let difference = endDate.timeIntervalSince(startDate) //assumes
+        let daysDifference = difference / 86_400
+        let tickSize = getXAxisTickSize()
+        var totalTicks = daysDifference / Double(tickSize)
+        totalTicks = totalTicks+1
+        let timeToAdd = floor(totalTicks) * Double(tickSize) * 86_400
+        return (startDate...startDate.addingTimeInterval(timeToAdd))
+    }
     func simplifySecondsToTimeString(_ seconds: Double) -> String{
         let date = Date(timeIntervalSince1970: seconds)
         let dateformatter = DateFormatter()
@@ -96,12 +121,12 @@ struct SimpleBedtimeHistory: View {
         let dateString = dateformatter.string(from: date)
         return dateString
     }
+    
+
 }
 
-
-struct SimpleBedtimeHistory_Previews: PreviewProvider {
-    static var sample = SleepExperiment(goalEntries: 50, dependentVariable: .productivity, independentVariable: .bedtime, entries: [SleepEntry(date: Date(), bedtime: Date(), quality: 3)], name: "", notes: "")
+struct SimpleWaketimeHistory_Previews: PreviewProvider {
     static var previews: some View {
-        SimpleBedtimeHistory(experiment: SleepExperiment.midnightSampleExperiment).padding()
+        SimpleWaketimeHistory(experiment: SleepExperiment.waketimeSampleExperiment).padding()
     }
 }

@@ -54,7 +54,7 @@ struct SleepView: View {
                 
                 NavigationStack {
                     
-                    SleepEditView(entry: $experiment.entries[experiment.entries.count-1], sleepExperiment: experiment)// return the last item in entries because when the button was pressed, an empty entry was added
+                    SleepEditView(entry: $experiment.entries[experiment.entries.count-1], experiment: $experiment)// return the last item in entries because when the button was pressed, an empty entry was added
                         .navigationTitle("New Entry")
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction) {

@@ -22,9 +22,9 @@ struct SleepChart: View {
         VStack{
             switch(experiment.independentVariable){
             case .bedtime:
-                BedtimeStats(experiment: experiment)
+                BedtimeResults(experiment: experiment)
             case .waketime:
-                WaketimeStats(experiment: experiment)
+                WaketimeResults(experiment: experiment)
             case .both:
                 BothtimeChart(experiment: experiment)
             case .hoursSlept:

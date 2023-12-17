@@ -54,11 +54,21 @@ struct SleepDependentHistory: View {
                         Spacer()
                         Text("\(experiment.getAverageQuality())")
                     }
+                    HStack{
+                        Text("Standard deviation: ")
+                        Spacer()
+                        Text("\(experiment.getQualityStandardDeviation().formatted(.number.precision(.fractionLength(2))))")
+                    }
                 } else{
                     HStack{
                         Text("Average productivity: ")
                         Spacer()
                         Text("\(experiment.getAverageProductivity())")
+                    }
+                    HStack{
+                        Text("Standard deviation: ")
+                        Spacer()
+                        Text("\(experiment.getProductivityStandardDeviation().formatted(.number.precision(.fractionLength(2))))")
                     }
                 }
             }

@@ -12,6 +12,7 @@ struct BedtimeBarChartEntry: Identifiable{
     let value: Double
     let isOptimal: Bool
     //initializes using a time
+    //dependent variable should only either be quality or producitvity
     init(id: UUID = UUID(),experiment: SleepExperiment, dependentVariable: SleepExperiment.DependentVariable, time: Int, isOptimal: Bool = false) {
         self.id = id
         
@@ -22,6 +23,7 @@ struct BedtimeBarChartEntry: Identifiable{
         } else if (dependentVariable == .productivity || experiment.dependentVariable == .productivity){
             self.value = experiment.averageOfBedtimeInterval(at: time, for: 30, dependentVariable: .productivity)
         } else {
+            //default condition: should never be called
             self.value = experiment.averageOfBedtimeInterval(at: time, for: 30, dependentVariable: dependentVariable)
         }
         

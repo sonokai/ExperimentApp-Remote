@@ -1,40 +1,37 @@
 //
-//  SimpleBedtimeChart.swift
+//  WaketimeChartPreview.swift
 //  ExperimentApp
 //
-//  Created by Bell Chen on 12/15/23.
+//  Created by Bell Chen on 12/16/23.
 //
 
 import SwiftUI
 import Charts
-
-struct BedtimeChartPreview: View {
+struct WaketimeChartPreview: View {
     var experiment: SleepExperiment
-    
     var body: some View {
         VStack(alignment: .leading){
             HStack{
                 Image(systemName: "bed.double")
-                
                 Text("Here is a preview of your results:")
             }.padding(.vertical)
             Chart(){
                 ForEach(experiment.entries){ entry in
                     if(experiment.dependentVariable == .quality || experiment.dependentVariable == .both){
                         PointMark(
-                            x: .value("Bedtime", entry.bedtime.formatDateForChart()),
+                            x: .value("Waketime", entry.waketime.formatDateForChart()),
                             y: .value("Quality", entry.quality)
                         ).foregroundStyle(.red)
                     }
                     if(experiment.dependentVariable == .productivity || experiment.dependentVariable == .both){
                         PointMark(
-                            x: .value("Bedtime", entry.bedtime.formatDateForChart()),
+                            x: .value("Waketime", entry.waketime.formatDateForChart()),
                             y: .value("Productivity", entry.productivity)
                         ).foregroundStyle(.blue)
                     }
                 }
             }.frame(height: 250)
-                .chartXAxisLabel("Bedtime")
+                .chartXAxisLabel("Waketime")
                 .chartYAxisLabel(getYAxisLabel())
                 .chartXAxis {
                     AxisMarks() { value in
@@ -69,10 +66,11 @@ struct BedtimeChartPreview: View {
         case .both: return ""
         }
     }
+    
 }
 
-struct SimpleBedtimeChart_Previews: PreviewProvider {
+struct WaketimeChartPreview_Previews: PreviewProvider {
     static var previews: some View {
-        BedtimeChartPreview(experiment: SleepExperiment.midnightSampleExperiment)
+        WaketimeChartPreview(experiment: SleepExperiment.waketimeSampleExperiment)
     }
 }

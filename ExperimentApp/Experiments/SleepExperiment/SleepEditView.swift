@@ -10,7 +10,7 @@ import SwiftUI
 struct SleepEditView: View {
     @Binding var entry: SleepEntry
     
-    @State private var tempDate = Date()
+    @State private var selectedDate = Date()
     @State private var bedtime = Date()
     @State private var waketime = Date()
     @State private var timeSlept = "0"
@@ -19,17 +19,18 @@ struct SleepEditView: View {
     @State private var hoursSlept: Int = 0
     @State private var minutesSlept: Int = 0
     
-    var sleepExperiment: SleepExperiment
+    
+    @Binding var experiment: SleepExperiment
     
     @Environment(\.presentationMode) private var presentationMode
-    //this line of code allows you to return to the parent class from a child class idk lol chat gpt told me to do it
     
     var body: some View {
         Form {
-            DatePicker("Entry date", selection: $tempDate, in: ...Date(),displayedComponents: [.date])
+            DatePicker("Entry date", selection: $selectedDate, in: ...Date(),displayedComponents: [.date])
             
-            switch(sleepExperiment.independentVariable){
+            switch(experiment.independentVariable){
             case .bedtime:
+                
                 DatePicker("Bedtime", selection: $bedtime, displayedComponents: [.hourAndMinute])
             case .waketime:
                 DatePicker("Wake time", selection: $waketime, displayedComponents: [.hourAndMinute])
@@ -38,10 +39,13 @@ struct SleepEditView: View {
                 DatePicker("Wake time", selection: $waketime, displayedComponents: [.hourAndMinute])
                 Text("Time slept: \(entry.calculateTimeSlept(sleep: bedtime, wake: waketime))")
             case .hoursSlept:
-                TimeSelector(hours: $hoursSlept, minutes: $minutesSlept)
+                VStack(alignment:.leading){
+                    Text("Hours slept")
+                    TimeSelector(hours: $hoursSlept, minutes: $minutesSlept)
+                }
             }
             
-            switch(sleepExperiment.dependentVariable){
+            switch(experiment.dependentVariable){
             case .quality:
                 SliderView(name: "Quality of day", value: $quality)
             case .productivity:
@@ -56,7 +60,7 @@ struct SleepEditView: View {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Done") {
                     //update the entry binding when and if the done button is pressed
-                    entry.date = tempDate
+                    entry.date = selectedDate
                     entry.bedtime = bedtime
                     entry.waketime = waketime
                     entry.timeSlept = timeSlept
@@ -64,17 +68,30 @@ struct SleepEditView: View {
                     entry.productivity = productivity
                     entry.hoursSlept = hoursSlept
                     entry.minutesSlept = minutesSlept
+                    experiment.sortEntriesByDate()
                     presentationMode.wrappedValue.dismiss()
-                }
+                }.disabled(isInvalidEntry())
             }
         }
         
         
     }
+    func isInvalidEntry()->Bool{
+        for entry in experiment.entries{
+            let date = entry.date
+            if Calendar.current.isDate(date, equalTo: selectedDate, toGranularity: .day) {
+                print("Selected day is \(selectedDate), but there is an entry with date \(date)")
+                return true
+            }
+        }
+        return false
+    }
     
 }
 struct SleepEditView_Previews: PreviewProvider {
     static var previews: some View {
-        SleepEditView(entry: .constant(SleepEntry.newEntry),sleepExperiment: SleepExperiment.hoursSleptSampleExperiment)
+        NavigationStack{
+            SleepEditView(entry: .constant(SleepEntry.newEntry),experiment: .constant(SleepExperiment.hoursSleptSampleExperiment))
+        }
     }
 }
