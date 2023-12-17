@@ -1,13 +1,13 @@
 //
-//  WaketimeHistoryMessage.swift
+//  SleepTimeHistoryMessage.swift
 //  ExperimentApp
 //
 //  Created by Bell Chen on 12/16/23.
 //
 
 import SwiftUI
-
-struct WaketimeHistoryMessage: View {
+import Charts
+struct SleepTimeHistoryMessage: View {
     @State var comparisonWord = ""
     @State var minutes = 0
     var experiment: SleepExperiment
@@ -15,12 +15,12 @@ struct WaketimeHistoryMessage: View {
         VStack{
             
             if (minutes == 0 || experiment.entries.count < 14){
-                Text("Last week, your average waketime was") + Text(" \(SleepExperiment.getAverageWaketimeFromEntries(entries: experiment.entries.suffix(7)).simplifyDateToTimeString())").bold()
+                Text("Last week, your average time slept was") + Text(" \(SleepExperiment.getAverageSleepTimeFromEntries(entries: experiment.entries.suffix(7)).simplifyDateToHMM())").bold()
             }else {
                 Text("Last week, you woke up ") + Text("\(minutes) minutes").bold() + Text(" \(comparisonWord) than normal")
             }
         }.onAppear(){
-            minutes = experiment.compareLastWeekWaketimeAverage()
+            minutes = experiment.compareLastWeekSleepTimeAverage()
             if(minutes < 0){
                 comparisonWord = "earlier"
             } else {
@@ -31,8 +31,8 @@ struct WaketimeHistoryMessage: View {
     }
 }
 
-struct WaketimeHistoryMessage_Previews: PreviewProvider {
+struct SleepTimeHistoryMessage_Previews: PreviewProvider {
     static var previews: some View {
-        WaketimeHistoryMessage(experiment: SleepExperiment.waketimeSampleExperiment)
+        SleepTimeHistoryMessage(experiment: SleepExperiment.hoursSleptSampleExperiment)
     }
 }

@@ -50,7 +50,7 @@ struct WakeTimeHistory: View {
             }
             Section("Stats"){
                 HStack{
-                    Text("Average waketime: ")
+                    Text("Average wake time: ")
                     Spacer()
                     Text("\(experiment.getAverageWaketime())")
                 }
@@ -60,7 +60,7 @@ struct WakeTimeHistory: View {
                     Text(formatStandardDeviation())
                 }
                 HStack{
-                    Text("Median bedtime: ")
+                    Text("Median wake time: ")
                     Spacer()
                     Text("\(experiment.getMedianWaketime())")
                 }
@@ -68,7 +68,7 @@ struct WakeTimeHistory: View {
 
             }
             
-        }
+        }.navigationTitle(Text("Waketime data"))
     }
     func formatStandardDeviation() -> String{
         let (hour, minute) = experiment.getWaketimeStandardDeviation()
@@ -83,9 +83,6 @@ struct WakeTimeHistory: View {
         for entry in experiment.entries{
             
             var seconds = entry.waketime.timeIntervalSince1970.truncatingRemainder(dividingBy: 86400)
-            if(seconds<43_200){
-                seconds += 86_400
-            }
             
             if(seconds < least || least == 0){
                 least = seconds
@@ -99,9 +96,10 @@ struct WakeTimeHistory: View {
     
     func getYDomain() -> ClosedRange<Double>{
         let (least, most) = getWaketimeRange()
-        let startHour = Double(floor(least/3600))
-        let endHour = Double(floor(most/3600))
-        return (startHour*3600-getYAxisTickSize()...endHour*3600+getYAxisTickSize())
+        let tickSize = getYAxisTickSize()
+        let startTicks = Double(floor(least/tickSize))
+        let endTicks = Double(floor(most/tickSize))
+        return (startTicks*tickSize-getYAxisTickSize()...endTicks*tickSize+getYAxisTickSize())
     }
     //returns seconds to stride the y axis by
     func getYAxisTickSize() -> Double{

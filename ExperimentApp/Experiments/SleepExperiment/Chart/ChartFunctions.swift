@@ -14,6 +14,12 @@ extension Date{
         let dateString = dateformatter.string(from: self)
         return dateString
     }
+    func simplifyDateToHMM() -> String{
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "h:mm"
+        let dateString = dateformatter.string(from: self)
+        return dateString
+    }
     func getAMPM() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "a"

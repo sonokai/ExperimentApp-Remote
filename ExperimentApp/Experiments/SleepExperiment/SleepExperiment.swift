@@ -554,6 +554,7 @@ extension SleepExperiment{
         
         return Calendar.current.date(bySettingHour: Int(averageminutes/60), minute: Int(averageminutes) % 60, second: 0, of: Date()) ?? Date()
     }
+    
     func getAverageWaketimeAsSeconds() -> Double{
         if(entries.count == 0){
             return 0
@@ -628,6 +629,7 @@ extension SleepExperiment{
     func getSleepTimeRange() -> Int{
         return getMostSleepTimeMinutes()-getLeastSleepTimeMinutes()
     }
+    
     func getAppropriateLengthOfChartAxisMarks() -> Int{
         let difference = getMostSleepTimeMinutes() - getLeastSleepTimeMinutes()
         if(difference > 200){
@@ -755,6 +757,63 @@ extension SleepExperiment{
         let averageminutes: Int = minutes/entries.count
         
         return dateStringFromMinutes(minutes: averageminutes)
+    }
+    func getSleepTimeStandardDeviation() -> (Int, Int){
+        var total = 0.0
+        let average = getAverageSleepTimeAsSeconds()
+        for entry in entries{
+            let difference = SleepExperiment.getSleepTimeSeconds(from: entry)-average
+            total += difference*difference
+        }
+        let standardDeviationSeconds = sqrt(total/Double(entries.count))
+        let hours = Int(standardDeviationSeconds/3600)
+        let minutes = Int(standardDeviationSeconds.truncatingRemainder(dividingBy: 3600))/60
+        return (hours, minutes)
+    }
+    func getAverageSleepTimeAsSeconds() -> Double{
+        if(entries.count == 0){
+            return 0
+        }
+        var total = 0.0
+        for entry in entries{
+            total += SleepExperiment.getSleepTimeSeconds(from: entry)
+        }
+        return total/Double(entries.count)
+    }
+    static func getSleepTimeSeconds(from entry: SleepEntry)-> Double{
+        return Double(entry.hoursSlept*3600+entry.minutesSlept*60)
+    }
+    static func getAverageSleepTimeFromEntries(entries: [SleepEntry])-> Date{
+        var total = 0.0
+        for entry in entries{
+            total += Double(entry.hoursSlept * 60 + entry.minutesSlept)
+        }
+        let averageminutes = total/Double(entries.count)
+        
+        return Calendar.current.date(bySettingHour: Int(averageminutes/60), minute: Int(averageminutes) % 60, second: 0, of: Date()) ?? Date()
+    }
+    func compareLastWeekSleepTimeAverage() -> Int{
+        if(entries.count<8){
+            return 0
+        }
+        let normal = entries.dropLast(7)
+        let lastweek = entries.suffix(7)
+        
+        var total = 0
+        for entry in normal{
+            total += entry.hoursSlept*60 + entry.minutesSlept
+        }
+        let averageMinutesOfNormal = total/normal.count
+        
+        
+        total = 0
+        for entry in lastweek{
+            total += entry.hoursSlept*60 + entry.minutesSlept
+        }
+        let averageMinutesOfLastWeek = total/lastweek.count
+        
+        //print("Average of normal: \(averageMinutesOfNormal), average of lastweek: \(averageMinutesOfLastWeek)")
+        return averageMinutesOfLastWeek-averageMinutesOfNormal
     }
     
 }

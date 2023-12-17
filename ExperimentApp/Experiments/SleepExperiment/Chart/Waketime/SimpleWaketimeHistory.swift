@@ -62,9 +62,10 @@ struct SimpleWaketimeHistory: View {
     
     func getYDomain() -> ClosedRange<Double>{
         let (least, most) = getWaketimeRange()
-        let startHour = Double(floor(least/3600))
-        let endHour = Double(floor(most/3600))
-        return (startHour*3600-getYAxisTickSize()...endHour*3600+getYAxisTickSize())
+        let tickSize = getYAxisTickSize()
+        let startTicks = Double(floor(least/tickSize))
+        let endTicks = Double(floor(most/tickSize))
+        return (startTicks*tickSize-getYAxisTickSize()...endTicks*tickSize+getYAxisTickSize())
     }
     //returns seconds to stride the y axis by
     func getYAxisTickSize() -> Double{
