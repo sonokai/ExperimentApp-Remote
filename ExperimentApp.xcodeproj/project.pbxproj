@@ -1,0 +1,1039 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		593974992AAA8F45005D95D3 /* MoodSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593974982AAA8F45005D95D3 /* MoodSetupView.swift */; };
+		59702D4F2AABD2A100B296EB /* MoodRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59702D4E2AABD2A100B296EB /* MoodRatingView.swift */; };
+		598DDA7B2AA2BEB300784BD9 /* MoodExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598DDA7A2AA2BEB300784BD9 /* MoodExperiment.swift */; };
+		598DDA7D2AA2BEDA00784BD9 /* MoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598DDA7C2AA2BEDA00784BD9 /* MoodEntry.swift */; };
+		59EEFAD92A58E7F400DA7D84 /* ExperimentAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEFAD82A58E7F400DA7D84 /* ExperimentAppApp.swift */; };
+		59EEFADD2A58E7F500DA7D84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59EEFADC2A58E7F500DA7D84 /* Assets.xcassets */; };
+		59EEFAE02A58E7F500DA7D84 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59EEFADF2A58E7F500DA7D84 /* Preview Assets.xcassets */; };
+		59EEFAEA2A58E7F500DA7D84 /* ExperimentAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEFAE92A58E7F500DA7D84 /* ExperimentAppTests.swift */; };
+		59EEFAF42A58E7F500DA7D84 /* ExperimentAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEFAF32A58E7F500DA7D84 /* ExperimentAppUITests.swift */; };
+		59EEFAF62A58E7F500DA7D84 /* ExperimentAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEFAF52A58E7F500DA7D84 /* ExperimentAppUITestsLaunchTests.swift */; };
+		6F28AFEE2A9AA5D300FDCA0A /* DayExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFED2A9AA5D300FDCA0A /* DayExperiment.swift */; };
+		6F28AFF02A9BBE3E00FDCA0A /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFEF2A9BBE3E00FDCA0A /* AppData.swift */; };
+		6F28AFF22A9BBFA300FDCA0A /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFF12A9BBFA300FDCA0A /* DataStore.swift */; };
+		6F28AFF42A9BCD2100FDCA0A /* ExperimentView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFF32A9BCD2100FDCA0A /* ExperimentView2.swift */; };
+		6F28AFF62A9BF7BB00FDCA0A /* NewExperimentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFF52A9BF7BB00FDCA0A /* NewExperimentView.swift */; };
+		6F28AFF82A9E46EC00FDCA0A /* ExperimentNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFF72A9E46EC00FDCA0A /* ExperimentNameView.swift */; };
+		6F28AFFA2A9F612D00FDCA0A /* TimeSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFF92A9F612D00FDCA0A /* TimeSelector.swift */; };
+		6F28AFFC2A9F6D8000FDCA0A /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFFB2A9F6D8000FDCA0A /* SliderView.swift */; };
+		6F28B07E2AA3824000FDCA0A /* DaySetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28B07D2AA3824000FDCA0A /* DaySetupView.swift */; };
+		6F28B0802AA39E6100FDCA0A /* DaySetup1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28B07F2AA39E6100FDCA0A /* DaySetup1.swift */; };
+		6F28B0822AA55D6F00FDCA0A /* DaySetup2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28B0812AA55D6F00FDCA0A /* DaySetup2.swift */; };
+		6F35C9B42AAA9C9B0019D839 /* DaySetup3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9B32AAA9C9B0019D839 /* DaySetup3.swift */; };
+		6F35C9B62AABD2980019D839 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9B52AABD2980019D839 /* DescriptionView.swift */; };
+		6F35C9B82AB2A25A0019D839 /* DayChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9B72AB2A25A0019D839 /* DayChart.swift */; };
+		6F35C9BA2AB2A6850019D839 /* DoubleSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9B92AB2A6850019D839 /* DoubleSliderView.swift */; };
+		6F35C9BC2AB451460019D839 /* SleepChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9BB2AB451460019D839 /* SleepChart.swift */; };
+		6F35C9C02AB658040019D839 /* WaketimeScatterPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9BF2AB658040019D839 /* WaketimeScatterPlot.swift */; };
+		6F35C9C22AB65E740019D839 /* BedtimeScatterPlot+BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9C12AB65E740019D839 /* BedtimeScatterPlot+BarChart.swift */; };
+		6F7750A32A71A9CE003BFA65 /* SleepProcedureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */; };
+		6F7750A52A71B08C003BFA65 /* SleepEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A42A71B08C003BFA65 /* SleepEditView.swift */; };
+		6F7750AB2A748AEA003BFA65 /* SleepEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750AA2A748AEA003BFA65 /* SleepEntry.swift */; };
+		6F7750AE2A74B9D6003BFA65 /* SimplifiedSleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750AD2A74B9D6003BFA65 /* SimplifiedSleepView.swift */; };
+		6F7750B22A7B41B9003BFA65 /* DayProcedureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750B12A7B41B9003BFA65 /* DayProcedureView.swift */; };
+		6F7750B42A7B4370003BFA65 /* DayEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750B32A7B4370003BFA65 /* DayEntry.swift */; };
+		6F7750B72A7B4772003BFA65 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750B62A7B4772003BFA65 /* DayView.swift */; };
+		6F7750B92A7B4825003BFA65 /* DayEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750B82A7B4825003BFA65 /* DayEntryView.swift */; };
+		6F7750BB2A7B6C1B003BFA65 /* DayEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750BA2A7B6C1B003BFA65 /* DayEditView.swift */; };
+		6F7750BF2A7B7071003BFA65 /* TimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750BE2A7B7071003BFA65 /* TimePicker.swift */; };
+		6F7750C62A7BA3F5003BFA65 /* SleepIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750C52A7BA3F5003BFA65 /* SleepIntroView.swift */; };
+		6F7750CA2A7BA50E003BFA65 /* SleepExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750C92A7BA50E003BFA65 /* SleepExperiment.swift */; };
+		6F7750CC2A7C40BA003BFA65 /* SleepSetup1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750CB2A7C40BA003BFA65 /* SleepSetup1.swift */; };
+		6F7750CE2A7C4374003BFA65 /* SleepSetup2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750CD2A7C4374003BFA65 /* SleepSetup2.swift */; };
+		6F7750D02A7C4382003BFA65 /* SleepSetup3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750CF2A7C4382003BFA65 /* SleepSetup3.swift */; };
+		6F7750D42A7D12CA003BFA65 /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750D32A7D12CA003BFA65 /* SleepView.swift */; };
+		6F7750D72A7DD14E003BFA65 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750D62A7DD14E003BFA65 /* Todo.swift */; };
+<<<<<<< HEAD
+		6FA619B32AFA0BCE00CD9572 /* SleepTimeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619B22AFA0BCE00CD9572 /* SleepTimeChart.swift */; };
+		6FA619B62AFDF9E500CD9572 /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619B52AFDF9E500CD9572 /* ErrorWrapper.swift */; };
+		6FA619B82AFDFA2F00CD9572 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619B72AFDFA2F00CD9572 /* ErrorView.swift */; };
+		6FA619D32B03409300CD9572 /* ChartFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619D22B03409300CD9572 /* ChartFunctions.swift */; };
+		6FA619D52B03455F00CD9572 /* ChartPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619D42B03455F00CD9572 /* ChartPicker.swift */; };
+		6FA619D72B042B1600CD9572 /* SleepExperimentSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619D62B042B1600CD9572 /* SleepExperimentSamples.swift */; };
+		6FA619D92B043A1F00CD9572 /* BedtimeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619D82B043A1F00CD9572 /* BedtimeHistory.swift */; };
+		6FB5176C2B2C311E0054A44C /* SimpleBedtimeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5176B2B2C311E0054A44C /* SimpleBedtimeHistory.swift */; };
+		6FB5176E2B2C3F9F0054A44C /* BedtimeChartPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5176D2B2C3F9F0054A44C /* BedtimeChartPreview.swift */; };
+		6FB517712B2C526A0054A44C /* BedtimeBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517702B2C526A0054A44C /* BedtimeBarChart.swift */; };
+		6FB517732B2C65230054A44C /* SimpleBedtimeBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517722B2C65230054A44C /* SimpleBedtimeBarChart.swift */; };
+		6FB517752B2C65B30054A44C /* BedtimeBarChartEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517742B2C65B30054A44C /* BedtimeBarChartEntry.swift */; };
+		6FB5177A2B2D42FA0054A44C /* SleepHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517792B2D42FA0054A44C /* SleepHistory.swift */; };
+		6FB5177C2B2D523A0054A44C /* EntryProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5177B2B2D523A0054A44C /* EntryProgressView.swift */; };
+		6FB5177F2B2D5D910054A44C /* SleepDependentHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5177E2B2D5D910054A44C /* SleepDependentHistory.swift */; };
+		6FB517812B2D665C0054A44C /* SimpleSleepDependentHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517802B2D665C0054A44C /* SimpleSleepDependentHistory.swift */; };
+		6FB517832B2D8B010054A44C /* BedtimeHistoryMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517822B2D8B010054A44C /* BedtimeHistoryMessage.swift */; };
+		6FB517852B2E71910054A44C /* WaketimeBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517842B2E71910054A44C /* WaketimeBarChart.swift */; };
+		6FB517872B2E71E20054A44C /* WaketimeBarChartEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517862B2E71E20054A44C /* WaketimeBarChartEntry.swift */; };
+		6FB517892B2E7BAF0054A44C /* SimpleWaketimeBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517882B2E7BAF0054A44C /* SimpleWaketimeBarChart.swift */; };
+		6FB5178B2B2E7CE00054A44C /* WaketimeChartPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5178A2B2E7CE00054A44C /* WaketimeChartPreview.swift */; };
+		6FB5178D2B2E7E970054A44C /* WakeTimeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5178C2B2E7E970054A44C /* WakeTimeHistory.swift */; };
+		6FB5178F2B2E81400054A44C /* WaketimeHistoryMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5178E2B2E81400054A44C /* WaketimeHistoryMessage.swift */; };
+		6FB517912B2E82A90054A44C /* SimpleWaketimeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517902B2E82A90054A44C /* SimpleWaketimeHistory.swift */; };
+		6FB517932B2E8C7E0054A44C /* SleepTimeBarChartEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517922B2E8C7E0054A44C /* SleepTimeBarChartEntry.swift */; };
+		6FB517952B2E8D3F0054A44C /* SleepTimeBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517942B2E8D3F0054A44C /* SleepTimeBarChart.swift */; };
+		6FB517972B2E8F1B0054A44C /* SimpleSleepTimeBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517962B2E8F1B0054A44C /* SimpleSleepTimeBarChart.swift */; };
+		6FB517992B2E90C30054A44C /* SleepTimeScatterPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517982B2E90C30054A44C /* SleepTimeScatterPlot.swift */; };
+		6FB5179B2B2E93D00054A44C /* SleepTimeChartPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5179A2B2E93D00054A44C /* SleepTimeChartPreview.swift */; };
+		6FB5179D2B2E96210054A44C /* SleepTimeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5179C2B2E96210054A44C /* SleepTimeHistory.swift */; };
+		6FB5179F2B2E9DFE0054A44C /* SleepTimeHistoryMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5179E2B2E9DFE0054A44C /* SleepTimeHistoryMessage.swift */; };
+		6FB517A12B2EC4880054A44C /* SimpleSleepTimeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517A02B2EC4880054A44C /* SimpleSleepTimeHistory.swift */; };
+		6FB517A52B2EC8590054A44C /* BothTimeResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517A42B2EC8590054A44C /* BothTimeResults.swift */; };
+		6FB517A92B3338960054A44C /* NewSleepEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517A82B3338960054A44C /* NewSleepEntryView.swift */; };
+		6FB517AB2B337C160054A44C /* NewSleepEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517AA2B337C160054A44C /* NewSleepEntry.swift */; };
+		6FB517AD2B3441CD0054A44C /* TimeSleptPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517AC2B3441CD0054A44C /* TimeSleptPicker.swift */; };
+		6FB517AF2B3443F80054A44C /* SleepDependentVarPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517AE2B3443F80054A44C /* SleepDependentVarPicker.swift */; };
+		6FB517B12B3456F50054A44C /* BedtimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517B02B3456F50054A44C /* BedtimePicker.swift */; };
+		6FB517B32B34649F0054A44C /* WaketimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517B22B34649F0054A44C /* WaketimePicker.swift */; };
+		6FB517B52B346BFA0054A44C /* SleepPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517B42B346BFA0054A44C /* SleepPicker.swift */; };
+		6FB517B72B346C9F0054A44C /* SleepEntryDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517B62B346C9F0054A44C /* SleepEntryDatePicker.swift */; };
+		6FB517BA2B3470550054A44C /* SleepCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517B92B3470550054A44C /* SleepCalculatorView.swift */; };
+		6FF397972ADAF7F70096B143 /* BothtimeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF397962ADAF7F70096B143 /* BothtimeChart.swift */; };
+		6FF397E32AE1E7600096B143 /* BedtimeResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF397E22AE1E7600096B143 /* BedtimeResults.swift */; };
+		6FF3982D2AF45D850096B143 /* WaketimeResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3982C2AF45D850096B143 /* WaketimeResults.swift */; };
+=======
+>>>>>>> main
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		59EEFAE62A58E7F500DA7D84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 59EEFACD2A58E7F400DA7D84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 59EEFAD42A58E7F400DA7D84;
+			remoteInfo = ExperimentApp;
+		};
+		59EEFAF02A58E7F500DA7D84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 59EEFACD2A58E7F400DA7D84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 59EEFAD42A58E7F400DA7D84;
+			remoteInfo = ExperimentApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		593974982AAA8F45005D95D3 /* MoodSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodSetupView.swift; sourceTree = "<group>"; };
+		59702D4E2AABD2A100B296EB /* MoodRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodRatingView.swift; sourceTree = "<group>"; };
+		598DDA7A2AA2BEB300784BD9 /* MoodExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodExperiment.swift; sourceTree = "<group>"; };
+		598DDA7C2AA2BEDA00784BD9 /* MoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodEntry.swift; sourceTree = "<group>"; };
+		59EEFAD52A58E7F400DA7D84 /* ExperimentApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExperimentApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		59EEFAD82A58E7F400DA7D84 /* ExperimentAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentAppApp.swift; sourceTree = "<group>"; };
+		59EEFADC2A58E7F500DA7D84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		59EEFADF2A58E7F500DA7D84 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		59EEFAE52A58E7F500DA7D84 /* ExperimentAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExperimentAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		59EEFAE92A58E7F500DA7D84 /* ExperimentAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentAppTests.swift; sourceTree = "<group>"; };
+		59EEFAEF2A58E7F500DA7D84 /* ExperimentAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExperimentAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		59EEFAF32A58E7F500DA7D84 /* ExperimentAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentAppUITests.swift; sourceTree = "<group>"; };
+		59EEFAF52A58E7F500DA7D84 /* ExperimentAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6F28AFED2A9AA5D300FDCA0A /* DayExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayExperiment.swift; sourceTree = "<group>"; };
+		6F28AFEF2A9BBE3E00FDCA0A /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
+		6F28AFF12A9BBFA300FDCA0A /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		6F28AFF32A9BCD2100FDCA0A /* ExperimentView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentView2.swift; sourceTree = "<group>"; };
+		6F28AFF52A9BF7BB00FDCA0A /* NewExperimentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExperimentView.swift; sourceTree = "<group>"; };
+		6F28AFF72A9E46EC00FDCA0A /* ExperimentNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentNameView.swift; sourceTree = "<group>"; };
+		6F28AFF92A9F612D00FDCA0A /* TimeSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelector.swift; sourceTree = "<group>"; };
+		6F28AFFB2A9F6D8000FDCA0A /* SliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
+		6F28B07D2AA3824000FDCA0A /* DaySetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySetupView.swift; sourceTree = "<group>"; };
+		6F28B07F2AA39E6100FDCA0A /* DaySetup1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySetup1.swift; sourceTree = "<group>"; };
+		6F28B0812AA55D6F00FDCA0A /* DaySetup2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySetup2.swift; sourceTree = "<group>"; };
+		6F35C9B32AAA9C9B0019D839 /* DaySetup3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySetup3.swift; sourceTree = "<group>"; };
+		6F35C9B52AABD2980019D839 /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
+		6F35C9B72AB2A25A0019D839 /* DayChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayChart.swift; sourceTree = "<group>"; };
+		6F35C9B92AB2A6850019D839 /* DoubleSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSliderView.swift; sourceTree = "<group>"; };
+		6F35C9BB2AB451460019D839 /* SleepChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepChart.swift; sourceTree = "<group>"; };
+		6F35C9BF2AB658040019D839 /* WaketimeScatterPlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimeScatterPlot.swift; sourceTree = "<group>"; };
+		6F35C9C12AB65E740019D839 /* BedtimeScatterPlot+BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BedtimeScatterPlot+BarChart.swift"; sourceTree = "<group>"; };
+		6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepProcedureView.swift; sourceTree = "<group>"; };
+		6F7750A42A71B08C003BFA65 /* SleepEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepEditView.swift; sourceTree = "<group>"; };
+		6F7750AA2A748AEA003BFA65 /* SleepEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepEntry.swift; sourceTree = "<group>"; };
+		6F7750AD2A74B9D6003BFA65 /* SimplifiedSleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedSleepView.swift; sourceTree = "<group>"; };
+		6F7750B12A7B41B9003BFA65 /* DayProcedureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayProcedureView.swift; sourceTree = "<group>"; };
+		6F7750B32A7B4370003BFA65 /* DayEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEntry.swift; sourceTree = "<group>"; };
+		6F7750B62A7B4772003BFA65 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		6F7750B82A7B4825003BFA65 /* DayEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEntryView.swift; sourceTree = "<group>"; };
+		6F7750BA2A7B6C1B003BFA65 /* DayEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEditView.swift; sourceTree = "<group>"; };
+		6F7750BE2A7B7071003BFA65 /* TimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePicker.swift; sourceTree = "<group>"; };
+		6F7750C52A7BA3F5003BFA65 /* SleepIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepIntroView.swift; sourceTree = "<group>"; };
+		6F7750C92A7BA50E003BFA65 /* SleepExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepExperiment.swift; sourceTree = "<group>"; };
+		6F7750CB2A7C40BA003BFA65 /* SleepSetup1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepSetup1.swift; sourceTree = "<group>"; };
+		6F7750CD2A7C4374003BFA65 /* SleepSetup2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepSetup2.swift; sourceTree = "<group>"; };
+		6F7750CF2A7C4382003BFA65 /* SleepSetup3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepSetup3.swift; sourceTree = "<group>"; };
+		6F7750D32A7D12CA003BFA65 /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
+		6F7750D62A7DD14E003BFA65 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
+		6FA619B22AFA0BCE00CD9572 /* SleepTimeChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTimeChart.swift; sourceTree = "<group>"; };
+		6FA619B52AFDF9E500CD9572 /* ErrorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
+		6FA619B72AFDFA2F00CD9572 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		6FA619D22B03409300CD9572 /* ChartFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFunctions.swift; sourceTree = "<group>"; };
+		6FA619D42B03455F00CD9572 /* ChartPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPicker.swift; sourceTree = "<group>"; };
+		6FA619D62B042B1600CD9572 /* SleepExperimentSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepExperimentSamples.swift; sourceTree = "<group>"; };
+		6FA619D82B043A1F00CD9572 /* BedtimeHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeHistory.swift; sourceTree = "<group>"; };
+		6FB5176B2B2C311E0054A44C /* SimpleBedtimeHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBedtimeHistory.swift; sourceTree = "<group>"; };
+		6FB5176D2B2C3F9F0054A44C /* BedtimeChartPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeChartPreview.swift; sourceTree = "<group>"; };
+		6FB517702B2C526A0054A44C /* BedtimeBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeBarChart.swift; sourceTree = "<group>"; };
+		6FB517722B2C65230054A44C /* SimpleBedtimeBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBedtimeBarChart.swift; sourceTree = "<group>"; };
+		6FB517742B2C65B30054A44C /* BedtimeBarChartEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeBarChartEntry.swift; sourceTree = "<group>"; };
+		6FB517792B2D42FA0054A44C /* SleepHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepHistory.swift; sourceTree = "<group>"; };
+		6FB5177B2B2D523A0054A44C /* EntryProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryProgressView.swift; sourceTree = "<group>"; };
+		6FB5177E2B2D5D910054A44C /* SleepDependentHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepDependentHistory.swift; sourceTree = "<group>"; };
+		6FB517802B2D665C0054A44C /* SimpleSleepDependentHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSleepDependentHistory.swift; sourceTree = "<group>"; };
+		6FB517822B2D8B010054A44C /* BedtimeHistoryMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeHistoryMessage.swift; sourceTree = "<group>"; };
+		6FB517842B2E71910054A44C /* WaketimeBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimeBarChart.swift; sourceTree = "<group>"; };
+		6FB517862B2E71E20054A44C /* WaketimeBarChartEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimeBarChartEntry.swift; sourceTree = "<group>"; };
+		6FB517882B2E7BAF0054A44C /* SimpleWaketimeBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleWaketimeBarChart.swift; sourceTree = "<group>"; };
+		6FB5178A2B2E7CE00054A44C /* WaketimeChartPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimeChartPreview.swift; sourceTree = "<group>"; };
+		6FB5178C2B2E7E970054A44C /* WakeTimeHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WakeTimeHistory.swift; sourceTree = "<group>"; };
+		6FB5178E2B2E81400054A44C /* WaketimeHistoryMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimeHistoryMessage.swift; sourceTree = "<group>"; };
+		6FB517902B2E82A90054A44C /* SimpleWaketimeHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleWaketimeHistory.swift; sourceTree = "<group>"; };
+		6FB517922B2E8C7E0054A44C /* SleepTimeBarChartEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTimeBarChartEntry.swift; sourceTree = "<group>"; };
+		6FB517942B2E8D3F0054A44C /* SleepTimeBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTimeBarChart.swift; sourceTree = "<group>"; };
+		6FB517962B2E8F1B0054A44C /* SimpleSleepTimeBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSleepTimeBarChart.swift; sourceTree = "<group>"; };
+		6FB517982B2E90C30054A44C /* SleepTimeScatterPlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTimeScatterPlot.swift; sourceTree = "<group>"; };
+		6FB5179A2B2E93D00054A44C /* SleepTimeChartPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTimeChartPreview.swift; sourceTree = "<group>"; };
+		6FB5179C2B2E96210054A44C /* SleepTimeHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTimeHistory.swift; sourceTree = "<group>"; };
+		6FB5179E2B2E9DFE0054A44C /* SleepTimeHistoryMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTimeHistoryMessage.swift; sourceTree = "<group>"; };
+		6FB517A02B2EC4880054A44C /* SimpleSleepTimeHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSleepTimeHistory.swift; sourceTree = "<group>"; };
+		6FB517A42B2EC8590054A44C /* BothTimeResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BothTimeResults.swift; sourceTree = "<group>"; };
+		6FB517A82B3338960054A44C /* NewSleepEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSleepEntryView.swift; sourceTree = "<group>"; };
+		6FB517AA2B337C160054A44C /* NewSleepEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSleepEntry.swift; sourceTree = "<group>"; };
+		6FB517AC2B3441CD0054A44C /* TimeSleptPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSleptPicker.swift; sourceTree = "<group>"; };
+		6FB517AE2B3443F80054A44C /* SleepDependentVarPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepDependentVarPicker.swift; sourceTree = "<group>"; };
+		6FB517B02B3456F50054A44C /* BedtimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimePicker.swift; sourceTree = "<group>"; };
+		6FB517B22B34649F0054A44C /* WaketimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimePicker.swift; sourceTree = "<group>"; };
+		6FB517B42B346BFA0054A44C /* SleepPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepPicker.swift; sourceTree = "<group>"; };
+		6FB517B62B346C9F0054A44C /* SleepEntryDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepEntryDatePicker.swift; sourceTree = "<group>"; };
+		6FB517B92B3470550054A44C /* SleepCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepCalculatorView.swift; sourceTree = "<group>"; };
+		6FF397962ADAF7F70096B143 /* BothtimeChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BothtimeChart.swift; sourceTree = "<group>"; };
+		6FF397E22AE1E7600096B143 /* BedtimeResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeResults.swift; sourceTree = "<group>"; };
+		6FF3982C2AF45D850096B143 /* WaketimeResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimeResults.swift; sourceTree = "<group>"; };
+=======
+>>>>>>> main
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		59EEFAD22A58E7F400DA7D84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59EEFAE22A58E7F500DA7D84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59EEFAEC2A58E7F500DA7D84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		598DDA792AA2BE9700784BD9 /* MoodExperiment */ = {
+			isa = PBXGroup;
+			children = (
+				598DDA7A2AA2BEB300784BD9 /* MoodExperiment.swift */,
+				598DDA7C2AA2BEDA00784BD9 /* MoodEntry.swift */,
+				593974982AAA8F45005D95D3 /* MoodSetupView.swift */,
+				59702D4E2AABD2A100B296EB /* MoodRatingView.swift */,
+			);
+			path = MoodExperiment;
+			sourceTree = "<group>";
+		};
+		59EEFACC2A58E7F400DA7D84 = {
+			isa = PBXGroup;
+			children = (
+				59EEFAD72A58E7F400DA7D84 /* ExperimentApp */,
+				59EEFAE82A58E7F500DA7D84 /* ExperimentAppTests */,
+				59EEFAF22A58E7F500DA7D84 /* ExperimentAppUITests */,
+				59EEFAD62A58E7F400DA7D84 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		59EEFAD62A58E7F400DA7D84 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				59EEFAD52A58E7F400DA7D84 /* ExperimentApp.app */,
+				59EEFAE52A58E7F500DA7D84 /* ExperimentAppTests.xctest */,
+				59EEFAEF2A58E7F500DA7D84 /* ExperimentAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		59EEFAD72A58E7F400DA7D84 /* ExperimentApp */ = {
+			isa = PBXGroup;
+			children = (
+				59EEFAD82A58E7F400DA7D84 /* ExperimentAppApp.swift */,
+				6F7750D62A7DD14E003BFA65 /* Todo.swift */,
+				6FDA3E4A2A691C110074A50C /* Models */,
+				6FDA3E472A6910C50074A50C /* Experiments */,
+				6FDA3E4F2A69E51A0074A50C /* Views */,
+				59EEFADC2A58E7F500DA7D84 /* Assets.xcassets */,
+				59EEFADE2A58E7F500DA7D84 /* Preview Content */,
+			);
+			path = ExperimentApp;
+			sourceTree = "<group>";
+		};
+		59EEFADE2A58E7F500DA7D84 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				59EEFADF2A58E7F500DA7D84 /* Preview Assets.xcassets */,
+				6FA619D62B042B1600CD9572 /* SleepExperimentSamples.swift */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		59EEFAE82A58E7F500DA7D84 /* ExperimentAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				59EEFAE92A58E7F500DA7D84 /* ExperimentAppTests.swift */,
+			);
+			path = ExperimentAppTests;
+			sourceTree = "<group>";
+		};
+		59EEFAF22A58E7F500DA7D84 /* ExperimentAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				59EEFAF32A58E7F500DA7D84 /* ExperimentAppUITests.swift */,
+				59EEFAF52A58E7F500DA7D84 /* ExperimentAppUITestsLaunchTests.swift */,
+			);
+			path = ExperimentAppUITests;
+			sourceTree = "<group>";
+		};
+		6F7750AC2A74ABAD003BFA65 /* SleepExperiment */ = {
+			isa = PBXGroup;
+			children = (
+				6FF3982E2AF46ED90096B143 /* Setup */,
+				6F7750C92A7BA50E003BFA65 /* SleepExperiment.swift */,
+				6F7750D32A7D12CA003BFA65 /* SleepView.swift */,
+				6FB517792B2D42FA0054A44C /* SleepHistory.swift */,
+				6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */,
+				6F7750AD2A74B9D6003BFA65 /* SimplifiedSleepView.swift */,
+				6F7750A42A71B08C003BFA65 /* SleepEditView.swift */,
+<<<<<<< HEAD
+				6FB517B42B346BFA0054A44C /* SleepPicker.swift */,
+				6FB517B82B346FAF0054A44C /* SleepEntry */,
+				6FA619B42AFCA69900CD9572 /* Chart */,
+=======
+				6F28AFF92A9F612D00FDCA0A /* TimeSelector.swift */,
+				6F7750C52A7BA3F5003BFA65 /* SleepIntroView.swift */,
+				6F7750CB2A7C40BA003BFA65 /* SleepSetup1.swift */,
+				6F7750CD2A7C4374003BFA65 /* SleepSetup2.swift */,
+				6F7750CF2A7C4382003BFA65 /* SleepSetup3.swift */,
+				6F35C9BB2AB451460019D839 /* SleepChart.swift */,
+				6F35C9C12AB65E740019D839 /* BedtimeChart.swift */,
+				6F35C9BF2AB658040019D839 /* WaketimeChart.swift */,
+				6F35C9C32AB65F320019D839 /* SleepTimeChart.swift */,
+>>>>>>> main
+			);
+			path = SleepExperiment;
+			sourceTree = "<group>";
+		};
+		6F7750B02A7B40F2003BFA65 /* DayExperiment */ = {
+			isa = PBXGroup;
+			children = (
+				6F28AFED2A9AA5D300FDCA0A /* DayExperiment.swift */,
+				6F7750B62A7B4772003BFA65 /* DayView.swift */,
+				6F28B07D2AA3824000FDCA0A /* DaySetupView.swift */,
+				6F28B07F2AA39E6100FDCA0A /* DaySetup1.swift */,
+				6F28B0812AA55D6F00FDCA0A /* DaySetup2.swift */,
+				6F35C9B32AAA9C9B0019D839 /* DaySetup3.swift */,
+				6F7750B12A7B41B9003BFA65 /* DayProcedureView.swift */,
+				6F7750B32A7B4370003BFA65 /* DayEntry.swift */,
+				6F7750B82A7B4825003BFA65 /* DayEntryView.swift */,
+				6F7750BE2A7B7071003BFA65 /* TimePicker.swift */,
+				6F7750BA2A7B6C1B003BFA65 /* DayEditView.swift */,
+				6F35C9B72AB2A25A0019D839 /* DayChart.swift */,
+			);
+			path = DayExperiment;
+			sourceTree = "<group>";
+		};
+		6FA619B42AFCA69900CD9572 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				6FB5177D2B2D5D650054A44C /* DependentVariable */,
+				6F35C9BB2AB451460019D839 /* SleepChart.swift */,
+				6FB5177B2B2D523A0054A44C /* EntryProgressView.swift */,
+				6FB5176F2B2C4F630054A44C /* Bedtime */,
+				6FB517762B2C6C210054A44C /* Waketime */,
+				6FB517772B2C6C350054A44C /* Sleeptime */,
+				6FA619D22B03409300CD9572 /* ChartFunctions.swift */,
+				6FF397962ADAF7F70096B143 /* BothtimeChart.swift */,
+				6FB517A42B2EC8590054A44C /* BothTimeResults.swift */,
+				6FA619D42B03455F00CD9572 /* ChartPicker.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
+		6FB5176F2B2C4F630054A44C /* Bedtime */ = {
+			isa = PBXGroup;
+			children = (
+				6FF397E22AE1E7600096B143 /* BedtimeResults.swift */,
+				6F35C9C12AB65E740019D839 /* BedtimeScatterPlot+BarChart.swift */,
+				6FB5176B2B2C311E0054A44C /* SimpleBedtimeHistory.swift */,
+				6FB517822B2D8B010054A44C /* BedtimeHistoryMessage.swift */,
+				6FA619D82B043A1F00CD9572 /* BedtimeHistory.swift */,
+				6FB517702B2C526A0054A44C /* BedtimeBarChart.swift */,
+				6FB517722B2C65230054A44C /* SimpleBedtimeBarChart.swift */,
+				6FB517742B2C65B30054A44C /* BedtimeBarChartEntry.swift */,
+				6FB5176D2B2C3F9F0054A44C /* BedtimeChartPreview.swift */,
+			);
+			path = Bedtime;
+			sourceTree = "<group>";
+		};
+		6FB517762B2C6C210054A44C /* Waketime */ = {
+			isa = PBXGroup;
+			children = (
+				6FF3982C2AF45D850096B143 /* WaketimeResults.swift */,
+				6FB517842B2E71910054A44C /* WaketimeBarChart.swift */,
+				6FB517862B2E71E20054A44C /* WaketimeBarChartEntry.swift */,
+				6FB517882B2E7BAF0054A44C /* SimpleWaketimeBarChart.swift */,
+				6FB5178A2B2E7CE00054A44C /* WaketimeChartPreview.swift */,
+				6FB5178C2B2E7E970054A44C /* WakeTimeHistory.swift */,
+				6FB5178E2B2E81400054A44C /* WaketimeHistoryMessage.swift */,
+				6FB517902B2E82A90054A44C /* SimpleWaketimeHistory.swift */,
+				6F35C9BF2AB658040019D839 /* WaketimeScatterPlot.swift */,
+			);
+			path = Waketime;
+			sourceTree = "<group>";
+		};
+		6FB517772B2C6C350054A44C /* Sleeptime */ = {
+			isa = PBXGroup;
+			children = (
+				6FA619B22AFA0BCE00CD9572 /* SleepTimeChart.swift */,
+				6FB517922B2E8C7E0054A44C /* SleepTimeBarChartEntry.swift */,
+				6FB517942B2E8D3F0054A44C /* SleepTimeBarChart.swift */,
+				6FB517962B2E8F1B0054A44C /* SimpleSleepTimeBarChart.swift */,
+				6FB517982B2E90C30054A44C /* SleepTimeScatterPlot.swift */,
+				6FB5179A2B2E93D00054A44C /* SleepTimeChartPreview.swift */,
+				6FB5179C2B2E96210054A44C /* SleepTimeHistory.swift */,
+				6FB5179E2B2E9DFE0054A44C /* SleepTimeHistoryMessage.swift */,
+				6FB517A02B2EC4880054A44C /* SimpleSleepTimeHistory.swift */,
+			);
+			path = Sleeptime;
+			sourceTree = "<group>";
+		};
+		6FB5177D2B2D5D650054A44C /* DependentVariable */ = {
+			isa = PBXGroup;
+			children = (
+				6FB5177E2B2D5D910054A44C /* SleepDependentHistory.swift */,
+				6FB517802B2D665C0054A44C /* SimpleSleepDependentHistory.swift */,
+			);
+			path = DependentVariable;
+			sourceTree = "<group>";
+		};
+		6FB517B82B346FAF0054A44C /* SleepEntry */ = {
+			isa = PBXGroup;
+			children = (
+				6FB517A82B3338960054A44C /* NewSleepEntryView.swift */,
+				6F7750AA2A748AEA003BFA65 /* SleepEntry.swift */,
+				6FB517AA2B337C160054A44C /* NewSleepEntry.swift */,
+				6FB517B62B346C9F0054A44C /* SleepEntryDatePicker.swift */,
+				6FB517B02B3456F50054A44C /* BedtimePicker.swift */,
+				6FB517B22B34649F0054A44C /* WaketimePicker.swift */,
+				6FB517AC2B3441CD0054A44C /* TimeSleptPicker.swift */,
+				6FB517AE2B3443F80054A44C /* SleepDependentVarPicker.swift */,
+				6FB517B92B3470550054A44C /* SleepCalculatorView.swift */,
+			);
+			path = SleepEntry;
+			sourceTree = "<group>";
+		};
+		6FDA3E472A6910C50074A50C /* Experiments */ = {
+			isa = PBXGroup;
+			children = (
+				598DDA792AA2BE9700784BD9 /* MoodExperiment */,
+				6F7750B02A7B40F2003BFA65 /* DayExperiment */,
+				6F7750AC2A74ABAD003BFA65 /* SleepExperiment */,
+			);
+			path = Experiments;
+			sourceTree = "<group>";
+		};
+		6FDA3E4A2A691C110074A50C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6F28AFEF2A9BBE3E00FDCA0A /* AppData.swift */,
+				6F28AFF12A9BBFA300FDCA0A /* DataStore.swift */,
+				6F28AFF72A9E46EC00FDCA0A /* ExperimentNameView.swift */,
+				6F35C9B52AABD2980019D839 /* DescriptionView.swift */,
+				6F28AFFB2A9F6D8000FDCA0A /* SliderView.swift */,
+				6F35C9B92AB2A6850019D839 /* DoubleSliderView.swift */,
+				6F28AFF92A9F612D00FDCA0A /* TimeSelector.swift */,
+				6FA619B72AFDFA2F00CD9572 /* ErrorView.swift */,
+				6FA619B52AFDF9E500CD9572 /* ErrorWrapper.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6FDA3E4F2A69E51A0074A50C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6F28AFF32A9BCD2100FDCA0A /* ExperimentView2.swift */,
+				6F28AFF52A9BF7BB00FDCA0A /* NewExperimentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6FF3982E2AF46ED90096B143 /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				6F7750C52A7BA3F5003BFA65 /* SleepIntroView.swift */,
+				6F7750CB2A7C40BA003BFA65 /* SleepSetup1.swift */,
+				6F7750CD2A7C4374003BFA65 /* SleepSetup2.swift */,
+				6F7750CF2A7C4382003BFA65 /* SleepSetup3.swift */,
+			);
+			path = Setup;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		59EEFAD42A58E7F400DA7D84 /* ExperimentApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59EEFAF92A58E7F500DA7D84 /* Build configuration list for PBXNativeTarget "ExperimentApp" */;
+			buildPhases = (
+				59EEFAD12A58E7F400DA7D84 /* Sources */,
+				59EEFAD22A58E7F400DA7D84 /* Frameworks */,
+				59EEFAD32A58E7F400DA7D84 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ExperimentApp;
+			productName = ExperimentApp;
+			productReference = 59EEFAD52A58E7F400DA7D84 /* ExperimentApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		59EEFAE42A58E7F500DA7D84 /* ExperimentAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59EEFAFC2A58E7F500DA7D84 /* Build configuration list for PBXNativeTarget "ExperimentAppTests" */;
+			buildPhases = (
+				59EEFAE12A58E7F500DA7D84 /* Sources */,
+				59EEFAE22A58E7F500DA7D84 /* Frameworks */,
+				59EEFAE32A58E7F500DA7D84 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				59EEFAE72A58E7F500DA7D84 /* PBXTargetDependency */,
+			);
+			name = ExperimentAppTests;
+			productName = ExperimentAppTests;
+			productReference = 59EEFAE52A58E7F500DA7D84 /* ExperimentAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		59EEFAEE2A58E7F500DA7D84 /* ExperimentAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59EEFAFF2A58E7F500DA7D84 /* Build configuration list for PBXNativeTarget "ExperimentAppUITests" */;
+			buildPhases = (
+				59EEFAEB2A58E7F500DA7D84 /* Sources */,
+				59EEFAEC2A58E7F500DA7D84 /* Frameworks */,
+				59EEFAED2A58E7F500DA7D84 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				59EEFAF12A58E7F500DA7D84 /* PBXTargetDependency */,
+			);
+			name = ExperimentAppUITests;
+			productName = ExperimentAppUITests;
+			productReference = 59EEFAEF2A58E7F500DA7D84 /* ExperimentAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		59EEFACD2A58E7F400DA7D84 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					59EEFAD42A58E7F400DA7D84 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					59EEFAE42A58E7F500DA7D84 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 59EEFAD42A58E7F400DA7D84;
+					};
+					59EEFAEE2A58E7F500DA7D84 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 59EEFAD42A58E7F400DA7D84;
+					};
+				};
+			};
+			buildConfigurationList = 59EEFAD02A58E7F400DA7D84 /* Build configuration list for PBXProject "ExperimentApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 59EEFACC2A58E7F400DA7D84;
+			productRefGroup = 59EEFAD62A58E7F400DA7D84 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				59EEFAD42A58E7F400DA7D84 /* ExperimentApp */,
+				59EEFAE42A58E7F500DA7D84 /* ExperimentAppTests */,
+				59EEFAEE2A58E7F500DA7D84 /* ExperimentAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		59EEFAD32A58E7F400DA7D84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59EEFAE02A58E7F500DA7D84 /* Preview Assets.xcassets in Resources */,
+				59EEFADD2A58E7F500DA7D84 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59EEFAE32A58E7F500DA7D84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59EEFAED2A58E7F500DA7D84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		59EEFAD12A58E7F400DA7D84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F35C9BC2AB451460019D839 /* SleepChart.swift in Sources */,
+				6FA619B32AFA0BCE00CD9572 /* SleepTimeChart.swift in Sources */,
+				6F28AFEE2A9AA5D300FDCA0A /* DayExperiment.swift in Sources */,
+				6F7750CC2A7C40BA003BFA65 /* SleepSetup1.swift in Sources */,
+				6F7750A52A71B08C003BFA65 /* SleepEditView.swift in Sources */,
+				6F7750C62A7BA3F5003BFA65 /* SleepIntroView.swift in Sources */,
+				6FB517872B2E71E20054A44C /* WaketimeBarChartEntry.swift in Sources */,
+				6FB517912B2E82A90054A44C /* SimpleWaketimeHistory.swift in Sources */,
+				6F35C9BA2AB2A6850019D839 /* DoubleSliderView.swift in Sources */,
+				6F7750A32A71A9CE003BFA65 /* SleepProcedureView.swift in Sources */,
+				6F28B0822AA55D6F00FDCA0A /* DaySetup2.swift in Sources */,
+				6F7750B42A7B4370003BFA65 /* DayEntry.swift in Sources */,
+				6FA619D72B042B1600CD9572 /* SleepExperimentSamples.swift in Sources */,
+				6FB5179B2B2E93D00054A44C /* SleepTimeChartPreview.swift in Sources */,
+				59702D4F2AABD2A100B296EB /* MoodRatingView.swift in Sources */,
+				6F35C9B82AB2A25A0019D839 /* DayChart.swift in Sources */,
+				6FB517812B2D665C0054A44C /* SimpleSleepDependentHistory.swift in Sources */,
+				6F7750B92A7B4825003BFA65 /* DayEntryView.swift in Sources */,
+				6FA619B82AFDFA2F00CD9572 /* ErrorView.swift in Sources */,
+				6F7750CA2A7BA50E003BFA65 /* SleepExperiment.swift in Sources */,
+				6FB517892B2E7BAF0054A44C /* SimpleWaketimeBarChart.swift in Sources */,
+				6F7750D42A7D12CA003BFA65 /* SleepView.swift in Sources */,
+				6F28AFF22A9BBFA300FDCA0A /* DataStore.swift in Sources */,
+				6F28B0802AA39E6100FDCA0A /* DaySetup1.swift in Sources */,
+				6FB517B72B346C9F0054A44C /* SleepEntryDatePicker.swift in Sources */,
+				6F35C9B62AABD2980019D839 /* DescriptionView.swift in Sources */,
+<<<<<<< HEAD
+				6FB517B52B346BFA0054A44C /* SleepPicker.swift in Sources */,
+=======
+>>>>>>> main
+				6F7750AB2A748AEA003BFA65 /* SleepEntry.swift in Sources */,
+				6F28AFFA2A9F612D00FDCA0A /* TimeSelector.swift in Sources */,
+				6FA619D52B03455F00CD9572 /* ChartPicker.swift in Sources */,
+				6F7750AE2A74B9D6003BFA65 /* SimplifiedSleepView.swift in Sources */,
+				6F28B07E2AA3824000FDCA0A /* DaySetupView.swift in Sources */,
+				6F7750BF2A7B7071003BFA65 /* TimePicker.swift in Sources */,
+				6FB5177A2B2D42FA0054A44C /* SleepHistory.swift in Sources */,
+				6FB5178B2B2E7CE00054A44C /* WaketimeChartPreview.swift in Sources */,
+				6F7750B72A7B4772003BFA65 /* DayView.swift in Sources */,
+				6FB5177F2B2D5D910054A44C /* SleepDependentHistory.swift in Sources */,
+				59EEFAD92A58E7F400DA7D84 /* ExperimentAppApp.swift in Sources */,
+				6FB5179D2B2E96210054A44C /* SleepTimeHistory.swift in Sources */,
+				6FB5177C2B2D523A0054A44C /* EntryProgressView.swift in Sources */,
+				6F7750B22A7B41B9003BFA65 /* DayProcedureView.swift in Sources */,
+				6FA619D92B043A1F00CD9572 /* BedtimeHistory.swift in Sources */,
+				6FF397E32AE1E7600096B143 /* BedtimeResults.swift in Sources */,
+				6FB517972B2E8F1B0054A44C /* SimpleSleepTimeBarChart.swift in Sources */,
+				6FB517AB2B337C160054A44C /* NewSleepEntry.swift in Sources */,
+				6FB517732B2C65230054A44C /* SimpleBedtimeBarChart.swift in Sources */,
+				6FB517AD2B3441CD0054A44C /* TimeSleptPicker.swift in Sources */,
+				6FB517B12B3456F50054A44C /* BedtimePicker.swift in Sources */,
+				6FF397972ADAF7F70096B143 /* BothtimeChart.swift in Sources */,
+				6FB517712B2C526A0054A44C /* BedtimeBarChart.swift in Sources */,
+				6F7750BB2A7B6C1B003BFA65 /* DayEditView.swift in Sources */,
+				6FB5176E2B2C3F9F0054A44C /* BedtimeChartPreview.swift in Sources */,
+				6FB517B32B34649F0054A44C /* WaketimePicker.swift in Sources */,
+				6FF3982D2AF45D850096B143 /* WaketimeResults.swift in Sources */,
+				6FB517832B2D8B010054A44C /* BedtimeHistoryMessage.swift in Sources */,
+				6FB517932B2E8C7E0054A44C /* SleepTimeBarChartEntry.swift in Sources */,
+				6F28AFF42A9BCD2100FDCA0A /* ExperimentView2.swift in Sources */,
+				6FB5178D2B2E7E970054A44C /* WakeTimeHistory.swift in Sources */,
+				6F28AFF62A9BF7BB00FDCA0A /* NewExperimentView.swift in Sources */,
+				598DDA7B2AA2BEB300784BD9 /* MoodExperiment.swift in Sources */,
+				6F7750D72A7DD14E003BFA65 /* Todo.swift in Sources */,
+				6F35C9C22AB65E740019D839 /* BedtimeScatterPlot+BarChart.swift in Sources */,
+				6F7750CE2A7C4374003BFA65 /* SleepSetup2.swift in Sources */,
+				6F28AFF02A9BBE3E00FDCA0A /* AppData.swift in Sources */,
+				593974992AAA8F45005D95D3 /* MoodSetupView.swift in Sources */,
+				6FB517992B2E90C30054A44C /* SleepTimeScatterPlot.swift in Sources */,
+				6F28AFF82A9E46EC00FDCA0A /* ExperimentNameView.swift in Sources */,
+				6FB517752B2C65B30054A44C /* BedtimeBarChartEntry.swift in Sources */,
+				6FA619B62AFDF9E500CD9572 /* ErrorWrapper.swift in Sources */,
+				6FB517A12B2EC4880054A44C /* SimpleSleepTimeHistory.swift in Sources */,
+				6FA619D32B03409300CD9572 /* ChartFunctions.swift in Sources */,
+				6FB517A92B3338960054A44C /* NewSleepEntryView.swift in Sources */,
+				6F7750D02A7C4382003BFA65 /* SleepSetup3.swift in Sources */,
+				6FB5179F2B2E9DFE0054A44C /* SleepTimeHistoryMessage.swift in Sources */,
+				6F35C9B42AAA9C9B0019D839 /* DaySetup3.swift in Sources */,
+				6FB517A52B2EC8590054A44C /* BothTimeResults.swift in Sources */,
+				6F28AFFC2A9F6D8000FDCA0A /* SliderView.swift in Sources */,
+				6FB517AF2B3443F80054A44C /* SleepDependentVarPicker.swift in Sources */,
+				6FB517852B2E71910054A44C /* WaketimeBarChart.swift in Sources */,
+				6FB517BA2B3470550054A44C /* SleepCalculatorView.swift in Sources */,
+				6FB5176C2B2C311E0054A44C /* SimpleBedtimeHistory.swift in Sources */,
+				6FB5178F2B2E81400054A44C /* WaketimeHistoryMessage.swift in Sources */,
+				598DDA7D2AA2BEDA00784BD9 /* MoodEntry.swift in Sources */,
+				6FB517952B2E8D3F0054A44C /* SleepTimeBarChart.swift in Sources */,
+				6F35C9C02AB658040019D839 /* WaketimeScatterPlot.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59EEFAE12A58E7F500DA7D84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59EEFAEA2A58E7F500DA7D84 /* ExperimentAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59EEFAEB2A58E7F500DA7D84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59EEFAF42A58E7F500DA7D84 /* ExperimentAppUITests.swift in Sources */,
+				59EEFAF62A58E7F500DA7D84 /* ExperimentAppUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		59EEFAE72A58E7F500DA7D84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 59EEFAD42A58E7F400DA7D84 /* ExperimentApp */;
+			targetProxy = 59EEFAE62A58E7F500DA7D84 /* PBXContainerItemProxy */;
+		};
+		59EEFAF12A58E7F500DA7D84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 59EEFAD42A58E7F400DA7D84 /* ExperimentApp */;
+			targetProxy = 59EEFAF02A58E7F500DA7D84 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		59EEFAF72A58E7F500DA7D84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		59EEFAF82A58E7F500DA7D84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		59EEFAFA2A58E7F500DA7D84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ExperimentApp/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com-example.ExperimentApp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		59EEFAFB2A58E7F500DA7D84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ExperimentApp/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com-example.ExperimentApp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		59EEFAFD2A58E7F500DA7D84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com-example.ExperimentAppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExperimentApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ExperimentApp";
+			};
+			name = Debug;
+		};
+		59EEFAFE2A58E7F500DA7D84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com-example.ExperimentAppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExperimentApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ExperimentApp";
+			};
+			name = Release;
+		};
+		59EEFB002A58E7F500DA7D84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com-example.ExperimentAppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ExperimentApp;
+			};
+			name = Debug;
+		};
+		59EEFB012A58E7F500DA7D84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com-example.ExperimentAppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ExperimentApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		59EEFAD02A58E7F400DA7D84 /* Build configuration list for PBXProject "ExperimentApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59EEFAF72A58E7F500DA7D84 /* Debug */,
+				59EEFAF82A58E7F500DA7D84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		59EEFAF92A58E7F500DA7D84 /* Build configuration list for PBXNativeTarget "ExperimentApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59EEFAFA2A58E7F500DA7D84 /* Debug */,
+				59EEFAFB2A58E7F500DA7D84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		59EEFAFC2A58E7F500DA7D84 /* Build configuration list for PBXNativeTarget "ExperimentAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59EEFAFD2A58E7F500DA7D84 /* Debug */,
+				59EEFAFE2A58E7F500DA7D84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		59EEFAFF2A58E7F500DA7D84 /* Build configuration list for PBXNativeTarget "ExperimentAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59EEFB002A58E7F500DA7D84 /* Debug */,
+				59EEFB012A58E7F500DA7D84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 59EEFACD2A58E7F400DA7D84 /* Project object */;
+}
