@@ -15,7 +15,7 @@ struct SleepExperiment: Identifiable, Codable{
     var entries: [SleepEntry] = []
     var notes: String = "Take notes here"
     var name: String = "Sleep Experiment"
-    
+    var newSleepEntry = NewSleepEntry(date: Date())
     
     init(id: UUID = UUID(), goalEntries: Int, dependentVariable: DependentVariable, independentVariable: IndependentVariable) {
         self.id = id
@@ -902,5 +902,9 @@ extension SleepExperiment{
     //sort entries in order from earliest to latest date
     mutating func sortEntriesByDate() {
         entries = entries.sorted(by: {$0.date < $1.date})
+    }
+    mutating func initiateSleepEntry(){
+        entries.append(SleepEntry(newEntry: newSleepEntry))
+        newSleepEntry = NewSleepEntry()
     }
 }

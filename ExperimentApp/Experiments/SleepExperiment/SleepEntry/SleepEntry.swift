@@ -40,13 +40,48 @@ struct SleepEntry: Identifiable, Codable {
         self.hoursSlept = hoursSlept
         self.minutesSlept = minutesSlept
     }
-    
+    init(newEntry: NewSleepEntry){
+        self.id = UUID()
+        self.date = newEntry.date
+        
+        if let bedtime = newEntry.bedtime{
+            self.bedtime = bedtime
+        } else{
+            bedtime = Date()
+        }
+        
+        if let waketime = newEntry.waketime{
+            self.waketime = waketime
+        } else {
+            waketime = Date()
+        }
+        
+        if let quality = newEntry.quality{
+            self.quality = quality
+        } else {
+            quality = 5
+        }
+        
+        if let productivity = newEntry.productivity{
+            self.productivity = productivity
+        } else {
+            productivity = 5
+        }
+        
+        if let hours = newEntry.hoursSlept{
+            self.hoursSlept = hours
+        }
+        if let minutes = newEntry.minutesSlept{
+            self.minutesSlept = minutes
+        }
+        self.timeSlept = "0"
+    }
     
     //mutating allows it to modify self? idk
     mutating func updateTimeSlept(){
-        timeSlept = calculateTimeSlept(sleep: bedtime, wake: waketime)
+        timeSlept = SleepEntry.calculateTimeSlept(sleep: bedtime, wake: waketime)
     }
-    func calculateTimeSlept(sleep: Date, wake: Date) -> (String){
+    static func calculateTimeSlept(sleep: Date, wake: Date) -> (String){
         let sleepHour = getHour(date: sleep)
         let sleepMinute = getMinute(date: sleep)
         let wakeHour = getHour(date: wake)
@@ -72,9 +107,34 @@ struct SleepEntry: Identifiable, Codable {
         if(minuteDifference == 0){
             return "\(hourDifference) hours, \(minuteDifference) minutes "
         }
-        return "\(hourDifference) hours \(minuteDifference) minutes"
+        return "\(hourDifference) hours, \(minuteDifference) minutes"
     }
-    func getHour(date: Date) -> (Int) {
+    static func returnTimeSlept(sleep: Date, wake: Date) -> (Int, Int){
+        let sleepHour = getHour(date: sleep)
+        let sleepMinute = getMinute(date: sleep)
+        let wakeHour = getHour(date: wake)
+        let wakeMinute = getMinute(date:wake)
+        //assume that if wakehour is less than sleep hour, you're crossing over a 12 once
+        var minuteDifference = wakeMinute - sleepMinute
+        var hourDifference = wakeHour - sleepHour
+        
+        
+        if(minuteDifference<0){
+            minuteDifference = minuteDifference + 60
+            hourDifference = hourDifference - 1
+        }
+        if(hasSameAMPM(date1: sleep, date2: wake)){
+            if(hourDifference<0){
+                hourDifference += 24
+            }
+        } else {
+            if(hourDifference<=0){
+                hourDifference += 24
+            }
+        }
+        return (hourDifference, minuteDifference)
+    }
+    static func getHour(date: Date) -> (Int) {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.hour], from: date)
         guard let hour = components.hour else {
@@ -82,7 +142,7 @@ struct SleepEntry: Identifiable, Codable {
         }
         return hour
     }
-    func getMinute(date: Date) -> (Int) {
+    static func getMinute(date: Date) -> (Int) {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.minute], from: date)
         guard let minute = components.minute else {
@@ -90,7 +150,7 @@ struct SleepEntry: Identifiable, Codable {
         }
         return minute
     }
-    func hasSameAMPM(date1: Date, date2: Date)-> (Bool){
+    static func hasSameAMPM(date1: Date, date2: Date)-> (Bool){
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "a"
         return dateFormatter.string(from: date1) == dateFormatter.string(from: date2)

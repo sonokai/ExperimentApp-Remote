@@ -14,25 +14,18 @@ struct SleepView: View {
     @State private var newEntry = SleepEntry.newEntry
     
     var body: some View {
-    
+        
         
         
         NavigationStack{
             
             Form{
-                Section(header: Text("Experiment Info")){
-                    Text("Q: How much sleep should you get?")
-                        .toolbar {
-                        Button("New entry") {
-                            experiment.entries.append(newEntry)
-                            //immediately add a new entry and present a sleepeditview as a sheet to edit that entry'
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
-                                isAddingNew = true
-                            }
-                        }
-                    }
-                    
-                    NavigationLink(destination: SleepProcedureView()){
+                Section("Make a new entry"){
+                    NewSleepEntryView(experiment: $experiment)
+                }
+                
+                Section("Results"){
+                    NavigationLink(destination: SleepProcedureView(experiment: experiment)){
                         Text("Procedure")
                     }
                     NavigationLink(destination: SleepChart(experiment: experiment)){
@@ -45,29 +38,37 @@ struct SleepView: View {
                         Text("History")
                     }
                 }
-                .navigationTitle(Text("\(experiment.name)"))
+            }
+            .navigationTitle(Text("\(experiment.name)"))
+            
+            
+            
+            
+        }.sheet(isPresented: $isAddingNew) {
+            
+            NavigationStack {
                 
-                
-                
-                                
-            }.sheet(isPresented: $isAddingNew) {
-                
-                NavigationStack {
-                    
-                    SleepEditView(entry: $experiment.entries[experiment.entries.count-1], experiment: $experiment)// return the last item in entries because when the button was pressed, an empty entry was added
-                        .navigationTitle("New Entry")
-                        .toolbar {
-                            ToolbarItem(placement: .cancellationAction) {
-                                Button("Cancel") {
-                                    isAddingNew = false
-                                    experiment.entries.removeLast()
-                                }
+                SleepEditView(entry: $experiment.entries[experiment.entries.count-1], experiment: $experiment)// return the last item in entries because when the button was pressed, an empty entry was added
+                    .navigationTitle("New Entry")
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") {
+                                isAddingNew = false
+                                experiment.entries.removeLast()
                             }
                         }
-                }
-                 
+                    }
             }
-
+            
+        }.toolbar {
+            Button("New entry") {
+                experiment.entries.append(newEntry)
+                //immediately add a new entry and present a sleepeditview as a sheet to edit that entry'
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
+                    isAddingNew = true
+                }
+            }
+            
             
         }
     }

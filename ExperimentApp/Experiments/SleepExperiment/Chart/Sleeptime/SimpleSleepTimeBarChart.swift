@@ -19,7 +19,7 @@ struct SimpleSleepTimeBarChart: View {
                     Image(systemName: "gearshape.2.fill")
                     Text("When you slept between ") + Text(interval.simplifyDateToHMM()).bold() + Text(" and ") + Text(interval.addMinutesToDate(minutesToAdd: 30).simplifyDateToHMM()).bold() + Text(", you had the highest productivity!")
                 } else if(experiment.dependentVariable == .quality||dependentVariable == .quality){
-                    Image(systemName: "heart.circle.fill")
+                    Image(systemName: "sun.max")
                     Text("When you slept between ") + Text(interval.simplifyDateToHMM()).bold() + Text(" and ") + Text(interval.addMinutesToDate(minutesToAdd: 30).simplifyDateToHMM()).bold() + Text(", you had the highest quality of day!")
                 }
             }

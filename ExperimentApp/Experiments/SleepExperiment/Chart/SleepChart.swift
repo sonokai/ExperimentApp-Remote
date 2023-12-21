@@ -26,7 +26,7 @@ struct SleepChart: View {
             case .waketime:
                 WaketimeResults(experiment: experiment)
             case .both:
-                BothtimeChart(experiment: experiment)
+                BothTimeResults(experiment: experiment)
             case .hoursSlept:
                 SleepTimeResults(experiment: experiment)
             }

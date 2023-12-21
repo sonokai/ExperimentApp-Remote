@@ -82,7 +82,7 @@ struct WakeTimeHistory: View {
         var most = (Double)(0)
         for entry in experiment.entries{
             
-            var seconds = entry.waketime.timeIntervalSince1970.truncatingRemainder(dividingBy: 86400)
+            let seconds = entry.waketime.timeIntervalSince1970.truncatingRemainder(dividingBy: 86400)
             
             if(seconds < least || least == 0){
                 least = seconds

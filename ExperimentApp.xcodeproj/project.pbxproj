@@ -35,7 +35,6 @@
 		6F35C9BC2AB451460019D839 /* SleepChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9BB2AB451460019D839 /* SleepChart.swift */; };
 		6F35C9C02AB658040019D839 /* WaketimeScatterPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9BF2AB658040019D839 /* WaketimeScatterPlot.swift */; };
 		6F35C9C22AB65E740019D839 /* BedtimeScatterPlot+BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9C12AB65E740019D839 /* BedtimeScatterPlot+BarChart.swift */; };
-		6F35C9C42AB65F320019D839 /* SleepTimeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9C32AB65F320019D839 /* SleepTimeChart.swift */; };
 		6F7750A32A71A9CE003BFA65 /* SleepProcedureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */; };
 		6F7750A52A71B08C003BFA65 /* SleepEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A42A71B08C003BFA65 /* SleepEditView.swift */; };
 		6F7750AB2A748AEA003BFA65 /* SleepEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750AA2A748AEA003BFA65 /* SleepEntry.swift */; };
@@ -60,7 +59,6 @@
 		6FA619D52B03455F00CD9572 /* ChartPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619D42B03455F00CD9572 /* ChartPicker.swift */; };
 		6FA619D72B042B1600CD9572 /* SleepExperimentSamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619D62B042B1600CD9572 /* SleepExperimentSamples.swift */; };
 		6FA619D92B043A1F00CD9572 /* BedtimeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619D82B043A1F00CD9572 /* BedtimeHistory.swift */; };
-		6FB5176A2B1A90480054A44C /* DateChartTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517692B1A90480054A44C /* DateChartTest.swift */; };
 		6FB5176C2B2C311E0054A44C /* SimpleBedtimeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5176B2B2C311E0054A44C /* SimpleBedtimeHistory.swift */; };
 		6FB5176E2B2C3F9F0054A44C /* BedtimeChartPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5176D2B2C3F9F0054A44C /* BedtimeChartPreview.swift */; };
 		6FB517712B2C526A0054A44C /* BedtimeBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517702B2C526A0054A44C /* BedtimeBarChart.swift */; };
@@ -86,6 +84,16 @@
 		6FB5179D2B2E96210054A44C /* SleepTimeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5179C2B2E96210054A44C /* SleepTimeHistory.swift */; };
 		6FB5179F2B2E9DFE0054A44C /* SleepTimeHistoryMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB5179E2B2E9DFE0054A44C /* SleepTimeHistoryMessage.swift */; };
 		6FB517A12B2EC4880054A44C /* SimpleSleepTimeHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517A02B2EC4880054A44C /* SimpleSleepTimeHistory.swift */; };
+		6FB517A52B2EC8590054A44C /* BothTimeResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517A42B2EC8590054A44C /* BothTimeResults.swift */; };
+		6FB517A92B3338960054A44C /* NewSleepEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517A82B3338960054A44C /* NewSleepEntryView.swift */; };
+		6FB517AB2B337C160054A44C /* NewSleepEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517AA2B337C160054A44C /* NewSleepEntry.swift */; };
+		6FB517AD2B3441CD0054A44C /* TimeSleptPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517AC2B3441CD0054A44C /* TimeSleptPicker.swift */; };
+		6FB517AF2B3443F80054A44C /* SleepDependentVarPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517AE2B3443F80054A44C /* SleepDependentVarPicker.swift */; };
+		6FB517B12B3456F50054A44C /* BedtimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517B02B3456F50054A44C /* BedtimePicker.swift */; };
+		6FB517B32B34649F0054A44C /* WaketimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517B22B34649F0054A44C /* WaketimePicker.swift */; };
+		6FB517B52B346BFA0054A44C /* SleepPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517B42B346BFA0054A44C /* SleepPicker.swift */; };
+		6FB517B72B346C9F0054A44C /* SleepEntryDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517B62B346C9F0054A44C /* SleepEntryDatePicker.swift */; };
+		6FB517BA2B3470550054A44C /* SleepCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517B92B3470550054A44C /* SleepCalculatorView.swift */; };
 		6FF397972ADAF7F70096B143 /* BothtimeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF397962ADAF7F70096B143 /* BothtimeChart.swift */; };
 		6FF397E32AE1E7600096B143 /* BedtimeResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF397E22AE1E7600096B143 /* BedtimeResults.swift */; };
 		6FF3982D2AF45D850096B143 /* WaketimeResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3982C2AF45D850096B143 /* WaketimeResults.swift */; };
@@ -140,7 +148,6 @@
 		6F35C9BB2AB451460019D839 /* SleepChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepChart.swift; sourceTree = "<group>"; };
 		6F35C9BF2AB658040019D839 /* WaketimeScatterPlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimeScatterPlot.swift; sourceTree = "<group>"; };
 		6F35C9C12AB65E740019D839 /* BedtimeScatterPlot+BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BedtimeScatterPlot+BarChart.swift"; sourceTree = "<group>"; };
-		6F35C9C32AB65F320019D839 /* SleepTimeChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTimeChart.swift; sourceTree = "<group>"; };
 		6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepProcedureView.swift; sourceTree = "<group>"; };
 		6F7750A42A71B08C003BFA65 /* SleepEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepEditView.swift; sourceTree = "<group>"; };
 		6F7750AA2A748AEA003BFA65 /* SleepEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepEntry.swift; sourceTree = "<group>"; };
@@ -165,7 +172,6 @@
 		6FA619D42B03455F00CD9572 /* ChartPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartPicker.swift; sourceTree = "<group>"; };
 		6FA619D62B042B1600CD9572 /* SleepExperimentSamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepExperimentSamples.swift; sourceTree = "<group>"; };
 		6FA619D82B043A1F00CD9572 /* BedtimeHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeHistory.swift; sourceTree = "<group>"; };
-		6FB517692B1A90480054A44C /* DateChartTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateChartTest.swift; sourceTree = "<group>"; };
 		6FB5176B2B2C311E0054A44C /* SimpleBedtimeHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBedtimeHistory.swift; sourceTree = "<group>"; };
 		6FB5176D2B2C3F9F0054A44C /* BedtimeChartPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeChartPreview.swift; sourceTree = "<group>"; };
 		6FB517702B2C526A0054A44C /* BedtimeBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeBarChart.swift; sourceTree = "<group>"; };
@@ -191,6 +197,16 @@
 		6FB5179C2B2E96210054A44C /* SleepTimeHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTimeHistory.swift; sourceTree = "<group>"; };
 		6FB5179E2B2E9DFE0054A44C /* SleepTimeHistoryMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTimeHistoryMessage.swift; sourceTree = "<group>"; };
 		6FB517A02B2EC4880054A44C /* SimpleSleepTimeHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSleepTimeHistory.swift; sourceTree = "<group>"; };
+		6FB517A42B2EC8590054A44C /* BothTimeResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BothTimeResults.swift; sourceTree = "<group>"; };
+		6FB517A82B3338960054A44C /* NewSleepEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSleepEntryView.swift; sourceTree = "<group>"; };
+		6FB517AA2B337C160054A44C /* NewSleepEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSleepEntry.swift; sourceTree = "<group>"; };
+		6FB517AC2B3441CD0054A44C /* TimeSleptPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSleptPicker.swift; sourceTree = "<group>"; };
+		6FB517AE2B3443F80054A44C /* SleepDependentVarPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepDependentVarPicker.swift; sourceTree = "<group>"; };
+		6FB517B02B3456F50054A44C /* BedtimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimePicker.swift; sourceTree = "<group>"; };
+		6FB517B22B34649F0054A44C /* WaketimePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimePicker.swift; sourceTree = "<group>"; };
+		6FB517B42B346BFA0054A44C /* SleepPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepPicker.swift; sourceTree = "<group>"; };
+		6FB517B62B346C9F0054A44C /* SleepEntryDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepEntryDatePicker.swift; sourceTree = "<group>"; };
+		6FB517B92B3470550054A44C /* SleepCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepCalculatorView.swift; sourceTree = "<group>"; };
 		6FF397962ADAF7F70096B143 /* BothtimeChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BothtimeChart.swift; sourceTree = "<group>"; };
 		6FF397E22AE1E7600096B143 /* BedtimeResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeResults.swift; sourceTree = "<group>"; };
 		6FF3982C2AF45D850096B143 /* WaketimeResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimeResults.swift; sourceTree = "<group>"; };
@@ -297,12 +313,13 @@
 			children = (
 				6FF3982E2AF46ED90096B143 /* Setup */,
 				6F7750C92A7BA50E003BFA65 /* SleepExperiment.swift */,
-				6F7750AA2A748AEA003BFA65 /* SleepEntry.swift */,
 				6F7750D32A7D12CA003BFA65 /* SleepView.swift */,
 				6FB517792B2D42FA0054A44C /* SleepHistory.swift */,
 				6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */,
 				6F7750AD2A74B9D6003BFA65 /* SimplifiedSleepView.swift */,
 				6F7750A42A71B08C003BFA65 /* SleepEditView.swift */,
+				6FB517B42B346BFA0054A44C /* SleepPicker.swift */,
+				6FB517B82B346FAF0054A44C /* SleepEntry */,
 				6FA619B42AFCA69900CD9572 /* Chart */,
 			);
 			path = SleepExperiment;
@@ -330,14 +347,16 @@
 		6FA619B42AFCA69900CD9572 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
+				6FB5177D2B2D5D650054A44C /* DependentVariable */,
+				6F35C9BB2AB451460019D839 /* SleepChart.swift */,
 				6FB5177B2B2D523A0054A44C /* EntryProgressView.swift */,
 				6FB5176F2B2C4F630054A44C /* Bedtime */,
 				6FB517762B2C6C210054A44C /* Waketime */,
 				6FB517772B2C6C350054A44C /* Sleeptime */,
 				6FA619D22B03409300CD9572 /* ChartFunctions.swift */,
-				6FB5177D2B2D5D650054A44C /* DependentVariable */,
 				6FF397962ADAF7F70096B143 /* BothtimeChart.swift */,
-				6FB517782B2D3FDD0054A44C /* Delete */,
+				6FB517A42B2EC8590054A44C /* BothTimeResults.swift */,
+				6FA619D42B03455F00CD9572 /* ChartPicker.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -378,7 +397,6 @@
 			isa = PBXGroup;
 			children = (
 				6FA619B22AFA0BCE00CD9572 /* SleepTimeResults.swift */,
-				6F35C9C32AB65F320019D839 /* SleepTimeChart.swift */,
 				6FB517922B2E8C7E0054A44C /* SleepTimeBarChartEntry.swift */,
 				6FB517942B2E8D3F0054A44C /* SleepTimeBarChart.swift */,
 				6FB517962B2E8F1B0054A44C /* SimpleSleepTimeBarChart.swift */,
@@ -391,16 +409,6 @@
 			path = Sleeptime;
 			sourceTree = "<group>";
 		};
-		6FB517782B2D3FDD0054A44C /* Delete */ = {
-			isa = PBXGroup;
-			children = (
-				6FB517692B1A90480054A44C /* DateChartTest.swift */,
-				6FA619D42B03455F00CD9572 /* ChartPicker.swift */,
-				6F35C9BB2AB451460019D839 /* SleepChart.swift */,
-			);
-			path = Delete;
-			sourceTree = "<group>";
-		};
 		6FB5177D2B2D5D650054A44C /* DependentVariable */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,6 +416,22 @@
 				6FB517802B2D665C0054A44C /* SimpleSleepDependentHistory.swift */,
 			);
 			path = DependentVariable;
+			sourceTree = "<group>";
+		};
+		6FB517B82B346FAF0054A44C /* SleepEntry */ = {
+			isa = PBXGroup;
+			children = (
+				6FB517A82B3338960054A44C /* NewSleepEntryView.swift */,
+				6F7750AA2A748AEA003BFA65 /* SleepEntry.swift */,
+				6FB517AA2B337C160054A44C /* NewSleepEntry.swift */,
+				6FB517B62B346C9F0054A44C /* SleepEntryDatePicker.swift */,
+				6FB517B02B3456F50054A44C /* BedtimePicker.swift */,
+				6FB517B22B34649F0054A44C /* WaketimePicker.swift */,
+				6FB517AC2B3441CD0054A44C /* TimeSleptPicker.swift */,
+				6FB517AE2B3443F80054A44C /* SleepDependentVarPicker.swift */,
+				6FB517B92B3470550054A44C /* SleepCalculatorView.swift */,
+			);
+			path = SleepEntry;
 			sourceTree = "<group>";
 		};
 		6FDA3E472A6910C50074A50C /* Experiments */ = {
@@ -598,7 +622,6 @@
 				6F7750A32A71A9CE003BFA65 /* SleepProcedureView.swift in Sources */,
 				6F28B0822AA55D6F00FDCA0A /* DaySetup2.swift in Sources */,
 				6F7750B42A7B4370003BFA65 /* DayEntry.swift in Sources */,
-				6FB5176A2B1A90480054A44C /* DateChartTest.swift in Sources */,
 				6FA619D72B042B1600CD9572 /* SleepExperimentSamples.swift in Sources */,
 				6FB5179B2B2E93D00054A44C /* SleepTimeChartPreview.swift in Sources */,
 				59702D4F2AABD2A100B296EB /* MoodRatingView.swift in Sources */,
@@ -611,9 +634,10 @@
 				6F7750D42A7D12CA003BFA65 /* SleepView.swift in Sources */,
 				6F28AFF22A9BBFA300FDCA0A /* DataStore.swift in Sources */,
 				6F28B0802AA39E6100FDCA0A /* DaySetup1.swift in Sources */,
+				6FB517B72B346C9F0054A44C /* SleepEntryDatePicker.swift in Sources */,
 				6F35C9B62AABD2980019D839 /* DescriptionView.swift in Sources */,
+				6FB517B52B346BFA0054A44C /* SleepPicker.swift in Sources */,
 				6F7750AB2A748AEA003BFA65 /* SleepEntry.swift in Sources */,
-				6F35C9C42AB65F320019D839 /* SleepTimeChart.swift in Sources */,
 				6F28AFFA2A9F612D00FDCA0A /* TimeSelector.swift in Sources */,
 				6FA619D52B03455F00CD9572 /* ChartPicker.swift in Sources */,
 				6F7750AE2A74B9D6003BFA65 /* SimplifiedSleepView.swift in Sources */,
@@ -630,11 +654,15 @@
 				6FA619D92B043A1F00CD9572 /* BedtimeHistory.swift in Sources */,
 				6FF397E32AE1E7600096B143 /* BedtimeResults.swift in Sources */,
 				6FB517972B2E8F1B0054A44C /* SimpleSleepTimeBarChart.swift in Sources */,
+				6FB517AB2B337C160054A44C /* NewSleepEntry.swift in Sources */,
 				6FB517732B2C65230054A44C /* SimpleBedtimeBarChart.swift in Sources */,
+				6FB517AD2B3441CD0054A44C /* TimeSleptPicker.swift in Sources */,
+				6FB517B12B3456F50054A44C /* BedtimePicker.swift in Sources */,
 				6FF397972ADAF7F70096B143 /* BothtimeChart.swift in Sources */,
 				6FB517712B2C526A0054A44C /* BedtimeBarChart.swift in Sources */,
 				6F7750BB2A7B6C1B003BFA65 /* DayEditView.swift in Sources */,
 				6FB5176E2B2C3F9F0054A44C /* BedtimeChartPreview.swift in Sources */,
+				6FB517B32B34649F0054A44C /* WaketimePicker.swift in Sources */,
 				6FF3982D2AF45D850096B143 /* WaketimeResults.swift in Sources */,
 				6FB517832B2D8B010054A44C /* BedtimeHistoryMessage.swift in Sources */,
 				6FB517932B2E8C7E0054A44C /* SleepTimeBarChartEntry.swift in Sources */,
@@ -653,11 +681,15 @@
 				6FA619B62AFDF9E500CD9572 /* ErrorWrapper.swift in Sources */,
 				6FB517A12B2EC4880054A44C /* SimpleSleepTimeHistory.swift in Sources */,
 				6FA619D32B03409300CD9572 /* ChartFunctions.swift in Sources */,
+				6FB517A92B3338960054A44C /* NewSleepEntryView.swift in Sources */,
 				6F7750D02A7C4382003BFA65 /* SleepSetup3.swift in Sources */,
 				6FB5179F2B2E9DFE0054A44C /* SleepTimeHistoryMessage.swift in Sources */,
 				6F35C9B42AAA9C9B0019D839 /* DaySetup3.swift in Sources */,
+				6FB517A52B2EC8590054A44C /* BothTimeResults.swift in Sources */,
 				6F28AFFC2A9F6D8000FDCA0A /* SliderView.swift in Sources */,
+				6FB517AF2B3443F80054A44C /* SleepDependentVarPicker.swift in Sources */,
 				6FB517852B2E71910054A44C /* WaketimeBarChart.swift in Sources */,
+				6FB517BA2B3470550054A44C /* SleepCalculatorView.swift in Sources */,
 				6FB5176C2B2C311E0054A44C /* SimpleBedtimeHistory.swift in Sources */,
 				6FB5178F2B2E81400054A44C /* WaketimeHistoryMessage.swift in Sources */,
 				598DDA7D2AA2BEDA00784BD9 /* MoodEntry.swift in Sources */,

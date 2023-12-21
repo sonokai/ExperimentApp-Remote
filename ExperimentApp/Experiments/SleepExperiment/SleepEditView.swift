@@ -26,7 +26,11 @@ struct SleepEditView: View {
     
     var body: some View {
         Form {
-            DatePicker("Entry date", selection: $selectedDate, in: ...Date(),displayedComponents: [.date])
+            
+            
+                DatePicker("Entry date", selection: $selectedDate, in: ...Date(),displayedComponents: [.date])
+            
+            
             
             switch(experiment.independentVariable){
             case .bedtime:
@@ -37,22 +41,25 @@ struct SleepEditView: View {
             case .both:
                 DatePicker("Bedtime", selection: $bedtime, displayedComponents: [.hourAndMinute])
                 DatePicker("Wake time", selection: $waketime, displayedComponents: [.hourAndMinute])
-                Text("Time slept: \(entry.calculateTimeSlept(sleep: bedtime, wake: waketime))")
+                Text("Time slept: \(SleepEntry.calculateTimeSlept(sleep: bedtime, wake: waketime))")
             case .hoursSlept:
                 VStack(alignment:.leading){
-                    Text("Hours slept")
+                    
+                    Text("Time slept")
+                    
+                    
                     TimeSelector(hours: $hoursSlept, minutes: $minutesSlept)
                 }
             }
             
             switch(experiment.dependentVariable){
             case .quality:
-                SliderView(name: "Quality of day", value: $quality)
+                SleepPicker(label: "Quality of day", value: $quality)
             case .productivity:
-                SliderView(name: "Productivity", value: $productivity)
+                SleepPicker(label: "Productivity", value: $productivity)
             case .both:
-                SliderView(name: "Quality of day", value: $quality)
-                SliderView(name: "Productivity", value: $productivity)
+                SleepPicker(label: "Quality of day", value: $quality)
+                SleepPicker(label: "Productivity", value: $productivity)
             }
         
             
@@ -91,7 +98,9 @@ struct SleepEditView: View {
 struct SleepEditView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
+            
             SleepEditView(entry: .constant(SleepEntry.newEntry),experiment: .constant(SleepExperiment.hoursSleptSampleExperiment))
+            
         }
     }
 }
