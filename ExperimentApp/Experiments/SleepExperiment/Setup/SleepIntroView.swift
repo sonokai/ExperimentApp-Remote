@@ -16,7 +16,7 @@ struct SleepIntroView: View {
     
     @State var notes: String = "Take notes here"
     @State var name: String = ""
-    @Binding var isPresentingSheetView: Bool
+    
     var body: some View {
         NavigationStack{
             Form{
@@ -32,7 +32,7 @@ struct SleepIntroView: View {
         }.toolbar{
             ToolbarItem(placement: .confirmationAction){
                 Button("Create experiment"){
-                    isPresentingSheetView = false
+                    
                     sleepExperiments.append(SleepExperiment(goalEntries: goalEntries, dependentVariable: dependentVariable, independentVariable: independentVariable, entries: [], name: name, notes: notes))
                 }
             }
@@ -42,6 +42,6 @@ struct SleepIntroView: View {
 
 struct SleepIntroView_Previews: PreviewProvider {
     static var previews: some View {
-        SleepIntroView(sleepExperiments: .constant(SleepExperiment.experimentArray), isPresentingSheetView: .constant(true))
+        SleepIntroView(sleepExperiments: .constant(SleepExperiment.experimentArray))
     }
 }

@@ -14,7 +14,7 @@ struct DaySetupView: View {
     @State var goalEntries: Int = 10
     @State var name: String = ""
     @State var hasSelectedDependentVariable = false
-    @Binding var isPresentingSheetView : Bool
+    
     
     let experimentDescription: String = ""
     
@@ -33,7 +33,7 @@ struct DaySetupView: View {
             .toolbar{
                 ToolbarItem(placement: .confirmationAction){
                     Button("Create experiment"){
-                        isPresentingSheetView = false
+                       
                         dayExperiments.append(DayExperiment(goalEntries: goalEntries,independentVariable: independentVariable, dependentVariable: dependentVariable, entries: [], name: name, notes: ""))
                     }.disabled(independentVariable.timesOfDayIsEmpty() || !hasSelectedDependentVariable)
                 }
@@ -44,6 +44,6 @@ struct DaySetupView: View {
 
 struct DaySetupView_Previews: PreviewProvider {
     static var previews: some View {
-        DaySetupView(dayExperiments: .constant(DayExperiment.sampleExperimentArray), isPresentingSheetView: .constant(true))
+        DaySetupView(dayExperiments: .constant(DayExperiment.sampleExperimentArray))
     }
 }
