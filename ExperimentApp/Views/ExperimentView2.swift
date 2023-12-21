@@ -11,7 +11,7 @@ struct ExperimentView: View {
     @Environment (\.scenePhase) private var scenePhase
     
     @Binding var appData: AppData
-    @State var isPresentingSheetView = false
+    
     let saveAction : () -> Void
     
     var body: some View {
@@ -24,7 +24,7 @@ struct ExperimentView: View {
                         }
                     }
                     ForEach($appData.dayExperiments) { $dayExperiment in
-                        NavigationLink(destination:DayView(experiment: $dayExperiment)){
+                        NavigationLink(destination: DayView(experiment: $dayExperiment)){
                             Text("\(dayExperiment.name)")
                         }
                     }
@@ -37,15 +37,9 @@ struct ExperimentView: View {
                 
                 
             }
-            .navigationTitle("Experiments")
-            .toolbar{
-                ToolbarItem(placement: .confirmationAction){
-                    Button("New Experiment"){
-                        isPresentingSheetView = true
-                    }
-                }
-                
-            }
+            .navigationTitle("My Experiments")
+           
+            /*
             .sheet(isPresented: $isPresentingSheetView){
                 NavigationStack{
                     NewExperimentView(appData: $appData, isPresentingSheetView: $isPresentingSheetView)
@@ -60,6 +54,7 @@ struct ExperimentView: View {
                         }
                 }
             }
+             */
         }
         .navigationTitle("Experiments")
         .onChange(of: scenePhase){ phase in
