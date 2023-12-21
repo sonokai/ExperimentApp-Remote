@@ -7,7 +7,7 @@
 
 import SwiftUI
 //this is sleep time results
-struct SleepTimeChart: View {
+struct SleepTimeResults: View {
     var experiment: SleepExperiment
     
     var body: some View {
@@ -72,8 +72,8 @@ struct SleepTimeChart: View {
    
 }
 
-struct SleepTimeStats_Previews: PreviewProvider {
+struct SleepTimeResults_Previews: PreviewProvider {
     static var previews: some View {
-        SleepTimeChart(experiment: SleepExperiment.hoursSleptSampleExperiment)
+        SleepTimeResults(experiment: SleepExperiment.hoursSleptSampleExperiment)
     }
 }
