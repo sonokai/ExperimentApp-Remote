@@ -17,44 +17,25 @@ struct ExperimentView: View {
     var body: some View {
         NavigationStack{
             Form{
-                Section(header: Text("Active Experiments")){
-                    ForEach($appData.sleepExperiments) { $sleepExperiment in
-                        NavigationLink(destination: SleepView(experiment: $sleepExperiment)){
-                            Text("\(sleepExperiment.name)")
-                        }
-                    }
-                    ForEach($appData.dayExperiments) { $dayExperiment in
-                        NavigationLink(destination: DayView(experiment: $dayExperiment)){
-                            Text("\(dayExperiment.name)")
-                        }
-                    }
-                    ForEach($appData.moodExperiments){ $moodExperiment in
-                        NavigationLink(destination: Text("Put mood experiment main view here")){
-                            Text(moodExperiment.name)
-                        }
+                
+                ForEach($appData.sleepExperiments) { $sleepExperiment in
+                    Section("\(sleepExperiment.name)"){
+                        NewSleepEntryView(experiment: $sleepExperiment)
                     }
                 }
                 
-                
-            }
+                ForEach($appData.dayExperiments) { $dayExperiment in
+                    NavigationLink(destination: DayView(experiment: $dayExperiment)){
+                        Text("\(dayExperiment.name)")
+                    }
+                }
+                ForEach($appData.moodExperiments){ $moodExperiment in
+                    NavigationLink(destination: Text("Put mood experiment main view here")){
+                        Text(moodExperiment.name)
+                    }
+                }
+            }.buttonStyle(.borderless)
             .navigationTitle("My Experiments")
-           
-            /*
-            .sheet(isPresented: $isPresentingSheetView){
-                NavigationStack{
-                    NewExperimentView(appData: $appData, isPresentingSheetView: $isPresentingSheetView)
-                        .navigationTitle("New Experiment")
-                        .toolbar{
-                            ToolbarItem(placement: .confirmationAction){
-                                Button("Done"){
-                                    //add the new experiment to the app data
-                                    isPresentingSheetView = false
-                                }
-                            }
-                        }
-                }
-            }
-             */
         }
         .navigationTitle("Experiments")
         .onChange(of: scenePhase){ phase in

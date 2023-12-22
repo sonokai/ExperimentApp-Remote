@@ -8,25 +8,29 @@
 import SwiftUI
 
 struct SleepCalculatorView: View {
-    @Binding var experiment: SleepExperiment
+    
     @State var bedtime: Date = Calendar.current.startOfDay(for: Date())
     @State var waketime: Date = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date()) ?? Date()
-    @Environment(\.presentationMode) private var presentationMode
+    @Binding var hours: Int
+    @Binding var minutes: Int
     var body: some View {
-        Form{
+        VStack{
             DatePicker("Bedtime", selection: $bedtime, displayedComponents: [.hourAndMinute])
             DatePicker("Wake time", selection: $waketime, displayedComponents: [.hourAndMinute])
             HStack{
                 Text("Time slept: ")
                 Spacer()
                 Text(SleepEntry.calculateTimeSlept(sleep: bedtime, wake: waketime))
+            }.onChange(of: bedtime){ _ in
+                let (newhours, newminutes) = SleepEntry.returnTimeSlept(sleep: bedtime, wake: waketime)
+                hours = newhours
+                minutes = newminutes
+            }.onChange(of: waketime){ _ in
+                let (newhours, newminutes) = SleepEntry.returnTimeSlept(sleep: bedtime, wake: waketime)
+                hours = newhours
+                minutes = newminutes
             }
-            Button("Log time in new entry"){
-                let (hours, minutes) = SleepEntry.returnTimeSlept(sleep: bedtime, wake: waketime)
-                experiment.newSleepEntry.hoursSlept = hours
-                experiment.newSleepEntry.minutesSlept = minutes
-                presentationMode.wrappedValue.dismiss()
-            }
+            
         }
     }
     
@@ -34,6 +38,6 @@ struct SleepCalculatorView: View {
 
 struct SleepCalculatorView_Previews: PreviewProvider {
     static var previews: some View {
-        SleepCalculatorView(experiment: .constant(SleepExperiment.hoursSleptSampleExperiment))
+        SleepCalculatorView(hours: .constant(0), minutes: .constant(0))
     }
 }

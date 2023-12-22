@@ -48,6 +48,7 @@ struct TimeSleptPicker: View {
                     }
                 })//end of button
                 .popover(isPresented: $timeSelectorPopOver, attachmentAnchor: .point(.bottom), arrowEdge: .top, content: {
+                    
                     TimeSelector(hours: $hoursSlept, minutes: $minutesSlept)
                         .presentationCompactAdaptation(.popover)
                         .padding()
@@ -77,9 +78,9 @@ struct TimeSleptPicker: View {
 
 struct TimeSelectingButton_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView{
+        NavigationStack{
             Form{
-                TimeSleptPicker(experiment: .constant(SleepExperiment.hoursSleptSampleExperiment), timeSelectorPopOver: .constant(false))
+                TimeSleptPicker(experiment: .constant(SleepExperiment.hoursSleptSampleExperiment), timeSelectorPopOver: .constant(true))
             }
         }
     }

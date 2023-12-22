@@ -43,13 +43,9 @@ struct SleepEditView: View {
                 DatePicker("Wake time", selection: $waketime, displayedComponents: [.hourAndMinute])
                 Text("Time slept: \(SleepEntry.calculateTimeSlept(sleep: bedtime, wake: waketime))")
             case .hoursSlept:
-                VStack(alignment:.leading){
-                    
-                    Text("Time slept")
-                    
-                    
-                    TimeSelector(hours: $hoursSlept, minutes: $minutesSlept)
-                }
+                
+                TimeSelector(hours: $hoursSlept, minutes: $minutesSlept)
+                
             }
             
             switch(experiment.dependentVariable){
