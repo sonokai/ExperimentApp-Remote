@@ -24,7 +24,7 @@ struct SimpleWaketimeHistory: View {
                     x: .value("Date", entry.date.convertToMMDDYYYY(), unit: .day),
                     yStart: .value("Min", getYDomain().lowerBound),
                     yEnd: .value("Bedtime",SleepExperiment.getWaketimeSeconds(from: entry.waketime))
-                ).foregroundStyle(.red)
+                ).foregroundStyle(.orange)
             }
             .chartYAxis(.hidden)
             .chartYScale(domain: getYDomain())

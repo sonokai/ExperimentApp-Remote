@@ -11,20 +11,20 @@ extension SleepExperiment{
     
     static let emptyExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime)
     
-    static let bedtimeSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime, entries: SleepEntry.sampleData, name: "Sleep Experiment 1", notes: "notes")
-    static let bedtimeSampleExperiment2: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .productivity, independentVariable: .bedtime, entries: sampleDataForBedtime2, name: "Sleep Experiment 2", notes: "notes")
+    static let bedtimeSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .bedtime, entries: SleepEntry.sampleData, name: "Sleep Experiment 1")
+    static let bedtimeSampleExperiment2: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .productivity, independentVariable: .bedtime, entries: sampleDataForBedtime2, name: "Sleep Experiment 2")
     //bedtime experiment for testing cross day plotting
-    static let midnightSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .bedtime, entries: sampleDataForCrossMidnight, name: "Sleep Experiment 12", notes: "notes")
+    static let midnightSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .bedtime, entries: sampleDataForCrossMidnight, name: "Sleep Experiment 12")
     static let experimentArray: [SleepExperiment] = [
     bedtimeSampleExperiment, bothTimesSampleExperiment, hoursSleptSampleExperiment
     ]
-    static let bedtimeSampleExperiment3: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .bedtime, entries: sampleDataForBedtime2, name: "Sleep Experiment 3", notes: "notes")
-    static let bothTimesSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .both, entries: sampleDataForExperiment2, name: "Sleep Experiment 2", notes: "notes")
-    static let waketimeSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .productivity, independentVariable: .waketime, entries: sampleDataForExperiment2, name: "Waketime experiment 1", notes: "notes?")
-    static let waketimeSampleExperiment2: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .waketime, entries: sampleDataForExperiment2, name: "Waketime experiment 2", notes: "notes?")
-    static let waketimeSampleExperiment3: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .waketime, entries: sampleDataForExperiment2, name: "Waketime experiment 3", notes: "notes?")
-    static let bedtimebothExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .bedtime, entries:sampleData12, name: "", notes: "")
-    static let hoursSleptSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .hoursSlept, entries: sampleDataForExperiment3, name: "Sleep Experiment 3", notes: "notes")
+    static let bedtimeSampleExperiment3: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .bedtime, entries: sampleDataForBedtime2, name: "Sleep Experiment 3")
+    static let bothTimesSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .both, entries: sampleDataForExperiment2, name: "Sleep Experiment 2")
+    static let waketimeSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .productivity, independentVariable: .waketime, entries: sampleDataForExperiment2, name: "Waketime experiment 1")
+    static let waketimeSampleExperiment2: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .waketime, entries: sampleDataForExperiment2, name: "Waketime experiment 2")
+    static let waketimeSampleExperiment3: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .waketime, entries: sampleDataForExperiment2, name: "Waketime experiment 3")
+    static let bedtimebothExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .bedtime, entries:sampleData12, name: "")
+    static let hoursSleptSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .hoursSlept, entries: sampleDataForExperiment3, name: "Sleep Experiment 3")
     
     
     static let sampleDataForBedtime2: [SleepEntry] = [

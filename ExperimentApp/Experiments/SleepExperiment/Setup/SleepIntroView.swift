@@ -14,7 +14,7 @@ struct SleepIntroView: View {
     @State var dependentVariable: SleepExperiment.DependentVariable = .quality //ask user if they want to track how sleep affects their productivity or quality of day
     @State var independentVariable: SleepExperiment.IndependentVariable = .bedtime //ask user if they want to guess how much hours they slept on their own or only track bedtime, waketime, or both bedtime and waketime for the maximum data
     
-    @State var notes: String = "Take notes here"
+    
     @State var name: String = ""
     
     var body: some View {
@@ -33,7 +33,7 @@ struct SleepIntroView: View {
             ToolbarItem(placement: .confirmationAction){
                 Button("Create experiment"){
                     
-                    sleepExperiments.append(SleepExperiment(goalEntries: goalEntries, dependentVariable: dependentVariable, independentVariable: independentVariable, entries: [], name: name, notes: notes))
+                    sleepExperiments.append(SleepExperiment(goalEntries: goalEntries, dependentVariable: dependentVariable, independentVariable: independentVariable, entries: [], name: name))
                 }
             }
         }

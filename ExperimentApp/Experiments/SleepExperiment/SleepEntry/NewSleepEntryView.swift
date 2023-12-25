@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-//make it so that it needs interaction before you get a value
-//interaction with all makes done avaiable
 struct NewSleepEntryView: View {
     
     @Binding var experiment: SleepExperiment
@@ -19,7 +17,7 @@ struct NewSleepEntryView: View {
             ProgressView(value: Double(experiment.entries.count)/Double(experiment.goalEntries)) {
                 Text("Goal: \(experiment.goalEntries) entries")
                 if(experiment.entries.count < experiment.goalEntries){
-                    Text("Progress: \(Int(Double(experiment.entries.count)/Double(experiment.goalEntries)*100))%")
+                    Text("Progress: \(experiment.entries.count)/\(experiment.goalEntries) (\(Int(Double(experiment.entries.count)/Double(experiment.goalEntries)*100))%)")
                 }else {
                     Text("View your results")
                 }

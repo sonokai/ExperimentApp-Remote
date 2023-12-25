@@ -29,9 +29,7 @@ struct SleepEditView: View {
             
             
                 DatePicker("Entry date", selection: $selectedDate, in: ...Date(),displayedComponents: [.date])
-            
-            
-            
+
             switch(experiment.independentVariable){
             case .bedtime:
                 

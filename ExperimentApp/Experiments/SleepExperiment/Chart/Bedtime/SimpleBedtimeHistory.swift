@@ -101,7 +101,7 @@ struct SimpleBedtimeHistory: View {
 
 
 struct SimpleBedtimeHistory_Previews: PreviewProvider {
-    static var sample = SleepExperiment(goalEntries: 50, dependentVariable: .productivity, independentVariable: .bedtime, entries: [SleepEntry(date: Date(), bedtime: Date(), quality: 3)], name: "", notes: "")
+    static var sample = SleepExperiment(goalEntries: 50, dependentVariable: .productivity, independentVariable: .bedtime, entries: [SleepEntry(date: Date(), bedtime: Date(), quality: 3)], name: "")
     static var previews: some View {
         SimpleBedtimeHistory(experiment: SleepExperiment.midnightSampleExperiment).padding()
     }

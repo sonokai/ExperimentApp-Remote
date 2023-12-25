@@ -13,7 +13,7 @@ struct SleepExperiment: Identifiable, Codable{
     let dependentVariable: DependentVariable //ask user if they want to track how sleep affects their productivity or quality of day
     let independentVariable: IndependentVariable //ask user if they want to guess how much hours they slept on their own or only track bedtime, waketime, or both bedtime and waketime for the maximum data
     var entries: [SleepEntry] = []
-    var notes: String = "Take notes here"
+    var insights: [String] = []
     var name: String = "Sleep Experiment"
     var newSleepEntry = NewSleepEntry(date: Date())
     
@@ -24,14 +24,14 @@ struct SleepExperiment: Identifiable, Codable{
         self.independentVariable = independentVariable
     }
     //for testing
-    init(id: UUID = UUID(), goalEntries: Int, dependentVariable: DependentVariable, independentVariable: IndependentVariable, entries: [SleepEntry], name: String, notes: String) {
+    init(id: UUID = UUID(), goalEntries: Int, dependentVariable: DependentVariable, independentVariable: IndependentVariable, entries: [SleepEntry], name: String) {
         self.id = id
         self.goalEntries = goalEntries
         self.dependentVariable = dependentVariable
         self.independentVariable = independentVariable
         self.entries = entries
         self.name = name
-        self.notes = notes
+        self.insights = []
     }
 }
 extension SleepExperiment{

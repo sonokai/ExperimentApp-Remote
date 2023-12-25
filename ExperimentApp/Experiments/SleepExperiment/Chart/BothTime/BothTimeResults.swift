@@ -1,22 +1,23 @@
 //
-//  SleepStats.swift
+//  BothTimeResults.swift
 //  ExperimentApp
 //
-//  Created by Bell Chen on 10/19/23.
+//  Created by Bell Chen on 12/16/23.
 //
 
 import SwiftUI
 
-struct BedtimeResults: View {
+struct BothTimeResults: View {
     var experiment: SleepExperiment
+    @State var chartToShow: ChartPicker.pickerValues = .bedtime
     var body: some View {
         NavigationStack{
             Form{
                 Section("Correlational data"){
-                    BedtimeCorrelationData(experiment: experiment)
+                    BothTimeCorrelationData(experiment: experiment)
                 }
                 Section("Independent variable data"){
-                    BedtimeData(experiment: experiment)
+                    BothTimeData(experiment: experiment)
                 }
                 Section("Dependent variable data"){
                     DependentVariableData(experiment: experiment)
@@ -24,15 +25,11 @@ struct BedtimeResults: View {
                 
             }
         }.navigationTitle(Text("Experiment results"))
-        
     }
-    
 }
 
-struct SleepStats_Previews: PreviewProvider {
+struct BothTimeResults_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack{
-            BedtimeResults(experiment: SleepExperiment.midnightSampleExperiment)
-        }
+        BothTimeResults(experiment: SleepExperiment.bothTimesSampleExperiment)
     }
 }

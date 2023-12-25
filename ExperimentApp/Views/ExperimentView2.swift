@@ -9,18 +9,23 @@ import SwiftUI
 
 struct ExperimentView: View {
     @Environment (\.scenePhase) private var scenePhase
-    
     @Binding var appData: AppData
-    
     let saveAction : () -> Void
     
+    @State var showSleepExperiment: Bool = true
     var body: some View {
         NavigationStack{
             Form{
                 
                 ForEach($appData.sleepExperiments) { $sleepExperiment in
-                    Section("\(sleepExperiment.name)"){
-                        NewSleepEntryView(experiment: $sleepExperiment)
+                    Section(header: SleepExperimentHeader(title: sleepExperiment.name, isOn: $showSleepExperiment)){
+                        if(showSleepExperiment){
+                            NewSleepEntryView(experiment: $sleepExperiment)
+                        } else {
+                            NavigationLink(destination: SleepView(experiment: $sleepExperiment)){
+                                Text("Main page")
+                            }
+                        }
                     }
                 }
                 

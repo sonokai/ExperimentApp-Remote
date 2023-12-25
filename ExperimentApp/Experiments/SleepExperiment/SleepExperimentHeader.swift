@@ -8,20 +8,35 @@
 import SwiftUI
 
 struct SleepExperimentHeader: View {
-    @Binding var experiment: SleepExperiment
+    var title: String
+    @Binding var isOn: Bool
+    
     var body: some View {
-        HStack{
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            Spacer()
-            
-        }
+        Button(action: {
+            withAnimation {
+                isOn.toggle()
+            }
+        }, label: {
+            if isOn {
+                Image(systemName: "chevron.down")
+            } else {
+                Image(systemName: "chevron.up")
+            }
+        })
+        .font(Font.caption)
+        .foregroundColor(.accentColor)
+        .frame(maxWidth: .infinity, alignment: .trailing)
+        .overlay(
+            Text(title),
+            alignment: .leading
+        )
     }
 }
 
 struct SleepExperimentHeader_Previews: PreviewProvider {
     static var previews: some View {
         Form{
-            Section(header: SleepExperimentHeader(experiment: .constant(SleepExperiment.bedtimeSampleExperiment))){
+            Section(header: SleepExperimentHeader(title: "Experiment", isOn:.constant(false))){
                 Text("Form stuff here")
             }
         }
