@@ -6,7 +6,7 @@
 //
 
 import XCTest
-
+@testable import ExperimentApp
 final class ExperimentAppUITests: XCTestCase {
 
     override func setUpWithError() throws {
@@ -38,4 +38,6 @@ final class ExperimentAppUITests: XCTestCase {
             }
         }
     }
+    
+    
 }

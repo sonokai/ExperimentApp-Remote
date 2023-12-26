@@ -16,68 +16,74 @@ struct WaketimeScatterPlot: View {
     @State var showRange: Bool = false
     
     var body: some View {
-        Form{
-            Section("Chart"){
-                VStack(alignment:.leading){
-                    
-                    Text(SleepExperiment.getChartTitle2(independentVariable: .waketime, dependentVariable: dependentVariable)).font(.headline)
-                    
-                    Chart(){
-                        if(showRange){
-                            RectangleMark(
-                                xStart: .value("Start of interval", interval.formatDateForChart()),
-                                xEnd: .value("End of best interval", interval.addMinutesToDate(minutesToAdd: size)),
-                                yStart: nil,
-                                yEnd: nil
-                            ).foregroundStyle(.green)
+        NavigationStack{
+            Form{
+                Section("Chart"){
+                    VStack(alignment:.leading){
+                        
+                        Text(SleepExperiment.getChartTitle2(independentVariable: .waketime, dependentVariable: dependentVariable)).font(.headline)
+                        
+                        Chart(){
+                            if(showRange){
+                                RectangleMark(
+                                    xStart: .value("Start of interval", interval.formatDateForChart()),
+                                    xEnd: .value("End of best interval", interval.addMinutesToDate(minutesToAdd: size)),
+                                    yStart: nil,
+                                    yEnd: nil
+                                ).foregroundStyle(.green)
+                            }
+                            
+                            ForEach(experiment.entries){ entry in
+                                if(experiment.dependentVariable == .quality || dependentVariable == .quality){
+                                    PointMark(
+                                        x: .value("Waketime", entry.waketime.formatDateForChart()),
+                                        y: .value("Quality", entry.quality)
+                                    ).foregroundStyle(.red)
+                                }
+                                if(experiment.dependentVariable == .productivity || dependentVariable == .productivity){
+                                    PointMark(
+                                        x: .value("Waketime", entry.waketime.formatDateForChart()),
+                                        y: .value("Productivity", entry.productivity)
+                                    ).foregroundStyle(.blue)
+                                }
+                            }
                         }
                         
-                        ForEach(experiment.entries){ entry in
-                            if(experiment.dependentVariable == .quality || dependentVariable == .quality){
-                                PointMark(
-                                    x: .value("Waketime", entry.waketime.formatDateForChart()),
-                                    y: .value("Quality", entry.quality)
-                                ).foregroundStyle(.red)
-                            }
-                            if(experiment.dependentVariable == .productivity || dependentVariable == .productivity){
-                                PointMark(
-                                    x: .value("Waketime", entry.waketime.formatDateForChart()),
-                                    y: .value("Productivity", entry.productivity)
-                                ).foregroundStyle(.blue)
-                            }
-                        }
-                    }
-                    
-                    .chartXScale()
-                    .chartYAxisLabel(getYAxisLabel())
-                    .chartXAxisLabel("Waketime")
-                    
-                    .chartXAxis {
-                        AxisMarks() { value in
-                            if let date = value.as(Date.self) {
-                                AxisValueLabel {
-                                    VStack(alignment: .leading) {
-                                        Text(date.simplifyDateToTimeString())
+                        .chartXScale()
+                        .chartYAxisLabel(getYAxisLabel())
+                        .chartXAxisLabel("Waketime")
+                        
+                        .chartXAxis {
+                            AxisMarks() { value in
+                                if let date = value.as(Date.self) {
+                                    AxisValueLabel {
+                                        VStack(alignment: .leading) {
+                                            Text(date.simplifyDateToTimeString())
+                                        }
                                     }
+                                    AxisGridLine()
+                                    AxisTick()
                                 }
-                                AxisGridLine()
-                                AxisTick()
                             }
                         }
+                        .frame(height:300)
                     }
-                    .frame(height:300)
+                    .padding()
                 }
-                .padding()
-            }
-            Section("Settings"){
-                
-                Toggle("Show optimal interval", isOn: $showRange)
-                if(showRange){
+                Section(header: WaketimeStatsHeader()){
+                    
+                    Toggle("Show optimal interval", isOn: $showRange)
                     HStack{
                         Text("Optimal interval:")
                         Spacer()
                         Text("\(interval.simplifyDateToTimeString()) - \(interval.addMinutesToDate(minutesToAdd: size).simplifyDateToTimeString())")
                     }
+                    HStack{
+                        Text("Confidence level")
+                        Spacer()
+                        Text(getConfidenceOfWaketimeInterval())
+                    }
+                    
                     HStack{
                         if(dependentVariable == .quality){
                             Text("Average quality of day: ")
@@ -98,10 +104,7 @@ struct WaketimeScatterPlot: View {
                         Text("You need more data!")
                     }
                 }
-            }
-            Section("Bar chart"){
-                WaketimeBarChart(experiment: experiment, dependentVariable: dependentVariable)
-            }
+            }.navigationTitle("Wake time Scatterplot")
         }
     }
     
@@ -130,7 +133,27 @@ struct WaketimeScatterPlot: View {
         }
         return "\(ones).\(hundredths)"
     }
+    func getConfidenceOfWaketimeInterval() -> String{
+        let pValue = experiment.getPValueOfWaketimeInterval(interval: interval, size: size, dependentVariable: dependentVariable)
+        let confidence = (1-pValue)*100
+        return "\(Int(confidence))%"
+    }
     
+}
+struct WaketimeStatsHeader: View{
+    var body: some View{
+        
+        NavigationLink(destination: WaketimeStatsExplanation()){
+            Image(systemName: "info.circle")
+        }.font(Font.caption)
+            .foregroundColor(.accentColor)
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .overlay(
+                Text("Stats"),
+                alignment: .leading
+            )
+        
+    }
 }
 
 struct WaketimeChart_Previews: PreviewProvider {

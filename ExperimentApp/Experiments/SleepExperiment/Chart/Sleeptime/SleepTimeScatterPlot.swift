@@ -14,71 +14,77 @@ struct SleepTimeScatterPlot: View {
     @State var size: Int = 30
     @State var showRange: Bool = false
     var body: some View {
-        Form{
-            Section("Chart"){
-                VStack(alignment:.leading){
-                    
-                    Text(SleepExperiment.getChartTitle2(independentVariable: .hoursSlept, dependentVariable: dependentVariable)).font(.headline)
-                    
-                    Chart(){
-                        if(showRange){
-                            RectangleMark(
-                                xStart: .value("Start of interval", convertDate(from: interval)),
-                                xEnd: .value("End of best interval", addMinutesToDate(date: interval, minutesToAdd: size)),
-                                yStart: nil,
-                                yEnd: nil
-                            ).foregroundStyle(.green)
-                        }
+        NavigationStack{
+            Form{
+                Section("Chart"){
+                    VStack(alignment:.leading){
                         
-                        ForEach(experiment.entries){ entry in
-                            if(experiment.dependentVariable == .quality || dependentVariable == .quality){
-                                PointMark(
-                                    x: .value("Time slept", formatTime(hour:entry.hoursSlept, minute: entry.minutesSlept)),
-                                    y: .value("Quality", entry.quality)
-                                ).foregroundStyle(.red)
+                        Text(SleepExperiment.getChartTitle2(independentVariable: .hoursSlept, dependentVariable: dependentVariable)).font(.headline)
+                        
+                        Chart(){
+                            if(showRange){
+                                RectangleMark(
+                                    xStart: .value("Start of interval", convertDate(from: interval)),
+                                    xEnd: .value("End of best interval", addMinutesToDate(date: interval, minutesToAdd: size)),
+                                    yStart: nil,
+                                    yEnd: nil
+                                ).foregroundStyle(.green)
                             }
-                            if(experiment.dependentVariable == .productivity || dependentVariable == .productivity){
-                                PointMark(
-                                    x: .value("Time slept", formatTime(hour:entry.hoursSlept, minute: entry.minutesSlept)),
-                                    y: .value("Productivity", entry.productivity)
-                                ).foregroundStyle(.blue)
+                            
+                            ForEach(experiment.entries){ entry in
+                                if(experiment.dependentVariable == .quality || dependentVariable == .quality){
+                                    PointMark(
+                                        x: .value("Time slept", formatTime(hour:entry.hoursSlept, minute: entry.minutesSlept)),
+                                        y: .value("Quality", entry.quality)
+                                    ).foregroundStyle(.red)
+                                }
+                                if(experiment.dependentVariable == .productivity || dependentVariable == .productivity){
+                                    PointMark(
+                                        x: .value("Time slept", formatTime(hour:entry.hoursSlept, minute: entry.minutesSlept)),
+                                        y: .value("Productivity", entry.productivity)
+                                    ).foregroundStyle(.blue)
+                                }
                             }
                         }
-                    }
-                    .chartXScale()
-                    .chartYAxisLabel(getYAxisLabel())
-                    .chartXAxisLabel("Hours slept")
-                    .frame(height: 300)
-                    .chartXAxis {
-                        AxisMarks(values: .stride(by: .minute, count: experiment.getAppropriateLengthOfChartAxisMarks())) { value in
-                            if let date = value.as(Date.self) {
-                                let hour = Calendar.current.component(.hour, from: date)
-                                AxisValueLabel {
-                                    VStack(alignment: .leading) {
-                                        Text(timeString(date: date))
+                        .chartXScale()
+                        .chartYAxisLabel(getYAxisLabel())
+                        .chartXAxisLabel("Hours slept")
+                        .frame(height: 300)
+                        .chartXAxis {
+                            AxisMarks(values: .stride(by: .minute, count: experiment.getAppropriateLengthOfChartAxisMarks())) { value in
+                                if let date = value.as(Date.self) {
+                                    let hour = Calendar.current.component(.hour, from: date)
+                                    AxisValueLabel {
+                                        VStack(alignment: .leading) {
+                                            Text(timeString(date: date))
+                                        }
+                                    }
+                                    if hour == 0 {
+                                        AxisGridLine(stroke: StrokeStyle(lineWidth: 0.5))
+                                        AxisTick(stroke: StrokeStyle(lineWidth: 0.5))
+                                    } else {
+                                        AxisGridLine()
+                                        AxisTick()
                                     }
                                 }
-                                if hour == 0 {
-                                    AxisGridLine(stroke: StrokeStyle(lineWidth: 0.5))
-                                    AxisTick(stroke: StrokeStyle(lineWidth: 0.5))
-                                } else {
-                                    AxisGridLine()
-                                    AxisTick()
-                                }
                             }
                         }
+                        
                     }
-                    
+                    .padding()
                 }
-                .padding()
-            }
-            Section("Settings"){
-                Toggle("Show optimal interval", isOn: $showRange)
-                if(showRange){
+                Section(header: SleepTimeStatsHeader()){
+                    Toggle("Show optimal interval", isOn: $showRange)
+                    
                     HStack{
                         Text("Optimal interval:")
                         Spacer()
                         Text("\(interval.simplifyDateToHMM()) - \(interval.addMinutesToDate(minutesToAdd: size).simplifyDateToHMM())")
+                    }
+                    HStack{
+                        Text("Confidence level")
+                        Spacer()
+                        Text(getConfidenceOfSleeptimeInterval())
                     }
                     HStack{
                         if(dependentVariable == .quality){
@@ -91,16 +97,17 @@ struct SleepTimeScatterPlot: View {
                     }
                     SliderView(name: "Interval size (minutes)",value: $size, lowValue: 15, highValue: 60)
                         .onChange(of: size){ _ in
-                       updateOptimalInterval()
-                    }.onAppear(){
-                        updateOptimalInterval()
-                    }.disabled(experiment.getSleepTimeRange()<30 || experiment.entries.count == 0)
+                            updateOptimalInterval()
+                        }.onAppear(){
+                            updateOptimalInterval()
+                        }.disabled(experiment.getSleepTimeRange()<30 || experiment.entries.count == 0)
                     if(experiment.getSleepTimeRange()<30){
                         Text("You need more data!")
                     }
+                    
                 }
-            }
-            
+                
+            }.navigationTitle("Sleep time Scatterplot")
         }
     }
     private func getYAxisLabel() -> String{
@@ -169,10 +176,30 @@ struct SleepTimeScatterPlot: View {
         }
         return "\(ones).\(hundredths)"
     }
+    func getConfidenceOfSleeptimeInterval() -> String{
+        let pValue = experiment.getPValueOfSleeptimeInterval(interval: interval, size: size, dependentVariable: dependentVariable)
+        let confidence = (1-pValue)*100
+        return "\(Int(confidence))%"
+    }
     
     
 }
 
+struct SleepTimeStatsHeader: View{
+    var body: some View{
+        
+        NavigationLink(destination: SleepTimeStatsExplanation()){
+            Image(systemName: "info.circle")
+        }.font(Font.caption)
+            .foregroundColor(.accentColor)
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .overlay(
+                Text("Stats"),
+                alignment: .leading
+            )
+        
+    }
+}
 struct SleepTimeScatterPlot_Previews: PreviewProvider {
     static var previews: some View {
         SleepTimeScatterPlot(experiment: SleepExperiment.hoursSleptSampleExperiment, dependentVariable: .quality)

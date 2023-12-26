@@ -21,7 +21,6 @@ struct BedtimeResults: View {
                 Section("Dependent variable data"){
                     DependentVariableData(experiment: experiment)
                 }
-                
             }
         }.navigationTitle(Text("Experiment results"))
         

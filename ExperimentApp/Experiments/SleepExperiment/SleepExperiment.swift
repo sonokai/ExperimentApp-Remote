@@ -243,6 +243,39 @@ extension SleepExperiment{
         return (Double)(sum)/(Double)(count)
     }
     
+    
+    //takes in an interval (Date) with size, a dependent variable of either
+    //quality of productivity to run the test on
+    //and returns the confidence
+    //that it is better than the rest of the data
+    //uses a two sample t test
+    func getPValueOfBedtimeInterval(interval: Date, size: Int, dependentVariable: DependentVariable) -> Double{
+        //an array of the specified dependent variable outside and inside
+        //our interval. aka our two samples we will be comparing
+        var outsideInterval: [Int] = []
+        var insideInterval: [Int] = []
+        
+        //sort entries into the correct array
+        let startingMinutes = SleepExperiment.getBedtimeMinutes(from: interval)
+        for entry in entries{
+            let minutes = SleepExperiment.getBedtimeMinutes(from: entry.bedtime)
+            if(minutes >= startingMinutes && minutes < startingMinutes + size){
+                if(dependentVariable == .quality){
+                    insideInterval.append(entry.quality)
+                } else {
+                    insideInterval.append(entry.productivity)
+                }
+            }else {
+                if(dependentVariable == .quality){
+                    outsideInterval.append(entry.quality)
+                } else {
+                    outsideInterval.append(entry.productivity)
+                }
+            }
+        }
+        return StatsTable.twoSampleTTest(array1: insideInterval, array2: outsideInterval)
+    }
+    
     //returns average bedtime in string format
     func getAverageBedtime() -> String{
         
@@ -601,6 +634,30 @@ extension SleepExperiment{
         return (hours, minutes)
     }
     
+    //see getpValueofbedtimeinterval and replace bed with wake
+    func getPValueOfWaketimeInterval(interval: Date, size: Int, dependentVariable: DependentVariable) -> Double{
+        var outsideInterval: [Int] = []
+        var insideInterval: [Int] = []
+        let startingMinutes = SleepExperiment.getWaketimeMinutes(from: interval)
+        for entry in entries{
+            let minutes = SleepExperiment.getWaketimeMinutes(from: entry.waketime)
+            if(minutes >= startingMinutes && minutes < startingMinutes + size){
+                if(dependentVariable == .quality){
+                    insideInterval.append(entry.quality)
+                } else {
+                    insideInterval.append(entry.productivity)
+                }
+            }else {
+                if(dependentVariable == .quality){
+                    outsideInterval.append(entry.quality)
+                } else {
+                    outsideInterval.append(entry.productivity)
+                }
+            }
+        }
+        return StatsTable.twoSampleTTest(array1: insideInterval, array2: outsideInterval)
+    }
+    
     
     
 }
@@ -815,6 +872,32 @@ extension SleepExperiment{
         //print("Average of normal: \(averageMinutesOfNormal), average of lastweek: \(averageMinutesOfLastWeek)")
         return averageMinutesOfLastWeek-averageMinutesOfNormal
     }
+    func getPValueOfSleeptimeInterval(interval: Date, size: Int, dependentVariable: DependentVariable) -> Double{
+        //an array of the specified dependent variable outside and inside
+        //our interval. aka our two samples we will be comparing
+        var outsideInterval: [Int] = []
+        var insideInterval: [Int] = []
+        
+        //sort entries into the correct array
+        let startingMinutes = SleepExperiment.getMinutes(from: interval)
+        for entry in entries{
+            let minutes = entry.hoursSlept * 60 + entry.minutesSlept
+            if(minutes >= startingMinutes && minutes < startingMinutes + size){
+                if(dependentVariable == .quality){
+                    insideInterval.append(entry.quality)
+                } else {
+                    insideInterval.append(entry.productivity)
+                }
+            }else {
+                if(dependentVariable == .quality){
+                    outsideInterval.append(entry.quality)
+                } else {
+                    outsideInterval.append(entry.productivity)
+                }
+            }
+        }
+        return StatsTable.twoSampleTTest(array1: insideInterval, array2: outsideInterval)
+    }
     
 }
 //independent variable stats
@@ -907,4 +990,5 @@ extension SleepExperiment{
         entries.append(SleepEntry(newEntry: newSleepEntry))
         newSleepEntry = NewSleepEntry()
     }
+    
 }
