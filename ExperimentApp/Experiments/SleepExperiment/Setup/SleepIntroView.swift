@@ -34,6 +34,7 @@ struct SleepIntroView: View {
                 Button("Create experiment"){
                     
                     sleepExperiments.append(SleepExperiment(goalEntries: goalEntries, dependentVariable: dependentVariable, independentVariable: independentVariable, entries: [], name: name))
+                    presentationMode.wrappedValue.dismiss()
                 }
             }
         }

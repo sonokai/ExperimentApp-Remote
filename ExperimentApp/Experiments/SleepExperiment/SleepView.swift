@@ -14,9 +14,9 @@ struct SleepView: View {
     @State var showCorrelationalData: Bool = true
     @State var showIndependentVariableData: Bool = true
     @State var showDependentVariableData: Bool = true
-    
-    
-    
+    @Environment(\.presentationMode) private var presentationMode
+    let finishAction: (SleepExperiment) -> Void
+    @State var isFinished: Bool = false
     var body: some View {
         NavigationStack{
             Form{
@@ -45,7 +45,6 @@ struct SleepView: View {
                             WaketimeCorrelationData(experiment: experiment)
                         }
                     }
-                    
                     Section(header: SleepExperimentHeader(title: "Wake time data", isOn: $showIndependentVariableData)){
                         if(showIndependentVariableData){
                             WaketimeData(experiment: experiment)
@@ -80,10 +79,23 @@ struct SleepView: View {
                         DependentVariableData(experiment: experiment)
                     }
                 }
-            }
+                
+                Section("Finish experiment"){
+                    Button("Finish experiment"){
+                        //show alert
+                        isFinished = true
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+            }.buttonStyle(.borderless)
             .navigationTitle(Text("\(experiment.name)"))
             .toolbar(content: toolbarContent)
+            
 
+        }.onDisappear(){
+            if(isFinished){
+                finishAction(experiment)
+            }
         }
     }
     
@@ -93,7 +105,7 @@ struct SleepView: View {
 struct SleepView3_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
-            SleepView(experiment: .constant(SleepExperiment.bedtimeSampleExperiment))
+            SleepView(experiment: .constant(SleepExperiment.bedtimeSampleExperiment), finishAction: { _ in})
         }
     }
 }

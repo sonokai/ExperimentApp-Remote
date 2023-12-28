@@ -34,11 +34,12 @@ struct SimpleBedtimeBarChart: View {
             .chartYAxis(.hidden)
             .frame(height: 120)
         }.onAppear(){
-            if let tempinterval =
-                experiment.getOptimalBedtimeInterval(size: 30, dependentVariable: dependentVariable){
-                interval = tempinterval
-            } else {
-                interval = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
+            switch(experiment.getOptimalBedtimeInterval(size: 30, dependentVariable: dependentVariable)){
+            case .success(let optimalInterval):
+                interval = optimalInterval
+            case .failure(let error):
+                print("Failure: \(error.description)")
+                interval = Date()
             }
             var intervalMinutes = SleepExperiment.getMinutes(from: interval)
             if(intervalMinutes<720){

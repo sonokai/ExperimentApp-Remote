@@ -23,12 +23,14 @@ struct WaketimeBarChart: View {
             }.frame(height: 300)
         }.onAppear(){
             var interval = Date()
-            if let tempinterval =
-                experiment.getOptimalWaketimeInterval(size: 30, dependentVariable: dependentVariable){
-                interval = tempinterval
-            } else {
-                interval = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
+            
+            switch(experiment.getOptimalWaketimeInterval(size: 30, dependentVariable: dependentVariable)){
+            case .success(let optimalInterval):
+                interval = optimalInterval
+            case .failure:
+                interval = Date()
             }
+            
             let intervalMinutes = SleepExperiment.getMinutes(from: interval)
             
             //1. use least waketime to find a smallest range that will generate a bar mark (in line with the optimal interval)

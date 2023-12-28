@@ -34,12 +34,12 @@ struct SimpleSleepTimeBarChart: View {
             .chartYAxis(.hidden)
             .frame(height: 120)
         }.onAppear(){
-            var interval = Date()
-            if let tempinterval =
-                experiment.getOptimalSleepTimeInterval(size: 30, dependentVariable: dependentVariable){
-                interval = tempinterval
-            } else {
-                interval = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
+            switch(experiment.getOptimalWaketimeInterval(size: 30, dependentVariable: dependentVariable)){
+            case .success(let optimalInterval):
+                interval = optimalInterval
+            case .failure(let error):
+                print("Failure: \(error.description)")
+                interval = Date()
             }
             let intervalMinutes = SleepExperiment.getMinutes(from: interval)
             

@@ -10,7 +10,17 @@ import SwiftUI
 struct ProfileView: View {
     @Binding var appData: AppData
     var body: some View {
-        Text("Profile here")
+        NavigationStack{
+            Form{
+                Section("Finished experiments"){
+                    ForEach(appData.finishedExperiments){ finished in
+                        NavigationLink(destination: FinishedExperimentView(finishedExperiment: finished)){
+                            FinishedExperimentRow(finishedExperiment: finished)
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

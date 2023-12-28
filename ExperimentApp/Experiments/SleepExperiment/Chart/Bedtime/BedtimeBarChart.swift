@@ -29,11 +29,11 @@ struct BedtimeBarChart: View {
             
         }.onAppear(){
             var interval = Date()
-            if let tempinterval =
-                experiment.getOptimalBedtimeInterval(size: 30, dependentVariable: dependentVariable){
-                interval = tempinterval
-            } else {
-                interval = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
+            switch(experiment.getOptimalBedtimeInterval(size: 30, dependentVariable: dependentVariable)){
+            case .success(let optimalInterval):
+                interval = optimalInterval
+            case .failure:
+                interval = Date()
             }
             var intervalMinutes = SleepExperiment.getMinutes(from: interval)
             if(intervalMinutes<720){
@@ -53,12 +53,10 @@ struct BedtimeBarChart: View {
             if(highestChartBarMark > intervalMinutes){
                 highestChartBarMark = highestChartBarMark - 30
             }
-            print("LowestchartBarMark = \(lowestChartBarMark), highestchartbarmark = \(highestChartBarMark), leastbedtimeminutes = \(experiment.getLeastBedtimeMinutes()), optimal interval = \(intervalMinutes)")
             //3. initiate the bedtimebarchartentries
             for chartBarMark in stride(from: lowestChartBarMark, through: highestChartBarMark, by: 30){
                 
                 chartEntries.append(BedtimeBarChartEntry(experiment: experiment, dependentVariable: dependentVariable, time: chartBarMark, isOptimal: chartBarMark == intervalMinutes))
-                 
             }
             
         }

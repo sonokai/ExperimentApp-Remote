@@ -25,6 +25,7 @@ extension Date{
         dateFormatter.dateFormat = "a"
         return dateFormatter.string(from: self)
     }
+    //makes pm precede am
     func formatDateForChart() -> Date{
         let day = self.getAMPM() == "PM" ? 0 : 1
         let calendar = Calendar.current
@@ -37,6 +38,25 @@ extension Date{
         
         // Create a new date with the specified day and the extracted time components
         if let newDate = calendar.date(bySettingHour: hour, minute: minute, second: second, of: Date(timeIntervalSince1970: TimeInterval(day * 24 * 3600))) {
+            return newDate
+        } else {
+            // Return the original date in case of any issues
+            print("Date formatting failed")
+            return self
+        }
+    }
+    //puts everything on the same date
+    func formatDateForNonBedtimeChart() -> Date{
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute, .second], from: self)
+        
+        // Extract the time components
+        let hour = components.hour ?? 0
+        let minute = components.minute ?? 0
+        let second = components.second ?? 0
+        
+        // Create a new date with the specified day and the extracted time components
+        if let newDate = calendar.date(bySettingHour: hour, minute: minute, second: second, of: Date(timeIntervalSince1970: 0)) {
             return newDate
         } else {
             // Return the original date in case of any issues

@@ -12,8 +12,12 @@ struct NewSleepEntryView: View {
     @State private var selectedDate = Date()
     @State var timeSelectorPopOver = false
     @State var sheet = false
+    let finishAction: (SleepExperiment) -> Void
+    
     var body: some View {
-        NavigationLink(destination: SleepView(experiment: $experiment)){
+        NavigationLink(destination: SleepView(experiment: $experiment, finishAction: { experiment in
+            finishAction(experiment)
+        })){
             ProgressView(value: Double(experiment.entries.count)/Double(experiment.goalEntries)) {
                 Text("Goal: \(experiment.goalEntries) entries")
                 if(experiment.entries.count < experiment.goalEntries){
@@ -87,7 +91,7 @@ struct NewSleepEntryView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
             Form{
-                NewSleepEntryView(experiment: .constant(SleepExperiment.waketimeSampleExperiment))
+                NewSleepEntryView(experiment: .constant(SleepExperiment.waketimeSampleExperiment), finishAction: {_ in})
             }.buttonStyle(.borderless)
         }
     }

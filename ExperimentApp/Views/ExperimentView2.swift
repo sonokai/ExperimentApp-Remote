@@ -13,6 +13,7 @@ struct ExperimentView: View {
     let saveAction : () -> Void
     
     @State var showSleepExperiment: Bool = true
+    @Binding var selectedTabIndex: Int
     var body: some View {
         NavigationStack{
             Form{
@@ -20,9 +21,15 @@ struct ExperimentView: View {
                 ForEach($appData.sleepExperiments) { $sleepExperiment in
                     Section(header: SleepExperimentHeader(title: sleepExperiment.name, isOn: $showSleepExperiment)){
                         if(showSleepExperiment){
-                            NewSleepEntryView(experiment: $sleepExperiment)
+                            NewSleepEntryView(experiment: $sleepExperiment, finishAction: { experiment in
+                                let closure = finishExperiment(experiment)
+                                closure()
+                            })
                         } else {
-                            NavigationLink(destination: SleepView(experiment: $sleepExperiment)){
+                            NavigationLink(destination: SleepView(experiment: $sleepExperiment, finishAction: { experiment in
+                                let closure = finishExperiment(experiment)
+                                closure()
+                            })){
                                 Text("Main page")
                             }
                         }
@@ -39,6 +46,7 @@ struct ExperimentView: View {
                         Text(moodExperiment.name)
                     }
                 }
+                
             }.buttonStyle(.borderless)
             .navigationTitle("My Experiments")
         }
@@ -46,12 +54,24 @@ struct ExperimentView: View {
         .onChange(of: scenePhase){ phase in
             if phase == .inactive {saveAction()}
         }
-
+    }
+    
+    func finishExperiment(_ experiment: SleepExperiment) -> () -> Void  {
+        return {
+            //inititate the finished experiment
+            let finishedExperiment = FinishedExperiment(name: experiment.name, startDate: experiment.startDate, endDate: Date(), insights: experiment.insights)
+            appData.finishedExperiments.append(finishedExperiment)
+            //remove the experiment from the active experiments list
+            appData.sleepExperiments.removeAll{ $0.id == experiment.id }
+            //change the tab view to finished experiments
+            selectedTabIndex = 2
+            //confetti?
+        }
     }
 }
 
 struct ExperimentView2_Previews: PreviewProvider {
     static var previews: some View {
-        ExperimentView(appData: .constant(AppData.sampleData), saveAction: {})
+        ExperimentView(appData: .constant(AppData.sampleData), saveAction: {}, selectedTabIndex: .constant(0))
     }
 }

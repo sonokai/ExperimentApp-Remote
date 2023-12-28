@@ -13,7 +13,7 @@ struct NewSleepEntryView2: View {
     var body: some View {
         NavigationStack{
             Form{
-                NewSleepEntryView(experiment: $experiment)
+                NewSleepEntryView(experiment: $experiment, finishAction: {_ in})
             }.toolbar{
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button("Save"){

@@ -13,10 +13,17 @@ struct SleepTimeScatterPlot: View {
     @State var interval: Date = Date()
     @State var size: Int = 30
     @State var showRange: Bool = false
+    
+    @State var startTime: Date = Date()
+    @State var endTime: Date = Date()
+    @State var entriesRequired: Int = 1
+    @State var showTheThingy: Bool = false
+    @State var optimalIntervalIsValid: Bool = true
+    @State var errorMessage = ""
     var body: some View {
         NavigationStack{
             Form{
-                Section("Chart"){
+                Section(header: ChartHeaderAndSettings(showTheThingy: $showTheThingy)){
                     VStack(alignment:.leading){
                         
                         Text(SleepExperiment.getChartTitle2(independentVariable: .hoursSlept, dependentVariable: dependentVariable)).font(.headline)
@@ -32,21 +39,30 @@ struct SleepTimeScatterPlot: View {
                             }
                             
                             ForEach(experiment.entries){ entry in
-                                if(experiment.dependentVariable == .quality || dependentVariable == .quality){
-                                    PointMark(
-                                        x: .value("Time slept", formatTime(hour:entry.hoursSlept, minute: entry.minutesSlept)),
-                                        y: .value("Quality", entry.quality)
-                                    ).foregroundStyle(.red)
-                                }
-                                if(experiment.dependentVariable == .productivity || dependentVariable == .productivity){
-                                    PointMark(
-                                        x: .value("Time slept", formatTime(hour:entry.hoursSlept, minute: entry.minutesSlept)),
-                                        y: .value("Productivity", entry.productivity)
-                                    ).foregroundStyle(.blue)
+                                if(formatTime(hour: entry.hoursSlept, minute: entry.minutesSlept) >= startTime && formatTime(hour: entry.hoursSlept, minute: entry.minutesSlept) <= endTime){
+                                    if(experiment.dependentVariable == .quality || dependentVariable == .quality){
+                                        PointMark(
+                                            x: .value("Time slept", formatTime(hour:entry.hoursSlept, minute: entry.minutesSlept)),
+                                            y: .value("Quality", entry.quality)
+                                        ).foregroundStyle(.red)
+                                    }
+                                    if(experiment.dependentVariable == .productivity || dependentVariable == .productivity){
+                                        PointMark(
+                                            x: .value("Time slept", formatTime(hour:entry.hoursSlept, minute: entry.minutesSlept)),
+                                            y: .value("Productivity", entry.productivity)
+                                        ).foregroundStyle(.blue)
+                                    }
                                 }
                             }
                         }
-                        .chartXScale()
+                        .onAppear(){
+                            let startMinutes = experiment.getLeastSleepTimeMinutes()
+                            let endMinutes = experiment.getMostSleepTimeMinutes()
+                            startTime = formatTime(hour: startMinutes/60, minute: startMinutes%60)
+                            endTime = formatTime(hour: endMinutes/60, minute: endMinutes%60)
+                            updateOptimalInterval()
+                        }
+                        .chartXScale(domain: [startTime, endTime])
                         .chartYAxisLabel(getYAxisLabel())
                         .chartXAxisLabel("Hours slept")
                         .frame(height: 300)
@@ -72,6 +88,10 @@ struct SleepTimeScatterPlot: View {
                         
                     }
                     .padding()
+                }.sheet(isPresented: $showTheThingy){
+                    SleepTimeSettings(startDate: $startTime, endDate: $endTime, entriesRequired: $entriesRequired).onDisappear(){
+                        updateOptimalInterval()
+                    }
                 }
                 Section(header: SleepTimeStatsHeader()){
                     Toggle("Show optimal interval", isOn: $showRange)
@@ -79,12 +99,20 @@ struct SleepTimeScatterPlot: View {
                     HStack{
                         Text("Optimal interval:")
                         Spacer()
-                        Text("\(interval.simplifyDateToHMM()) - \(interval.addMinutesToDate(minutesToAdd: size).simplifyDateToHMM())")
+                        if(optimalIntervalIsValid){
+                            Text("\(interval.simplifyDateToHMM()) - \(interval.addMinutesToDate(minutesToAdd: size).simplifyDateToHMM())")
+                        }else {
+                            Text("Error")
+                        }
                     }
                     HStack{
                         Text("Confidence level")
                         Spacer()
-                        Text(getConfidenceOfSleeptimeInterval())
+                        if(optimalIntervalIsValid){
+                            Text(getConfidenceOfSleeptimeInterval())
+                        }else {
+                            Text("-")
+                        }
                     }
                     HStack{
                         if(dependentVariable == .quality){
@@ -104,6 +132,9 @@ struct SleepTimeScatterPlot: View {
                     if(experiment.getSleepTimeRange()<30){
                         Text("You need more data!")
                     }
+                    if(!optimalIntervalIsValid){
+                        Text(errorMessage)
+                    }
                     
                 }
                 
@@ -118,13 +149,28 @@ struct SleepTimeScatterPlot: View {
         }
     }
     private func updateOptimalInterval(){
-        if let ainterval = experiment.getOptimalSleepTimeInterval(size: size, dependentVariable: dependentVariable){
-            interval = ainterval
-        } else {
-            interval = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
+        switch(experiment.getOptimalSleepTimeInterval(size: size, dependentVariable: dependentVariable, lowEndpoint: getMinutes(startTime), highEndpoint: getMinutes(endTime), requiredEntries: entriesRequired)){
+        case .success(let optimalInterval):
+            interval = optimalInterval
+            optimalIntervalIsValid = true
+            print("Sucess!")
+        case .failure(let error):
+            print("YOu suck")
+            errorMessage = error.description
+            optimalIntervalIsValid = false
         }
     }
-    
+    func getMinutes(_ date: Date)-> Int{
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute], from: date)
+        
+        if let hour = components.hour, let minute = components.minute {
+            return hour * 60 + minute
+        } else {
+            // Handle the case where date components cannot be obtained
+            return 0
+        }
+    }
     func convertDate(hour: Int, minute: Int) -> Date?{
         var dateComponents = DateComponents()
         dateComponents.hour = hour
@@ -145,6 +191,7 @@ struct SleepTimeScatterPlot: View {
             return Date()
         }
     }
+    
     func timeString(date: Date)->String{
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
@@ -158,7 +205,6 @@ struct SleepTimeScatterPlot: View {
         let dateString = dateformatter.string(from: date)
         let newDate = dateformatter.date(from: dateString)
         return newDate!
-        
     }
     func addMinutesToDate(date: Date, minutesToAdd: Int) -> Date {
         let calendar = Calendar.current
