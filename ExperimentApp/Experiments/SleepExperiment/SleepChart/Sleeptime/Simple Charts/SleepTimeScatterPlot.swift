@@ -134,9 +134,7 @@ struct SleepTimeScatterPlot: View {
                         }.onAppear(){
                             updateOptimalInterval()
                         }.disabled(experiment.getSleepTimeRange()<30 || experiment.entries.count == 0)
-                    if(experiment.getSleepTimeRange()<30){
-                        Text("You need more data!")
-                    }
+                    
                     if(!optimalIntervalIsValid){
                         Text(errorMessage)
                     }

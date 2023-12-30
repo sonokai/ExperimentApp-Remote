@@ -62,7 +62,7 @@ struct SleepEditView: View {
                 Button("Done") {
                     //update the entry binding when and if the done button is pressed
                     entry.date = selectedDate
-                    entry.bedtime = bedtime
+                    entry.bedtime =  bedtime
                     entry.waketime = waketime
                     entry.timeSlept = timeSlept
                     entry.quality = quality
@@ -78,12 +78,15 @@ struct SleepEditView: View {
         
     }
     func isInvalidEntry()->Bool{
+        var count = 0
         for entry in experiment.entries{
             let date = entry.date
             if Calendar.current.isDate(date, equalTo: selectedDate, toGranularity: .day) {
-                print("Selected day is \(selectedDate), but there is an entry with date \(date)")
-                return true
+                count = count + 1
             }
+        }
+        if(count > 1){
+            return true
         }
         return false
     }

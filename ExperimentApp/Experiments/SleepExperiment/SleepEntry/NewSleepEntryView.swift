@@ -54,7 +54,7 @@ struct NewSleepEntryView: View {
             WaketimePicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
         case .hoursSlept:
             TimeSleptPicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
-        }//end of switch
+        }
         
         switch(experiment.dependentVariable){
         case .quality:
@@ -65,6 +65,7 @@ struct NewSleepEntryView: View {
             SleepDependentVarPicker(label: "Quality of day", optional: $experiment.newSleepEntry.quality)
             SleepDependentVarPicker(label: "Productivity", optional: $experiment.newSleepEntry.productivity, image: "gearshape")
         }
+        
         Button("Done"){
             if(isInvalidEntry()){
                 replaceAlert = true
@@ -75,7 +76,9 @@ struct NewSleepEntryView: View {
             Button("Continue", role: .destructive){
                 experiment.entries.removeAll{ entry in  Calendar.current.isDate(entry.date, equalTo: experiment.newSleepEntry.date, toGranularity: .day)
                 }
+                
                 experiment.initiateSleepEntry()
+                experiment.sortEntriesByDate()
             }
         }).disabled(!experiment.newSleepEntry.isReady(experiment: experiment))
         

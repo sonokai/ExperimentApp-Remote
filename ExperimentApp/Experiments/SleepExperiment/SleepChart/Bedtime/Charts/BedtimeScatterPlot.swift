@@ -1,5 +1,5 @@
 //
-//  WaketimeChart.swift
+//  BedtimeChart.swift
 //  ExperimentApp
 //
 //  Created by Bell Chen on 9/16/23.
@@ -8,7 +8,8 @@
 import SwiftUI
 import Charts
 
-struct WaketimeScatterPlot: View {
+//will crash if you put in an empty array of sleep entries
+struct BedtimeScatterPlot: View {
     var experiment: SleepExperiment
     var dependentVariable: SleepExperiment.DependentVariable
     @State var interval: Date = Date()
@@ -27,29 +28,29 @@ struct WaketimeScatterPlot: View {
                 Section(header: ChartHeaderAndSettings(showTheThingy: $showTheThingy)){
                     VStack(alignment:.leading){
                         
-                        Text(SleepExperiment.getChartTitle2(independentVariable: .waketime, dependentVariable: dependentVariable)).font(.headline)
+                        Text(SleepExperiment.getChartTitle2(independentVariable: .bedtime, dependentVariable: dependentVariable)).font(.headline)
                         
                         Chart(){
                             if(showRange && optimalIntervalIsValid){
                                 RectangleMark(
-                                    xStart: .value("Start of interval", interval.formatDateForNonBedtimeChart()),
-                                    xEnd: .value("End of best interval", interval.addMinutesToDate(minutesToAdd: size).formatDateForNonBedtimeChart()),
+                                    xStart: .value("Start of interval", interval.formatDateForChart()),
+                                    xEnd: .value("End of best interval", interval.addMinutesToDate(minutesToAdd: size)),
                                     yStart: nil,
                                     yEnd: nil
                                 ).foregroundStyle(.green)
                             }
                             
                             ForEach(experiment.entries){ entry in
-                                if(entry.waketime.formatDateForNonBedtimeChart() >=  startTime && entry.waketime.formatDateForNonBedtimeChart() <= endTime){
+                                if(entry.bedtime.formatDateForChart() >=  startTime && entry.bedtime.formatDateForChart() <= endTime){
                                     if(experiment.dependentVariable == .quality || dependentVariable == .quality){
                                         PointMark(
-                                            x: .value("Waketime", entry.waketime.formatDateForNonBedtimeChart()),
+                                            x: .value("Bedtime", entry.bedtime.formatDateForChart()),
                                             y: .value("Quality", entry.quality)
                                         ).foregroundStyle(.red)
                                     }
                                     if(experiment.dependentVariable == .productivity || dependentVariable == .productivity){
                                         PointMark(
-                                            x: .value("Waketime", entry.waketime.formatDateForNonBedtimeChart()),
+                                            x: .value("Bedtime", entry.bedtime.formatDateForChart()),
                                             y: .value("Productivity", entry.productivity)
                                         ).foregroundStyle(.blue)
                                     }
@@ -58,21 +59,20 @@ struct WaketimeScatterPlot: View {
                             }
                         }
                         .onAppear(){
-                            let startMinutes = experiment.getLeastWaketimeMinutes()
-                            let endMinutes = experiment.getMostWaketimeMinutes()
+                            let startMinutes = experiment.getLeastBedtimeMinutes()
+                            let endMinutes = experiment.getMostBedtimeMinutes()
                             if let t1 = convertMinutesToDate(startMinutes){
-                                startTime = t1.formatDateForNonBedtimeChart()
+                                startTime = t1.formatDateForChart()
                             }
                             if let t2 = convertMinutesToDate(endMinutes){
-                                endTime = t2.formatDateForNonBedtimeChart()
+                                endTime = t2.formatDateForChart()
                             }
                             updateInterval()
                         }
                         
                         .chartXScale(domain: [startTime,endTime])
                         .chartYAxisLabel(getYAxisLabel())
-                        .chartXAxisLabel("Waketime")
-                        
+                        .chartXAxisLabel("Bedtime")
                         .chartXAxis {
                             AxisMarks() { value in
                                 if let date = value.as(Date.self) {
@@ -90,57 +90,66 @@ struct WaketimeScatterPlot: View {
                     }
                     .padding()
                 }.sheet(isPresented: $showTheThingy){
-                    WaketimeSettings(startDate: $startTime, endDate: $endTime, entriesRequired: $entriesRequired).onDisappear(){
+                    BedtimeSettings(startDate: $startTime, endDate: $endTime, entriesRequired: $entriesRequired).onDisappear(){
                         updateInterval()
                     }
                 }
-                Section(header: WaketimeStatsHeader()){
+                Section(header: BedtimeStatsHeader()){
                     
                     Toggle("Show optimal interval", isOn: $showRange)
                     HStack{
-                        Text("Optimal interval:")
+                        Text("Optimal interval")
                         Spacer()
                         if(optimalIntervalIsValid){
                             Text("\(interval.simplifyDateToTimeString()) - \(interval.addMinutesToDate(minutesToAdd: size).simplifyDateToTimeString())")
                         } else {
-                            Text("Error")
+                            Text("-")
                         }
+                        
                     }
                     HStack{
                         Text("Confidence level")
                         Spacer()
                         if(optimalIntervalIsValid){
-                            Text(getConfidenceOfWaketimeInterval())
+                            Text(getConfidenceOfBedtimeInterval())
                         }else {
                             Text("-")
                         }
                     }
-                    
                     HStack{
                         if(dependentVariable == .quality){
-                            Text("Average quality of day: ")
+                            Text("Average quality of day ")
                         } else{
-                            Text("Average productivity: ")
+                            Text("Average productivity ")
                         }
                         Spacer()
-                        Text("\(calculateAverage())")
+                        if(optimalIntervalIsValid){
+                            Text("\(calculateAverage())")
+                        }else {
+                            Text("-")
+                        }
+                        
                     }
                     
-                    SliderView(name: "Interval size (minutes)",value: $size, lowValue: 15, highValue: 60 > experiment.getWaketimeRange() ?  (Double)(experiment.getWaketimeRange()) : 60)
+                    SliderView(name: "Interval size (minutes)",value: $size, lowValue: 15, highValue: 60 > experiment.getBedtimeRange() ?  (Double)(experiment.getBedtimeRange()) : 60)
                         .onChange(of: size){ _ in
                             updateInterval()
-                        }.onAppear(){
-                            updateInterval()
-                        }.disabled(experiment.getWaketimeRange()<30 || experiment.entries.count == 0)
-                    if(experiment.getWaketimeRange()<30){
-                        Text("You need more data!")
-                    }
+                        }.disabled(experiment.getBedtimeRange()<30 || experiment.entries.count == 0)
+                    
+                    
                     if(!optimalIntervalIsValid){
                         Text(errorMessage)
                     }
-                }
-            }.navigationTitle("Wake time Scatterplot")
+                } //end of stats
+                
+            }.navigationTitle("Bedtime Scatterplot")
         }
+        
+    }
+    func getConfidenceOfBedtimeInterval() -> String{
+        let pValue = experiment.getPValueOfBedtimeInterval(interval: interval, size: size, dependentVariable: dependentVariable)
+        let confidence = (1-pValue)*100
+        return "\(Int(confidence))%"
     }
     
     private func getYAxisLabel() -> String{
@@ -151,18 +160,21 @@ struct WaketimeScatterPlot: View {
         }
     }
     private func updateInterval(){
-        switch(
-            experiment.getOptimalWaketimeInterval(size: size, dependentVariable: dependentVariable, lowEndpoint: startTime, highEndpoint: endTime, requiredEntries: entriesRequired)){
+        
+        switch(experiment.getOptimalBedtimeInterval(size: size, dependentVariable: dependentVariable, lowEndpoint: startTime, highEndpoint: endTime, requiredEntries: entriesRequired)){
         case .success(let optimalInterval):
             interval = optimalInterval
             optimalIntervalIsValid = true
+            print("Sucess!")
         case .failure(let error):
+            print("YOu suck")
             errorMessage = error.description
             optimalIntervalIsValid = false
         }
     }
+    //calculates average of dependent variable from the interval
     private func calculateAverage()-> String{
-        let average = experiment.averageOfWaketimeInterval(at: SleepExperiment.getWaketimeMinutes(from: interval), for: size, dependentVariable: dependentVariable)
+        let average = experiment.averageOfBedtimeInterval(at: SleepExperiment.getBedtimeMinutes(from: interval), for: size, dependentVariable: dependentVariable)
         var hundredths = Int(average*100)
         let ones = hundredths / 100
         hundredths = hundredths % 100
@@ -171,20 +183,22 @@ struct WaketimeScatterPlot: View {
         }
         return "\(ones).\(hundredths)"
     }
-    func getConfidenceOfWaketimeInterval() -> String{
-        let pValue = experiment.getPValueOfWaketimeInterval(interval: interval, size: size, dependentVariable: dependentVariable)
-        let confidence = (1-pValue)*100
-        return "\(Int(confidence))%"
-    }
     func convertMinutesToDate(_ minutes: Int) -> Date?{
-        let minutes = minutes
-        return Calendar.current.date(bySettingHour: minutes/60, minute: minutes % 60, second: 0, of: Date())
+        var minutes = minutes
+        var day = 1
+        if(minutes > 1440){
+            minutes = minutes - 1440
+            day = 2
+        }
+        return Calendar.current.date(bySettingHour: minutes/60, minute: minutes % 60, second: 0, of: Date(timeIntervalSinceReferenceDate: TimeInterval(day * 24 * 3600)))
     }
 }
-struct WaketimeStatsHeader: View{
+
+
+struct BedtimeStatsHeader: View{
     var body: some View{
         
-        NavigationLink(destination: WaketimeStatsExplanation()){
+        NavigationLink(destination: BedtimeStatsExplanation()){
             Image(systemName: "info.circle")
         }.font(Font.caption)
             .foregroundColor(.accentColor)
@@ -197,9 +211,10 @@ struct WaketimeStatsHeader: View{
     }
 }
 
-struct WaketimeChart_Previews: PreviewProvider {
+struct BedtimeChart_Previews: PreviewProvider {
     static let testInterval: Date = Calendar.current.date(bySettingHour: 10, minute: 50, second: 0, of: Date())!
     static var previews: some View {
-        WaketimeScatterPlot(experiment: SleepExperiment.waketimeSampleExperiment, dependentVariable: .productivity)
+        
+        BedtimeScatterPlot(experiment: SleepExperiment.highXRangeBedtimeExperiment, dependentVariable: .quality ,interval: testInterval, size: 30)
     }
 }

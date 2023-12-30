@@ -40,10 +40,12 @@ struct SleepEntry: Identifiable, Codable {
         self.hoursSlept = hoursSlept
         self.minutesSlept = minutesSlept
     }
+    
     init(newEntry: NewSleepEntry){
         self.id = UUID()
         self.date = newEntry.date
-        
+        //we will use a work around to make sure we can plot the same bedtime many times, by using the seconds to make unique bedtimes
+        //note that if we don't the thing will crash
         if let bedtime = newEntry.bedtime{
             self.bedtime = bedtime
         } else{
@@ -55,7 +57,11 @@ struct SleepEntry: Identifiable, Codable {
         } else {
             waketime = Date()
         }
-        
+        if let bedtime = newEntry.bedtime, let waketime = newEntry.waketime{
+            let (hour, minute) = SleepEntry.returnTimeSlept(sleep: bedtime, wake: waketime)
+            self.hoursSlept = hour
+            self.minutesSlept = minute
+        }
         if let quality = newEntry.quality{
             self.quality = quality
         } else {
@@ -155,6 +161,7 @@ struct SleepEntry: Identifiable, Codable {
         dateFormatter.dateFormat = "a"
         return dateFormatter.string(from: date1) == dateFormatter.string(from: date2)
     }
+    
 }
 
 

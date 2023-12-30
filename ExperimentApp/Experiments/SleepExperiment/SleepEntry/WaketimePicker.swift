@@ -16,7 +16,7 @@ struct WaketimePicker: View {
     var body: some View {
         HStack{
             Image(systemName: "bed.double")
-            if let initialValue = experiment.newSleepEntry.bedtime {
+            if let initialValue = experiment.newSleepEntry.waketime {
                 DatePicker("Wake time", selection: $waketime, displayedComponents: [.hourAndMinute])
                     .onChange(of: waketime, perform: { newValue in
                         experiment.newSleepEntry.waketime = newValue
@@ -30,6 +30,7 @@ struct WaketimePicker: View {
                     Button(action: {
                         withAnimation{
                             timeSelectorPopOver.toggle()
+                            interacted = true
                         }
                     }, label: {
                         ZStack{

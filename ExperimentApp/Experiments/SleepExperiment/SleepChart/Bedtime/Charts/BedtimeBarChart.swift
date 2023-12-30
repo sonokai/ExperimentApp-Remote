@@ -35,7 +35,7 @@ struct BedtimeBarChart: View {
             case .failure:
                 interval = Date()
             }
-            var intervalMinutes = SleepExperiment.getBedtimeMinutes(from: interval)
+            let intervalMinutes = SleepExperiment.getBedtimeMinutes(from: interval)
             
             //1. use least bedtime to find a smallest range that will generate a bar mark (in line with the optimal interval)
             var lowestChartBarMark = intervalMinutes

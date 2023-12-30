@@ -137,6 +137,9 @@ struct WakeTimeHistory: View {
         if(daysDifference >= 21){
             return 7
         }
+        if(daysDifference >= 12){
+            return 5
+        }
         if(daysDifference >= 9){
             return 3
         }
@@ -147,6 +150,7 @@ struct WakeTimeHistory: View {
     }
     func getXDomain() -> ClosedRange<Date>{
         let (startDate, endDate) = experiment.getDateRange()
+        print("Start date: \(startDate), end date: \(endDate)")
         let difference = endDate.timeIntervalSince(startDate) //assumes
         let daysDifference = difference / 86_400
         let tickSize = getXAxisTickSize()

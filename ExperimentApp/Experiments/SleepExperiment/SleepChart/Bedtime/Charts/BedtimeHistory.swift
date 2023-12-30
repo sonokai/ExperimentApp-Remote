@@ -1,37 +1,34 @@
 //
-//  SleepTimeHistory.swift
+//  BedtimeHistory.swift
 //  ExperimentApp
 //
-//  Created by Bell Chen on 12/16/23.
+//  Created by Bell Chen on 11/14/23.
 //
 
 import SwiftUI
 import Charts
-struct SleepTimeHistory: View {
+//this crashes if you get two of the same date
+struct BedtimeHistory: View {
     var experiment: SleepExperiment
+    @State var showFullRange = false
     var body: some View {
         Form{
             Section("Chart"){
                 VStack(alignment: .leading){
-                    Text("Time slept")
+                    Text("Bedtimes")
                     Chart(experiment.entries){ entry in
                         PointMark(
                             x: .value("Date", entry.date.convertToMMDDYYYY(), unit: .day),
-                            y: .value("Time slept", getSleepTimeSeconds(from: entry))
+                            y: .value("Bedtime", SleepExperiment.getBedtimeSeconds(from: entry.bedtime))
                         ).foregroundStyle(.red)
                     }.frame(height: 300)
                         .chartYAxis {
                             AxisMarks(values: .stride(by: getYAxisTickSize())) { value in
                                 AxisGridLine()
+                                
                                 if let value = value.as(Double.self) {
                                     AxisValueLabel {
-                                        let minutes = Int(value)%3600/60
-                                        if(minutes == 0){
-                                            Text("\(Int(value)/3600):\(minutes)0")
-                                        } else {
-                                            Text("\(Int(value)/3600):\(minutes)")
-                                        }
-                                        
+                                        Text(simplifySecondsToTimeString(value))
                                     }
                                 }
                             }
@@ -50,14 +47,13 @@ struct SleepTimeHistory: View {
                             }
                         }
                         .chartXScale(domain: getXDomain())
-                        
                 }
             }
             Section("Stats"){
                 HStack{
-                    Text("Average time slept:")
+                    Text("Average bedtime: ")
                     Spacer()
-                    Text("\(experiment.getAverageSleepTime())")
+                    Text("\(experiment.getAverageBedtime())")
                 }
                 HStack{
                     Text("Standard deviation:")
@@ -65,31 +61,33 @@ struct SleepTimeHistory: View {
                     Text(formatStandardDeviation())
                 }
                 HStack{
-                    Text("Median time slept:")
+                    Text("Median bedtime: ")
                     Spacer()
-                    Text("\(experiment.getMedianSleepTime())")
+                    Text("\(experiment.getMedianBedtime())")
                 }
                 
 
             }
             
-        }.navigationTitle(Text("Hours slept data"))
+        }
     }
+    
     func formatStandardDeviation() -> String{
-        let (hour, minute) = experiment.getSleepTimeStandardDeviation()
+        let (hour, minute) = experiment.getBedtimeStandardDeviation()
         if(hour == 0){
             return "\(minute) minutes"
         }
         return "\(hour) hours, \(minute) minutes"
     }
-    func getSleepTimeSeconds(from entry: SleepEntry)-> Int{
-        return entry.hoursSlept*3600 + entry.minutesSlept*60
-    }
-    func getSleepTimeRange() -> (Double, Double){
+    func getBedtimeRange() -> (Double, Double){
         var least = (Double)(0)
         var most = (Double)(0)
         for entry in experiment.entries{
-            let seconds = Double(getSleepTimeSeconds(from: entry))
+            
+            var seconds = entry.bedtime.timeIntervalSince1970.truncatingRemainder(dividingBy: 86400)
+            if(seconds<43_200){
+                seconds += 86_400
+            }
             
             if(seconds < least || least == 0){
                 least = seconds
@@ -98,12 +96,11 @@ struct SleepTimeHistory: View {
                 most = seconds
             }
         }
-        
         return (least, most)
     }
     
     func getYDomain() -> ClosedRange<Double>{
-        let (least, most) = getSleepTimeRange()
+        let (least, most) = getBedtimeRange()
         let tickSize = getYAxisTickSize()
         let startTicks = Double(floor(least/tickSize))
         let endTicks = Double(floor(most/tickSize))
@@ -112,7 +109,7 @@ struct SleepTimeHistory: View {
     //returns seconds to stride the y axis by
     func getYAxisTickSize() -> Double{
         //want: 4 marks per chart at least
-        let (least, most) = getSleepTimeRange()
+        let (least, most) = getBedtimeRange()
         let startHour = Double(floor(least/3600))
         let endHour = Double(floor(most/3600))
         let difference = endHour - startHour + 2
@@ -144,6 +141,9 @@ struct SleepTimeHistory: View {
         }
         if(daysDifference >= 21){
             return 7
+        }
+        if(daysDifference >= 12){
+            return 5
         }
         if(daysDifference >= 9){
             return 3
@@ -177,13 +177,12 @@ struct SleepTimeHistory: View {
                 return false
             }
         }
-        
         return true
     }
 }
 
-struct SleepTimeHistory_Previews: PreviewProvider {
+struct BedtimeHistory_Previews: PreviewProvider {
     static var previews: some View {
-        SleepTimeHistory(experiment: SleepExperiment.hoursSleptSampleExperiment)
+        BedtimeHistory(experiment: SleepExperiment.bedtimeSampleExperiment)
     }
 }

@@ -29,6 +29,7 @@ struct BedtimePicker: View {
                     Button(action: {
                         withAnimation{
                             timeSelectorPopOver.toggle()
+                            interacted = true
                         }
                     }, label: {
                         ZStack{

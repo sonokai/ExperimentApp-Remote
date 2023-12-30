@@ -85,7 +85,7 @@ struct BedtimeInsights: View{
         }
         ForEach(bedtimeInsights) { insight in
             HStack{
-                let insightString = "When I went to bed from \(insight.time), my average \(dependentVariable.nameInSentence) was \(insight.value.formatted()) (\(experiment.compareAverage(insight.value, dependentVariable)))."
+                let insightString = "When I went to bed from \(insight.time), my average \(dependentVariable.nameInSentence) was \(BedtimeInsights.formatDouble(insight.value)) (\(experiment.compareAverage(insight.value, dependentVariable)))."
                 Text(insightString)
                 Spacer()
                 Button("Add"){
@@ -101,6 +101,13 @@ struct BedtimeInsights: View{
                 bedtimeInsights.append(BedtimeBarChartEntry(experiment: experiment, dependentVariable: dependentVariable, time: minutes))
             }
         }
+    }
+    static func formatDouble(_ double: Double)-> String{
+        let string = double.formatted()
+        if(string.count > 5){
+            return String(string.prefix(5))
+        }
+        return string
     }
 }
 struct WaketimeInsights: View{
@@ -131,7 +138,7 @@ struct WaketimeInsights: View{
         }
         ForEach(waketimeInsights) { insight in
             HStack{
-                let insightString = "When I woke up from \(insight.time), my average \(dependentVariable.nameInSentence) was \(insight.value.formatted()) (\(experiment.compareAverage(insight.value, dependentVariable)))."
+                let insightString = "When I woke up from \(insight.time), my average \(dependentVariable.nameInSentence) was \(BedtimeInsights.formatDouble(insight.value)) (\(experiment.compareAverage(insight.value, dependentVariable)))."
                 Text(insightString)
                 Spacer()
                 Button("Add"){
@@ -178,7 +185,7 @@ struct SleepTimeInsights: View{
         }
         ForEach(sleepTimeInsights) { insight in
             HStack{
-                let insightString = "When I slept for a total of \(insight.time), my average \(dependentVariable.nameInSentence) was \(insight.value.formatted()) (\(experiment.compareAverage(insight.value, dependentVariable)))."
+                let insightString = "When I slept for a total of \(insight.time), my average \(dependentVariable.nameInSentence) was \(BedtimeInsights.formatDouble(insight.value)) (\(experiment.compareAverage(insight.value, dependentVariable)))."
                 Text(insightString)
                 Spacer()
                 Button("Add"){
