@@ -13,13 +13,16 @@ struct SleepHistory: View {
         NavigationStack{
             Form{
                 Section(header: Text("Entries")) {
-                    ForEach($experiment.entries) { entryBinding in
+                    ForEach($experiment.entries.reversed()) { entryBinding in
                         NavigationLink(destination: SleepEditView(entry:entryBinding, experiment: $experiment).navigationTitle("Edit entry")) {
                             SimplifiedSleepView(sleepExperiment: experiment, entry: entryBinding)
                         }
                     }
-                    .onDelete { indices in
-                        deleteEntries(at: indices)
+                    .onDelete { indexSet in
+                        let originalIndices = indexSet.map { index in
+                            experiment.entries.count - 1 - index
+                        }
+                        deleteEntries(at: IndexSet(originalIndices))
                     }
                 }
             }

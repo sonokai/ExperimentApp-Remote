@@ -11,7 +11,7 @@ struct SleepHistoryButton: View {
     @Binding var experiment: SleepExperiment
     var body: some View {
         NavigationLink(destination: SleepHistory(experiment: $experiment)){
-            Image(systemName: "slider.horizontal.3")
+            Image(systemName: "book")
         }
     }
 }

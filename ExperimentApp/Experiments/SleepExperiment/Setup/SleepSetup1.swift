@@ -28,28 +28,34 @@ struct SleepSetup1: View {
                     
                     HStack{
                         
-                        VStack{
+                        VStack(){
                             Text(variable.name).frame(maxWidth: .infinity, alignment: .leading)
                             //enter a description for each of the choices
-                            switch(variable.name){
-                            case "Bedtime":
-                                Text("Enter the time you went to bed the night before")
+                            switch(variable){
+                            case .bedtime:
+                                Text("- For people with consistent wake times but inconsistent bedtimes")
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(.caption)
-                            case "Waketime":
-                                Text("Enter the time you woke up in the morning")
+                            case .waketime:
+                                Text("- For people with consistent bedtimes but inconsistent wake times")
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(.caption)
-                            case "Both":
-                                Text("Enter both bedtime and wake time, and the app calculates time slept")
+                            case .both:
+                                Text("- The app calculates time slept")
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(.caption)
-                            case "Hours Slept":
-                                Text("Give a rough estimate of time slept the night before")
+                                
+                                Text("- Generates the most insights")
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(.caption)
-                            default:
-                                Text("default")
+                            case .hoursSlept:
+                                Text("- Give a rough estimate of time slept")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .font(.caption)
+                                Text("- Least effort required")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .font(.caption)
+
                             }
                         }
                         Spacer()
@@ -58,7 +64,6 @@ struct SleepSetup1: View {
                             Button("Choose"){
                                 independentVariable = variable
                                 hasSelected = true
-                                print(variable.name)
                             }
                         } else {
                             Text("Selected")

@@ -39,12 +39,12 @@ struct BedtimePicker: View {
                                 Text(getTime()).foregroundColor(timeSelectorPopOver ? .blue : .black)
                                     .foregroundColor(timeSelectorPopOver ? .blue : .black)
                             }else {
-                                Text("-:--")
+                                Text("   ")
                                     .foregroundColor(timeSelectorPopOver ? .blue : .black)
                             }
                         }
                     }).popover(isPresented: $timeSelectorPopOver, attachmentAnchor: .point(.leading), arrowEdge: .trailing, content: {
-                        CustomDatePicker(date: $bedtime)
+                        CustomDatePicker(date: $bedtime, timeSelectorPopOver: $timeSelectorPopOver)
                             .presentationCompactAdaptation(.popover)
                             .padding()
                     })

@@ -14,12 +14,6 @@ struct NewSleepEntryView2: View {
         NavigationStack{
             Form{
                 NewSleepEntryView(experiment: $experiment, finishAction: {_ in})
-            }.toolbar{
-                ToolbarItem(placement: .navigationBarTrailing){
-                    Button("Save"){
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                }
             }.navigationTitle("New Sleep Entry")
         }
     }

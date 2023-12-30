@@ -133,6 +133,12 @@ struct BedtimeHistory: View {
         let (startDate, endDate) = experiment.getDateRange()
         let difference = endDate.timeIntervalSince(startDate)
         let daysDifference = difference / 86_400
+        if(daysDifference >= 80){
+            return 28
+        }
+        if(daysDifference >= 40){
+            return 14
+        }
         if(daysDifference >= 21){
             return 7
         }

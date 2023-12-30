@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CustomDatePicker: View {
     @Binding var date: Date
+    @Binding var timeSelectorPopOver: Bool
     @State var hours: Int = 0
     @State var hoursSelection: Int = 120
     @State var minutesSelection: Int = 600
@@ -23,7 +24,10 @@ struct CustomDatePicker: View {
         VStack{
             Button("Now (\(getFormattedTimeNow()))"){
                 setTimeToNow()
-                presentationMode.wrappedValue.dismiss()
+                updateDate()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        presentationMode.wrappedValue.dismiss()
+                }
             }
             HStack(spacing: 0){
                 Picker("H", selection: $hoursSelection) {
@@ -33,16 +37,23 @@ struct CustomDatePicker: View {
                 }.pickerStyle(.wheel).frame(minWidth: 0)
                     .compositingGroup()
                     .clipped()
+                    
                 
                 Picker("M", selection: $minutesSelection) {
                     
                     ForEach(0...1200, id: \.self) { minute in
-                        Text("\(minute%60)")
+                        if(minute%60<10){
+                            Text("0\(minute%60)")
+                        } else {
+                            Text("\(minute%60)")
+                        }
+                        
                     }
                 }.pickerStyle(.wheel)
                     .frame(minWidth: 0)
                     .compositingGroup()
                     .clipped()
+                    
                 Picker("AMPM", selection: $ampm){
                     Text("AM").tag(AMPM.AM)
                     Text("PM").tag(AMPM.PM)
@@ -55,6 +66,9 @@ struct CustomDatePicker: View {
                 hoursSelection = getHour()+120
                 minutesSelection = getMinute()+600
                 ampm = getAMPM()
+            }.onDisappear(){
+                updateDate()
+                timeSelectorPopOver = false
             }
         }.frame(width: 150, height: 200)
     }
@@ -89,13 +103,27 @@ struct CustomDatePicker: View {
         minutesSelection = minuteComponent+600
         ampm = hourComponent<12 ? .AM : .PM
     }
+    func updateDate(){
+        hours = hoursSelection % 12 + (ampm == .PM && (hoursSelection%12) != 12 ? 12 : 0)
+        minutes = minutesSelection % 60
+        
+        var dateComponents = DateComponents()
+        dateComponents.hour = hours
+        dateComponents.minute = minutes
+        dateComponents.second = 0
+        
+        let calendar = Calendar.current
+        if let newdate = calendar.date(from: dateComponents){
+            date = newdate
+        }
+    }
 }
 
 struct CustomDatePicker_Previews: PreviewProvider {
     static var previews: some View {
         ZStack{
             
-            CustomDatePicker(date: .constant(Date()))
+            CustomDatePicker(date: .constant(Date()), timeSelectorPopOver: .constant(false))
         }
     }
 }

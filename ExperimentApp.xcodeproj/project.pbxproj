@@ -126,7 +126,6 @@
 		6FB517ED2B3985870054A44C /* NewSleepInsightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517EC2B3985870054A44C /* NewSleepInsightView.swift */; };
 		6FB517EF2B3989840054A44C /* SleepInsightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517EE2B3989840054A44C /* SleepInsightView.swift */; };
 		6FB517F72B398D660054A44C /* SleepEntryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB517F62B398D660054A44C /* SleepEntryButton.swift */; };
-		6FF397972ADAF7F70096B143 /* BothtimeChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF397962ADAF7F70096B143 /* BothtimeChart.swift */; };
 		6FF397E32AE1E7600096B143 /* BedtimeResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF397E22AE1E7600096B143 /* BedtimeResults.swift */; };
 		6FF3982D2AF45D850096B143 /* WaketimeResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF3982C2AF45D850096B143 /* WaketimeResults.swift */; };
 /* End PBXBuildFile section */
@@ -271,7 +270,6 @@
 		6FB517EC2B3985870054A44C /* NewSleepInsightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSleepInsightView.swift; sourceTree = "<group>"; };
 		6FB517EE2B3989840054A44C /* SleepInsightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepInsightView.swift; sourceTree = "<group>"; };
 		6FB517F62B398D660054A44C /* SleepEntryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepEntryButton.swift; sourceTree = "<group>"; };
-		6FF397962ADAF7F70096B143 /* BothtimeChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BothtimeChart.swift; sourceTree = "<group>"; };
 		6FF397E22AE1E7600096B143 /* BedtimeResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeResults.swift; sourceTree = "<group>"; };
 		6FF3982C2AF45D850096B143 /* WaketimeResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimeResults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -375,16 +373,16 @@
 		6F7750AC2A74ABAD003BFA65 /* SleepExperiment */ = {
 			isa = PBXGroup;
 			children = (
-				6FF3982E2AF46ED90096B143 /* Setup */,
 				6F7750C92A7BA50E003BFA65 /* SleepExperiment.swift */,
 				6F970BEB2B3D4C35003B3FA8 /* SleepExperimentError.swift */,
 				6FB517C72B3612080054A44C /* SleepExperimentHeader.swift */,
 				6F7750D32A7D12CA003BFA65 /* SleepView.swift */,
 				6FB517EE2B3989840054A44C /* SleepInsightView.swift */,
+				6FF3982E2AF46ED90096B143 /* Setup */,
 				6FB517E22B397B560054A44C /* SleepViewToolBar */,
 				6FB517EB2B3985370054A44C /* SleepHistory+Editing */,
 				6FB517B82B346FAF0054A44C /* SleepEntry */,
-				6FA619B42AFCA69900CD9572 /* Chart */,
+				6FA619B42AFCA69900CD9572 /* SleepChart */,
 			);
 			path = SleepExperiment;
 			sourceTree = "<group>";
@@ -408,7 +406,7 @@
 			path = DayExperiment;
 			sourceTree = "<group>";
 		};
-		6FA619B42AFCA69900CD9572 /* Chart */ = {
+		6FA619B42AFCA69900CD9572 /* SleepChart */ = {
 			isa = PBXGroup;
 			children = (
 				6FB5177D2B2D5D650054A44C /* DependentVariable */,
@@ -419,10 +417,9 @@
 				6FB517762B2C6C210054A44C /* Waketime */,
 				6FB517772B2C6C350054A44C /* Sleeptime */,
 				6FA619D22B03409300CD9572 /* ChartFunctions.swift */,
-				6FF397962ADAF7F70096B143 /* BothtimeChart.swift */,
 				6FB517DF2B38FD810054A44C /* BothTime */,
 			);
-			path = Chart;
+			path = SleepChart;
 			sourceTree = "<group>";
 		};
 		6FB5176F2B2C4F630054A44C /* Bedtime */ = {
@@ -796,7 +793,6 @@
 				6FB517AD2B3441CD0054A44C /* TimeSleptPicker.swift in Sources */,
 				6FB517C82B3612080054A44C /* SleepExperimentHeader.swift in Sources */,
 				6FB517B12B3456F50054A44C /* BedtimePicker.swift in Sources */,
-				6FF397972ADAF7F70096B143 /* BothtimeChart.swift in Sources */,
 				6FB517712B2C526A0054A44C /* BedtimeBarChart.swift in Sources */,
 				6F7750BB2A7B6C1B003BFA65 /* DayEditView.swift in Sources */,
 				6FB5176E2B2C3F9F0054A44C /* BedtimeChartPreview.swift in Sources */,

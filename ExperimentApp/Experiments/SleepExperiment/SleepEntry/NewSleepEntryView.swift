@@ -9,11 +9,12 @@ import SwiftUI
 struct NewSleepEntryView: View {
     
     @Binding var experiment: SleepExperiment
-    @State private var selectedDate = Date()
+    
     @State var timeSelectorPopOver = false
     @State var sheet = false
     let finishAction: (SleepExperiment) -> Void
     
+    @State var replaceAlert: Bool = false
     var body: some View {
         NavigationLink(destination: SleepView(experiment: $experiment, finishAction: { experiment in
             finishAction(experiment)
@@ -65,11 +66,28 @@ struct NewSleepEntryView: View {
             SleepDependentVarPicker(label: "Productivity", optional: $experiment.newSleepEntry.productivity, image: "gearshape")
         }
         Button("Done"){
-            experiment.initiateSleepEntry()
-        }.disabled(!experiment.newSleepEntry.isReady(experiment: experiment))
+            if(isInvalidEntry()){
+                replaceAlert = true
+            } else {
+                experiment.initiateSleepEntry()
+            }
+        }.alert("There is another entry with the date \(formatToMonthAndDay()). Replace this entry?", isPresented: $replaceAlert, actions: {
+            Button("Continue", role: .destructive){
+                experiment.entries.removeAll{ entry in  Calendar.current.isDate(entry.date, equalTo: experiment.newSleepEntry.date, toGranularity: .day)
+                }
+                experiment.initiateSleepEntry()
+            }
+        }).disabled(!experiment.newSleepEntry.isReady(experiment: experiment))
+        
         
     }
-    
+    func formatToMonthAndDay() -> String {
+        let date = experiment.newSleepEntry.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM d"
+        let formattedDateString = dateFormatter.string(from: date)
+        return formattedDateString
+    }
     func isInvalidEntry()->Bool{
         for entry in experiment.entries{
             let date = entry.date

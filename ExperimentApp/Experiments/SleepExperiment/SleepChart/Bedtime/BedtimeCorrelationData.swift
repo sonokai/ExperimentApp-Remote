@@ -26,7 +26,9 @@ struct BedtimeCorrelationData: View {
             }
         }else {
             EntryProgressView(count: experiment.entries.count, needed: 14, text: "to view correlational data")
-            BedtimeChartPreview(experiment: experiment)
+            if(experiment.entries.count>0){
+                BedtimeChartPreview(experiment: experiment)
+            }
             
         }
     }

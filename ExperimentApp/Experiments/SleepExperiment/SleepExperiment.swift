@@ -62,12 +62,12 @@ extension SleepExperiment{
             return self
         }
         case bedtime = "Bedtime"
-        case waketime = "Waketime"
-        case both = "Both"
-        case hoursSlept = "Hours slept"
+        case waketime = "Wake time"
+        case both = "Both bedtime and wake time"
+        case hoursSlept = "Sleep time"
         
         var name: String {
-            rawValue.capitalized
+            rawValue
         }
     }
 }

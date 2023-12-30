@@ -16,6 +16,7 @@ struct SleepView: View {
     @State var showDependentVariableData: Bool = true
     @Environment(\.presentationMode) private var presentationMode
     let finishAction: (SleepExperiment) -> Void
+    @State var presentAlert: Bool = false
     @State var isFinished: Bool = false
     var body: some View {
         NavigationStack{
@@ -83,9 +84,14 @@ struct SleepView: View {
                 Section("Finish experiment"){
                     Button("Finish experiment"){
                         //show alert
-                        isFinished = true
-                        presentationMode.wrappedValue.dismiss()
-                    }
+                        presentAlert = true
+                        
+                    }.alert("Are you sure you want to finish your experiment?", isPresented: $presentAlert, actions: {
+                        Button("Finish", role: .destructive){
+                            isFinished = true
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                    })
                 }
             }.buttonStyle(.borderless)
             .navigationTitle(Text("\(experiment.name)"))

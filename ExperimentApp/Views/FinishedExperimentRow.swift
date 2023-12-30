@@ -14,7 +14,17 @@ struct FinishedExperimentRow: View {
             HStack{
                 Text(finishedExperiment.name).font(.headline)
                 Spacer()
-                Image(systemName: "medal.fill").foregroundColor(.yellow)
+                switch(finishedExperiment.medal){
+                case .none:
+                    Text("")
+                case .bronze:
+                    Image(systemName: "medal.fill").foregroundColor(.brown)
+                case .silver:
+                    Image(systemName: "medal.fill").foregroundColor(.gray)
+                case .gold:
+                    Image(systemName: "medal.fill").foregroundColor(.yellow)
+                }
+                
             }
             HStack{
                 Text("\(formatDateToString(finishedExperiment.startDate)) - \(formatDateToString(finishedExperiment.endDate))")

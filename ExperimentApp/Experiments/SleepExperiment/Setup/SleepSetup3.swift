@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SleepSetup3: View {
-    @State var sliderValue: Double = 20
+    @State var sliderValue: Double = 25
     @Binding var goalEntries: Int
     
     
@@ -20,22 +20,34 @@ struct SleepSetup3: View {
                 .padding(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.headline)
-            Text("The more entries you have, the more your results can conclude.")
+            Text("The more entries you have, the more helpful your data will be for optimizing your sleeping patterns.")
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.caption)
                 .padding(1)
-            Text("5+ entries: A general idea of how much sleep affects your day")
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .font(.caption)
-                .padding(1)
-            Text("20+ entries: Statistical significance")
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .font(.caption)
-                .padding(1)
-            Text("30+ entries: Make conclusions about how sleep affects your day")
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .font(.caption)
-                .padding(1)
+            HStack{
+                Image(systemName: "medal.fill").foregroundColor(.brown)
+                Text("15+ entries: Gain a general idea of how much sleep affects your day")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.caption)
+                    .padding(1)
+            }
+            HStack{
+                Image(systemName: "medal.fill").foregroundColor(.gray)
+                Text("25+ entries: Gain a good idea of what happens when you sleep differently")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.caption)
+                    .padding(1)
+            }
+            HStack{
+                Image(systemName: "medal.fill").foregroundColor(.yellow)
+                Text("50+ entries: Make a detailed analysis of the outcomes of different sleep patterns and conclude what the best habits for sleep are")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.caption)
+                    .padding(1)
+            }
+            
+            
+            
             
             //review the statistics behind this
             HStack{
