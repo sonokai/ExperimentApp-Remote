@@ -35,10 +35,8 @@ struct BedtimeBarChart: View {
             case .failure:
                 interval = Date()
             }
-            var intervalMinutes = SleepExperiment.getMinutes(from: interval)
-            if(intervalMinutes<720){
-                intervalMinutes = intervalMinutes + 1440
-            }
+            var intervalMinutes = SleepExperiment.getBedtimeMinutes(from: interval)
+            
             //1. use least bedtime to find a smallest range that will generate a bar mark (in line with the optimal interval)
             var lowestChartBarMark = intervalMinutes
             while(lowestChartBarMark > experiment.getLeastBedtimeMinutes()){
@@ -55,7 +53,6 @@ struct BedtimeBarChart: View {
             }
             //3. initiate the bedtimebarchartentries
             for chartBarMark in stride(from: lowestChartBarMark, through: highestChartBarMark, by: 30){
-                
                 chartEntries.append(BedtimeBarChartEntry(experiment: experiment, dependentVariable: dependentVariable, time: chartBarMark, isOptimal: chartBarMark == intervalMinutes))
             }
             

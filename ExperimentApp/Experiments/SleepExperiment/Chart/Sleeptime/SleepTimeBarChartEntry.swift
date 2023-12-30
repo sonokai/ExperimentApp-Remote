@@ -18,7 +18,7 @@ struct SleepTimeBarChartEntry: Identifiable{
         self.id = id
         
         let date = SleepTimeBarChartEntry.dateFromMinutes(time)
-        self.time = "\(date.simplifyDateToTimeString()) - \(date.addMinutesToDate(minutesToAdd: 30).simplifyDateToTimeString())"
+        self.time = "\(date.simplifyDateToHMM()) - \(date.addMinutesToDate(minutesToAdd: 30).simplifyDateToHMM())"
         if(dependentVariable == .quality || experiment.dependentVariable == .quality){
             self.value = experiment.averageOfSleepTimeInterval(at: time, for: 30, dependentVariable: .quality)
         } else if (dependentVariable == .productivity || experiment.dependentVariable == .productivity){

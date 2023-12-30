@@ -13,7 +13,6 @@ struct SleepHistory: View {
         NavigationStack{
             Form{
                 Section(header: Text("Entries")) {
-                    
                     ForEach($experiment.entries) { entryBinding in
                         NavigationLink(destination: SleepEditView(entry:entryBinding, experiment: $experiment).navigationTitle("Edit entry")) {
                             SimplifiedSleepView(sleepExperiment: experiment, entry: entryBinding)
@@ -22,8 +21,6 @@ struct SleepHistory: View {
                     .onDelete { indices in
                         deleteEntries(at: indices)
                     }
-                    
-                    
                 }
             }
         }.navigationTitle(Text("History"))

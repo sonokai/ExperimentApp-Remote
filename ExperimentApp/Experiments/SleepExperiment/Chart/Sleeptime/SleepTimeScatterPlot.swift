@@ -29,7 +29,7 @@ struct SleepTimeScatterPlot: View {
                         Text(SleepExperiment.getChartTitle2(independentVariable: .hoursSlept, dependentVariable: dependentVariable)).font(.headline)
                         
                         Chart(){
-                            if(showRange){
+                            if(showRange && optimalIntervalIsValid){
                                 RectangleMark(
                                     xStart: .value("Start of interval", convertDate(from: interval)),
                                     xEnd: .value("End of best interval", addMinutesToDate(date: interval, minutesToAdd: size)),
@@ -102,7 +102,7 @@ struct SleepTimeScatterPlot: View {
                         if(optimalIntervalIsValid){
                             Text("\(interval.simplifyDateToHMM()) - \(interval.addMinutesToDate(minutesToAdd: size).simplifyDateToHMM())")
                         }else {
-                            Text("Error")
+                            Text("-")
                         }
                     }
                     HStack{
@@ -121,9 +121,14 @@ struct SleepTimeScatterPlot: View {
                             Text("Average productivity: ")
                         }
                         Spacer()
-                        Text("\(calculateAverage())")
+                        if(optimalIntervalIsValid){
+                            Text("\(calculateAverage())")
+                        } else {
+                            Text("-")
+                        }
+                        
                     }
-                    SliderView(name: "Interval size (minutes)",value: $size, lowValue: 15, highValue: 60)
+                    SliderView(name: "Optimal interval size",value: $size, lowValue: 15, highValue: 60)
                         .onChange(of: size){ _ in
                             updateOptimalInterval()
                         }.onAppear(){

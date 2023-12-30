@@ -49,6 +49,13 @@ extension SleepExperiment{
         var name: String {
             rawValue.capitalized
         }
+        var nameInSentence: String{
+            switch self{
+            case .productivity: return "productivity"
+            case .quality: return "quality of day"
+            case .both: return "shouldn't be using this"
+            }
+        }
     }
     enum IndependentVariable: String, Codable, CaseIterable, Identifiable{
         var id: Self {
@@ -1026,6 +1033,42 @@ extension SleepExperiment{
         }
         return (Double)(quality)/(Double)(entries.count)
     }
+    func compareQualityAverage(_ value: Double) -> String{
+        let average = getAverageQualityDouble()
+        let dividend = value/average
+        if(dividend > 1){
+            let percent = Int((dividend - 1)*100)
+            return "\(percent)% higher than average"
+        }
+        if(dividend < 1){
+            let percent = Int((1-dividend)*100)
+            return "\(percent)% lower than average"
+        }
+        return "equal to average"
+    }
+    func compareProductivityAverage(_ value: Double) -> String{
+        let average = getAverageProductivityDouble()
+        let dividend = Double(value)/Double(average)
+        if(dividend > 1){
+            let percent = Int((dividend - 1)*100)
+            return "\(percent)% higher than average"
+        }
+        if(dividend < 1){
+            let percent = Int((1-dividend)*100)
+            return "\(percent)% lower than average"
+        }
+        return "equal to average"
+    }
+    func compareAverage(_ value: Double, _ dependentVariable: DependentVariable) -> String{
+        if(dependentVariable == .quality){
+            return compareQualityAverage(value)
+        }
+        if(dependentVariable == .productivity){
+            return compareProductivityAverage(value)
+        }
+        print("Called compare average when dependentvariable is both")
+        return compareQualityAverage(value)
+    }
     func getAverageProductivityDouble()->Double{
         if(entries.count == 0){
             return 0
@@ -1036,6 +1079,7 @@ extension SleepExperiment{
         }
         return (Double)(productivity)/(Double)(entries.count)
     }
+    
     func getProductivityStandardDeviation()->Double{
         var sum = 0.0
         let average = getAverageProductivityDouble()

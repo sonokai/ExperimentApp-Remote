@@ -13,8 +13,8 @@ struct SleepTimeSettings: View {
     @State var errorMessage: String = ""
     @Environment(\.presentationMode) var presentationMode
     //these will serve as temporary, only update the bindings if it is valid
-    @State var start: Date = Date()
-    @State var end: Date = Date()
+    @State var start: Int = 0
+    @State var end: Int = 0
     @State var startHours: Int = 0
     @State var startMinutes: Int = 0
     @State var endHours: Int = 0
@@ -70,8 +70,8 @@ struct SleepTimeSettings: View {
                         Spacer()
                     }.frame(width: 325,height: 170)
                     Button(action: {
-                        startDate = start.formatDateForChart()
-                        endDate = end.formatDateForChart()
+                        startDate = formatTime(hour: startHours, minute: startMinutes)
+                        endDate = formatTime(hour: endHours, minute: endMinutes)
                     }, label: {
                         Text("Save")
                     }).disabled(!isValidEndpoints())
@@ -98,8 +98,9 @@ struct SleepTimeSettings: View {
                         endHours = hour
                         endMinutes = minute
                     }
-                    start = startDate
-                    end = endDate
+                    calculateStart()
+                    calculateEnd()
+                    
                 }.buttonStyle(.borderless)
                 .toolbar(){
                     ToolbarItem(placement: .navigationBarTrailing){
@@ -111,32 +112,34 @@ struct SleepTimeSettings: View {
         }
     }
     func calculateStart(){
-        var dateComponents = DateComponents()
-        dateComponents.hour = startHours
-        dateComponents.minute = startMinutes
-        if let date = Calendar.current.date(from: dateComponents){
-            start = date
-            print("updated start")
-        } else {
-            print("Failed to update date")
-        }
+        start = startHours * 60 + startMinutes
     }
     func calculateEnd(){
+        end = endHours * 60 + endMinutes
+    }
+    func convertDate(hour: Int, minute: Int) -> Date?{
         var dateComponents = DateComponents()
-        dateComponents.hour = endHours
-        dateComponents.minute = endMinutes
-        if let date = Calendar.current.date(from: dateComponents){
-            end = date
-            print("Updated end")
-        }else {
-            print("Failed to update date")
+        dateComponents.hour = hour
+        dateComponents.minute = minute
+        return Calendar.current.date(from: dateComponents)
+        
+    }
+    func formatTime(hour: Int, minute: Int) -> Date {
+        if let date = convertDate(hour: hour, minute: minute) {
+            let dateformatter = DateFormatter()
+            dateformatter.dateFormat = "HH:mm"
+            let dateString = dateformatter.string(from: date)
+            let newDate = dateformatter.date(from: dateString)
+
+            return newDate!
+        } else {
+            print("Uh oh")
+            return Date()
         }
     }
+    
     func isValidEndpoints() ->Bool{
-        let start1 = start.formatDateForChart()
-        let end1 = end.formatDateForChart()
-        
-        if(differenceBetweenDates(date1: start1, date2: end1) < 1800){
+        if(end-start<30){
             //if the end is less than 30 minutes later than the start
             errorMessage = "Your upper endpoint must be at least 30 minutes later than your lower endpoint"
             return false

@@ -15,29 +15,28 @@ struct SimplifiedSleepView: View {
             
             Text("\(formattedDate(date:entry.date))")
                 .font(.headline)
-                .accessibilityAddTraits(.isHeader)
-            Spacer().frame(maxHeight: 100)
+            Spacer().frame(minHeight: 10)
             HStack {
                 switch(sleepExperiment.independentVariable){
                 case .bedtime:
-                    Label("Bedtime: \(hourAndMinute(date: entry.bedtime))", systemImage: "clock")
+                    Label("\(hourAndMinute(date: entry.bedtime))", systemImage: "clock")
                 case .waketime:
-                    Label("Wake time: \(hourAndMinute(date: entry.waketime))", systemImage: "clock")
+                    Label("\(hourAndMinute(date: entry.waketime))", systemImage: "clock")
                 case .both:
-                    Label("Hours of sleep: \(entry.timeSlept)", systemImage: "clock")
+                    Label("\(entry.timeSlept)", systemImage: "clock")
                 case .hoursSlept:
-                    Label("Hours of sleep: \(entry.hoursSlept):\(entry.minutesSlept)", systemImage: "clock")
+                    Label("\(entry.hoursSlept):\(entry.minutesSlept)", systemImage: "clock")
                 }
                 
                 Spacer()
                 
                 switch(sleepExperiment.dependentVariable){
                 case .productivity:
-                    Label("Productivity: \(entry.productivity)", systemImage: "person")
+                    Label("\(entry.productivity)", systemImage: "gearshape.2.fill")
                 case .quality:
-                    Label("Quality of day: \(entry.quality)", systemImage: "person")
+                    Label("\(entry.quality)", systemImage: "sun.max")
                 case .both:
-                    Label("Quality of day: \(entry.quality)", systemImage: "person")
+                    Label("\(entry.quality)", systemImage: "sun.max")
                 }
                             
             }
