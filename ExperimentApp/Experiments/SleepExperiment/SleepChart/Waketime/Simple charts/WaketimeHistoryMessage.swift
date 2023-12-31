@@ -15,9 +15,9 @@ struct WaketimeHistoryMessage: View {
         VStack{
             
             if (minutes == 0 || experiment.entries.count < 14){
-                Text("Last week, your average waketime was") + Text(" \(SleepExperiment.getAverageWaketimeFromEntries(entries: experiment.entries.suffix(7)).simplifyDateToTimeString())").bold()
+                Text("In your last 7 entries, your average wake time was") + Text(" \(SleepExperiment.getAverageWaketimeFromEntries(entries: experiment.entries.suffix(7)).simplifyDateToTimeString())").bold()
             }else {
-                Text("Last week, you woke up ") + Text("\(minutes) minutes").bold() + Text(" \(comparisonWord) than normal")
+                Text("In your last 7 entries, you woke up ") + Text("\(minutes) minutes").bold() + Text(" \(comparisonWord) than normal")
             }
         }.onAppear(){
             minutes = experiment.compareLastWeekWaketimeAverage()

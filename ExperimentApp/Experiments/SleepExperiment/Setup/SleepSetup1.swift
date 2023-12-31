@@ -12,7 +12,7 @@ import SwiftUI
 struct SleepSetup1: View {
     
     @Binding var independentVariable: SleepExperiment.IndependentVariable
-    @State var hasSelected = false
+    @Binding var index: Int
     
     var body: some View {
         
@@ -60,10 +60,12 @@ struct SleepSetup1: View {
                         }
                         Spacer()
                         //display a button saying choose if not chosen already, display selected if chosen
-                        if(hasSelected == false || independentVariable != variable){
+                        if(index == 0 || independentVariable != variable){
                             Button("Choose"){
                                 independentVariable = variable
-                                hasSelected = true
+                                if(index == 0){
+                                    index = 1
+                                }
                             }
                         } else {
                             Text("Selected")
@@ -88,6 +90,6 @@ struct SleepSetup1: View {
 
 struct SleepConfig1_Previews: PreviewProvider {
     static var previews: some View {
-        SleepSetup1(independentVariable: .constant(SleepExperiment.IndependentVariable.bedtime))
+        SleepSetup1(independentVariable: .constant(SleepExperiment.IndependentVariable.bedtime), index: .constant(0))
     }
 }

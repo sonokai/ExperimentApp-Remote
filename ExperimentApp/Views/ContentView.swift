@@ -20,7 +20,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
-            NewExperimentView(appData: $appData)
+            NewExperimentView(appData: $appData, selectedTabIndex: $selectedTabIndex)
                 .tag(1)
                 .tabItem {
                     Label("Explore", systemImage: "magnifyingglass")

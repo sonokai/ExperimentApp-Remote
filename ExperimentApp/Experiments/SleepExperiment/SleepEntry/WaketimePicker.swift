@@ -47,7 +47,7 @@ struct WaketimePicker: View {
                         }
                     }).popover(isPresented: $timeSelectorPopOver, attachmentAnchor: .point(.leading), arrowEdge: .trailing, content: {
                         CustomDatePicker(date: $waketime, timeSelectorPopOver: $timeSelectorPopOver)
-                            .presentationCompactAdaptation(.popover)
+                           // .presentationCompactAdaptation(.popover)
                             .padding()
                     })
                 }.onChange(of: waketime, perform: { newValue in

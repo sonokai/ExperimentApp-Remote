@@ -46,7 +46,7 @@ struct BedtimePicker: View {
                         }
                     }).popover(isPresented: $timeSelectorPopOver, attachmentAnchor: .point(.leading), arrowEdge: .trailing, content: {
                         CustomDatePicker(date: $bedtime, timeSelectorPopOver: $timeSelectorPopOver)
-                            .presentationCompactAdaptation(.popover)
+                           // .presentationCompactAdaptation(.popover)
                             .padding()
                     })
                 }.onChange(of: bedtime, perform: { newValue in

@@ -50,7 +50,7 @@ struct TimeSleptPicker: View {
                 .popover(isPresented: $timeSelectorPopOver, attachmentAnchor: .point(.bottom), arrowEdge: .top, content: {
                     
                     TimeSelector(hours: $hoursSlept, minutes: $minutesSlept)
-                        .presentationCompactAdaptation(.popover)
+                        //.presentationCompactAdaptation(.popover)
                         .padding()
                 }).onChange(of: hoursSlept) { newHoursSlept in
                     experiment.newSleepEntry.hoursSlept = newHoursSlept

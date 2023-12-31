@@ -10,7 +10,7 @@ import SwiftUI
 struct SleepSetup3: View {
     @State var sliderValue: Double = 25
     @Binding var goalEntries: Int
-    
+    @Binding var index: Int
     
     
     var body: some View {
@@ -51,10 +51,18 @@ struct SleepSetup3: View {
             
             //review the statistics behind this
             HStack{
-                Slider(value: $sliderValue, in: 5...40, step: 0.1).onChange(of: sliderValue) { newValue in
+                Slider(value: $sliderValue, in: 5...100, step: 0.1).onChange(of: sliderValue) { newValue in
                     goalEntries = Int(newValue)
+                    if(index == 2){
+                        index = 3
+                    }
                 }
-                Text("\(goalEntries)")
+                if(index == 2){
+                    Text("-")
+                } else {
+                    Text("\(goalEntries)")
+                }
+                
             }
             
         }
@@ -64,6 +72,6 @@ struct SleepSetup3: View {
 
 struct SleepConfig3_Previews: PreviewProvider {
     static var previews: some View {
-        SleepSetup3(goalEntries: .constant(20))
+        SleepSetup3(goalEntries: .constant(20), index: .constant(0))
     }
 }

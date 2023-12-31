@@ -15,9 +15,9 @@ struct BedtimeHistoryMessage: View {
         VStack{
             
             if (minutes == 0 || experiment.entries.count < 14){
-                Text("Last week, your average bedtime was") + Text(" \(SleepExperiment.getAverageBedtimeFromEntries(entries: experiment.entries.suffix(7)).simplifyDateToTimeString())").bold()
+                Text("In your last 7 entries, your average bedtime was") + Text(" \(SleepExperiment.getAverageBedtimeFromEntries(entries: experiment.entries.suffix(7)).simplifyDateToTimeString())").bold()
             }else {
-                Text("Last week, you slept ") + Text("\(minutes) minutes").bold() + Text("  \(comparisonWord) than normal")
+                Text("In your last 7 entries, you slept ") + Text("\(minutes) minutes").bold() + Text("  \(comparisonWord) than normal")
             }
         }.onAppear(){
             minutes = experiment.compareLastWeekBedtimeAverage()
