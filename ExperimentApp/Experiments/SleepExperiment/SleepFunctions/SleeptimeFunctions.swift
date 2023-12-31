@@ -84,6 +84,9 @@ extension SleepExperiment{
         if(entries.count == 0){
             return .failure(SleepExperimentError.noEntries)
         }
+        if(getSleepTimeRange()<15){
+            return.failure(SleepExperimentError.insufficientRange)
+        }
         if(independentVariable == .bedtime || independentVariable == .waketime){
             print("Called get optimal sleeptime interval but independent variable is either bedtime or waketime")
             return .failure(SleepExperimentError.wrongIndependentVariable)
@@ -142,8 +145,8 @@ extension SleepExperiment{
         while(entries.count>2){
             var most = 0
             var least = 10000000
-            var mostIndex = -1
-            var leastIndex = -1
+            var mostIndex = 0
+            var leastIndex = 0
             for i in 0..<entries.count{
                 let minutes = entries[i].hoursSlept * 60 + entries[i].minutesSlept
                 if(minutes>most){
@@ -173,11 +176,11 @@ extension SleepExperiment{
         //if there are a final two, mean the last two and return, otherwise, return the last
         if(entries.count == 2){
             let minutes = ((entries[0].hoursSlept * 60 + entries[0].minutesSlept) + (entries[1].hoursSlept * 60 + entries[1].minutesSlept))/2
-            return dateStringFromMinutes(minutes: minutes)
+            return dateStringFromMinutesWithoutAMPM(minutes: minutes)
         }
         
         let minutes = entries[0].hoursSlept * 60 + entries[0].minutesSlept
-        return dateStringFromMinutes(minutes: minutes)
+        return dateStringFromMinutesWithoutAMPM(minutes: minutes)
     }
     
     //returns average waketime in string format
@@ -191,7 +194,7 @@ extension SleepExperiment{
         }
         let averageminutes: Int = minutes/entries.count
         
-        return dateStringFromMinutes(minutes: averageminutes)
+        return dateStringFromMinutesWithoutAMPM(minutes: averageminutes)
     }
     func getSleepTimeStandardDeviation() -> (Int, Int){
         var total = 0.0

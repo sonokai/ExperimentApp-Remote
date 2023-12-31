@@ -12,14 +12,15 @@ struct SleepEntryDatePicker: View {
     var timeSelectorPopOver: Bool
     var body: some View {
         HStack{
+            /*
             if(isInvalidEntry()){
                 Image(systemName:"calendar.badge.exclamationmark")
             } else{
                 Image(systemName:"calendar")
-            }
+            }*/
             
             ZStack{
-                DatePicker("Entry date", selection: $experiment.newSleepEntry.date, in: ...Date(),displayedComponents: [.date])//.disabled(timeSelectorPopOver)
+                DatePicker("Entry date", selection: $experiment.newSleepEntry.date, in: experiment.startDate.addingTimeInterval(-5000000)...Date(),displayedComponents: [.date])//.disabled(timeSelectorPopOver)
                 //if somoething else is being interacted with, you should not immediately open the datepicker
                 if(timeSelectorPopOver){
                     Color.black.opacity(0.0005)

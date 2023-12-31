@@ -119,7 +119,23 @@ extension SleepExperiment{
             }
         }
     }
-    
-    
+    func dateStringFromMinutesWithoutAMPM(minutes: Int) -> String{
+        if let date = Calendar.current.date(bySettingHour: minutes/60, minute: minutes % 60, second: 0, of: Date()){
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeStyle = .short
+            dateFormatter.dateFormat = "H:mm"
+            return dateFormatter.string(from: date)
+        } else {
+            if let date2 = Calendar.current.date(bySettingHour: ((minutes/60)-24), minute: minutes % 60, second: 0, of: Date()){
+                let dateFormatter = DateFormatter()
+                dateFormatter.timeStyle = .short
+                dateFormatter.dateFormat = "H:mm"
+                return dateFormatter.string(from: date2)
+            }
+            else{
+                return "I broke"
+            }
+        }
+    }
 }
 

@@ -70,9 +70,8 @@ struct WaketimeScatterPlot: View {
                         }
                         
                         .chartXScale(domain: [startTime,endTime])
-                        .chartYAxisLabel(getYAxisLabel())
+                        .chartYAxisLabel(experiment.getYAxisLabel(dependentVariable))
                         .chartXAxisLabel("Waketime")
-                        
                         .chartXAxis {
                             AxisMarks() { value in
                                 if let date = value.as(Date.self) {
@@ -96,9 +95,9 @@ struct WaketimeScatterPlot: View {
                 }
                 Section(header: WaketimeStatsHeader()){
                     
-                    Toggle("Show optimal interval", isOn: $showRange)
+                    Toggle("Show optimal interval", isOn: $showRange).disabled(!optimalIntervalIsValid)
                     HStack{
-                        Text("Optimal interval:")
+                        Text("Optimal interval")
                         Spacer()
                         if(optimalIntervalIsValid){
                             Text("\(interval.simplifyDateToTimeString()) - \(interval.addMinutesToDate(minutesToAdd: size).simplifyDateToTimeString())")
@@ -118,9 +117,9 @@ struct WaketimeScatterPlot: View {
                     
                     HStack{
                         if(dependentVariable == .quality){
-                            Text("Average quality of day: ")
+                            Text("Quality of day of optimal interval")
                         } else{
-                            Text("Average productivity: ")
+                            Text("Productivity of optimal interval")
                         }
                         Spacer()
                         if(optimalIntervalIsValid){
@@ -130,13 +129,17 @@ struct WaketimeScatterPlot: View {
                         }
                         
                     }
-                    
-                    SliderView(name: "Interval size (minutes)",value: $size, lowValue: 15, highValue: 60 > experiment.getWaketimeRange() ?  (Double)(experiment.getWaketimeRange()) : 60)
-                        .onChange(of: size){ _ in
-                            updateInterval()
-                        }.onAppear(){
-                            updateInterval()
-                        }.disabled(experiment.getWaketimeRange()<30 || experiment.entries.count == 0)
+                    if(experiment.getWaketimeRange() >= 15){
+                        SliderView(name: "Interval size (minutes)",value: $size, lowValue: 15, highValue: 60 > experiment.getWaketimeRange() ?  (Double)(experiment.getWaketimeRange()) : 60)
+                            .onChange(of: size){ _ in
+                                updateInterval()
+                            }.onAppear(){
+                                if(experiment.getWaketimeRange()<30){
+                                    size = 15
+                                }
+                                updateInterval()
+                            }
+                    }
                     
                     if(!optimalIntervalIsValid){
                         Text(errorMessage)
@@ -146,13 +149,6 @@ struct WaketimeScatterPlot: View {
         }
     }
     
-    private func getYAxisLabel() -> String{
-        switch(experiment.dependentVariable){
-        case .quality: return "Quality of day"
-        case .productivity: return "Productivity"
-        case .both: return ""
-        }
-    }
     private func updateInterval(){
         switch(
             experiment.getOptimalWaketimeInterval(size: size, dependentVariable: dependentVariable, lowEndpoint: startTime, highEndpoint: endTime, requiredEntries: entriesRequired)){

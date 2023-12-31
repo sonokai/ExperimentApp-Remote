@@ -71,7 +71,7 @@ struct BedtimeScatterPlot: View {
                         }
                         
                         .chartXScale(domain: [startTime,endTime])
-                        .chartYAxisLabel(getYAxisLabel())
+                        .chartYAxisLabel(experiment.getYAxisLabel(dependentVariable))
                         .chartXAxisLabel("Bedtime")
                         .chartXAxis {
                             AxisMarks() { value in
@@ -96,7 +96,7 @@ struct BedtimeScatterPlot: View {
                 }
                 Section(header: BedtimeStatsHeader()){
                     
-                    Toggle("Show optimal interval", isOn: $showRange)
+                    Toggle("Show optimal interval", isOn: $showRange).disabled(!optimalIntervalIsValid)
                     HStack{
                         Text("Optimal interval")
                         Spacer()
@@ -118,9 +118,9 @@ struct BedtimeScatterPlot: View {
                     }
                     HStack{
                         if(dependentVariable == .quality){
-                            Text("Average quality of day ")
+                            Text("Quality of day of optimal interval")
                         } else{
-                            Text("Average productivity ")
+                            Text("Productivity of optimal interval")
                         }
                         Spacer()
                         if(optimalIntervalIsValid){
@@ -131,10 +131,17 @@ struct BedtimeScatterPlot: View {
                         
                     }
                     
-                    SliderView(name: "Interval size (minutes)",value: $size, lowValue: 15, highValue: 60 > experiment.getBedtimeRange() ?  (Double)(experiment.getBedtimeRange()) : 60)
-                        .onChange(of: size){ _ in
-                            updateInterval()
-                        }.disabled(experiment.getBedtimeRange()<30 || experiment.entries.count == 0)
+                    if(experiment.getBedtimeRange() >= 15){
+                        SliderView(name: "Interval size (minutes)",value: $size, lowValue: 15, highValue: 60 > experiment.getBedtimeRange() ?  (Double)(experiment.getBedtimeRange()) : 60)
+                            .onChange(of: size){ _ in
+                                updateInterval()
+                            }.onAppear(){
+                                if(experiment.getBedtimeRange()<30){
+                                    size = 15
+                                }
+                                updateInterval()
+                            }
+                    }
                     
                     
                     if(!optimalIntervalIsValid){
@@ -152,13 +159,6 @@ struct BedtimeScatterPlot: View {
         return "\(Int(confidence))%"
     }
     
-    private func getYAxisLabel() -> String{
-        switch(experiment.dependentVariable){
-        case .quality: return "Quality of day"
-        case .productivity: return "Productivity"
-        case .both: return ""
-        }
-    }
     private func updateInterval(){
         
         switch(experiment.getOptimalBedtimeInterval(size: size, dependentVariable: dependentVariable, lowEndpoint: startTime, highEndpoint: endTime, requiredEntries: entriesRequired)){
@@ -207,7 +207,6 @@ struct BedtimeStatsHeader: View{
                 Text("Stats"),
                 alignment: .leading
             )
-        
     }
 }
 
@@ -215,6 +214,6 @@ struct BedtimeChart_Previews: PreviewProvider {
     static let testInterval: Date = Calendar.current.date(bySettingHour: 10, minute: 50, second: 0, of: Date())!
     static var previews: some View {
         
-        BedtimeScatterPlot(experiment: SleepExperiment.highXRangeBedtimeExperiment, dependentVariable: .quality ,interval: testInterval, size: 30)
+        BedtimeScatterPlot(experiment: SleepExperiment.bedtimebothExperiment, dependentVariable: .productivity ,interval: testInterval, size: 30)
     }
 }

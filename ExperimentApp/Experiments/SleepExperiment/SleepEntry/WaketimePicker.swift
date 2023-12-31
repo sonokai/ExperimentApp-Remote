@@ -15,7 +15,7 @@ struct WaketimePicker: View {
     @State var interacted: Bool = false
     var body: some View {
         HStack{
-            Image(systemName: "bed.double")
+            //Image(systemName: "bed.double")
             if let initialValue = experiment.newSleepEntry.waketime {
                 DatePicker("Wake time", selection: $waketime, displayedComponents: [.hourAndMinute])
                     .onChange(of: waketime, perform: { newValue in

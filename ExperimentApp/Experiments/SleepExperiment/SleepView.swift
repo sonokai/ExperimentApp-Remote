@@ -11,18 +11,22 @@ import SwiftUI
 struct SleepView: View {
     @Binding var experiment: SleepExperiment
     @State var showInsights: Bool = true
+    @State var showProgress: Bool = true
     @State var showCorrelationalData: Bool = true
     @State var showIndependentVariableData: Bool = true
     @State var showDependentVariableData: Bool = true
-    @Environment(\.presentationMode) private var presentationMode
+    @Environment(\.presentationMode) var presentationMode
     let finishAction: (SleepExperiment) -> Void
     @State var presentAlert: Bool = false
     @State var isFinished: Bool = false
+    
     var body: some View {
         NavigationStack{
             Form{
+                
                 Section(header: SleepExperimentHeader(title: "Insights", isOn: $showInsights)){
                     if(showInsights){
+                        SleepProgressView(experiment: experiment)
                         SleepInsightView(experiment: $experiment)
                     }
                 }
@@ -94,10 +98,10 @@ struct SleepView: View {
                     })
                 }
             }.buttonStyle(.borderless)
-            .navigationTitle(Text("\(experiment.name)"))
-            .toolbar(content: toolbarContent)
+                .toolbar(content: toolbarContent)
+                .navigationBarBackButtonHidden(true)
             
-
+            
         }.onDisappear(){
             if(isFinished){
                 finishAction(experiment)

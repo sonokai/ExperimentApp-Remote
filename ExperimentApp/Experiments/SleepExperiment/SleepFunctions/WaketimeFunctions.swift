@@ -13,6 +13,9 @@ extension SleepExperiment{
         if(entries.count == 0){
             return .failure(SleepExperimentError.noEntries)
         }
+        if(getWaketimeRange()<15){
+            return.failure(SleepExperimentError.insufficientRange)
+        }
         if(independentVariable != .waketime && independentVariable != .both){
             return .failure(SleepExperimentError.wrongIndependentVariable)
         }
@@ -88,10 +91,8 @@ extension SleepExperiment{
         return most
     }
     static func getWaketimeSeconds(from date: Date)-> Double{
-        let seconds = date.timeIntervalSince1970.truncatingRemainder(dividingBy: 86_400)
-        //if am, dont pass it at the next day
-        
-        return seconds
+        let minutes = getWaketimeMinutes(from: date)
+        return Double(minutes) * 60
     }
     func getWaketimeRange() -> Int{
         return getMostWaketimeMinutes()-getLeastWaketimeMinutes()
@@ -143,8 +144,8 @@ extension SleepExperiment{
         while(entries.count>2){
             var most = 0
             var least = 10000000
-            var mostIndex = -1
-            var leastIndex = -1
+            var mostIndex = 0
+            var leastIndex = 0
             for i in 0..<entries.count{
                 let minutes = SleepExperiment.getMinutes(from: entries[i].waketime)
                 if(minutes>most){

@@ -16,7 +16,7 @@ struct TimeSleptPicker: View {
     var body: some View {
         VStack(alignment:.leading){
             HStack{
-                Image(systemName: "clock")
+                //Image(systemName: "clock")
                 Text("Time slept")
                 Spacer().frame(maxWidth: .infinity)
                 

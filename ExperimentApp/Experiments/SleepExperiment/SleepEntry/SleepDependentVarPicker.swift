@@ -19,7 +19,7 @@ struct SleepDependentVarPicker: View {
 
     var body: some View {
         HStack{
-            Image(systemName: image)
+            
             if let optionalValue = optional{
                 Picker(label, selection: $value){
                     ForEach(1..<11, id:\.self){ number in

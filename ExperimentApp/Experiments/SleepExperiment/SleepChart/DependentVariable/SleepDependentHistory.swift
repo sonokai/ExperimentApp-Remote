@@ -38,10 +38,18 @@ struct SleepDependentHistory: View {
                 .chartXAxis{
                     AxisMarks(values: .stride(by: .day, count: getXAxisTickSize())){ value in
                         
-                        AxisValueLabel()
+                        if(getXAxisTickSize() >= 28){
+                            AxisValueLabel{
+                                Text(getMonth(value.as(Date.self)))
+                            }
+                        } else {
+                            AxisValueLabel{
+                                Text(formatToMonthAndDay(date: value.as(Date.self)))
+                            }
+                        }
+                        
                         AxisGridLine()
                         AxisTick()
-                        
                     }
                 }
                 .chartXScale(domain: getXDomain())
@@ -78,8 +86,11 @@ struct SleepDependentHistory: View {
         let (startDate, endDate) = experiment.getDateRange()
         let difference = endDate.timeIntervalSince(startDate)
         let daysDifference = difference / 86_400
+        if(daysDifference >= 160){
+            return 60
+        }
         if(daysDifference >= 80){
-            return 28
+            return 30
         }
         if(daysDifference >= 40){
             return 14
@@ -94,6 +105,24 @@ struct SleepDependentHistory: View {
             return 2
         }
         return 1
+    }
+    func getMonth(_ date: Date?) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM"
+        if let date1 = date {
+            return dateFormatter.string(from: date1)
+        } else {
+            return "????"
+        }
+    }
+    func formatToMonthAndDay(date: Date?) -> String {
+        if let date1 = date{
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "M/d"
+            return dateFormatter.string(from: date1)
+        } else {
+            return "????"
+        }
     }
     func getXDomain() -> ClosedRange<Date>{
         let (startDate, endDate) = experiment.getDateRange()

@@ -17,9 +17,9 @@ struct ExperimentView: View {
     var body: some View {
         NavigationStack{
             Form{
-                
-                ForEach($appData.sleepExperiments) { $sleepExperiment in
-                    Section(header: SleepExperimentHeader(title: sleepExperiment.name, isOn: $showSleepExperiment)){
+                Section(header: SleepExperimentHeader(title: "Sleep experiment", isOn: $showSleepExperiment)){
+                    ForEach($appData.sleepExperiments) { $sleepExperiment in
+                        
                         if(showSleepExperiment){
                             NewSleepEntryView(experiment: $sleepExperiment, finishAction: { experiment in
                                 let closure = finishExperiment(experiment)
@@ -30,7 +30,7 @@ struct ExperimentView: View {
                                 let closure = finishExperiment(experiment)
                                 closure()
                             })){
-                                Text("Main page")
+                                Text(sleepExperiment.name)
                             }
                         }
                     }

@@ -27,7 +27,6 @@ struct StatsTable{
         let dfRounded = round(dfDouble)
         let df = Int(dfRounded)
         
-        print("t: \(t), df: \(df)")
         
         //return the confidence associated with the t and df
         return getPValue(tValue: t, df: df)

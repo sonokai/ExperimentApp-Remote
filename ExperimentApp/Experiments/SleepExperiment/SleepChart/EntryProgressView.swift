@@ -17,7 +17,7 @@ struct EntryProgressView: View {
                 Image(systemName: "lock.fill")
                 Text("You need \(needed-count) more entries \(text)")
             }
-            ProgressView(value: Double(count)/Double(needed)) { Text("\(count*100/needed)% progress") }.padding()
+            ProgressView(value: Double(count)/Double(needed)) { Text("\(count*100/needed)% progress") }.padding(.vertical)
         }
     }
 }

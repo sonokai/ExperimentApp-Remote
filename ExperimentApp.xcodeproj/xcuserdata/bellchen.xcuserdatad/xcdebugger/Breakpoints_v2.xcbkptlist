@@ -84,5 +84,69 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "848B700C-14F8-4012-858E-0A78C11D3A4D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ExperimentApp/Experiments/SleepExperiment/SleepChart/Sleeptime/Simple Charts/SleepTimeHistory.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AD78AA19-D576-4C30-B447-909497D44DC0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ExperimentApp/Experiments/SleepExperiment/SleepChart/Sleeptime/Simple Charts/SleepTimeHistory.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "AD78AA19-D576-4C30-B447-909497D44DC0 - 2dff38190026b2dc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.chartXScale&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Charts.ScaleDomain&gt;(domain: &#x3c4;_1_0, type: Swift.Optional&lt;Charts.ScaleType&gt;) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.chartXScale&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Charts.ScaleDomain&gt;(domain: &#x3c4;_1_0, type: Swift.Optional&lt;Charts.ScaleType&gt;) -&gt; some&gt;&gt;.0)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.chartXScale&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Charts.ScaleDomain&gt;(domain: &#x3c4;_1_0, type: Swift.Optional&lt;Charts.ScaleType&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;)&gt;, SwiftUI.EmptyView&gt;)&gt; in ExperimentApp.SleepTimeHistory.body.getter : some"
+                  moduleName = "ExperimentApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bellchen/Desktop/ExperimentAppRemote/ExperimentApp/Experiments/SleepExperiment/SleepChart/Sleeptime/Simple%20Charts/SleepTimeHistory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "876">
+               </Location>
+               <Location
+                  uuid = "AD78AA19-D576-4C30-B447-909497D44DC0 - 47068528b652276f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (ExperimentApp.SleepEntry) -&gt; &lt;&lt;opaque return type of Charts.ChartContent.foregroundStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.chartXScale&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Charts.ScaleDomain&gt;(domain: &#x3c4;_1_0, type: Swift.Optional&lt;Charts.ScaleType&gt;) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.chartXScale&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Charts.ScaleDomain&gt;(domain: &#x3c4;_1_0, type: Swift.Optional&lt;Charts.ScaleType&gt;) -&gt; some&gt;&gt;.0)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.chartXScale&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Charts.ScaleDomain&gt;(domain: &#x3c4;_1_0, type: Swift.Optional&lt;Charts.ScaleType&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;)&gt;, SwiftUI.EmptyView&gt;)&gt; in ExperimentApp.SleepTimeHistory.body.getter : some"
+                  moduleName = "ExperimentApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bellchen/Desktop/ExperimentAppRemote/ExperimentApp/Experiments/SleepExperiment/SleepChart/Sleeptime/Simple%20Charts/SleepTimeHistory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "600">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

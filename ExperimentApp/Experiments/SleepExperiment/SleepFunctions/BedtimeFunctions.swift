@@ -14,6 +14,9 @@ extension SleepExperiment{
         if(entries.count == 0){
             return .failure(SleepExperimentError.noEntries)
         }
+        if(getBedtimeRange()<15){
+            return.failure(SleepExperimentError.insufficientRange)
+        }
         if(!(independentVariable == .bedtime || independentVariable == .both)){
             print("Called get optimal bedtime interval but independent variable is not bedtime")
             return .failure(SleepExperimentError.wrongIndependentVariable)
@@ -96,14 +99,13 @@ extension SleepExperiment{
         return minutes
     }
     static func getBedtimeSeconds(from date: Date)-> Double{
-        let seconds = date.timeIntervalSince1970.truncatingRemainder(dividingBy: 86_400)
+        let seconds = Double(getBedtimeMinutes(from: date)*60)
         //if am, pass it at the next day
         if(seconds<43_200){
             return seconds + 86_400
         }
         return seconds
     }
-    
     static func getMinutes(from date: Date)-> Int {
         let time = getHoursAndMinute(from: date)
         return time.0*60+time.1
@@ -292,8 +294,8 @@ extension SleepExperiment{
         while(entries.count>2){
             var most = 0
             var least = 10000000
-            var mostIndex = -1
-            var leastIndex = -1
+            var mostIndex = 0
+            var leastIndex = 0
             for i in 0..<entries.count{
                 let minutes = SleepExperiment.getBedtimeMinutes(from: entries[i].bedtime)
                 if(minutes>most){

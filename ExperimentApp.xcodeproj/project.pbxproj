@@ -71,6 +71,8 @@
 		6F970C072B40127A003B3FA8 /* BedtimeSampleExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F970C062B40127A003B3FA8 /* BedtimeSampleExperiments.swift */; };
 		6F970C092B40131C003B3FA8 /* OtherFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F970C082B40131C003B3FA8 /* OtherFunctions.swift */; };
 		6F970C0B2B402424003B3FA8 /* WaketimeSampleExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F970C0A2B402424003B3FA8 /* WaketimeSampleExperiments.swift */; };
+		6F970C0D2B409813003B3FA8 /* SleepProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F970C0C2B409813003B3FA8 /* SleepProgressView.swift */; };
+		6F970C0F2B40EA7A003B3FA8 /* SleepTimeSampleExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F970C0E2B40EA7A003B3FA8 /* SleepTimeSampleExperiments.swift */; };
 		6FA619B62AFDF9E500CD9572 /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619B52AFDF9E500CD9572 /* ErrorWrapper.swift */; };
 		6FA619B82AFDFA2F00CD9572 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619B72AFDFA2F00CD9572 /* ErrorView.swift */; };
 		6FA619D32B03409300CD9572 /* ChartFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619D22B03409300CD9572 /* ChartFunctions.swift */; };
@@ -222,6 +224,8 @@
 		6F970C062B40127A003B3FA8 /* BedtimeSampleExperiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeSampleExperiments.swift; sourceTree = "<group>"; };
 		6F970C082B40131C003B3FA8 /* OtherFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherFunctions.swift; sourceTree = "<group>"; };
 		6F970C0A2B402424003B3FA8 /* WaketimeSampleExperiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimeSampleExperiments.swift; sourceTree = "<group>"; };
+		6F970C0C2B409813003B3FA8 /* SleepProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepProgressView.swift; sourceTree = "<group>"; };
+		6F970C0E2B40EA7A003B3FA8 /* SleepTimeSampleExperiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTimeSampleExperiments.swift; sourceTree = "<group>"; };
 		6FA619B52AFDF9E500CD9572 /* ErrorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
 		6FA619B72AFDFA2F00CD9572 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		6FA619D22B03409300CD9572 /* ChartFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFunctions.swift; sourceTree = "<group>"; };
@@ -365,6 +369,7 @@
 				6FA619D62B042B1600CD9572 /* SleepExperimentSamples.swift */,
 				6F970C062B40127A003B3FA8 /* BedtimeSampleExperiments.swift */,
 				6F970C0A2B402424003B3FA8 /* WaketimeSampleExperiments.swift */,
+				6F970C0E2B40EA7A003B3FA8 /* SleepTimeSampleExperiments.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -392,8 +397,8 @@
 				6F7750C92A7BA50E003BFA65 /* SleepExperiment.swift */,
 				6FB517B82B346FAF0054A44C /* SleepEntry */,
 				6F970BFD2B400F1A003B3FA8 /* SleepFunctions */,
-				6F970BEB2B3D4C35003B3FA8 /* SleepExperimentError.swift */,
 				6F7750D32A7D12CA003BFA65 /* SleepView.swift */,
+				6F970C0C2B409813003B3FA8 /* SleepProgressView.swift */,
 				6FB517C72B3612080054A44C /* SleepExperimentHeader.swift */,
 				6FB517EE2B3989840054A44C /* SleepInsightView.swift */,
 				6FF3982E2AF46ED90096B143 /* Setup */,
@@ -540,6 +545,7 @@
 		6FA619B42AFCA69900CD9572 /* SleepChart */ = {
 			isa = PBXGroup;
 			children = (
+				6F970BEB2B3D4C35003B3FA8 /* SleepExperimentError.swift */,
 				6FB5177D2B2D5D650054A44C /* DependentVariable */,
 				6F35C9BB2AB451460019D839 /* SleepChart.swift */,
 				6FB5177B2B2D523A0054A44C /* EntryProgressView.swift */,
@@ -831,6 +837,7 @@
 				6F35C9BC2AB451460019D839 /* SleepChart.swift in Sources */,
 				6F28AFEE2A9AA5D300FDCA0A /* DayExperiment.swift in Sources */,
 				6F970BDA2B3ABE4F003B3FA8 /* StatsTable.swift in Sources */,
+				6F970C0D2B409813003B3FA8 /* SleepProgressView.swift in Sources */,
 				6F7750CC2A7C40BA003BFA65 /* SleepSetup1.swift in Sources */,
 				6F7750A52A71B08C003BFA65 /* SleepEditView.swift in Sources */,
 				6F7750C62A7BA3F5003BFA65 /* SleepIntroView.swift in Sources */,
@@ -916,6 +923,7 @@
 				6F970C072B40127A003B3FA8 /* BedtimeSampleExperiments.swift in Sources */,
 				6F35C9C22AB65E740019D839 /* BedtimeScatterPlot.swift in Sources */,
 				6F970BE82B3D2F9B003B3FA8 /* ChartHeaderAndSettings.swift in Sources */,
+				6F970C0F2B40EA7A003B3FA8 /* SleepTimeSampleExperiments.swift in Sources */,
 				6FB517ED2B3985870054A44C /* NewSleepInsightView.swift in Sources */,
 				6FB517CC2B375EA30054A44C /* BedtimeData.swift in Sources */,
 				6F7750CE2A7C4374003BFA65 /* SleepSetup2.swift in Sources */,

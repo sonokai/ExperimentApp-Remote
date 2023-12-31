@@ -63,7 +63,7 @@ struct SleepTimeScatterPlot: View {
                             updateOptimalInterval()
                         }
                         .chartXScale(domain: [startTime, endTime])
-                        .chartYAxisLabel(getYAxisLabel())
+                        .chartYAxisLabel(experiment.getYAxisLabel(dependentVariable))
                         .chartXAxisLabel("Hours slept")
                         .frame(height: 300)
                         .chartXAxis {
@@ -94,10 +94,10 @@ struct SleepTimeScatterPlot: View {
                     }
                 }
                 Section(header: SleepTimeStatsHeader()){
-                    Toggle("Show optimal interval", isOn: $showRange)
+                    Toggle("Show optimal interval", isOn: $showRange).disabled(!optimalIntervalIsValid)
                     
                     HStack{
-                        Text("Optimal interval:")
+                        Text("Optimal interval")
                         Spacer()
                         if(optimalIntervalIsValid){
                             Text("\(interval.simplifyDateToHMM()) - \(interval.addMinutesToDate(minutesToAdd: size).simplifyDateToHMM())")
@@ -116,9 +116,9 @@ struct SleepTimeScatterPlot: View {
                     }
                     HStack{
                         if(dependentVariable == .quality){
-                            Text("Average quality of day: ")
+                            Text("Quality of day of optimal interval ")
                         } else{
-                            Text("Average productivity: ")
+                            Text("Productivity of optimal interval")
                         }
                         Spacer()
                         if(optimalIntervalIsValid){
@@ -128,13 +128,17 @@ struct SleepTimeScatterPlot: View {
                         }
                         
                     }
-                    SliderView(name: "Optimal interval size",value: $size, lowValue: 15, highValue: 60)
-                        .onChange(of: size){ _ in
-                            updateOptimalInterval()
-                        }.onAppear(){
-                            updateOptimalInterval()
-                        }.disabled(experiment.getSleepTimeRange()<30 || experiment.entries.count == 0)
-                    
+                    if(experiment.getSleepTimeRange() >= 15){
+                        SliderView(name: "Optimal interval size",value: $size, lowValue: 15, highValue: 60)
+                            .onChange(of: size){ _ in
+                                updateOptimalInterval()
+                            }.onAppear(){
+                                if(experiment.getSleepTimeRange()<30){
+                                    size = 15
+                                }
+                                updateOptimalInterval()
+                            }
+                    }
                     if(!optimalIntervalIsValid){
                         Text(errorMessage)
                     }
@@ -142,13 +146,6 @@ struct SleepTimeScatterPlot: View {
                 }
                 
             }.navigationTitle("Sleep time Scatterplot")
-        }
-    }
-    private func getYAxisLabel() -> String{
-        switch(experiment.dependentVariable){
-        case .quality: return "Quality of day"
-        case .productivity: return "Productivity"
-        case .both: return ""
         }
     }
     private func updateOptimalInterval(){

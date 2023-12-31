@@ -19,6 +19,7 @@ struct NewSleepEntryView: View {
         NavigationLink(destination: SleepView(experiment: $experiment, finishAction: { experiment in
             finishAction(experiment)
         })){
+            /*
             ProgressView(value: Double(experiment.entries.count)/Double(experiment.goalEntries)) {
                 Text("Goal: \(experiment.goalEntries) entries")
                 if(experiment.entries.count < experiment.goalEntries){
@@ -28,10 +29,12 @@ struct NewSleepEntryView: View {
                 }
                 
             }
+             */
+            Text("\(experiment.name)")
         }
         
         HStack{
-            Text("Add a new entry").bold()
+            Text("Add a new entry")
             Spacer().frame(maxWidth: .infinity)
             Button(action: {
                 sheet.toggle()

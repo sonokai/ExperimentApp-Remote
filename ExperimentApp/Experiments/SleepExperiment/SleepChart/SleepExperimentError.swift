@@ -13,6 +13,7 @@ enum SleepExperimentError: Error{
     case dateConversionError
     case wrongIndependentVariable
     case intervalExceedsRange
+    case insufficientRange
     var description: String {
         switch self{
         case .noEntries: return "You need at least one entry to calculate an optimal interval!"
@@ -20,6 +21,7 @@ enum SleepExperimentError: Error{
         case .dateConversionError: return "Something went wrong with the date converting."
         case .wrongIndependentVariable: return "Used a bedtime function when the experiment's dependent variable does not include bedtime"
         case .intervalExceedsRange: return "The interval is bigger than your range! Try increasing your chart range or reducing your interval size."
+        case .insufficientRange: return "The range of your data is less than 15 minutes, add more entries to analyze."
         }
     }
 }

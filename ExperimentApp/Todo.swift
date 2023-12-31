@@ -7,12 +7,6 @@
 // research sleep and add sleep tips
 
 
-// test bedtime history for large date range
-// test waketime scatterplot for large x ranges
-// test waketime history for large date range
-// test sleeptime scatterplot for large x ranges
-// test sleeptime history for large date range
-
 //make simple history charts display correct message (accurately report last week's difference) x3
 //make sleep intro view's create experiment at the bottom
 // make sleep intro view build on itself
