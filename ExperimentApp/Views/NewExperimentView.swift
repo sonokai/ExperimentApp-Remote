@@ -21,7 +21,7 @@ struct NewExperimentView: View {
                     NavigationLink(destination: DaySetupView(dayExperiments: $appData.dayExperiments)){
                         Text("Start a day experiment")
                     }
-                    NavigationLink(destination: MoodSetupView(moodExperiments: $appData.moodExperiments)){
+                    NavigationLink(destination: MoodSetupView(moodExperiments: $appData.moodExperiments, appData: .constant(AppData.sampleData), saveAction: {})){
                         Text("Start a mood experiment")
                     }
                 }

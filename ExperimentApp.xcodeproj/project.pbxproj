@@ -9,8 +9,11 @@
 /* Begin PBXBuildFile section */
 		593974992AAA8F45005D95D3 /* MoodSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593974982AAA8F45005D95D3 /* MoodSetupView.swift */; };
 		59702D4F2AABD2A100B296EB /* MoodRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59702D4E2AABD2A100B296EB /* MoodRatingView.swift */; };
-		598DDA7B2AA2BEB300784BD9 /* MoodExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598DDA7A2AA2BEB300784BD9 /* MoodExperiment.swift */; };
+		598DDA7B2AA2BEB300784BD9 /* MoodTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598DDA7A2AA2BEB300784BD9 /* MoodTracker.swift */; };
 		598DDA7D2AA2BEDA00784BD9 /* MoodEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598DDA7C2AA2BEDA00784BD9 /* MoodEntry.swift */; };
+		598F37962B4DF43100D3BB77 /* DurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F37952B4DF43100D3BB77 /* DurationView.swift */; };
+		598F37982B4DF85A00D3BB77 /* MoodTrackerEntrySetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F37972B4DF85A00D3BB77 /* MoodTrackerEntrySetupView.swift */; };
+		598F379A2B4F2A4500D3BB77 /* MoodTrackerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598F37992B4F2A4500D3BB77 /* MoodTrackerViewModel.swift */; };
 		59EEFAD92A58E7F400DA7D84 /* ExperimentAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEFAD82A58E7F400DA7D84 /* ExperimentAppApp.swift */; };
 		59EEFADD2A58E7F500DA7D84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59EEFADC2A58E7F500DA7D84 /* Assets.xcassets */; };
 		59EEFAE02A58E7F500DA7D84 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59EEFADF2A58E7F500DA7D84 /* Preview Assets.xcassets */; };
@@ -121,8 +124,11 @@
 /* Begin PBXFileReference section */
 		593974982AAA8F45005D95D3 /* MoodSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodSetupView.swift; sourceTree = "<group>"; };
 		59702D4E2AABD2A100B296EB /* MoodRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodRatingView.swift; sourceTree = "<group>"; };
-		598DDA7A2AA2BEB300784BD9 /* MoodExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodExperiment.swift; sourceTree = "<group>"; };
+		598DDA7A2AA2BEB300784BD9 /* MoodTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodTracker.swift; sourceTree = "<group>"; };
 		598DDA7C2AA2BEDA00784BD9 /* MoodEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodEntry.swift; sourceTree = "<group>"; };
+		598F37952B4DF43100D3BB77 /* DurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationView.swift; sourceTree = "<group>"; };
+		598F37972B4DF85A00D3BB77 /* MoodTrackerEntrySetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodTrackerEntrySetupView.swift; sourceTree = "<group>"; };
+		598F37992B4F2A4500D3BB77 /* MoodTrackerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodTrackerViewModel.swift; sourceTree = "<group>"; };
 		59EEFAD52A58E7F400DA7D84 /* ExperimentApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExperimentApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59EEFAD82A58E7F400DA7D84 /* ExperimentAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentAppApp.swift; sourceTree = "<group>"; };
 		59EEFADC2A58E7F500DA7D84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -244,12 +250,23 @@
 		598DDA792AA2BE9700784BD9 /* MoodExperiment */ = {
 			isa = PBXGroup;
 			children = (
-				598DDA7A2AA2BEB300784BD9 /* MoodExperiment.swift */,
+				598F37942B4DF40800D3BB77 /* Setup */,
+				598DDA7A2AA2BEB300784BD9 /* MoodTracker.swift */,
 				598DDA7C2AA2BEDA00784BD9 /* MoodEntry.swift */,
-				593974982AAA8F45005D95D3 /* MoodSetupView.swift */,
 				59702D4E2AABD2A100B296EB /* MoodRatingView.swift */,
+				598F37992B4F2A4500D3BB77 /* MoodTrackerViewModel.swift */,
 			);
 			path = MoodExperiment;
+			sourceTree = "<group>";
+		};
+		598F37942B4DF40800D3BB77 /* Setup */ = {
+			isa = PBXGroup;
+			children = (
+				593974982AAA8F45005D95D3 /* MoodSetupView.swift */,
+				598F37952B4DF43100D3BB77 /* DurationView.swift */,
+				598F37972B4DF85A00D3BB77 /* MoodTrackerEntrySetupView.swift */,
+			);
+			path = Setup;
 			sourceTree = "<group>";
 		};
 		59EEFACC2A58E7F400DA7D84 = {
@@ -658,6 +675,7 @@
 				6F7750B22A7B41B9003BFA65 /* DayProcedureView.swift in Sources */,
 				6FB517C02B34E58B0054A44C /* ProfileView.swift in Sources */,
 				6FA619D92B043A1F00CD9572 /* BedtimeHistory.swift in Sources */,
+				598F379A2B4F2A4500D3BB77 /* MoodTrackerViewModel.swift in Sources */,
 				6FF397E32AE1E7600096B143 /* BedtimeResults.swift in Sources */,
 				6FB517972B2E8F1B0054A44C /* SimpleSleepTimeBarChart.swift in Sources */,
 				6FB517AB2B337C160054A44C /* NewSleepEntry.swift in Sources */,
@@ -669,6 +687,7 @@
 				6FB517712B2C526A0054A44C /* BedtimeBarChart.swift in Sources */,
 				6F7750BB2A7B6C1B003BFA65 /* DayEditView.swift in Sources */,
 				6FB5176E2B2C3F9F0054A44C /* BedtimeChartPreview.swift in Sources */,
+				598F37982B4DF85A00D3BB77 /* MoodTrackerEntrySetupView.swift in Sources */,
 				6FB517B32B34649F0054A44C /* WaketimePicker.swift in Sources */,
 				6FF3982D2AF45D850096B143 /* WaketimeResults.swift in Sources */,
 				6FB517832B2D8B010054A44C /* BedtimeHistoryMessage.swift in Sources */,
@@ -676,7 +695,7 @@
 				6F28AFF42A9BCD2100FDCA0A /* ExperimentView2.swift in Sources */,
 				6FB5178D2B2E7E970054A44C /* WakeTimeHistory.swift in Sources */,
 				6F28AFF62A9BF7BB00FDCA0A /* NewExperimentView.swift in Sources */,
-				598DDA7B2AA2BEB300784BD9 /* MoodExperiment.swift in Sources */,
+				598DDA7B2AA2BEB300784BD9 /* MoodTracker.swift in Sources */,
 				6F7750D72A7DD14E003BFA65 /* Todo.swift in Sources */,
 				6F35C9C22AB65E740019D839 /* BedtimeScatterPlot+BarChart.swift in Sources */,
 				6F7750CE2A7C4374003BFA65 /* SleepSetup2.swift in Sources */,
@@ -702,6 +721,7 @@
 				6FB5178F2B2E81400054A44C /* WaketimeHistoryMessage.swift in Sources */,
 				598DDA7D2AA2BEDA00784BD9 /* MoodEntry.swift in Sources */,
 				6FB517952B2E8D3F0054A44C /* SleepTimeBarChart.swift in Sources */,
+				598F37962B4DF43100D3BB77 /* DurationView.swift in Sources */,
 				6F35C9C02AB658040019D839 /* WaketimeScatterPlot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

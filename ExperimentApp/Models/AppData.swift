@@ -10,14 +10,14 @@ import Foundation
 struct AppData: Codable{
     var sleepExperiments: [SleepExperiment]
     var dayExperiments: [DayExperiment]
-    var moodExperiments: [MoodExperiment]
+    var moodExperiments: [MoodTracker]
      
-    init(sleepExperiments: [SleepExperiment], dayExperiments: [DayExperiment], moodExperiments: [MoodExperiment]) {
+    init(sleepExperiments: [SleepExperiment], dayExperiments: [DayExperiment], moodExperiments: [MoodTracker]) {
         self.sleepExperiments = sleepExperiments
         self.dayExperiments = dayExperiments
         self.moodExperiments = moodExperiments
     }
     
     static var emptyData: AppData = AppData(sleepExperiments: [], dayExperiments: [], moodExperiments: [])
-    static var sampleData: AppData = AppData(sleepExperiments: [SleepExperiment.bedtimeSampleExperiment], dayExperiments: [DayExperiment.sampleExperiment], moodExperiments: MoodExperiment.sampleExperiments)
+    static var sampleData: AppData = AppData(sleepExperiments: [SleepExperiment.bedtimeSampleExperiment], dayExperiments: [DayExperiment.sampleExperiment], moodExperiments: MoodTracker.sampleExperiments)
 }
