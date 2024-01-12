@@ -7,7 +7,7 @@ struct MoodSetupView: View {
     @State private var shouldNavigate = false
     @State var name: String = ""
     let saveAction : () -> Void
-    
+    @Binding var selectedTabIndex: Int
     var body: some View {
         NavigationStack {
            Form {
@@ -22,14 +22,13 @@ struct MoodSetupView: View {
                     
                     moodExperiments.append(MoodTracker(name: name, entries: [], duration: viewModel.duration, dailyEntryGoal: viewModel.dailyEntryGoal))
                     shouldNavigate = true
+                    selectedTabIndex = 0
                 } label: {
                     Text("Start Tracking")
                 }
             }
         }
-        NavigationLink(destination: ExperimentView(appData: $appData, saveAction: saveAction), isActive: $shouldNavigate) {
-                        EmptyView()
-                    }
+        
     }
 }
                                            
@@ -38,7 +37,7 @@ struct MoodSetupView: View {
 struct MoodSetupView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            MoodSetupView(moodExperiments: .constant(MoodTracker.sampleExperiments), appData: .constant(AppData.sampleData), saveAction: {})
+            MoodSetupView(moodExperiments: .constant(MoodTracker.sampleExperiments), appData: .constant(AppData.sampleData), saveAction: {}, selectedTabIndex: .constant(1))
         }
     }
 }
