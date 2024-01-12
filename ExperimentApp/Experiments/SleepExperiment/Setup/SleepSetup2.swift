@@ -11,7 +11,7 @@ struct SleepSetup2: View {
     
     
     @Binding var dependentVariable: SleepExperiment.DependentVariable
-    @State var hasSelected = false
+    @Binding var index: Int
     var body: some View {
         
         NavigationStack{
@@ -44,10 +44,12 @@ struct SleepSetup2: View {
                                 }
                             }
                             Spacer()
-                            if(hasSelected == false || dependentVariable != variable){
+                            if(index == 1 || dependentVariable != variable){
                                 Button("Choose"){
                                     dependentVariable = variable
-                                    hasSelected = true
+                                    if(index == 1){
+                                        index = 2
+                                    }
                                 }
                             } else {
                                 Text("Selected")
@@ -71,7 +73,7 @@ struct SleepSetup2: View {
 
 struct SleepConfig2_Previews: PreviewProvider {
     static var previews: some View {
-        SleepSetup2(dependentVariable: .constant(.both))
+        SleepSetup2(dependentVariable: .constant(.both), index:.constant(0))
         
     }
 }

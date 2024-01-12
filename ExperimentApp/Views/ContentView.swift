@@ -9,22 +9,24 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment (\.scenePhase) private var scenePhase
-    
+    @State private var selectedTabIndex = 0
     @Binding var appData: AppData
     @State var isPresentingSheetView = false
     let saveAction : () -> Void
     var body: some View {
-        TabView {
-            ExperimentView(appData: $appData, saveAction: saveAction)
+        TabView(selection: $selectedTabIndex){
+            ExperimentView(appData: $appData, saveAction: saveAction, selectedTabIndex: $selectedTabIndex)
+                .tag(0)
                 .tabItem {
-                    
                     Label("Home", systemImage: "house")
                 }
-            NewExperimentView(appData: $appData)
+            NewExperimentView(appData: $appData, selectedTabIndex: $selectedTabIndex)
+                .tag(1)
                 .tabItem {
                     Label("Explore", systemImage: "magnifyingglass")
                 }
-            Text("Notification")
+            ProfileView(appData: $appData)
+                .tag(2)
                 .tabItem {
                     Label("Me", systemImage: "person")
                 }

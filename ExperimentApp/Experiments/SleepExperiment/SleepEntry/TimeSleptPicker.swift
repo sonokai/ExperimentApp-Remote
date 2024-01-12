@@ -16,7 +16,7 @@ struct TimeSleptPicker: View {
     var body: some View {
         VStack(alignment:.leading){
             HStack{
-                Image(systemName: "clock")
+                //Image(systemName: "clock")
                 Text("Time slept")
                 Spacer().frame(maxWidth: .infinity)
                 
@@ -48,8 +48,9 @@ struct TimeSleptPicker: View {
                     }
                 })//end of button
                 .popover(isPresented: $timeSelectorPopOver, attachmentAnchor: .point(.bottom), arrowEdge: .top, content: {
+                    
                     TimeSelector(hours: $hoursSlept, minutes: $minutesSlept)
-                        .presentationCompactAdaptation(.popover)
+                        //.presentationCompactAdaptation(.popover)
                         .padding()
                 }).onChange(of: hoursSlept) { newHoursSlept in
                     experiment.newSleepEntry.hoursSlept = newHoursSlept
@@ -77,9 +78,9 @@ struct TimeSleptPicker: View {
 
 struct TimeSelectingButton_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView{
+        NavigationStack{
             Form{
-                TimeSleptPicker(experiment: .constant(SleepExperiment.hoursSleptSampleExperiment), timeSelectorPopOver: .constant(false))
+                TimeSleptPicker(experiment: .constant(SleepExperiment.hoursSleptSampleExperiment), timeSelectorPopOver: .constant(true))
             }
         }
     }

@@ -6,46 +6,94 @@
 //
 
 import SwiftUI
-//make it so that it needs interaction before you get a value
-//interaction with all makes done avaiable
 struct NewSleepEntryView: View {
     
     @Binding var experiment: SleepExperiment
-    @State private var selectedDate = Date()
+    
     @State var timeSelectorPopOver = false
+    @State var sheet = false
+    let finishAction: (SleepExperiment) -> Void
     
+    @State var replaceAlert: Bool = false
     var body: some View {
-        
-            SleepEntryDatePicker(experiment: $experiment, timeSelectorPopOver: timeSelectorPopOver)
-            
-          //  Divider()
-            
-            switch(experiment.independentVariable){
-            case .bedtime:
-                BedtimePicker(experiment: $experiment)
-            case .waketime:
-                WaketimePicker(experiment: $experiment)
-            case .both:
-                BedtimePicker(experiment: $experiment)
-                WaketimePicker(experiment: $experiment)
-            case .hoursSlept:
-                TimeSleptPicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
-            }//end of switch
-        
-            switch(experiment.dependentVariable){
-            case .quality:
-                SleepDependentVarPicker(label: "Quality of day", optional: $experiment.newSleepEntry.quality)
-            case .productivity:
-                SleepDependentVarPicker(label: "Productivity", optional: $experiment.newSleepEntry.productivity, image: "gearshape")
-            case .both:
-                SleepDependentVarPicker(label: "Quality of day", optional: $experiment.newSleepEntry.quality)
-                SleepDependentVarPicker(label: "Productivity", optional: $experiment.newSleepEntry.productivity, image: "gearshape")
+        NavigationLink(destination: SleepView(experiment: $experiment, finishAction: { experiment in
+            finishAction(experiment)
+        })){
+            /*
+            ProgressView(value: Double(experiment.entries.count)/Double(experiment.goalEntries)) {
+                Text("Goal: \(experiment.goalEntries) entries")
+                if(experiment.entries.count < experiment.goalEntries){
+                    Text("Progress: \(experiment.entries.count)/\(experiment.goalEntries) (\(Int(Double(experiment.entries.count)/Double(experiment.goalEntries)*100))%)")
+                }else {
+                    Text("View your results")
+                }
+                
             }
+             */
+            Text("\(experiment.name)")
+        }
+        
+        HStack{
+            Text("Add a new entry")
+            Spacer().frame(maxWidth: .infinity)
+            Button(action: {
+                sheet.toggle()
+            }, label: {
+                Image(systemName: "info.circle")
+            }).sheet(isPresented: $sheet, content: {
+                SleepProcedureView(experiment: experiment, sheet: $sheet)
+            })
+        }
+        
+        SleepEntryDatePicker(experiment: $experiment, timeSelectorPopOver: timeSelectorPopOver)
+        
+        switch(experiment.independentVariable){
+        case .bedtime:
+            BedtimePicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
+        case .waketime:
+            WaketimePicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
+        case .both:
+            BedtimePicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
+            WaketimePicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
+        case .hoursSlept:
+            TimeSleptPicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
+        }
+        
+        switch(experiment.dependentVariable){
+        case .quality:
+            SleepDependentVarPicker(label: "Quality of day", optional: $experiment.newSleepEntry.quality)
+        case .productivity:
+            SleepDependentVarPicker(label: "Productivity", optional: $experiment.newSleepEntry.productivity, image: "gearshape")
+        case .both:
+            SleepDependentVarPicker(label: "Quality of day", optional: $experiment.newSleepEntry.quality)
+            SleepDependentVarPicker(label: "Productivity", optional: $experiment.newSleepEntry.productivity, image: "gearshape")
+        }
+        
         Button("Done"){
-            experiment.initiateSleepEntry()
-        }.disabled(!experiment.newSleepEntry.isReady(experiment: experiment))
+            if(isInvalidEntry()){
+                replaceAlert = true
+            } else {
+                experiment.initiateSleepEntry()
+            }
+        }.alert("There is another entry with the date \(formatToMonthAndDay()). Replace this entry?", isPresented: $replaceAlert, actions: {
+            Button("Continue", role: .destructive){
+                experiment.entries.removeAll{ entry in  Calendar.current.isDate(entry.date, equalTo: experiment.newSleepEntry.date, toGranularity: .day)
+                }
+                
+                experiment.initiateSleepEntry()
+                experiment.sortEntriesByDate()
+            }
+        }).disabled(!experiment.newSleepEntry.isReady(experiment: experiment))
+        
+        
     }
-    
+    func formatToMonthAndDay() -> String {
+        let date = experiment.newSleepEntry.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM d"
+        let formattedDateString = dateFormatter.string(from: date)
+        return formattedDateString
+    }
     func isInvalidEntry()->Bool{
         for entry in experiment.entries{
             let date = entry.date
@@ -67,7 +115,7 @@ struct NewSleepEntryView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
             Form{
-                NewSleepEntryView(experiment: .constant(SleepExperiment.hoursSleptSampleExperiment))
+                NewSleepEntryView(experiment: .constant(SleepExperiment.waketimeSampleExperiment), finishAction: {_ in})
             }.buttonStyle(.borderless)
         }
     }

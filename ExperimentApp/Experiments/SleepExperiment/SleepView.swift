@@ -10,66 +10,102 @@ import SwiftUI
 
 struct SleepView: View {
     @Binding var experiment: SleepExperiment
-    @State private var isAddingNew = false
-    @State private var newEntry = SleepEntry.newEntry
+    @State var showInsights: Bool = true
+    @State var showProgress: Bool = true
+    @State var showCorrelationalData: Bool = true
+    @State var showIndependentVariableData: Bool = true
+    @State var showDependentVariableData: Bool = true
+    @Environment(\.presentationMode) var presentationMode
+    let finishAction: (SleepExperiment) -> Void
+    @State var presentAlert: Bool = false
+    @State var isFinished: Bool = false
     
     var body: some View {
-        
-        
-        
         NavigationStack{
-            
             Form{
-                Section("Make a new entry"){
-                    NewSleepEntryView(experiment: $experiment)
-                }
                 
-                Section("Results"){
-                    NavigationLink(destination: SleepProcedureView(experiment: experiment)){
-                        Text("Procedure")
-                    }
-                    NavigationLink(destination: SleepChart(experiment: experiment)){
-                        Text("Chart")
-                    }
-                    NavigationLink(destination: Text("\(experiment.notes)")){
-                        Text("Notes")
-                    }
-                    NavigationLink(destination: SleepHistory(experiment: $experiment)){
-                        Text("History")
+                Section(header: SleepExperimentHeader(title: "Insights", isOn: $showInsights)){
+                    if(showInsights){
+                        SleepProgressView(experiment: experiment)
+                        SleepInsightView(experiment: $experiment)
                     }
                 }
-            }
-            .navigationTitle(Text("\(experiment.name)"))
-            
-            
-            
-            
-        }.sheet(isPresented: $isAddingNew) {
-            
-            NavigationStack {
-                
-                SleepEditView(entry: $experiment.entries[experiment.entries.count-1], experiment: $experiment)// return the last item in entries because when the button was pressed, an empty entry was added
-                    .navigationTitle("New Entry")
-                    .toolbar {
-                        ToolbarItem(placement: .cancellationAction) {
-                            Button("Cancel") {
-                                isAddingNew = false
-                                experiment.entries.removeLast()
-                            }
+                //results
+                switch(experiment.independentVariable){
+                case .bedtime:
+                    Section(header: SleepExperimentHeader(title: "Correlational Data", isOn: $showCorrelationalData)){
+                        if(showCorrelationalData){
+                            BedtimeCorrelationData(experiment: experiment)
                         }
                     }
-            }
-            
-        }.toolbar {
-            Button("New entry") {
-                experiment.entries.append(newEntry)
-                //immediately add a new entry and present a sleepeditview as a sheet to edit that entry'
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
-                    isAddingNew = true
+                    
+                    Section(header: SleepExperimentHeader(title: "Bedtime data", isOn: $showIndependentVariableData)){
+                        if(showIndependentVariableData){
+                            BedtimeData(experiment: experiment)
+                        }
+                    }
+                case .waketime:
+                    Section(header: SleepExperimentHeader(title: "Correlational Data", isOn: $showCorrelationalData)){
+                        if(showCorrelationalData){
+                            WaketimeCorrelationData(experiment: experiment)
+                        }
+                    }
+                    Section(header: SleepExperimentHeader(title: "Wake time data", isOn: $showIndependentVariableData)){
+                        if(showIndependentVariableData){
+                            WaketimeData(experiment: experiment)
+                        }
+                    }
+                case .both:
+                    Section(header: SleepExperimentHeader(title: "Correlational Data", isOn: $showCorrelationalData)){
+                        if(showCorrelationalData){
+                            BothTimeCorrelationData(experiment: experiment)
+                        }
+                    }
+                    
+                    Section(header: SleepExperimentHeader(title: "Independent variable data", isOn: $showIndependentVariableData)){
+                        if(showIndependentVariableData){
+                            BothTimeData(experiment: experiment)
+                        }
+                    }
+                case .hoursSlept:
+                    Section(header: SleepExperimentHeader(title: "Correlational Data", isOn: $showCorrelationalData)){
+                        if(showCorrelationalData){
+                            SleepTimeCorrelationData(experiment: experiment)
+                        }
+                    }
+                    Section(header: SleepExperimentHeader(title: "Sleep time data", isOn: $showIndependentVariableData)){
+                        if(showIndependentVariableData){
+                            SleepTimeData(experiment: experiment)
+                        }
+                    }
                 }
+                Section(header: SleepExperimentHeader(title: "Dependent variable data", isOn: $showDependentVariableData)){
+                    if(showDependentVariableData){
+                        DependentVariableData(experiment: experiment)
+                    }
+                }
+                
+                Section("Finish experiment"){
+                    Button("Finish experiment"){
+                        //show alert
+                        presentAlert = true
+                        
+                    }.alert("Are you sure you want to finish your experiment?", isPresented: $presentAlert, actions: {
+                        Button("Finish", role: .destructive){
+                            isFinished = true
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                    })
+                }
+            }.buttonStyle(.borderless)
+                .toolbar(content: toolbarContent)
+                .navigationBarBackButtonHidden(true)
+            
+            
+        }.onDisappear(){
+            if(isFinished){
+                finishAction(experiment)
             }
-            
-            
         }
     }
     
@@ -78,6 +114,8 @@ struct SleepView: View {
 
 struct SleepView3_Previews: PreviewProvider {
     static var previews: some View {
-        SleepView(experiment: .constant(SleepExperiment.bedtimeSampleExperiment))
+        NavigationStack{
+            SleepView(experiment: .constant(SleepExperiment.bedtimeSampleExperiment), finishAction: { _ in})
+        }
     }
 }

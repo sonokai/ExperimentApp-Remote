@@ -11,42 +11,62 @@ struct WaketimePicker: View {
     @Binding var experiment: SleepExperiment
     
     @State var waketime: Date = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date()) ?? Date()
-
-    
+    @Binding var timeSelectorPopOver: Bool
+    @State var interacted: Bool = false
     var body: some View {
         HStack{
-            Image(systemName: "bed.double")
-            if let initialValue = experiment.newSleepEntry.bedtime {
-                DatePicker("Waketime", selection: $waketime, displayedComponents: [.hourAndMinute])
+            //Image(systemName: "bed.double")
+            if let initialValue = experiment.newSleepEntry.waketime {
+                DatePicker("Wake time", selection: $waketime, displayedComponents: [.hourAndMinute])
                     .onChange(of: waketime, perform: { newValue in
                         experiment.newSleepEntry.waketime = newValue
-                    })
-                    .onAppear(){
+                    }).onAppear(){
                         waketime = initialValue
                     }
             } else {
                 HStack{
-                    Text("Waketime")
+                    Text("Wake time")
                     Spacer().frame(maxWidth: .infinity)
                     Button(action: {
-                        waketime = Date()
-                        experiment.newSleepEntry.waketime = Date()
+                        withAnimation{
+                            timeSelectorPopOver.toggle()
+                            interacted = true
+                        }
                     }, label: {
-                        Text("Now")
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(Color(UIColor.systemGray6))
+                                .frame(width: 100)
+                            if(interacted){
+                                Text(getTime()).foregroundColor(timeSelectorPopOver ? .blue : .black)
+                                    .foregroundColor(timeSelectorPopOver ? .blue : .black)
+                            }else {
+                                Text("    ")
+                                    .foregroundColor(timeSelectorPopOver ? .blue : .black)
+                            }
+                        }
+                    }).popover(isPresented: $timeSelectorPopOver, attachmentAnchor: .point(.leading), arrowEdge: .trailing, content: {
+                        CustomDatePicker(date: $waketime, timeSelectorPopOver: $timeSelectorPopOver)
+                           // .presentationCompactAdaptation(.popover)
+                            .padding()
                     })
-                    DatePicker("", selection: $waketime, displayedComponents: [.hourAndMinute])
                 }.onChange(of: waketime, perform: { newValue in
                     experiment.newSleepEntry.waketime = newValue
                 })
             }
         }
     }
+    func getTime() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        return dateFormatter.string(from: waketime)
+    }
 }
 
 struct WaketimePicker_Previews: PreviewProvider {
     static var previews: some View {
         Form{
-            WaketimePicker(experiment: .constant(SleepExperiment.bedtimebothExperiment))
+            WaketimePicker(experiment: .constant(SleepExperiment.waketimeSampleExperiment), timeSelectorPopOver: .constant(false))
         }
     }
 }
