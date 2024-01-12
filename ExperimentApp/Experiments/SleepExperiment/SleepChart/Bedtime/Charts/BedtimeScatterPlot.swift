@@ -214,6 +214,6 @@ struct BedtimeChart_Previews: PreviewProvider {
     static let testInterval: Date = Calendar.current.date(bySettingHour: 10, minute: 50, second: 0, of: Date())!
     static var previews: some View {
         
-        BedtimeScatterPlot(experiment: SleepExperiment.bedtimebothExperiment, dependentVariable: .productivity ,interval: testInterval, size: 30)
+        BedtimeScatterPlot(experiment: SleepExperiment.bedtimeSampleExperiment2, dependentVariable: .productivity ,interval: testInterval, size: 30)
     }
 }

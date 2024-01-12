@@ -199,6 +199,6 @@ struct WaketimeStatsHeader: View{
 struct WaketimeChart_Previews: PreviewProvider {
     static let testInterval: Date = Calendar.current.date(bySettingHour: 10, minute: 50, second: 0, of: Date())!
     static var previews: some View {
-        WaketimeScatterPlot(experiment: SleepExperiment.testCrash, dependentVariable: .productivity)
+        WaketimeScatterPlot(experiment: SleepExperiment.waketimeSampleExperiment, dependentVariable: .productivity)
     }
 }
