@@ -38,6 +38,7 @@ struct SleepExperiment: Identifiable, Codable{
         self.name = name
         self.insights = insights
     }
+    //another one for teting
     init(id: UUID = UUID(), dependentVariable: DependentVariable, independentVariable: IndependentVariable, entries: [SleepEntry]) {
         self.id = id
         self.startDate = Date()
@@ -47,6 +48,7 @@ struct SleepExperiment: Identifiable, Codable{
         self.entries = entries
     }
 }
+
 extension SleepExperiment{
     enum DependentVariable: String, Codable, CaseIterable, Identifiable{
         var id: Self{

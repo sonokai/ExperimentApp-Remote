@@ -19,17 +19,7 @@ struct NewSleepEntryView: View {
         NavigationLink(destination: SleepView(experiment: $experiment, finishAction: { experiment in
             finishAction(experiment)
         })){
-            /*
-            ProgressView(value: Double(experiment.entries.count)/Double(experiment.goalEntries)) {
-                Text("Goal: \(experiment.goalEntries) entries")
-                if(experiment.entries.count < experiment.goalEntries){
-                    Text("Progress: \(experiment.entries.count)/\(experiment.goalEntries) (\(Int(Double(experiment.entries.count)/Double(experiment.goalEntries)*100))%)")
-                }else {
-                    Text("View your results")
-                }
-                
-            }
-             */
+            
             Text("\(experiment.name)")
         }
         

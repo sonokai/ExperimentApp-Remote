@@ -21,6 +21,8 @@ extension SleepExperiment{
             print("Called get optimal bedtime interval but independent variable is not bedtime")
             return .failure(SleepExperimentError.wrongIndependentVariable)
         }
+        
+        
         //first find bounds of our for loop before iterating through it
         var least = getLeastBedtimeMinutes()
         if let date1 = lowEndpoint {
@@ -59,6 +61,64 @@ extension SleepExperiment{
             optimalInterval = optimalInterval - 1440
         }
         if let date = Calendar.current.date(bySettingHour: optimalInterval/60, minute: optimalInterval % 60, second: 0, of: Date()){
+            return .success(date)
+        } else {
+            return .failure(SleepExperimentError.dateConversionError)
+        }
+    }
+    
+    //the same but fixed size so that it always lands on a nice number
+    func getOptimalBedtimeInterval(dependentVariable: DependentVariable, requiredEntries: Int = 1,lowEndpoint: Date? = nil, highEndpoint: Date? = nil) ->Result<Date, SleepExperimentError>{
+        if(entries.count == 0){
+            return .failure(SleepExperimentError.noEntries)
+        }
+        if(getBedtimeRange()<30){
+            return.failure(SleepExperimentError.insufficientRange)
+        }
+        if(!(independentVariable == .bedtime || independentVariable == .both)){
+            print("Called get optimal bedtime interval but independent variable is not bedtime")
+            return .failure(SleepExperimentError.wrongIndependentVariable)
+        }
+        //set up bounds
+        var least = getLeastBedtimeMinutes()
+        if let date1 = lowEndpoint {
+            least = SleepExperiment.getBedtimeMinutes(from: date1)
+        }
+        var most = getMostBedtimeMinutes()
+        if let date2 = highEndpoint{
+            most = SleepExperiment.getBedtimeMinutes(from: date2)
+        }
+        
+        //iterate through the range, changing the optimal interval if needed. this will find the optimal minute to start with
+        if(least+30 > most){
+            return .failure(SleepExperimentError.intervalExceedsRange)
+        }
+        //cycle through these and see which one is the best
+        var bestMinutes = -1
+        var bestAverage :Double = 0
+        var hasFoundOptimalInterval = false
+        for minutes in stride(from: 720, through: 2160, by: 30){
+            if(minutes < least || minutes + 30 > most){
+                continue
+            }
+            if(entryCountInBedtimeInterval(at: minutes, for: 30) >= requiredEntries){
+                let average = averageOfBedtimeInterval(at: minutes, for: 30, dependentVariable: dependentVariable)
+                if(average > bestAverage){
+                    bestAverage = average
+                    bestMinutes = minutes
+                    hasFoundOptimalInterval = true
+                }
+            }
+        }
+        if(bestMinutes >= 1440){
+            bestMinutes = bestMinutes - 1440
+        }
+        
+        if(!hasFoundOptimalInterval){
+            return .failure(SleepExperimentError.insufficientEntriesInInterval)
+        }
+        
+        if let date = Calendar.current.date(bySettingHour: bestMinutes/60, minute: bestMinutes % 60, second: 0, of: Date()){
             return .success(date)
         } else {
             return .failure(SleepExperimentError.dateConversionError)

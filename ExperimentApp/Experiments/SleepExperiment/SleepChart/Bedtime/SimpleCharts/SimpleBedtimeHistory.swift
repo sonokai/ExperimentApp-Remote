@@ -10,6 +10,19 @@ import Charts
 //Required: 7 entries
 struct SimpleBedtimeHistory: View {
     var experiment: SleepExperiment
+    
+    enum Day: String, Identifiable{
+        var id: Self{
+            return self
+        }
+        case one = "one"
+        case two  = "two"
+        case three = "three"
+        case four = "four"
+        case five = "five"
+        case six = "six"
+        case seven = "seven"
+    }
     var body: some View {
         
         VStack(alignment: .leading){
@@ -23,7 +36,7 @@ struct SimpleBedtimeHistory: View {
             }
             Chart(getLast7Entries()){ entry in
                 BarMark(
-                    x: .value("Date", entry.date.convertToMMDDYYYY(), unit: .day),
+                    x: .value("Date", getIndex(of: entry).rawValue),
                     yStart: .value("Min", getYDomain().lowerBound),
                     yEnd: .value("Bedtime",SleepExperiment.getBedtimeSeconds(from: entry.bedtime))
                 ).foregroundStyle(.red)
@@ -41,17 +54,28 @@ struct SimpleBedtimeHistory: View {
         }
         return experiment.entries.suffix(7)
     }
-    
+    func getIndex(of entry: SleepEntry) -> Day{
+        if let index = experiment.entries.firstIndex(where: { $0.id == entry.id }) {
+            switch(index%7){
+            case 0: return .one
+            case 1: return .two
+            case 2: return .three
+            case 3: return .four
+            case 4: return .five
+            case 5: return .six
+            case 6: return .seven
+            default: return .one
+            }
+            
+        } else {
+            return .one
+        }
+    }
     func getBedtimeRange() -> (Double, Double){
         var least = (Double)(0)
         var most = (Double)(0)
-        for entry in experiment.entries{
-            
-            var seconds = entry.bedtime.timeIntervalSince1970.truncatingRemainder(dividingBy: 86400)
-            if(seconds<43_200){
-                seconds += 86_400
-            }
-            
+        for entry in getLast7Entries(){
+            let seconds = SleepExperiment.getBedtimeSeconds(from: entry.bedtime)
             if(seconds < least || least == 0){
                 least = seconds
             }

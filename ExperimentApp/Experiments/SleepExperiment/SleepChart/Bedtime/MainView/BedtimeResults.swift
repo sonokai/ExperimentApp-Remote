@@ -31,7 +31,7 @@ struct BedtimeResults: View {
 struct SleepStats_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
-            BedtimeResults(experiment: SleepExperiment.midnightSampleExperiment)
+            BedtimeResults(experiment: SleepExperiment.bedtimeSampleExperiment)
         }
     }
 }

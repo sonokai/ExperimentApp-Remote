@@ -105,6 +105,7 @@ struct SleepTimeScatterPlot: View {
                             Text("-")
                         }
                     }
+                    /*
                     HStack{
                         Text("Confidence level")
                         Spacer()
@@ -114,6 +115,7 @@ struct SleepTimeScatterPlot: View {
                             Text("-")
                         }
                     }
+                    */
                     HStack{
                         if(dependentVariable == .quality){
                             Text("Quality of day of optimal interval ")
@@ -128,6 +130,7 @@ struct SleepTimeScatterPlot: View {
                         }
                         
                     }
+                    /*
                     if(experiment.getSleepTimeRange() >= 15){
                         SliderView(name: "Optimal interval size",value: $size, lowValue: 15, highValue: 60)
                             .onChange(of: size){ _ in
@@ -139,6 +142,7 @@ struct SleepTimeScatterPlot: View {
                                 updateOptimalInterval()
                             }
                     }
+                    */
                     if(!optimalIntervalIsValid){
                         Text(errorMessage)
                     }
@@ -149,7 +153,7 @@ struct SleepTimeScatterPlot: View {
         }
     }
     private func updateOptimalInterval(){
-        switch(experiment.getOptimalSleepTimeInterval(size: size, dependentVariable: dependentVariable, lowEndpoint: getMinutes(startTime), highEndpoint: getMinutes(endTime), requiredEntries: entriesRequired)){
+        switch(experiment.getOptimalSleepTimeInterval(dependentVariable: dependentVariable, requiredEntries: entriesRequired, lowEndpoint: getMinutes(startTime), highEndpoint: getMinutes(endTime))){
         case .success(let optimalInterval):
             interval = optimalInterval
             optimalIntervalIsValid = true

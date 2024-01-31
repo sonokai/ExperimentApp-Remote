@@ -107,15 +107,18 @@ struct BedtimeScatterPlot: View {
                         }
                         
                     }
+                    /*
                     HStack{
                         Text("Confidence level")
                         Spacer()
                         if(optimalIntervalIsValid){
-                            Text(getConfidenceOfBedtimeInterval())
+                            Text("-")
+                            //Text(getConfidenceOfBedtimeInterval())
                         }else {
                             Text("-")
                         }
                     }
+                     */
                     HStack{
                         if(dependentVariable == .quality){
                             Text("Quality of day of optimal interval")
@@ -130,7 +133,7 @@ struct BedtimeScatterPlot: View {
                         }
                         
                     }
-                    
+                    /*
                     if(experiment.getBedtimeRange() >= 15){
                         SliderView(name: "Interval size (minutes)",value: $size, lowValue: 15, highValue: 60 > experiment.getBedtimeRange() ?  (Double)(experiment.getBedtimeRange()) : 60)
                             .onChange(of: size){ _ in
@@ -141,7 +144,7 @@ struct BedtimeScatterPlot: View {
                                 }
                                 updateInterval()
                             }
-                    }
+                    }*/
                     
                     
                     if(!optimalIntervalIsValid){
@@ -161,7 +164,7 @@ struct BedtimeScatterPlot: View {
     
     private func updateInterval(){
         
-        switch(experiment.getOptimalBedtimeInterval(size: size, dependentVariable: dependentVariable, lowEndpoint: startTime, highEndpoint: endTime, requiredEntries: entriesRequired)){
+        switch(experiment.getOptimalBedtimeInterval(dependentVariable: dependentVariable, requiredEntries: entriesRequired, lowEndpoint: startTime, highEndpoint: endTime)){
         case .success(let optimalInterval):
             interval = optimalInterval
             optimalIntervalIsValid = true
@@ -214,6 +217,6 @@ struct BedtimeChart_Previews: PreviewProvider {
     static let testInterval: Date = Calendar.current.date(bySettingHour: 10, minute: 50, second: 0, of: Date())!
     static var previews: some View {
         
-        BedtimeScatterPlot(experiment: SleepExperiment.bedtimeSampleExperiment2, dependentVariable: .productivity ,interval: testInterval, size: 30)
+        BedtimeScatterPlot(experiment: SleepExperiment.bedtimeSampleExperiment, dependentVariable: .quality ,interval: testInterval, size: 30)
     }
 }

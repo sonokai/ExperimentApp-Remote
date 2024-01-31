@@ -132,6 +132,59 @@ extension SleepExperiment{
             return .failure(SleepExperimentError.dateConversionError)
         }
     }
+    func getOptimalSleepTimeInterval(dependentVariable: DependentVariable, requiredEntries: Int = 1,lowEndpoint: Int? = nil, highEndpoint: Int? = nil) ->Result<Date, SleepExperimentError>{
+        if(entries.count == 0){
+            return .failure(SleepExperimentError.noEntries)
+        }
+        if(getSleepTimeRange()<30){
+            return.failure(SleepExperimentError.insufficientRange)
+        }
+        if(!(independentVariable == .hoursSlept || independentVariable == .both)){
+            print("Called get optimal sleep time interval but independent variable is bedtime or waketime")
+            return .failure(SleepExperimentError.wrongIndependentVariable)
+        }
+        //set up bounds
+        var least = getLeastSleepTimeMinutes()
+        if let date1 = lowEndpoint {
+            least = date1
+        }
+        var most = getMostSleepTimeMinutes()
+        if let date2 = highEndpoint {
+            most = date2
+        }
+        
+        //iterate through the range, changing the optimal interval if needed. this will find the optimal minute to start with
+        if(least+30 > most){
+            return .failure(SleepExperimentError.intervalExceedsRange)
+        }
+        //cycle through these and see which one is the best
+        var bestMinutes = -1
+        var bestAverage :Double = 0
+        var hasFoundOptimalInterval = false
+        
+        for minutes in stride(from: 0, through: 1440, by: 30){
+            if(minutes < least || minutes + 30 > most){
+                continue
+            }
+            if(entryCountInSleepTimeInterval(at: minutes, for: 30) >= requiredEntries){
+                let average = averageOfSleepTimeInterval(at: minutes, for: 30, dependentVariable: dependentVariable)
+                if(average > bestAverage){
+                    bestAverage = average
+                    bestMinutes = minutes
+                    hasFoundOptimalInterval = true
+                }
+            }
+        }
+        if(!hasFoundOptimalInterval){
+            return .failure(SleepExperimentError.insufficientEntriesInInterval)
+        }
+        
+        if let date = Calendar.current.date(bySettingHour: bestMinutes/60, minute: bestMinutes % 60, second: 0, of: Date()){
+            return .success(date)
+        } else {
+            return .failure(SleepExperimentError.dateConversionError)
+        }
+    }
     
     
     

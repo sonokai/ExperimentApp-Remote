@@ -15,7 +15,7 @@ struct ErrorView: View {
     var body: some View {
         NavigationStack{
             VStack {
-                Text("oh no an error has happened").font(.system(size: 50))
+                Text("Sorry something went wrong").font(.system(size: 50))
                 
                 Text(errorWrapper.error.localizedDescription)
                     .font(.headline)
@@ -46,7 +46,7 @@ struct ErrorView_Previews: PreviewProvider {
     
     static var wrapper: ErrorWrapper {
         ErrorWrapper(error: SampleError.errorRequired,
-                     guidance: "You can safely ignore this error.")
+                     guidance: "we deleted all your data (sorry)")
     }
     
     static var previews: some View {

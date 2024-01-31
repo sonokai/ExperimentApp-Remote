@@ -56,7 +56,7 @@ struct SleepDependentHistory: View {
                 .chartYAxisLabel(getChartYAxisLabel())
             }
             Section(){
-                if(dependentVariable == .quality){
+                if(dependentVariable == .quality || experiment.dependentVariable == .quality){
                     HStack{
                         Text("Average quality of day: ")
                         Spacer()

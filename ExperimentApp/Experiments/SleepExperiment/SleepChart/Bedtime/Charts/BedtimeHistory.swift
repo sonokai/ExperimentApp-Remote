@@ -90,6 +90,6 @@ struct BedtimeHistory: View {
 
 struct BedtimeHistory_Previews: PreviewProvider {
     static var previews: some View {
-        BedtimeHistory(experiment: SleepExperiment.highDateRangeBedtimeExperiment)
+        BedtimeHistory(experiment: SleepExperiment.bedtimeSampleExperiment)
     }
 }

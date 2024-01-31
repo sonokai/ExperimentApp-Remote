@@ -14,47 +14,16 @@ struct WaketimePicker: View {
     @Binding var timeSelectorPopOver: Bool
     @State var interacted: Bool = false
     var body: some View {
-        HStack{
-            //Image(systemName: "bed.double")
-            if let initialValue = experiment.newSleepEntry.waketime {
-                DatePicker("Wake time", selection: $waketime, displayedComponents: [.hourAndMinute])
-                    .onChange(of: waketime, perform: { newValue in
-                        experiment.newSleepEntry.waketime = newValue
-                    }).onAppear(){
-                        waketime = initialValue
-                    }
-            } else {
-                HStack{
-                    Text("Wake time")
-                    Spacer().frame(maxWidth: .infinity)
-                    Button(action: {
-                        withAnimation{
-                            timeSelectorPopOver.toggle()
-                            interacted = true
-                        }
-                    }, label: {
-                        ZStack{
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(Color(UIColor.systemGray6))
-                                .frame(width: 100)
-                            if(interacted){
-                                Text(getTime()).foregroundColor(timeSelectorPopOver ? .blue : .black)
-                                    .foregroundColor(timeSelectorPopOver ? .blue : .black)
-                            }else {
-                                Text("    ")
-                                    .foregroundColor(timeSelectorPopOver ? .blue : .black)
-                            }
-                        }
-                    }).popover(isPresented: $timeSelectorPopOver, attachmentAnchor: .point(.leading), arrowEdge: .trailing, content: {
-                        CustomDatePicker(date: $waketime, timeSelectorPopOver: $timeSelectorPopOver)
-                           // .presentationCompactAdaptation(.popover)
-                            .padding()
-                    })
-                }.onChange(of: waketime, perform: { newValue in
-                    experiment.newSleepEntry.waketime = newValue
-                })
+        
+        DatePicker("Wake time", selection: $waketime, displayedComponents: [.hourAndMinute])
+            .onChange(of: waketime, perform: { newValue in
+                experiment.newSleepEntry.waketime = newValue
+            }).onAppear(){
+                if let initialValue = experiment.newSleepEntry.waketime {
+                    waketime = initialValue
+                }
             }
-        }
+        
     }
     func getTime() -> String {
         let dateFormatter = DateFormatter()

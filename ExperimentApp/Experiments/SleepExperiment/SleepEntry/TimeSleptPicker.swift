@@ -15,54 +15,45 @@ struct TimeSleptPicker: View {
     @State var interacted = false
     var body: some View {
         VStack(alignment:.leading){
-            HStack{
-                //Image(systemName: "clock")
-                Text("Time slept")
-                Spacer().frame(maxWidth: .infinity)
+            HStack {
                 
-                Button(action: {
-                    withAnimation{
-                        timeSelectorPopOver.toggle()
-                    }
-                }, label: {
-                    ZStack{
-                        RoundedRectangle(cornerRadius: 5)
-                            .fill(Color(UIColor.systemGray6))
-                            .frame(width: 75)
-                        if let hours = experiment.newSleepEntry.hoursSlept, let minutes = experiment.newSleepEntry.minutesSlept{
-                            Text(getTime())
-                                .foregroundColor(timeSelectorPopOver ? .blue : .black)
-                                .onAppear(){
-                                    hoursSlept = hours
-                                    minutesSlept = minutes
-                                }
-                        } else {
-                            if(interacted){
-                                Text(getTime()).foregroundColor(timeSelectorPopOver ? .blue : .black)
-                                .foregroundColor(timeSelectorPopOver ? .blue : .black)
-                            }else {
-                                Text("-:--")
-                                    .foregroundColor(timeSelectorPopOver ? .blue : .black)
-                            }
-                        }
-                    }
-                })//end of button
-                .popover(isPresented: $timeSelectorPopOver, attachmentAnchor: .point(.bottom), arrowEdge: .top, content: {
+                    //Image(systemName: "clock")
+                    Text("Time slept")
+                    Spacer().frame(maxWidth: .infinity)
                     
-                    TimeSelector(hours: $hoursSlept, minutes: $minutesSlept)
-                        //.presentationCompactAdaptation(.popover)
-                        .padding()
-                }).onChange(of: hoursSlept) { newHoursSlept in
-                    experiment.newSleepEntry.hoursSlept = newHoursSlept
-                    interacted = true
-                }
-                .onChange(of: minutesSlept){ newMinutesSlept in
-                    experiment.newSleepEntry.minutesSlept = newMinutesSlept
-                    interacted = true
+                    Button(action: {
+                        withAnimation{
+                            timeSelectorPopOver.toggle()
+                        }
+                    }, label: {
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(Color(UIColor.systemGray6))
+                                .frame(width: 75)
+                            
+                            Text(getTime())
+                                .onAppear(){
+                                    if let hours = experiment.newSleepEntry.hoursSlept, let minutes = experiment.newSleepEntry.minutesSlept{
+                                        hoursSlept = hours
+                                        minutesSlept = minutes
+                                    }
+                                }
+                            
+                        }
+                    })//end of button
+                    .popover(isPresented: $timeSelectorPopOver, attachmentAnchor: .point(.bottom), arrowEdge: .top, content: {
+                        TimeSelector(hours: $hoursSlept, minutes: $minutesSlept)
+                            .padding()
+                    }).onChange(of: hoursSlept) { newHoursSlept in
+                        experiment.newSleepEntry.hoursSlept = newHoursSlept
+                    }
+                    .onChange(of: minutesSlept){ newMinutesSlept in
+                        experiment.newSleepEntry.minutesSlept = newMinutesSlept
+                    }
                 }
             }
             
-        }
+        
         
     }
     func getTime() -> String{

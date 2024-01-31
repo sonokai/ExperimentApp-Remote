@@ -105,16 +105,17 @@ struct WaketimeScatterPlot: View {
                             Text("-")
                         }
                     }
+                    /*
                     HStack{
                         Text("Confidence level")
                         Spacer()
                         if(optimalIntervalIsValid){
-                            Text(getConfidenceOfWaketimeInterval())
+                            Text("-")
                         }else {
                             Text("-")
                         }
                     }
-                    
+                    */
                     HStack{
                         if(dependentVariable == .quality){
                             Text("Quality of day of optimal interval")
@@ -129,6 +130,7 @@ struct WaketimeScatterPlot: View {
                         }
                         
                     }
+                    /*
                     if(experiment.getWaketimeRange() >= 15){
                         SliderView(name: "Interval size (minutes)",value: $size, lowValue: 15, highValue: 60 > experiment.getWaketimeRange() ?  (Double)(experiment.getWaketimeRange()) : 60)
                             .onChange(of: size){ _ in
@@ -139,7 +141,7 @@ struct WaketimeScatterPlot: View {
                                 }
                                 updateInterval()
                             }
-                    }
+                    }*/
                     
                     if(!optimalIntervalIsValid){
                         Text(errorMessage)
@@ -151,7 +153,7 @@ struct WaketimeScatterPlot: View {
     
     private func updateInterval(){
         switch(
-            experiment.getOptimalWaketimeInterval(size: size, dependentVariable: dependentVariable, lowEndpoint: startTime, highEndpoint: endTime, requiredEntries: entriesRequired)){
+            experiment.getOptimalWaketimeInterval(dependentVariable: dependentVariable, requiredEntries: entriesRequired, lowEndpoint: startTime, highEndpoint: endTime)){
         case .success(let optimalInterval):
             interval = optimalInterval
             optimalIntervalIsValid = true

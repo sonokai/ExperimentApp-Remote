@@ -9,6 +9,18 @@ import SwiftUI
 import Charts
 struct SimpleSleepTimeHistory: View {
     var experiment: SleepExperiment
+    enum Day: String, Identifiable{
+        var id: Self{
+            return self
+        }
+        case one = "one"
+        case two  = "two"
+        case three = "three"
+        case four = "four"
+        case five = "five"
+        case six = "six"
+        case seven = "seven"
+    }
     var body: some View {
         VStack(alignment: .leading){
             
@@ -21,7 +33,7 @@ struct SimpleSleepTimeHistory: View {
             }
             Chart(getLast7Entries()){ entry in
                 BarMark(
-                    x: .value("Date", entry.date.convertToMMDDYYYY(), unit: .day),
+                    x: .value("Date",getIndex(of: entry).rawValue),
                     yStart: .value("Min", getYDomain().lowerBound),
                     yEnd: .value("Bedtime",SleepExperiment.getSleepTimeSeconds(from: entry))
                 ).foregroundStyle(.purple)
@@ -45,6 +57,23 @@ struct SimpleSleepTimeHistory: View {
         let startTicks = Double(floor(least/tickSize))
         let endTicks = Double(floor(most/tickSize))
         return (startTicks*tickSize-getYAxisTickSize()...endTicks*tickSize+getYAxisTickSize())
+    }
+    func getIndex(of entry: SleepEntry) -> Day{
+        if let index = experiment.entries.firstIndex(where: { $0.id == entry.id }) {
+            switch(index%7){
+            case 0: return .one
+            case 1: return .two
+            case 2: return .three
+            case 3: return .four
+            case 4: return .five
+            case 5: return .six
+            case 6: return .seven
+            default: return .one
+            }
+            
+        } else {
+            return .one
+        }
     }
     func getYAxisTickSize() -> Double{
         //want: 4 marks per chart at least
