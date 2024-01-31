@@ -2,15 +2,20 @@ import Foundation
 
 struct MoodEntry: Identifiable, Codable {
     let id: UUID
-    var date: Date
     let rating: Int
+    var date: Date
+    var time: Date
+    var insights: String
     
-    private var moodEntries: [MoodEntry] = []
     
-    init(id: UUID = UUID(), date: Date, rating: Int) {
+    
+    init(id: UUID = UUID(), rating: Int, date: Date,  time: Date, insights: String) {
         self.id = id
-        self.date = date
         self.rating = rating
+        self.date = date
+        self.time = time
+        self.insights = insights
+        
     }
     
     func getHour(date: Date) -> (Int) {
@@ -30,6 +35,15 @@ struct MoodEntry: Identifiable, Codable {
         return minute
         
     }
+    func createDate(month: Int, day: Int, year: Int) -> Date? {
+        var dateComponents = DateComponents()
+        dateComponents.year = year
+        dateComponents.month = month
+        dateComponents.day = day
+
+        let calendar = Calendar.current
+        return calendar.date(from: dateComponents)
+    }
     
     
     
@@ -38,22 +52,15 @@ struct MoodEntry: Identifiable, Codable {
 }
 
 extension MoodEntry {
+    
+    
     static let sampleData: [MoodEntry] =
     [
-        MoodEntry(
-            date: Date(),
-            rating: 5
-            ),
+        MoodEntry(rating: 3, date: Date(), time: Date(), insights: "Just got out of a stressful meeting."),
         
-        MoodEntry(
-            date: Date(),
-            rating: 6
-            ),
+        MoodEntry(rating: 7, date: Date(), time: Date(), insights: "Got home from work"),
         
-        MoodEntry(
-            date: Date(),
-            rating: 8
-            )
+        MoodEntry(rating: 9, date: Date(), time: Date(), insights: "Saw my family")
     
     ]
     
