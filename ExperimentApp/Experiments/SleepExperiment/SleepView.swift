@@ -115,7 +115,7 @@ struct SleepView: View {
 struct SleepView3_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
-            SleepView(experiment: .constant(SleepExperiment.bedtimeSampleExperiment), finishAction: { _ in})
+            SleepView(experiment: .constant(SleepExperiment.bothTimesSampleExperiment), finishAction: { _ in})
         }
     }
 }

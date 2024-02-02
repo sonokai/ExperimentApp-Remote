@@ -205,6 +205,6 @@ struct SleepTimeInsights: View{
 }
 struct NewSleepInsightView_Previews: PreviewProvider {
     static var previews: some View {
-        NewSleepInsightView(experiment: .constant(SleepExperiment.bothTimesSampleExperiment))
+        NewSleepInsightView(experiment: .constant(SleepExperiment.bedtimeSampleExperiment))
     }
 }

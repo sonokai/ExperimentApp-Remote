@@ -69,7 +69,7 @@ struct BedtimeHistory: View {
                 HStack{
                     Text("Median bedtime: ")
                     Spacer()
-                   // Text("\(experiment.getMedianBedtime())")
+                    Text("\(experiment.getMedianBedtime())")
                 }
                 
 

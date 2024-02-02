@@ -106,6 +106,6 @@ struct SleepTimeChartPreview: View {
 
 struct SleepTimeChartPreview_Previews: PreviewProvider {
     static var previews: some View {
-        SleepTimeChartPreview(experiment: SleepExperiment.hoursSleptSampleExperiment)
+        SleepTimeChartPreview(experiment: SleepExperiment.bothTimesSampleExperiment)
     }
 }

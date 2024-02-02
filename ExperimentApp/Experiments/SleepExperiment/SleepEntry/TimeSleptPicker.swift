@@ -38,21 +38,21 @@ struct TimeSleptPicker: View {
                                         minutesSlept = minutes
                                     }
                                 }
-                            
                         }
-                    })//end of button
-                    .popover(isPresented: $timeSelectorPopOver, attachmentAnchor: .point(.bottom), arrowEdge: .top, content: {
-                        TimeSelector(hours: $hoursSlept, minutes: $minutesSlept)
-                            .padding()
-                    }).onChange(of: hoursSlept) { newHoursSlept in
-                        experiment.newSleepEntry.hoursSlept = newHoursSlept
-                    }
-                    .onChange(of: minutesSlept){ newMinutesSlept in
-                        experiment.newSleepEntry.minutesSlept = newMinutesSlept
-                    }
-                }
+                    })
+                
             }
-            
+        }
+        if(timeSelectorPopOver){
+            TimeSelector(hours: $hoursSlept, minutes: $minutesSlept)
+                .padding().onChange(of: hoursSlept) { newHoursSlept in
+                    experiment.newSleepEntry.hoursSlept = newHoursSlept
+                }
+                .onChange(of: minutesSlept){ newMinutesSlept in
+                    experiment.newSleepEntry.minutesSlept = newMinutesSlept
+                }
+        }
+        
         
         
     }
