@@ -26,7 +26,6 @@ struct BedtimeBarChart: View {
                 }
             }.frame(height: 300)
             
-            
         }.onAppear(){
             var interval = Date()
             switch(experiment.getOptimalBedtimeInterval(size: 30, dependentVariable: dependentVariable)){

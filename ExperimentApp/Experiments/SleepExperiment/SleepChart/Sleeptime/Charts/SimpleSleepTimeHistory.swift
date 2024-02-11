@@ -9,6 +9,7 @@ import SwiftUI
 import Charts
 struct SimpleSleepTimeHistory: View {
     var experiment: SleepExperiment
+    @State var barChartEntries: [SimpleSleepDependentHistory.BarChartEntry] = []
     enum Day: String, Identifiable{
         var id: Self{
             return self
@@ -29,19 +30,28 @@ struct SimpleSleepTimeHistory: View {
             HStack{
                 Image(systemName: "bed.double")
                 //in the time of your last entry, you slept <minutes> <later or earlier> than normal
-                SleepTimeHistoryMessage(experiment: experiment)
+                if(experiment.entries.count == 0){
+                    Text("Add more entries to analyze your time slept")
+                }else {
+                    SleepTimeHistoryMessage(experiment: experiment)
+                }
+               
             }
-            Chart(getLast7Entries()){ entry in
-                BarMark(
-                    x: .value("Date",getIndex(of: entry).rawValue),
-                    yStart: .value("Min", getYDomain().lowerBound),
-                    yEnd: .value("Bedtime",SleepExperiment.getSleepTimeSeconds(from: entry))
-                ).foregroundStyle(.purple)
+            if(experiment.entries.count == 0){
+                EmptyChart()
+            } else {
+                Chart(barChartEntries){ entry in
+                    BarMark(
+                        x: .value("Date", entry.index),
+                        yStart: .value("Min", (Int)(getYDomain().lowerBound)),
+                        yEnd: .value("Waketime", entry.value)
+                    ).foregroundStyle(entry.missing ? .gray: .purple)
+                }.onAppear(perform: prepareBarChartEntries)
+                    .chartYAxis(.hidden)
+                    .chartYScale(domain: getYDomain())
+                    .chartXAxis(.hidden)
+                    .frame(height: 120)
             }
-            .chartYAxis(.hidden)
-            .chartYScale(domain: getYDomain())
-            .chartXAxis(.hidden)
-            .frame(height: 120)
         }
     }
     func getLast7Entries() -> [SleepEntry]{
@@ -113,6 +123,24 @@ struct SimpleSleepTimeHistory: View {
     }
     func getSleepTimeSeconds(from entry: SleepEntry)-> Int{
         return entry.hoursSlept*3600 + entry.minutesSlept*60
+    }
+    
+    func prepareBarChartEntries(){
+        let lastEntries = experiment.entries.suffix(7)
+        let count = lastEntries.count
+        let missingEntries = 7-count
+        var index = 0
+        for _ in 0..<missingEntries{
+            barChartEntries.append(SimpleSleepDependentHistory.BarChartEntry(index: index, missingValue: (Int)(experiment.getAverageSleepTimeAsSeconds())))
+            index+=1
+        }
+        for entry in lastEntries {
+            barChartEntries.append(SimpleSleepDependentHistory.BarChartEntry(value:     (Int)(SleepExperiment.getSleepTimeSeconds(from: entry)), index: index))
+            index+=1
+        }
+        if(index > 7){
+            print("something broke")
+        }
     }
     
 }

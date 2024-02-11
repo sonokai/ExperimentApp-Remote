@@ -55,7 +55,6 @@ struct BedtimeScatterPlot: View {
                                         ).foregroundStyle(.blue)
                                     }
                                 }
-                                
                             }
                         }
                         .onAppear(){

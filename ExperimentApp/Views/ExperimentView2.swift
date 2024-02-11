@@ -17,22 +17,19 @@ struct ExperimentView: View {
     var body: some View {
         NavigationStack{
             Form{
-                Section(header: SleepExperimentHeader(title: "Sleep experiment", isOn: $showSleepExperiment)){
+                Section(){
                     ForEach($appData.sleepExperiments) { $sleepExperiment in
-                        
-                        if(showSleepExperiment){
-                            NewSleepEntryView(experiment: $sleepExperiment, finishAction: { experiment in
-                                let closure = finishExperiment(experiment)
-                                closure()
-                            })
-                        } else {
+                        VStack{
                             NavigationLink(destination: SleepView(experiment: $sleepExperiment, finishAction: { experiment in
                                 let closure = finishExperiment(experiment)
                                 closure()
                             })){
-                                Text(sleepExperiment.name)
+                                Text(sleepExperiment.name).bold()
                             }
+                            SleepChartCarousel(experiment: sleepExperiment)
+                            
                         }
+                       
                     }
                 }
                 
@@ -84,6 +81,6 @@ struct ExperimentView: View {
 
 struct ExperimentView2_Previews: PreviewProvider {
     static var previews: some View {
-        ExperimentView(appData: .constant(AppData.sampleData), saveAction: {}, selectedTabIndex: .constant(0))
+        ExperimentView(appData: .constant(AppData.sampleData2), saveAction: {}, selectedTabIndex: .constant(0))
     }
 }

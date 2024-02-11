@@ -14,10 +14,10 @@ struct BedtimeHistoryMessage: View {
     var body: some View {
         VStack{
             
-            if (minutes == 0 || experiment.entries.count < 14){
-                Text("In your last 7 entries, your average bedtime was") + Text(" \(SleepExperiment.getAverageBedtimeFromEntries(entries: experiment.entries.suffix(7)).simplifyDateToTimeString())").bold()
+            if (minutes == 0 || experiment.entries.count < 10){
+                Text("Your average bedtime is") + Text(" \(SleepExperiment.getAverageBedtimeFromEntries(entries: experiment.entries.suffix(7)).simplifyDateToTimeString())").bold()
             }else {
-                Text("In your last 7 entries, you slept ") + Text("\(minutes) minutes").bold() + Text("  \(comparisonWord) than normal")
+                Text("In your last 7 entries, you slept ") + Text("\(minutes) minutes").bold() + Text(" \(comparisonWord) than normal")
             }
         }.onAppear(){
             minutes = experiment.compareLastWeekBedtimeAverage()

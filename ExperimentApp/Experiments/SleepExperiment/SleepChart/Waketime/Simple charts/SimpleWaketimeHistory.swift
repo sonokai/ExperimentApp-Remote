@@ -9,40 +9,35 @@ import SwiftUI
 import Charts
 struct SimpleWaketimeHistory: View {
     var experiment: SleepExperiment
+    @State var barChartEntries: [SimpleSleepDependentHistory.BarChartEntry] = []
     
-    enum Day: String, Identifiable{
-        var id: Self{
-            return self
-        }
-        case one = "one"
-        case two  = "two"
-        case three = "three"
-        case four = "four"
-        case five = "five"
-        case six = "six"
-        case seven = "seven"
-    }
     var body: some View {
         VStack(alignment: .leading){
-            
-            
-            
             HStack{
                 Image(systemName: "bed.double")
-                //in the time of your last entry, you slept <minutes> <later or earlier> than normal
-                WaketimeHistoryMessage(experiment: experiment)
+                
+                if(experiment.entries.count == 0){
+                    Text("Add more entries to analyze your wake times.")
+                }else {
+                    WaketimeHistoryMessage(experiment: experiment)
+                }
+                
             }
-            Chart(getLast7Entries()){ entry in
-                BarMark(
-                    x: .value("Date", getIndex(of: entry).rawValue),
-                    yStart: .value("Min", getYDomain().lowerBound),
-                    yEnd: .value("Bedtime",SleepExperiment.getWaketimeSeconds(from: entry.waketime))
-                ).foregroundStyle(.orange)
+            if(experiment.entries.count == 0){
+                EmptyChart()
+            }else {
+                Chart(barChartEntries){ entry in
+                    BarMark(
+                        x: .value("Date", entry.index),
+                        yStart: .value("Min", (Int)(getYDomain().lowerBound)),
+                        yEnd: .value("Waketime", entry.value)
+                    ).foregroundStyle(entry.missing ? .gray: .red)
+                }.onAppear(perform: prepareBarChartEntries)
+                    .chartYAxis(.hidden)
+                    .chartYScale(domain: getYDomain())
+                    .chartXAxis(.hidden)
+                    .frame(height: 120)
             }
-            .chartYAxis(.hidden)
-            .chartYScale(domain: getYDomain())
-            .chartXAxis(.hidden)
-            .frame(height: 120)
         }
     }
     func getLast7Entries() -> [SleepEntry]{
@@ -52,23 +47,7 @@ struct SimpleWaketimeHistory: View {
         }
         return experiment.entries.suffix(7)
     }
-    func getIndex(of entry: SleepEntry) -> Day{
-        if let index = experiment.entries.firstIndex(where: { $0.id == entry.id }) {
-            switch(index%7){
-            case 0: return .one
-            case 1: return .two
-            case 2: return .three
-            case 3: return .four
-            case 4: return .five
-            case 5: return .six
-            case 6: return .seven
-            default: return .one
-            }
-            
-        } else {
-            return .one
-        }
-    }
+    
     func getWaketimeRange() -> (Double, Double){
         var least = (Double)(0)
         var most = (Double)(0)
@@ -149,11 +128,30 @@ struct SimpleWaketimeHistory: View {
         return dateString
     }
     
+    func prepareBarChartEntries(){
+        let lastEntries = experiment.entries.suffix(7)
+        let count = lastEntries.count
+        let missingEntries = 7-count
+        var index = 0
+        for _ in 0..<missingEntries{
+            barChartEntries.append(SimpleSleepDependentHistory.BarChartEntry(index: index, missingValue: (Int)(experiment.getAverageWaketimeAsSeconds())))
+            index+=1
+        }
+        for entry in lastEntries {
+            barChartEntries.append(SimpleSleepDependentHistory.BarChartEntry(value:     (Int)(SleepExperiment.getWaketimeSeconds(from: entry.waketime)), index: index))
+            index+=1
+        }
+        if(index > 7){
+            print("something broke")
+        }
+    }
+     
+    
 
 }
 
 struct SimpleWaketimeHistory_Previews: PreviewProvider {
     static var previews: some View {
-        SimpleWaketimeHistory(experiment: SleepExperiment.waketimeSampleExperiment).padding()
+        SimpleWaketimeHistory(experiment: SleepExperiment.waketimeEmpty).padding()
     }
 }

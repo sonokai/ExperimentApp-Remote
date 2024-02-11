@@ -23,6 +23,7 @@ extension SleepExperiment{
     static let waketimeSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .productivity, independentVariable: .waketime, entries: sampleDataForExperiment2, name: "Waketime experiment 1")
     static let waketimeSampleExperiment2: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .waketime, entries: sampleDataForExperiment2, name: "Waketime experiment 2")
     static let waketimeSampleExperiment3: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .quality, independentVariable: .waketime, entries: sampleDataForExperiment2, name: "Waketime experiment 3")
+    static let waketimeEmpty: SleepExperiment = SleepExperiment(dependentVariable: .productivity, independentVariable: .waketime, entries: [])
     static let bedtimebothExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .bedtime, entries:sampleData12, name: "")
     static let hoursSleptSampleExperiment: SleepExperiment = SleepExperiment(goalEntries: 20, dependentVariable: .both, independentVariable: .hoursSlept, entries: sampleDataForExperiment3, name: "Sleep Experiment 3")
     
@@ -48,6 +49,19 @@ extension SleepExperiment{
                    productivity: 5),
     ]
     
+    static let bedtimeShortExperiment: SleepExperiment = SleepExperiment(dependentVariable: .productivity, independentVariable: .bedtime, entries: sampleDataForShortExperiment)
+    
+    static let sampleDataForShortExperiment: [SleepEntry] = [
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 9, minute: 30, second: 0, of: Date())!,
+                   productivity: 5),
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 9, minute: 35, second: 0, of: Date())!,
+                   productivity: 3),
+        SleepEntry(date: Date(),
+                   bedtime: Calendar.current.date(bySettingHour: 9, minute: 40, second: 0, of: Date())!,
+                   productivity: 6),
+    ]
     static let sampleDataForExperiment2: [SleepEntry] =
     [
         SleepEntry(date: createDate(month: 10, day: 8, year: 2023)!,

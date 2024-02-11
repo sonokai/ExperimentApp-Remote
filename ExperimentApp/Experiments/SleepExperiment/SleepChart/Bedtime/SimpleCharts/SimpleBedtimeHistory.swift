@@ -7,45 +7,48 @@
 
 import SwiftUI
 import Charts
-//Required: 7 entries
+//doesn't require 7 entries but if there isn't 7 entries will fill in
+//with gray bars
 struct SimpleBedtimeHistory: View {
     var experiment: SleepExperiment
+    @State var barChartEntries: [SimpleSleepDependentHistory.BarChartEntry] = []
     
-    enum Day: String, Identifiable{
-        var id: Self{
-            return self
-        }
-        case one = "one"
-        case two  = "two"
-        case three = "three"
-        case four = "four"
-        case five = "five"
-        case six = "six"
-        case seven = "seven"
-    }
+    
     var body: some View {
         
         VStack(alignment: .leading){
             
             
             
-            HStack{
+            HStack(){
                 Image(systemName: "bed.double")
                 //in the time of your last entry, you slept <minutes> <later or earlier> than normal
-                BedtimeHistoryMessage(experiment: experiment)
+                if(experiment.entries.count == 0){
+                    Text("Add some entries to see bedtime data")
+                } else {
+                    BedtimeHistoryMessage(experiment: experiment)
+                }
             }
-            Chart(getLast7Entries()){ entry in
-                BarMark(
-                    x: .value("Date", getIndex(of: entry).rawValue),
-                    yStart: .value("Min", getYDomain().lowerBound),
-                    yEnd: .value("Bedtime",SleepExperiment.getBedtimeSeconds(from: entry.bedtime))
-                ).foregroundStyle(.red)
+            Spacer()
+            if(experiment.entries.count == 0){
+                EmptyChart()
+            } else {
+                Chart(barChartEntries){ entry in
+                    BarMark(
+                        x: .value("Date", entry.index),
+                        yStart: .value("Min", (Int)(getYDomain().lowerBound)),
+                        yEnd: .value("Bedtime", entry.value)
+                    ).foregroundStyle(entry.missing ? .gray: .red)
+                }.onAppear(perform: prepareBarChartEntries)
+                    .chartYAxis(.hidden)
+                    .chartXAxis(.hidden)
+                    .chartYScale(domain: getYDomain())
+                    .frame(height: 120)
+                    .onAppear(){
+                        prepareBarChartEntries()
+                    }
             }
-            .chartYAxis(.hidden)
-            .chartYScale(domain: getYDomain())
-            .chartXAxis(.hidden)
-            .frame(height: 120)
-        }
+        }.frame(height: 180)
     }
     func getLast7Entries() -> [SleepEntry]{
         if(experiment.entries.count<7){
@@ -54,23 +57,7 @@ struct SimpleBedtimeHistory: View {
         }
         return experiment.entries.suffix(7)
     }
-    func getIndex(of entry: SleepEntry) -> Day{
-        if let index = experiment.entries.firstIndex(where: { $0.id == entry.id }) {
-            switch(index%7){
-            case 0: return .one
-            case 1: return .two
-            case 2: return .three
-            case 3: return .four
-            case 4: return .five
-            case 5: return .six
-            case 6: return .seven
-            default: return .one
-            }
-            
-        } else {
-            return .one
-        }
-    }
+    
     func getBedtimeRange() -> (Double, Double){
         var least = (Double)(0)
         var most = (Double)(0)
@@ -121,12 +108,30 @@ struct SimpleBedtimeHistory: View {
         let dateString = dateformatter.string(from: date)
         return dateString
     }
+    func prepareBarChartEntries(){
+        let lastEntries = experiment.entries.suffix(7)
+        let count = lastEntries.count
+        let missingEntries = 7-count
+        var index = 0
+        for _ in 0..<missingEntries{
+            barChartEntries.append(SimpleSleepDependentHistory.BarChartEntry(index: index, missingValue: (Int)(experiment.getAverageBedtimeAsSeconds())))
+            index+=1
+        }
+        for entry in lastEntries {
+            barChartEntries.append(SimpleSleepDependentHistory.BarChartEntry(value:     (Int)(SleepExperiment.getBedtimeSeconds(from: entry.bedtime)), index: index))
+            index+=1
+        }
+        if(index > 7){
+            print("something broke")
+        }
+    }
+    
 }
 
 
 struct SimpleBedtimeHistory_Previews: PreviewProvider {
     static var sample = SleepExperiment(goalEntries: 50, dependentVariable: .productivity, independentVariable: .bedtime, entries: [SleepEntry(date: Date(), bedtime: Date(), quality: 3)], name: "")
     static var previews: some View {
-        SimpleBedtimeHistory(experiment: SleepExperiment.midnightSampleExperiment).padding()
+        SimpleBedtimeHistory(experiment: SleepExperiment.bedtimeShortExperiment).padding()
     }
 }
