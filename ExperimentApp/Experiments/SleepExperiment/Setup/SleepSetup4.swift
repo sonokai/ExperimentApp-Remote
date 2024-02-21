@@ -11,6 +11,7 @@ struct SleepSetup4: View {
     let finishAction: () -> Void
     var independentVariable: SleepExperiment.IndependentVariable
     var dependentVariable: SleepExperiment.DependentVariable
+    @Binding var index: Int
     var body: some View {
         VStack(alignment: .leading, spacing: 10){
             Text("Final steps").font(.largeTitle).bold()
@@ -46,8 +47,16 @@ struct SleepSetup4: View {
                 Text("3. Analyze the results using the Logarithm app and find best amount of time to sleep per night.")
             }
             Text("If this all sounds good, then start the experiment.")
-            Button("Start experiment"){
-                finishAction()
+            HStack{
+                Button("Back"){
+                    withAnimation{
+                        index = 3
+                    }
+                }
+                Spacer()
+                Button("Start experiment"){
+                    finishAction()
+                }
             }
             Spacer()
             
@@ -57,6 +66,6 @@ struct SleepSetup4: View {
 
 struct SleepSetup4_Previews: PreviewProvider {
     static var previews: some View {
-        SleepSetup4(finishAction: {}, independentVariable: .bedtime, dependentVariable: .productivity)
+        SleepSetup4(finishAction: {}, independentVariable: .bedtime, dependentVariable: .productivity, index: .constant(4))
     }
 }

@@ -59,9 +59,17 @@ struct SleepSetup3: View {
                 Text("\(goalEntries)")
                 
             }
-            Button("Next"){
-                withAnimation{
-                    index = 4
+            HStack{
+                Button("Back"){
+                    withAnimation{
+                        index = 2
+                    }
+                }
+                Spacer()
+                Button("Next"){
+                    withAnimation{
+                        index = 4
+                    }
                 }
             }
             Spacer()

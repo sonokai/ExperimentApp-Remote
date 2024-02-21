@@ -17,11 +17,11 @@ struct SleepProcedureView: View {
                 //dependentvariables: quality of day, productivity, both
                 switch(experiment.independentVariable){
                 case .bedtime:
-                    Text("Right before you sleep, make an entry you go to bed and log the time.")
+                    Text("Right before you sleep, make an entry when you go to bed and log the time.")
                 case .waketime:
                     Text("When you wake up in the morning, make an entry and log the time.")
                 case .both:
-                    Text("Every day before you sleep, make an entry you go to bed and log the time.")
+                    Text("Every day before you sleep, make an entry when you go to bed and log the time.")
                     Text("The next day, open last night's entry and log the time when you wake up.")
                 case .hoursSlept:
                     Text("When you wake up in the morning, make a new entry and log your total time slept.")

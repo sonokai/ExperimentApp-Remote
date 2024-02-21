@@ -35,7 +35,10 @@ struct SleepView: View {
                                 Text("Add a new entry")
                             }
                         }
-                        SleepInsightView(experiment: $experiment)
+                        NavigationLink(destination: SleepInsightView(experiment: $experiment)){
+                            Text("Insights")
+                        }
+                        
                         if(experiment.entries.count > 0){
                             NavigationLink(destination: SleepHistory(experiment: $experiment), label: {
                                 Text("View past entries")

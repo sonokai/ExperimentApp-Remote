@@ -55,7 +55,7 @@ struct SimpleWaketimeBarChart: View {
             }
             let intervalMinutes = SleepExperiment.getMinutes(from: interval)
             
-            var lowestChartBarMark = intervalMinutes
+            
             
             for chartBarMark in stride(from: intervalMinutes-60, through: intervalMinutes+60, by: 30){
                 

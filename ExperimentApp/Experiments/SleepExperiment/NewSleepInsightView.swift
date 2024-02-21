@@ -46,7 +46,7 @@ struct NewSleepInsightView: View {
             }.toolbar{
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button("Done"){
-                        experiment.insights.append(text)
+                        experiment.insights.append(Insight(text: text, date: Date()))
                         presentationMode.wrappedValue.dismiss()
                     }.disabled(text == "")
                 }

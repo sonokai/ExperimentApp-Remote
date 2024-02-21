@@ -64,11 +64,18 @@ struct SimpleSleepDependentHistory: View {
                     x: .value("Date", entry.index),
                     yStart: .value("Min", 0),
                     yEnd: .value("Bedtime", entry.value)
-                ).foregroundStyle(entry.missing ? .gray: .red)
+                ).foregroundStyle(entry.missing ? .gray: getColor())
             }.onAppear(perform: prepareBarChartEntries)
             .chartYAxis(.hidden)
             .chartXAxis(.hidden)
             .frame(height: 120)
+        }
+    }
+    func getColor()->Color{
+        if(experiment.dependentVariable == .quality || dependentVariable == .quality){
+            return .yellow
+        } else {
+            return .indigo
         }
     }
     func prepareBarChartEntries(){
@@ -107,7 +114,7 @@ struct SimpleSleepDependentHistory: View {
         for entry in entries{
             sum += getEntryValue(entry: entry)
         }
-        return "\(((Double)(sum)/(Double)(7) * pow(10, Double(2))).rounded() / pow(10, Double(2)))"
+        return "\(((Double)(sum)/(Double)(min(7, experiment.entries.count)) * pow(10, Double(2))).rounded() / pow(10, Double(2)))"
     }
     func getEntryValue(entry: SleepEntry) -> Int{
         if(experiment.dependentVariable == .quality || dependentVariable == .quality){

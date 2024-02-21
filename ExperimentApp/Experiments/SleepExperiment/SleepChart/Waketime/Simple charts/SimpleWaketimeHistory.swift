@@ -32,7 +32,7 @@ struct SimpleWaketimeHistory: View {
                         x: .value("Date", entry.index),
                         yStart: .value("Min", (Int)(getYDomain().lowerBound)),
                         yEnd: .value("Waketime", entry.value)
-                    ).foregroundStyle(entry.missing ? .gray: .red)
+                    ).foregroundStyle(entry.missing ? .gray: .orange)
                 }.onAppear(perform: prepareBarChartEntries)
                     .chartYAxis(.hidden)
                     .chartYScale(domain: getYDomain())
@@ -153,6 +153,6 @@ struct SimpleWaketimeHistory: View {
 
 struct SimpleWaketimeHistory_Previews: PreviewProvider {
     static var previews: some View {
-        SimpleWaketimeHistory(experiment: SleepExperiment.waketimeEmpty).padding()
+        SimpleWaketimeHistory(experiment: SleepExperiment.waketimeSampleExperiment).padding()
     }
 }

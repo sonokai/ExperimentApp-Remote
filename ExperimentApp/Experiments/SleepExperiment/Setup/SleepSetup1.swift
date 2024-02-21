@@ -75,14 +75,18 @@ struct SleepSetup1: View {
                 }
                 .buttonStyle(BorderlessButtonStyle())
                 .padding(1)
-                if(selected){
-                    Button("Next"){
-                        withAnimation{
-                            index = 2
+                HStack{
+                    
+                    Spacer()
+                    if(selected){
+                        Button("Next"){
+                            withAnimation{
+                                index = 2
+                            }
                         }
+                    } else {
+                        Text("HIHIH").opacity(0)
                     }
-                } else {
-                    Text("HIHIH").opacity(0)
                 }
                 /*
                 VStack(alignment: .leading){

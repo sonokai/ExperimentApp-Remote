@@ -15,7 +15,7 @@ struct SleepIntroView2: View {
     @State var goalEntries: Int = 5  
     @State var dependentVariable: SleepExperiment.DependentVariable = .quality
     @State var independentVariable: SleepExperiment.IndependentVariable = .bedtime //ask user if
-    @State var index: Int = 0
+    //@State var index: Int = 0
     
     @State var name: String = ""
     @Binding var selectedTabIndex: Int
@@ -31,13 +31,12 @@ struct SleepIntroView2: View {
                 SleepSetup3(goalEntries: $goalEntries, index: $currentIndex).opacity(currentIndex == 3 ? 1.0: 0.5)
                     .offset(x: CGFloat(3-currentIndex) * 380).padding()
                 
-                
                 SleepSetup4(finishAction: {
-                    sleepExperiments.append(SleepExperiment(goalEntries: goalEntries, dependentVariable: dependentVariable, independentVariable: independentVariable, entries: [], name: name))
+                    sleepExperiments.append(SleepExperiment(goalEntries: goalEntries, dependentVariable: dependentVariable, independentVariable: independentVariable, entries: [], name: "Sleep experiment"))
                     isCreatingExperiment = true
                     presentationMode.wrappedValue.dismiss()
                     
-                }, independentVariable: independentVariable, dependentVariable: dependentVariable).onDisappear(){
+                }, independentVariable: independentVariable, dependentVariable: dependentVariable, index: $currentIndex).onDisappear(){
                     selectedTabIndex = 0
                 }.opacity(currentIndex == 4 ? 1.0: 0.5)
                     .offset(x: CGFloat(4-currentIndex) * 380).padding()

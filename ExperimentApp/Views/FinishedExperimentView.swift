@@ -17,7 +17,10 @@ struct FinishedExperimentView: View {
                 }
                 Section("Insights"){
                     ForEach(finishedExperiment.insights, id: \.self){ insight in
-                        Text(insight)
+                        VStack(alignment:.leading){
+                            Text(Date.formatToMonthAndDay(date: insight.date)).bold()
+                            Text(insight.text)
+                        }
                     }
                 }
             }.navigationTitle(finishedExperiment.name)

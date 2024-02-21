@@ -16,15 +16,17 @@ struct NewExperimentView: View {
         NavigationStack{
             Form{
                 Section(header: Text("Experiments")){
-                    NavigationLink(destination: SleepIntroView(sleepExperiments: $appData.sleepExperiments, selectedTabIndex: $selectedTabIndex)){
+                    NavigationLink(destination: SleepIntroView2(sleepExperiments: $appData.sleepExperiments, selectedTabIndex: $selectedTabIndex)){
                         Text("Start a sleep experiment")
                     }
+                    /*
                     NavigationLink(destination: DaySetupView(dayExperiments: $appData.dayExperiments)){
                         Text("Start a day experiment")
                     }
                     NavigationLink(destination: MoodSetupView(moodExperiments: $appData.moodExperiments, appData: .constant(AppData.sampleData), saveAction: {}, selectedTabIndex: $selectedTabIndex)){
                         Text("Start a mood experiment")
                     }
+                     */
                 }
             }.navigationTitle("Explore experiments")
         }

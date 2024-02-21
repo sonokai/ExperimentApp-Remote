@@ -65,14 +65,20 @@ struct SleepSetup2: View {
                     
                     
                 }.buttonStyle(.borderless)
-                if(selected){
-                    Button("Next"){
+                HStack{
+                    Button("Back"){
                         withAnimation{
-                            index = 3
+                            index = 1
                         }
                     }
-                }else {
-                    Text("HIHIH").opacity(0)
+                    Spacer()
+                    if(selected){
+                        Button("Next"){
+                            withAnimation{
+                                index = 3
+                            }
+                        }
+                    }
                 }
             }
             Spacer()

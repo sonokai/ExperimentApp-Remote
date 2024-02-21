@@ -11,22 +11,22 @@ struct AppData: Codable{
     var sleepExperiments: [SleepExperiment]
     var dayExperiments: [DayExperiment]
 
-    var moodExperiments: [MoodTracker]
+    //var moodExperiments: [MoodTracker]
     
     
     var finishedExperiments: [FinishedExperiment]
     
-    init(sleepExperiments: [SleepExperiment], dayExperiments: [DayExperiment], moodExperiments: [MoodTracker], finishedExperiments: [FinishedExperiment]) {
+    init(sleepExperiments: [SleepExperiment], dayExperiments: [DayExperiment], finishedExperiments: [FinishedExperiment]) {
 
         self.sleepExperiments = sleepExperiments
         self.dayExperiments = dayExperiments
-        self.moodExperiments = moodExperiments
+        
         self.finishedExperiments = finishedExperiments
     }
     
 
-    static var emptyData: AppData = AppData(sleepExperiments: [], dayExperiments: [], moodExperiments: [], finishedExperiments: [])
-    static var sampleData: AppData = AppData(sleepExperiments: [SleepExperiment.bothTimesSampleExperiment], dayExperiments: [DayExperiment.sampleExperiment], moodExperiments: MoodTracker.sampleExperiments, finishedExperiments: FinishedExperiment.sampleArray)
-    static var sampleData2: AppData = AppData(sleepExperiments: [SleepExperiment.bedtimeShortExperiment], dayExperiments: [DayExperiment.sampleExperiment], moodExperiments: MoodTracker.sampleExperiments, finishedExperiments: FinishedExperiment.sampleArray)
+    static var emptyData: AppData = AppData(sleepExperiments: [], dayExperiments: [], finishedExperiments: [])
+    static var sampleData: AppData = AppData(sleepExperiments: [SleepExperiment.bothTimesSampleExperiment], dayExperiments: [DayExperiment.sampleExperiment], finishedExperiments: FinishedExperiment.sampleArray)
+    static var sampleData2: AppData = AppData(sleepExperiments: [SleepExperiment.bedtimeShortExperiment], dayExperiments: [DayExperiment.sampleExperiment], finishedExperiments: FinishedExperiment.sampleArray)
 
 }

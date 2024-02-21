@@ -12,7 +12,7 @@ struct NewSleepEntryView: View {
     
     @State var timeSelectorPopOver = false
     @State var sheet = false
-    
+    @Environment(\.presentationMode) private var presentationMode
     @State var replaceAlert: Bool = false
     var body: some View {
         
@@ -57,6 +57,7 @@ struct NewSleepEntryView: View {
                 replaceAlert = true
             } else {
                 experiment.initiateSleepEntry()
+                presentationMode.wrappedValue.dismiss()
             }
         }.alert("There is another entry with the date \(formatToMonthAndDay()). Replace this entry?", isPresented: $replaceAlert, actions: {
             Button("Continue", role: .destructive){
@@ -64,7 +65,8 @@ struct NewSleepEntryView: View {
                 }
                 
                 experiment.initiateSleepEntry()
-                experiment.sortEntriesByDate()
+                
+                presentationMode.wrappedValue.dismiss()
             }
         }).disabled(!experiment.newSleepEntry.isReady(experiment: experiment))
         
