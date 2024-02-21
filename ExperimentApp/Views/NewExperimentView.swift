@@ -26,7 +26,7 @@ struct NewExperimentView: View {
                         Text("Start a mood experiment")
                     }
                 }
-            }.navigationTitle("Start a new experiment")
+            }.navigationTitle("Explore experiments")
         }
     }
 }

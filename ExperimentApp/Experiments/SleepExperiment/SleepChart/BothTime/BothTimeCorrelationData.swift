@@ -67,7 +67,9 @@ struct BothTimeCorrelationData: View {
                 
             }
         }else {
+            
             EntryProgressView(count: experiment.entries.count, needed: 14, text: "to view correlational data")
+            /*
             ChartPicker(pickerValue: $chartToShow)
             switch(chartToShow){
             case .bedtime:
@@ -77,6 +79,7 @@ struct BothTimeCorrelationData: View {
             case .sleeptime:
                 SleepTimeChartPreview(experiment: experiment)
             }
+             */
             
             
         }

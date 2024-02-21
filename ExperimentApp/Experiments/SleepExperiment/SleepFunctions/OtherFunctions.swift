@@ -100,6 +100,7 @@ extension SleepExperiment{
     mutating func initiateSleepEntry(){
         entries.append(SleepEntry(newEntry: newSleepEntry))
         newSleepEntry = NewSleepEntry()
+        isEditing = false
     }
     func dateStringFromMinutes(minutes: Int) -> String{
         if let date = Calendar.current.date(bySettingHour: minutes/60, minute: minutes % 60, second: 0, of: Date()){

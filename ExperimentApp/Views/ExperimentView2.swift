@@ -26,13 +26,11 @@ struct ExperimentView: View {
                             })){
                                 Text(sleepExperiment.name).bold()
                             }
-                            //SleepChartCarousel(experiment: sleepExperiment)
-                            
                         }
                        
                     }
                 }
-                
+                /*
                 ForEach($appData.dayExperiments) { $dayExperiment in
                     NavigationLink(destination: DayView(experiment: $dayExperiment)){
                         Text("\(dayExperiment.name)")
@@ -43,6 +41,7 @@ struct ExperimentView: View {
                         Text(moodExperiment.name)
                     }
                 }
+                 */
                 
             }.buttonStyle(.borderless)
             .navigationTitle("My Experiments")

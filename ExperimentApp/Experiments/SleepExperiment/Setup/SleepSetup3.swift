@@ -14,8 +14,8 @@ struct SleepSetup3: View {
     
     
     var body: some View {
-        VStack{
-            
+        VStack(alignment:.leading){
+            Text("Entry goal").font(.largeTitle).bold()
             Text("Choose a goal amount of entries.")
                 .padding(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -53,19 +53,19 @@ struct SleepSetup3: View {
             HStack{
                 Slider(value: $sliderValue, in: 5...100, step: 0.1).onChange(of: sliderValue) { newValue in
                     goalEntries = Int(newValue)
-                    if(index == 2){
-                        index = 3
-                    }
-                }
-                if(index == 2){
-                    Text("-")
-                } else {
-                    Text("\(goalEntries)")
+                    
                 }
                 
+                Text("\(goalEntries)")
+                
             }
-            
-        }
+            Button("Next"){
+                withAnimation{
+                    index = 4
+                }
+            }
+            Spacer()
+        }.padding()
         
     }
 }

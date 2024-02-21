@@ -17,6 +17,7 @@ struct SleepExperiment: Identifiable, Codable{
     var insights: [String] = []
     var name: String = "Sleep Experiment"
     var newSleepEntry = NewSleepEntry(date: Date())
+    var isEditing: Bool = false
     
     //normal initializer
     init(id: UUID = UUID(), goalEntries: Int, dependentVariable: DependentVariable, independentVariable: IndependentVariable) {

@@ -12,12 +12,14 @@ import SwiftUI
 struct SleepSetup1: View {
     
     @Binding var independentVariable: SleepExperiment.IndependentVariable
+    @State var selected: Bool = false
     @Binding var index: Int
-    
     var body: some View {
         
         NavigationStack{
-            VStack{
+            
+            VStack(alignment: .leading){
+                Text("Independent Variable").font(.largeTitle).bold()
                 Text("Choose how you'd like to track your sleep.")
                     .padding(1)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -55,36 +57,49 @@ struct SleepSetup1: View {
                                 Text("- Least effort required")
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(.caption)
-
                             }
                         }
                         Spacer()
                         //display a button saying choose if not chosen already, display selected if chosen
-                        if(index == 0 || independentVariable != variable){
+                        if(!selected || independentVariable != variable){
                             Button("Choose"){
                                 independentVariable = variable
-                                if(index == 0){
-                                    index = 1
-                                }
+                                selected = true
+                                
                             }
                         } else {
                             Text("Selected")
                         }
+                        
                     }
-                    
-                    
-                    
                 }
                 .buttonStyle(BorderlessButtonStyle())
                 .padding(1)
-                
-
-                //the code only works if we use .buttonStyle(BorderlessButtonStyle() bc for some reason using a button in form presses every single button in it
-                
-                
-                
+                if(selected){
+                    Button("Next"){
+                        withAnimation{
+                            index = 2
+                        }
+                    }
+                } else {
+                    Text("HIHIH").opacity(0)
+                }
+                /*
+                VStack(alignment: .leading){
+                    Text("Things to keep in mind: ").bold().padding(.bottom,5)
+                    Text("Difficulty")
+                    Text(" - How feasible will it be to consistently track the data?").font(.caption)
+                    Text(" - If ?").font(.caption)
+                    Text("Applicability")
+                    Text(" - How useful will knowledge about bedtime be for you?").font(.caption)
+                    Text("")
+                    Text(" - How convienient will it be to track the data?").font(.caption)
+                }
+                Text(" - How convienient will it be to track the data?").font(.caption)
+                 */
+                Spacer()
             }
-        }
+        }.padding()
     }
 }
 

@@ -15,12 +15,11 @@ struct SimpleBedtimeBarChart: View {
     @State var notEnoughEntries: Bool = false
     var body: some View {
         NavigationStack{
-            
             VStack(alignment: .leading){
                 HStack{
                     getMessage().foregroundColor(.black)
-                }.padding(.horizontal)
-                Divider()
+                }
+                
                 if(notEnoughEntries){
                     EmptyChart()
                 } else {
@@ -37,10 +36,7 @@ struct SimpleBedtimeBarChart: View {
                     .chartYAxis(.hidden)
                     .frame(height: 120)
                 }
-                NavigationLink(destination: BedtimeScatterPlot(experiment: experiment, dependentVariable: dependentVariable)){
-                    Spacer()
-                    Text("View Chart")
-                }
+               
             }.onAppear(){
                 fillData()
             }.frame(height: 220)

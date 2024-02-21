@@ -23,11 +23,24 @@ struct SleepView: View {
     var body: some View {
         NavigationStack{
             Form{
-                
-                Section(header: SleepExperimentHeader(title: "Insights", isOn: $showInsights)){
+                Section(header: SleepExperimentHeader(title: "Entries", isOn: $showInsights)){
                     if(showInsights){
                         SleepProgressView(experiment: experiment)
+                        
+                        NavigationLink(destination: NewSleepEntryView2(experiment: $experiment)){
+                            //if there is info in the entry, then say continue editing mm/dd entry, otherwise say add a new entry
+                            if(experiment.isEditing){
+                                Text("Continue editing \(Date.formatToMonthAndDay(date: experiment.newSleepEntry.date)) entry")
+                            }else {
+                                Text("Add a new entry")
+                            }
+                        }
                         SleepInsightView(experiment: $experiment)
+                        if(experiment.entries.count > 0){
+                            NavigationLink(destination: SleepHistory(experiment: $experiment), label: {
+                                Text("View past entries")
+                            })
+                        }
                     }
                 }
                 //results
@@ -98,8 +111,6 @@ struct SleepView: View {
                     })
                 }
             }.buttonStyle(.borderless)
-                .toolbar(content: toolbarContent)
-                .navigationBarBackButtonHidden(true)
             
             
         }.onDisappear(){

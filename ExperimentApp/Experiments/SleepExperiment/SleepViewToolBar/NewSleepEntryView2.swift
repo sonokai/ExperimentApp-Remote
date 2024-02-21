@@ -13,8 +13,20 @@ struct NewSleepEntryView2: View {
     var body: some View {
         NavigationStack{
             Form{
-                NewSleepEntryView(experiment: $experiment, finishAction: {_ in})
+                NewSleepEntryView(experiment: $experiment)
+                
             }.navigationTitle("New Sleep Entry")
+                .toolbar{
+                    ToolbarItem(placement:.navigationBarTrailing){
+                        Button(action:{
+                            presentationMode.wrappedValue.dismiss()
+                        },label: {
+                            Text("Save")
+                        })
+                    }
+                }.onAppear(){
+                    experiment.isEditing = true
+                }
         }
     }
 }

@@ -12,11 +12,13 @@ struct SleepSetup2: View {
     
     @Binding var dependentVariable: SleepExperiment.DependentVariable
     @Binding var index: Int
+    @State var selected: Bool = false
     var body: some View {
         
         NavigationStack{
             
-            VStack{
+            VStack(alignment: .leading){
+                Text("Dependent Variable").font(.largeTitle).bold()
                 Text("Choose a question.")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.headline)
@@ -44,12 +46,10 @@ struct SleepSetup2: View {
                                 }
                             }
                             Spacer()
-                            if(index == 1 || dependentVariable != variable){
+                            if(!selected || dependentVariable != variable){
                                 Button("Choose"){
                                     dependentVariable = variable
-                                    if(index == 1){
-                                        index = 2
-                                    }
+                                    selected = true
                                 }
                             } else {
                                 Text("Selected")
@@ -60,14 +60,23 @@ struct SleepSetup2: View {
                         }
                         
                         .padding(1)
-                       
+                    
                         
                     
                     
                 }.buttonStyle(.borderless)
-                
+                if(selected){
+                    Button("Next"){
+                        withAnimation{
+                            index = 3
+                        }
+                    }
+                }else {
+                    Text("HIHIH").opacity(0)
+                }
             }
-        }
+            Spacer()
+        }.padding()
     }
 }
 

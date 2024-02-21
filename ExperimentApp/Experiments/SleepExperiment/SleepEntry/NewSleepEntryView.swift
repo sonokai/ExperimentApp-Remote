@@ -12,16 +12,9 @@ struct NewSleepEntryView: View {
     
     @State var timeSelectorPopOver = false
     @State var sheet = false
-    let finishAction: (SleepExperiment) -> Void
     
     @State var replaceAlert: Bool = false
     var body: some View {
-        NavigationLink(destination: SleepView(experiment: $experiment, finishAction: { experiment in
-            finishAction(experiment)
-        })){
-            
-            Text("\(experiment.name)")
-        }
         
         HStack{
             Text("Add a new entry")
@@ -105,7 +98,7 @@ struct NewSleepEntryView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
             Form{
-                NewSleepEntryView(experiment: .constant(SleepExperiment.waketimeSampleExperiment), finishAction: {_ in})
+                NewSleepEntryView(experiment: .constant(SleepExperiment.waketimeSampleExperiment))
             }.buttonStyle(.borderless)
         }
     }
