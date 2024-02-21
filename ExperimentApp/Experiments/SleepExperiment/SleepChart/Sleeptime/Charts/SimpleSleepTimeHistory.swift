@@ -24,9 +24,6 @@ struct SimpleSleepTimeHistory: View {
     }
     var body: some View {
         VStack(alignment: .leading){
-            
-            
-            
             HStack{
                 Image(systemName: "bed.double")
                 //in the time of your last entry, you slept <minutes> <later or earlier> than normal

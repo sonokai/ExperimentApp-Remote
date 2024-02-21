@@ -23,6 +23,7 @@ struct SimpleWaketimeHistory: View {
                 }
                 
             }
+            Spacer()
             if(experiment.entries.count == 0){
                 EmptyChart()
             }else {
@@ -38,7 +39,7 @@ struct SimpleWaketimeHistory: View {
                     .chartXAxis(.hidden)
                     .frame(height: 120)
             }
-        }
+        }.frame(height: 180)
     }
     func getLast7Entries() -> [SleepEntry]{
         if(experiment.entries.count<7){

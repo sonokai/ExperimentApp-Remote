@@ -22,10 +22,10 @@ struct SimpleWaketimeBarChart: View {
                     Text("Add more entries to analyze your data.")
                 } else if(experiment.dependentVariable == .productivity||dependentVariable == .productivity){
                     Image(systemName: "gearshape.2.fill")
-                    Text("When you slept between ") + Text(interval.simplifyDateToTimeString()).bold() + Text(" and ") + Text(interval.addMinutesToDate(minutesToAdd: 30).simplifyDateToTimeString()).bold() + Text(", you had the highest productivity!")
+                    Text("When you woke up between ") + Text(interval.simplifyDateToTimeString()).bold() + Text(" and ") + Text(interval.addMinutesToDate(minutesToAdd: 30).simplifyDateToTimeString()).bold() + Text(", you had the highest productivity!")
                 } else if(experiment.dependentVariable == .quality||dependentVariable == .quality){
                     Image(systemName: "sun.max")
-                    Text("When you slept between ") + Text(interval.simplifyDateToTimeString()).bold() + Text(" and ") + Text(interval.addMinutesToDate(minutesToAdd: 30).simplifyDateToTimeString()).bold() + Text(", you had the highest quality of day!")
+                    Text("When you woke up between ") + Text(interval.simplifyDateToTimeString()).bold() + Text(" and ") + Text(interval.addMinutesToDate(minutesToAdd: 30).simplifyDateToTimeString()).bold() + Text(", you had the highest quality of day!")
                 }
             }
             if(notEnoughEntries){

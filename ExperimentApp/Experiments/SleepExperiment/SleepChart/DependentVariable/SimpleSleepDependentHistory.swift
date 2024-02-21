@@ -54,7 +54,11 @@ struct SimpleSleepDependentHistory: View {
     
     var body: some View {
         VStack(alignment: .leading){
-            getMessage()
+            HStack{
+                getIcon()
+                getMessage()
+            }
+
             Chart(barChartEntries){ entry in
                 BarMark(
                     x: .value("Date", entry.index),
@@ -89,8 +93,15 @@ struct SimpleSleepDependentHistory: View {
         if(experiment.dependentVariable == .quality || dependentVariable == .quality){
             return AnyView(Text("In your last 7 entries, the average quality of your day was ") + Text("\(getAverage(entries: experiment.entries.suffix(7)))").bold())
         }
-        return AnyView(Text("In your last 7 entries, your average productivity productivity was ") + Text("\(getAverage(entries: experiment.entries.suffix(7)))").bold())
+        return AnyView(Text("In your last 7 entries, your average productivity was ") + Text("\(getAverage(entries: experiment.entries.suffix(7)))").bold())
     }
+    func getIcon() -> AnyView{
+        if(experiment.dependentVariable == .quality || dependentVariable == .quality){
+            return AnyView(Image(systemName: "sun.max"))
+        }
+        return AnyView(Image(systemName:"gearshape.2.fill"))
+    }
+    
     func getAverage(entries: [SleepEntry]) -> String{
         var sum = 0
         for entry in entries{

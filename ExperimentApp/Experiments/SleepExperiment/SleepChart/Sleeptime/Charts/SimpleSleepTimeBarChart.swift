@@ -18,7 +18,11 @@ struct SimpleSleepTimeBarChart: View {
             HStack{
                 if(notEnoughEntries){
                     Image(systemName: "gearshape.2.fill")
-                    Text("Add more entries to view your data. ")
+                    if(experiment.dependentVariable == .quality || dependentVariable == .quality){
+                        Text("Add more entries to view how your sleep time is associated with quality of day.")
+                    } else {
+                        Text("Add more entries to view how your sleep time is associated with productivity.")
+                    }
                 } else if(experiment.dependentVariable == .productivity||dependentVariable == .productivity){
                     Image(systemName: "gearshape.2.fill")
                     Text("When you slept between ") + Text(interval.simplifyDateToHMM()).bold() + Text(" and ") + Text(interval.addMinutesToDate(minutesToAdd: 30).simplifyDateToHMM()).bold() + Text(", you had the highest productivity!")

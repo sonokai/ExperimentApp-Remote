@@ -61,13 +61,15 @@ struct SleepChartCarousel: View {
                 availableCharts.append(AnyView(SimpleSleepTimeBarChart(experiment: experiment, dependentVariable: .quality)))
             case .both:
                 availableCharts.append(AnyView(SimpleBedtimeHistory(experiment: experiment)))
-                availableCharts.append(AnyView(SimpleBedtimeBarChart(experiment: experiment, dependentVariable: .quality)))
                 availableCharts.append(AnyView(SimpleWaketimeHistory(experiment: experiment)))
-                availableCharts.append(AnyView(SimpleWaketimeBarChart(experiment: experiment, dependentVariable: .quality)))
                 availableCharts.append(AnyView(SimpleSleepTimeHistory(experiment: experiment)))
+                availableCharts.append(AnyView(SimpleBedtimeBarChart(experiment: experiment, dependentVariable: .quality)))
+                availableCharts.append(AnyView(SimpleWaketimeBarChart(experiment: experiment, dependentVariable: .quality)))
                 availableCharts.append(AnyView(SimpleSleepTimeBarChart(experiment: experiment, dependentVariable: .quality)))
+                availableCharts.append(AnyView(SimpleBedtimeBarChart(experiment: experiment, dependentVariable: .productivity)))
+                availableCharts.append(AnyView(SimpleWaketimeBarChart(experiment: experiment, dependentVariable: .productivity)))
+                availableCharts.append(AnyView(SimpleSleepTimeBarChart(experiment: experiment, dependentVariable: .productivity)))
             }
-            
             if(experiment.dependentVariable == .quality || experiment.dependentVariable == .both){
                 availableCharts.append(AnyView(SimpleSleepDependentHistory(experiment: experiment, dependentVariable: .quality)))
             }
