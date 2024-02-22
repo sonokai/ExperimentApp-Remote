@@ -10,13 +10,11 @@ import SwiftUI
 struct SleepTimeData: View {
     var experiment: SleepExperiment
     var body: some View {
-        if(experiment.entries.count>=7){
-            NavigationLink(destination: SleepTimeHistory(experiment: experiment)){
-                SimpleSleepTimeHistory(experiment: experiment)
-            }
-        } else{
-            EntryProgressView(count: experiment.entries.count, needed: 7, text: "to view bedtime data")
+        
+        NavigationLink(destination: SleepTimeHistory(experiment: experiment)){
+            SimpleSleepTimeHistory(experiment: experiment)
         }
+        
     }
 }
 

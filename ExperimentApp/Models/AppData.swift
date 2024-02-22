@@ -10,23 +10,17 @@ import Foundation
 struct AppData: Codable{
     var sleepExperiments: [SleepExperiment]
     var dayExperiments: [DayExperiment]
-
-    //var moodExperiments: [MoodTracker]
-    
-    
     var finishedExperiments: [FinishedExperiment]
     
     init(sleepExperiments: [SleepExperiment], dayExperiments: [DayExperiment], finishedExperiments: [FinishedExperiment]) {
-
         self.sleepExperiments = sleepExperiments
         self.dayExperiments = dayExperiments
-        
         self.finishedExperiments = finishedExperiments
     }
     
 
     static var emptyData: AppData = AppData(sleepExperiments: [], dayExperiments: [], finishedExperiments: [])
-    static var sampleData: AppData = AppData(sleepExperiments: [SleepExperiment.bothTimesSampleExperiment], dayExperiments: [DayExperiment.sampleExperiment], finishedExperiments: FinishedExperiment.sampleArray)
+    static var sampleData: AppData = AppData(sleepExperiments: [SleepExperiment.bothTimesSampleExperiment, SleepExperiment.bedtimebothExperiment, SleepExperiment.waketimeSampleExperiment], dayExperiments: [DayExperiment.sampleExperiment], finishedExperiments: FinishedExperiment.sampleArray)
     static var sampleData2: AppData = AppData(sleepExperiments: [SleepExperiment.bedtimeShortExperiment], dayExperiments: [DayExperiment.sampleExperiment], finishedExperiments: FinishedExperiment.sampleArray)
 
 }

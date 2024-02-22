@@ -32,13 +32,13 @@ struct SleepIntroView2: View {
                     .offset(x: CGFloat(3-currentIndex) * 380).padding()
                 
                 SleepSetup4(finishAction: {
+                    selectedTabIndex = 0
                     sleepExperiments.append(SleepExperiment(goalEntries: goalEntries, dependentVariable: dependentVariable, independentVariable: independentVariable, entries: [], name: "Sleep experiment"))
                     isCreatingExperiment = true
+                    
                     presentationMode.wrappedValue.dismiss()
                     
-                }, independentVariable: independentVariable, dependentVariable: dependentVariable, index: $currentIndex).onDisappear(){
-                    selectedTabIndex = 0
-                }.opacity(currentIndex == 4 ? 1.0: 0.5)
+                }, independentVariable: independentVariable, dependentVariable: dependentVariable, index: $currentIndex).opacity(currentIndex == 4 ? 1.0: 0.5)
                     .offset(x: CGFloat(4-currentIndex) * 380).padding()
                 
             }

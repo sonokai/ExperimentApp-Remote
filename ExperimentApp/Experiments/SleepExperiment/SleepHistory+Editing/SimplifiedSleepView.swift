@@ -23,9 +23,9 @@ struct SimplifiedSleepView: View {
                 case .waketime:
                     Label("\(hourAndMinute(date: entry.waketime))", systemImage: "clock")
                 case .both:
-                    Label("\(entry.timeSlept)", systemImage: "clock")
+                    Label(timeString(entry: entry), systemImage: "clock")
                 case .hoursSlept:
-                    Label("\(entry.hoursSlept):\(entry.minutesSlept)", systemImage: "clock")
+                    Label(timeString(entry: entry), systemImage: "clock")
                 }
                 
                 Spacer()
@@ -45,7 +45,12 @@ struct SimplifiedSleepView: View {
         .padding()
     }
 }
-
+func timeString(entry: SleepEntry)-> String{
+    if(entry.minutesSlept<10){
+        return "\(entry.hoursSlept):0\(entry.minutesSlept)"
+    }
+    return "\(entry.hoursSlept):\(entry.minutesSlept)"
+}
 private func formattedDate(date: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateStyle = .medium

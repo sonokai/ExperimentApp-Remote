@@ -28,7 +28,7 @@ struct NewSleepEntryView: View {
             })
         }
         
-        SleepEntryDatePicker(experiment: $experiment, timeSelectorPopOver: timeSelectorPopOver)
+        SleepEntryDatePicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
         
         switch(experiment.independentVariable){
         case .bedtime:
@@ -36,27 +36,36 @@ struct NewSleepEntryView: View {
         case .waketime:
             WaketimePicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
         case .both:
-            BedtimePicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver).onChange(of: experiment.newSleepEntry.bedtime){ _ in
-               
-              //  let (hour, minute) = SleepEntry.returnTimeSlept(sleep: experiment.newSleepEntry.bedtime, wake: <#T##Date#>)
-            }
-            WaketimePicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
+            BedtimePicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver).onChange(of: experiment.newSleepEntry.bedtime, perform: { _ in
+                
+                if let bedtime = experiment.newSleepEntry.bedtime, let waketime = experiment.newSleepEntry.waketime{
+                    let (hour, minute) = SleepEntry.returnTimeSlept(sleep: bedtime, wake: waketime)
+                    experiment.newSleepEntry.hoursSlept = hour
+                    experiment.newSleepEntry.minutesSlept = minute
+                    print("Updated hour and minute: new hour \(hour), new minute: \(minute)" )
+                }
+                
+            })
+            WaketimePicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver).onChange(of: experiment.newSleepEntry.waketime, perform: { _ in
+                if let bedtime = experiment.newSleepEntry.bedtime, let waketime = experiment.newSleepEntry.waketime{
+                    let (hour, minute) = SleepEntry.returnTimeSlept(sleep: bedtime, wake: waketime)
+                    experiment.newSleepEntry.hoursSlept = hour
+                    experiment.newSleepEntry.minutesSlept = minute
+                    print("Updated hour and minute: new hour \(hour), new minute: \(minute)" )
+                }
+            })
         case .hoursSlept:
             TimeSleptPicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
         }
         
         switch(experiment.dependentVariable){
         case .quality:
-            SleepDependentVarPicker(label: "Quality of day", optional: $experiment.newSleepEntry.quality)
+            SleepDependentVarPicker(label: "Quality of day", optional: $experiment.newSleepEntry.quality, timeSelectorPopOver: $timeSelectorPopOver)
         case .productivity:
-            SleepDependentVarPicker(label: "Productivity", optional: $experiment.newSleepEntry.productivity, image: "gearshape")
+            SleepDependentVarPicker(label: "Productivity", optional: $experiment.newSleepEntry.productivity,image: "gearshape", timeSelectorPopOver: $timeSelectorPopOver)
         case .both:
-            SleepDependentVarPicker(label: "Quality of day", optional: $experiment.newSleepEntry.quality)
-            SleepDependentVarPicker(label: "Productivity", optional: $experiment.newSleepEntry.productivity, image: "gearshape")
-        }
-        
-        if(experiment.independentVariable == .both){
-            
+            SleepDependentVarPicker(label: "Quality of day", optional: $experiment.newSleepEntry.quality, timeSelectorPopOver: $timeSelectorPopOver)
+            SleepDependentVarPicker(label: "Productivity", optional: $experiment.newSleepEntry.productivity,image: "gearshape", timeSelectorPopOver: $timeSelectorPopOver)
         }
         
         Button("Done"){
@@ -107,7 +116,7 @@ struct NewSleepEntryView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
             Form{
-                NewSleepEntryView(experiment: .constant(SleepExperiment.waketimeSampleExperiment))
+                NewSleepEntryView(experiment: .constant(SleepExperiment.bothTimesSampleExperiment))
             }.buttonStyle(.borderless)
         }
     }

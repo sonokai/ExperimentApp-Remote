@@ -47,7 +47,7 @@ struct FinishedExperiment: Identifiable, Codable{
     static let sampleArrayOfInsights = [
         Insight(text:"When I sleep between 9:00 PM and 10:00 PM, I have the best quality of day.", date: Date()),
         Insight(text:"When I wake up between 6:00 AM and 7:00 AM, I have the best productivity.",date: Date()),
-        Insight(text: "Sleeping between 8-9 hours is best for me.",date:Date()),
+        Insight(text: "Sleeping between 8-9 hours is best for me.", date: Date()),
         Insight(text: "Productivity drops by 20% when I sleep less than 6 hours",date: Date())
     ]
 }

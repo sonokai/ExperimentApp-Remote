@@ -13,7 +13,7 @@ struct SleepEntry: Identifiable, Codable {
     var bedtime: Date
     var waketime: Date
     var quality: Int
-    var timeSlept: String
+   // var timeSlept: String
     var productivity: Int
     var hoursSlept: Int = 0
     var minutesSlept: Int = 0
@@ -24,7 +24,7 @@ struct SleepEntry: Identifiable, Codable {
         self.bedtime = bedtime
         self.waketime = waketime
         self.quality = quality
-        self.timeSlept = "0"
+       // self.timeSlept = "0"
         self.productivity = 1
     }
     
@@ -36,7 +36,7 @@ struct SleepEntry: Identifiable, Codable {
         self.waketime = waketime
         self.quality = quality
         self.productivity = productivity
-        self.timeSlept = timeSlept
+       // self.timeSlept = timeSlept
         self.hoursSlept = hoursSlept
         self.minutesSlept = minutesSlept
     }
@@ -83,13 +83,10 @@ struct SleepEntry: Identifiable, Codable {
             self.minutesSlept = minutes
         }
         
-        self.timeSlept = "0"
+      //  self.timeSlept = "0"
     }
     
-    //mutating allows it to modify self? idk
-    mutating func updateTimeSlept(){
-        timeSlept = SleepEntry.calculateTimeSlept(sleep: bedtime, wake: waketime)
-    }
+    
     static func calculateTimeSlept(sleep: Date, wake: Date) -> (String){
         let sleepHour = getHour(date: sleep)
         let sleepMinute = getMinute(date: sleep)

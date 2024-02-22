@@ -19,15 +19,15 @@ struct BothTimeCorrelationData: View {
                 
                 switch(chartToShow){
                 case .bedtime:
-                    NavigationLink(destination: BedtimeScatterPlot(experiment: experiment, dependentVariable: experiment.dependentVariable)){
+                    NavigationLink(destination: BedtimeScatterPlot(experiment: experiment, dependentVariable: .quality)){
                         SimpleBedtimeBarChart(experiment: experiment, dependentVariable: .quality)
                     }
                 case .waketime:
-                    NavigationLink(destination: WaketimeScatterPlot(experiment: experiment, dependentVariable: experiment.dependentVariable)){
+                    NavigationLink(destination: WaketimeScatterPlot(experiment: experiment, dependentVariable:.quality)){
                         SimpleWaketimeBarChart(experiment: experiment, dependentVariable: .quality)
                     }
                 case .sleeptime:
-                    NavigationLink(destination: SleepTimeScatterPlot(experiment: experiment, dependentVariable: experiment.dependentVariable)){
+                    NavigationLink(destination: SleepTimeScatterPlot(experiment: experiment, dependentVariable: .quality)){
                         SimpleSleepTimeBarChart(experiment: experiment, dependentVariable: .quality)
                     }
                 }
@@ -35,15 +35,15 @@ struct BothTimeCorrelationData: View {
                 
                 switch(chartToShow){
                 case .bedtime:
-                    NavigationLink(destination: BedtimeScatterPlot(experiment: experiment, dependentVariable: experiment.dependentVariable)){
+                    NavigationLink(destination: BedtimeScatterPlot(experiment: experiment, dependentVariable: .productivity)){
                         SimpleBedtimeBarChart(experiment: experiment, dependentVariable: .productivity)
                     }
                 case .waketime:
-                    NavigationLink(destination: WaketimeScatterPlot(experiment: experiment, dependentVariable: experiment.dependentVariable)){
+                    NavigationLink(destination: WaketimeScatterPlot(experiment: experiment, dependentVariable: .productivity)){
                         SimpleWaketimeBarChart(experiment: experiment, dependentVariable: .productivity)
                     }
                 case .sleeptime:
-                    NavigationLink(destination: SleepTimeScatterPlot(experiment: experiment, dependentVariable: experiment.dependentVariable)){
+                    NavigationLink(destination: SleepTimeScatterPlot(experiment: experiment, dependentVariable: .productivity)){
                         SimpleSleepTimeBarChart(experiment: experiment, dependentVariable: .productivity)
                     }
                 }

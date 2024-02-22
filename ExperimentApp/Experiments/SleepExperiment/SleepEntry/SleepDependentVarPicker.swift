@@ -16,7 +16,7 @@ struct SleepDependentVarPicker: View {
     @State var value: Int = 0
     @Binding var optional: Int?
     var image: String = "sun.max"
-
+    @Binding var timeSelectorPopOver: Bool
     var body: some View {
         HStack{
             
@@ -57,7 +57,7 @@ struct SleepOptionalPicker_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
             Form{
-                SleepDependentVarPicker(label: "Quality of day", optional: .constant(nil))
+                SleepDependentVarPicker(label: "Quality of day", optional: .constant(nil), timeSelectorPopOver: .constant(false))
             }
         }
     }

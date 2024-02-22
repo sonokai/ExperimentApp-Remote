@@ -50,6 +50,9 @@ struct SleepEditView: View {
         }.toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Done") {
+                    let (hour, minute) = SleepEntry.returnTimeSlept(sleep: entry.bedtime, wake: entry.waketime)
+                    entry.hoursSlept = hour
+                    entry.minutesSlept = minute
                     experiment.sortEntriesByDate()
                     presentationMode.wrappedValue.dismiss()
                 }

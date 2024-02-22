@@ -45,6 +45,7 @@ struct SimpleWaketimeBarChart: View {
                 .frame(height: 120)
             }
         }.onAppear(){
+            barChartEntries = []
             switch(experiment.getOptimalWaketimeInterval(dependentVariable: dependentVariable, requiredEntries: 1)){
             case .success(let optimalInterval):
                 interval = optimalInterval

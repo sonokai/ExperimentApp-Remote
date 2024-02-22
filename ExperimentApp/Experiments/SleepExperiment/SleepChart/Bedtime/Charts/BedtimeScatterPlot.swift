@@ -58,8 +58,14 @@ struct BedtimeScatterPlot: View {
                             }
                         }
                         .onAppear(){
-                            let startMinutes = experiment.getLeastBedtimeMinutes()
-                            let endMinutes = experiment.getMostBedtimeMinutes()
+                            var startMinutes = experiment.getLeastBedtimeMinutes()
+                            if(startMinutes % 30 != 0){
+                                startMinutes = startMinutes-(startMinutes%30)
+                            }
+                            var endMinutes = experiment.getMostBedtimeMinutes()
+                            if(endMinutes % 30 != 0){
+                                endMinutes = endMinutes + (30-(endMinutes%30))
+                            }
                             if let t1 = convertMinutesToDate(startMinutes){
                                 startTime = t1.formatDateForChart()
                             }

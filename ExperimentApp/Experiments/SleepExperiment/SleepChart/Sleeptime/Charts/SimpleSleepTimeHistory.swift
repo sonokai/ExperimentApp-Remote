@@ -123,6 +123,7 @@ struct SimpleSleepTimeHistory: View {
     }
     
     func prepareBarChartEntries(){
+        barChartEntries = []
         let lastEntries = experiment.entries.suffix(7)
         let count = lastEntries.count
         let missingEntries = 7-count

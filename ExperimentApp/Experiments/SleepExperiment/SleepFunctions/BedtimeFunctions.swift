@@ -332,6 +332,9 @@ extension SleepExperiment{
     }
     //returns hour and minute of standard deviation of bedtime
     func getBedtimeStandardDeviation() -> (Int, Int){
+        if(entries.count == 0){
+            return (0,0)
+        }
         var total = 0.0
         let average = getAverageBedtimeAsSeconds()
         for entry in entries{

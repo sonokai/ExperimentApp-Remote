@@ -16,12 +16,18 @@ struct BothTimeResults: View {
                 Section("Correlational data"){
                     BothTimeCorrelationData(experiment: experiment)
                 }
-                Section("Independent variable data"){
-                    BothTimeData(experiment: experiment)
+                
+                if(experiment.entries.count>0){
+                    Section("Independent variable data"){
+                        BothTimeData(experiment: experiment)
+                    }
+                    Section("Dependent variable data"){
+                        DependentVariableData(experiment: experiment)
+                    }
+                } else {
+                    Text("Charts will show up here once you add an entry.")
                 }
-                Section("Dependent variable data"){
-                    DependentVariableData(experiment: experiment)
-                }
+                
                 
             }
         }.navigationTitle(Text("Experiment results"))
@@ -29,6 +35,7 @@ struct BothTimeResults: View {
 }
 
 struct BothTimeResults_Previews: PreviewProvider {
+    
     static var previews: some View {
         BothTimeResults(experiment: SleepExperiment.bothTimesSampleExperiment)
     }

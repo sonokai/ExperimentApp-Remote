@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment (\.scenePhase) private var scenePhase
-    @State private var selectedTabIndex = 0
+    @AppStorage("selectedTab") var selectedTabIndex: Int = 0
+    @StateObject private var viewModel = TabViewModel()
     @Binding var appData: AppData
     @State var isPresentingSheetView = false
     let saveAction : () -> Void
     var body: some View {
-        TabView(selection: $selectedTabIndex){
-            ExperimentView(appData: $appData, saveAction: saveAction, selectedTabIndex: $selectedTabIndex)
+        TabView(selection: $viewModel.selectedTab){
+            ExperimentView(appData: $appData, saveAction: saveAction, selectedTabIndex: $viewModel.selectedTab)
                 .tag(0)
                 .tabItem {
                     Label("Home", systemImage: "house")
@@ -30,9 +31,11 @@ struct ContentView: View {
                 .tabItem {
                     Label("Me", systemImage: "person")
                 }
-            
         }
     }
+}
+class TabViewModel: ObservableObject {
+    @Published var selectedTab: Int = 0
 }
 
 struct ContentView_Previews: PreviewProvider {
