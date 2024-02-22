@@ -8,16 +8,14 @@
 import SwiftUI
 
 struct MoodView: View {
-    @StateObject var viewModel = MoodTrackerViewModel()
-    @Binding var moodEntries: [MoodEntry]
-    @Binding var moodExperiments: [MoodTracker]
-    @Binding var appData: AppData
+  
+    @Binding var tracker: MoodTracker
     @State private var isShowingMoodRatingView = false
     
     var body: some View {
         NavigationStack {
             Form {
-                Button(action: {
+                /*Button(action: {
                     isShowingMoodRatingView = true
                 },label: {
                     Text("Make An Entry").font(.headline)
@@ -25,8 +23,9 @@ struct MoodView: View {
                 .navigationDestination(isPresented: $isShowingMoodRatingView) {
                     // Destination view when navigation is triggered
                     MoodRatingView(moodEntries: $moodEntries, moodExperiments: $moodExperiments, appData: $appData)
-                }
+                }*/
                 
+                MoodCumulativeChart(entries: tracker.entries)
         
             }
         }
@@ -35,6 +34,6 @@ struct MoodView: View {
 
 struct MoodView_Previews: PreviewProvider {
     static var previews: some View {
-        MoodView(moodEntries: .constant(MoodEntry.sampleData), moodExperiments: .constant(MoodTracker.sampleExperiments), appData: .constant(AppData.sampleData))
+        MoodView(tracker: .constant(MoodTracker.sampleExperiment1))
     }
 }

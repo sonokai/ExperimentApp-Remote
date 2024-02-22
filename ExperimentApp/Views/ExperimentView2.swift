@@ -20,6 +20,7 @@ struct ExperimentView: View {
                 Section(){
                     ForEach($appData.sleepExperiments) { $sleepExperiment in
                         VStack{
+
                             NavigationLink(destination: SleepView(experiment: $sleepExperiment, finishAction: { experiment in
                                 let closure = finishExperiment(experiment)
                                 closure()

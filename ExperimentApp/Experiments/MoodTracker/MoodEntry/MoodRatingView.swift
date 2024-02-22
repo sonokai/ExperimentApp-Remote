@@ -63,9 +63,9 @@ struct MoodRatingView: View {
                             isShowingMoodView = true
                         }
                     }
-                    .navigationDestination(isPresented: $isShowingMoodView) {
+                    /*.navigationDestination(isPresented: $isShowingMoodView) {
                         MoodView(moodEntries: $moodEntries, moodExperiments: $moodExperiments, appData: $appData)
-                    }
+                    }*/
                     .alert(isPresented: $showErrorAlert) {
                         Alert(
                             title: Text("Error"),
