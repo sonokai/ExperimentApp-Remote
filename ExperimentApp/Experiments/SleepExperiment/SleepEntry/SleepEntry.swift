@@ -57,11 +57,13 @@ struct SleepEntry: Identifiable, Codable {
         } else {
             waketime = Date()
         }
+        /*
         if let bedtime = newEntry.bedtime, let waketime = newEntry.waketime{
             let (hour, minute) = SleepEntry.returnTimeSlept(sleep: bedtime, wake: waketime)
             self.hoursSlept = hour
             self.minutesSlept = minute
-        }
+        }*/
+        
         if let quality = newEntry.quality{
             self.quality = quality
         } else {
@@ -80,6 +82,7 @@ struct SleepEntry: Identifiable, Codable {
         if let minutes = newEntry.minutesSlept{
             self.minutesSlept = minutes
         }
+        
         self.timeSlept = "0"
     }
     

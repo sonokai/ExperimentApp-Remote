@@ -36,7 +36,10 @@ struct NewSleepEntryView: View {
         case .waketime:
             WaketimePicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
         case .both:
-            BedtimePicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
+            BedtimePicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver).onChange(of: experiment.newSleepEntry.bedtime){ _ in
+               
+              //  let (hour, minute) = SleepEntry.returnTimeSlept(sleep: experiment.newSleepEntry.bedtime, wake: <#T##Date#>)
+            }
             WaketimePicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
         case .hoursSlept:
             TimeSleptPicker(experiment: $experiment, timeSelectorPopOver: $timeSelectorPopOver)
@@ -50,6 +53,10 @@ struct NewSleepEntryView: View {
         case .both:
             SleepDependentVarPicker(label: "Quality of day", optional: $experiment.newSleepEntry.quality)
             SleepDependentVarPicker(label: "Productivity", optional: $experiment.newSleepEntry.productivity, image: "gearshape")
+        }
+        
+        if(experiment.independentVariable == .both){
+            
         }
         
         Button("Done"){
