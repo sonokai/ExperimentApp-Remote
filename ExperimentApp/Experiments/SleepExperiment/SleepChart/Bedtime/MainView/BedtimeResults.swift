@@ -15,11 +15,16 @@ struct BedtimeResults: View {
                 Section("Correlational data"){
                     BedtimeCorrelationData(experiment: experiment)
                 }
-                Section("Independent variable data"){
-                    BedtimeData(experiment: experiment)
-                }
-                Section("Dependent variable data"){
-                    DependentVariableData(experiment: experiment)
+                
+                if(experiment.entries.count>0){
+                    Section("Independent variable data"){
+                        BedtimeData(experiment: experiment)
+                    }
+                    Section("Dependent variable data"){
+                        DependentVariableData(experiment: experiment)
+                    }
+                } else {
+                    Text("Charts will show up here once you add an entry.")
                 }
             }
         }.navigationTitle(Text("Experiment results"))

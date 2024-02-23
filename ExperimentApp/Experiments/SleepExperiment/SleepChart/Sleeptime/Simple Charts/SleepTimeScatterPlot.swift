@@ -56,15 +56,21 @@ struct SleepTimeScatterPlot: View {
                             }
                         }
                         .onAppear(){
-                            let startMinutes = experiment.getLeastSleepTimeMinutes()
-                            let endMinutes = experiment.getMostSleepTimeMinutes()
+                            var startMinutes = experiment.getLeastSleepTimeMinutes()
+                            var endMinutes = experiment.getMostSleepTimeMinutes()
+                            if(startMinutes % 30 != 0){
+                                startMinutes = startMinutes-(startMinutes%30)
+                            }
+                            if(endMinutes % 30 != 0){
+                                endMinutes = endMinutes + (30-(endMinutes%30))
+                            }
                             startTime = formatTime(hour: startMinutes/60, minute: startMinutes%60)
                             endTime = formatTime(hour: endMinutes/60, minute: endMinutes%60)
                             updateOptimalInterval()
                         }
                         .chartXScale(domain: [startTime, endTime])
                         .chartYAxisLabel(experiment.getYAxisLabel(dependentVariable))
-                        .chartXAxisLabel("Hours slept")
+                        .chartXAxisLabel("Time slept")
                         .frame(height: 300)
                         .chartXAxis {
                             AxisMarks(values: .stride(by: .minute, count: experiment.getAppropriateLengthOfChartAxisMarks())) { value in

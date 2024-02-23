@@ -12,69 +12,71 @@ struct BedtimeHistory: View {
     var experiment: SleepExperiment
     @State var showFullRange = false
     var body: some View {
-        Form{
-            Section("Chart"){
-                VStack(alignment: .leading){
-                    Text("Bedtimes")
-                    Chart(experiment.entries){ entry in
-                        PointMark(
-                            x: .value("Date", entry.date.convertToMMDDYYYY(), unit: .day),
-                            y: .value("Bedtime", SleepExperiment.getBedtimeSeconds(from: entry.bedtime))
-                        ).foregroundStyle(.red)
-                    }.frame(height: 300)
-                        .chartYAxis {
-                            AxisMarks(values: .stride(by: experiment.getYAxisTickSize(independentVariable: .bedtime))) { value in
-                                AxisGridLine()
-                                
-                                if let value = value.as(Double.self) {
-                                    AxisValueLabel {
-                                        //Text("\(value)")
-                                        Text(Date.simplifySecondsToTimeString(value))
-                                    }
-                                }
-                            }
-                        }
-                        .chartYScale(domain: experiment.getYDomain(independentVariable: .bedtime))
-                        .chartXAxis{
-                            AxisMarks(values: .stride(by: .day, count: experiment.getXAxisTickSize())){ value in
-                                if(xValueInRange(date: value.as(Date.self))){
-                                    if(experiment.getXAxisTickSize() >= 28){
-                                        AxisValueLabel{
-                                            Text(Date.getMonth(value.as(Date.self)))
-                                        }
-                                    } else {
-                                        AxisValueLabel{
-                                            Text(Date.formatToMonthAndDay(date: value.as(Date.self)))
+        NavigationStack{
+            Form{
+                Section("Chart"){
+                    VStack(alignment: .leading){
+                        Text("Bedtimes")
+                        Chart(experiment.entries){ entry in
+                            PointMark(
+                                x: .value("Date", entry.date.convertToMMDDYYYY(), unit: .day),
+                                y: .value("Bedtime", SleepExperiment.getBedtimeSeconds(from: entry.bedtime))
+                            ).foregroundStyle(.red)
+                        }.frame(height: 300)
+                            .chartYAxis {
+                                AxisMarks(values: .stride(by: experiment.getYAxisTickSize(independentVariable: .bedtime))) { value in
+                                    AxisGridLine()
+                                    
+                                    if let value = value.as(Double.self) {
+                                        AxisValueLabel {
+                                            //Text("\(value)")
+                                            Text(Date.simplifySecondsToTimeString(value))
                                         }
                                     }
                                 }
-                                AxisGridLine()
-                                AxisTick()
                             }
-                        }
-                        .chartXScale(domain: experiment.getXDomain())
+                            .chartYScale(domain: experiment.getYDomain(independentVariable: .bedtime))
+                            .chartXAxis{
+                                AxisMarks(values: .stride(by: .day, count: experiment.getXAxisTickSize())){ value in
+                                    if(xValueInRange(date: value.as(Date.self))){
+                                        if(experiment.getXAxisTickSize() >= 28){
+                                            AxisValueLabel{
+                                                Text(Date.getMonth(value.as(Date.self)))
+                                            }
+                                        } else {
+                                            AxisValueLabel{
+                                                Text(Date.formatToMonthAndDay(date: value.as(Date.self)))
+                                            }
+                                        }
+                                    }
+                                    AxisGridLine()
+                                    AxisTick()
+                                }
+                            }
+                            .chartXScale(domain: experiment.getXDomain())
+                    }
                 }
-            }
-            Section("Stats"){
-                HStack{
-                    Text("Average bedtime: ")
-                    Spacer()
-                    Text("\(experiment.getAverageBedtime())")
-                }
-                HStack{
-                    Text("Standard deviation:")
-                    Spacer()
-                    Text(experiment.formatStandardDeviation(independentVariable: .bedtime))
-                }
-                HStack{
-                    Text("Median bedtime: ")
-                    Spacer()
-                    Text("\(experiment.getMedianBedtime())")
+                Section("Stats"){
+                    HStack{
+                        Text("Average bedtime: ")
+                        Spacer()
+                        Text("\(experiment.getAverageBedtime())")
+                    }
+                    HStack{
+                        Text("Standard deviation:")
+                        Spacer()
+                        Text(experiment.formatStandardDeviation(independentVariable: .bedtime))
+                    }
+                    HStack{
+                        Text("Median bedtime: ")
+                        Spacer()
+                        Text("\(experiment.getMedianBedtime())")
+                    }
+                    
+                    
                 }
                 
-
-            }
-            
+            }.navigationTitle("Bedtime data")
         }
     }
     func xValueInRange(date: Date?) -> Bool{

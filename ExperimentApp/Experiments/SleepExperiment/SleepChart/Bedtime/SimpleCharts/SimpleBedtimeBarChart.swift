@@ -44,6 +44,7 @@ struct SimpleBedtimeBarChart: View {
         
     }
     func fillData(){
+        chartEntries = []
         switch(experiment.getOptimalBedtimeInterval(dependentVariable: dependentVariable, requiredEntries: 2, lowEndpoint: nil, highEndpoint: nil)){
         case .success(let optimalInterval):
             interval = optimalInterval
@@ -65,6 +66,7 @@ struct SimpleBedtimeBarChart: View {
         }
     }
     func getMessage() -> AnyView{
+        
         if(notEnoughEntries){
             return AnyView(HStack{
                 Image(systemName: "sun.max")

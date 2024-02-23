@@ -12,74 +12,83 @@ struct SleepDependentHistory: View {
     var dependentVariable: SleepExperiment.DependentVariable = .both
     //if dependentvariable is not both, then use the dependent vairable
     var body: some View {
-        Form{
-            VStack(alignment: .leading){
-                if(experiment.dependentVariable == .quality || dependentVariable == .quality){
-                    Text("Quality of day history")
-                } else {
-                    Text("Productivity history")
-                }
-                
-                Chart(experiment.entries){ entry in
+        NavigationStack{
+            Form{
+                VStack(alignment: .leading){
                     if(experiment.dependentVariable == .quality || dependentVariable == .quality){
-                        PointMark(
-                            x: .value("Date", entry.date, unit: .day),
-                            y: .value("Quality", entry.quality)
-                        ).foregroundStyle(.red)
+                        Text("Quality of day history")
                     } else {
-                        PointMark(
-                            x: .value("Date", entry.date, unit: .day),
-                            y: .value("Productivity", entry.productivity)
-                        ).foregroundStyle(.blue)
+                        Text("Productivity history")
                     }
                     
-                }
-                .frame(height: 300)
-                .chartXAxis{
-                    AxisMarks(values: .stride(by: .day, count: getXAxisTickSize())){ value in
-                        
-                        if(getXAxisTickSize() >= 28){
-                            AxisValueLabel{
-                                Text(getMonth(value.as(Date.self)))
-                            }
+                    Chart(experiment.entries){ entry in
+                        if(experiment.dependentVariable == .quality || dependentVariable == .quality){
+                            PointMark(
+                                x: .value("Date", entry.date, unit: .day),
+                                y: .value("Quality", entry.quality)
+                            ).foregroundStyle(.red)
                         } else {
-                            AxisValueLabel{
-                                Text(formatToMonthAndDay(date: value.as(Date.self)))
-                            }
+                            PointMark(
+                                x: .value("Date", entry.date, unit: .day),
+                                y: .value("Productivity", entry.productivity)
+                            ).foregroundStyle(.blue)
                         }
                         
-                        AxisGridLine()
-                        AxisTick()
                     }
+                    .frame(height: 300)
+                    .chartXAxis{
+                        AxisMarks(values: .stride(by: .day, count: getXAxisTickSize())){ value in
+                            
+                            if(getXAxisTickSize() >= 28){
+                                AxisValueLabel{
+                                    Text(getMonth(value.as(Date.self)))
+                                }
+                            } else {
+                                AxisValueLabel{
+                                    Text(formatToMonthAndDay(date: value.as(Date.self)))
+                                }
+                            }
+                            
+                            AxisGridLine()
+                            AxisTick()
+                        }
+                    }
+                    .chartXScale(domain: getXDomain())
+                    .chartYAxisLabel(getChartYAxisLabel())
                 }
-                .chartXScale(domain: getXDomain())
-                .chartYAxisLabel(getChartYAxisLabel())
+                Section(){
+                    if(dependentVariable == .quality || experiment.dependentVariable == .quality){
+                        HStack{
+                            Text("Average quality of day: ")
+                            Spacer()
+                            Text("\(experiment.getAverageQuality())")
+                        }
+                        HStack{
+                            Text("Standard deviation: ")
+                            Spacer()
+                            Text("\(experiment.getQualityStandardDeviation().formatted(.number.precision(.fractionLength(2))))")
+                        }
+                    } else{
+                        HStack{
+                            Text("Average productivity: ")
+                            Spacer()
+                            Text("\(experiment.getAverageProductivity())")
+                        }
+                        HStack{
+                            Text("Standard deviation: ")
+                            Spacer()
+                            Text("\(experiment.getProductivityStandardDeviation().formatted(.number.precision(.fractionLength(2))))")
+                        }
+                    }
+                }.navigationTitle(getTitle())
             }
-            Section(){
-                if(dependentVariable == .quality || experiment.dependentVariable == .quality){
-                    HStack{
-                        Text("Average quality of day: ")
-                        Spacer()
-                        Text("\(experiment.getAverageQuality())")
-                    }
-                    HStack{
-                        Text("Standard deviation: ")
-                        Spacer()
-                        Text("\(experiment.getQualityStandardDeviation().formatted(.number.precision(.fractionLength(2))))")
-                    }
-                } else{
-                    HStack{
-                        Text("Average productivity: ")
-                        Spacer()
-                        Text("\(experiment.getAverageProductivity())")
-                    }
-                    HStack{
-                        Text("Standard deviation: ")
-                        Spacer()
-                        Text("\(experiment.getProductivityStandardDeviation().formatted(.number.precision(.fractionLength(2))))")
-                    }
-                }
-            }
+        }
+    }
+    func getTitle()->String{
+        if(experiment.dependentVariable == .quality || dependentVariable == .quality){
+            return "Quality data"
+        } else {
+            return "Productivity data"
         }
     }
     func getXAxisTickSize() -> Int{

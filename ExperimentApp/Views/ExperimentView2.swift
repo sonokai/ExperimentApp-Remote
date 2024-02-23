@@ -18,17 +18,26 @@ struct ExperimentView: View {
         NavigationStack{
             Form{
                 Section(){
-                    ForEach($appData.sleepExperiments) { $sleepExperiment in
-                        VStack{
 
-                            NavigationLink(destination: SleepView(experiment: $sleepExperiment, finishAction: { experiment in
-                                let closure = finishExperiment(experiment)
-                                closure()
-                            })){
-                                Text(sleepExperiment.name).bold()
+                    if(appData.sleepExperiments.isEmpty){
+                        
+                        Text("You currently don't have any ongoing experiments.")
+                        Button("Go to explore"){
+                            selectedTabIndex = 1
+                        }
+                        
+                    } else {
+                        ForEach($appData.sleepExperiments) { $sleepExperiment in
+                            VStack{
+                                NavigationLink(destination: SleepView(experiment: $sleepExperiment, finishAction: { experiment in
+                                    let closure = finishExperiment(experiment)
+                                    closure()
+                                })){
+                                    Text(sleepExperiment.name).bold()
+                                }
+
                             }
                         }
-                       
                     }
                 }
                 /*

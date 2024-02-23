@@ -65,6 +65,52 @@ extension Date{
         }
     }
     
+    func roundDateToNearest30Low() -> Date{
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute, .second], from: self)
+        
+        // Extract the time components
+        let hour = components.hour ?? 0
+        var minute = components.minute ?? 0
+        let second = components.second ?? 0
+        if(minute >= 30){
+            minute = 30
+        } else if(minute>0){
+            minute = 0
+        }
+        if let newDate = calendar.date(bySettingHour: hour, minute: minute, second: second, of: Date(timeIntervalSince1970: 0)) {
+            return newDate
+        } else {
+            // Return the original date in case of any issues
+            print("Date formatting failed")
+            return self
+        }
+    }
+    
+    func roundDateToNearest30High() -> Date{
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute, .second], from: self)
+        
+        // Extract the time components
+        var hour = components.hour ?? 0
+        var minute = components.minute ?? 0
+        let second = components.second ?? 0
+        if(minute > 30){
+            minute = 0
+            hour = hour+1
+        } else if(minute>0){
+            minute = 30
+        }
+        if let newDate = calendar.date(bySettingHour: hour, minute: minute, second: second, of: Date(timeIntervalSince1970: 0)) {
+            return newDate
+        } else {
+            // Return the original date in case of any issues
+            print("Date formatting failed")
+            return self
+        }
+    }
+    
+    
     func addMinutesToDate(minutesToAdd: Int) -> Date {
         let calendar = Calendar.current
         let updatedDate = calendar.date(byAdding: .minute, value: minutesToAdd, to: self)

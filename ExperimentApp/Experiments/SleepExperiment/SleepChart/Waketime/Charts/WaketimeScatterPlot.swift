@@ -58,13 +58,19 @@ struct WaketimeScatterPlot: View {
                             }
                         }
                         .onAppear(){
-                            let startMinutes = experiment.getLeastWaketimeMinutes()
-                            let endMinutes = experiment.getMostWaketimeMinutes()
+                            var startMinutes = experiment.getLeastWaketimeMinutes()
+                            if(startMinutes % 30 != 0){
+                                startMinutes = startMinutes-(startMinutes%30)
+                            }
+                            var endMinutes = experiment.getMostWaketimeMinutes()
+                            if(endMinutes % 30 != 0){
+                                endMinutes = endMinutes + (30-(endMinutes%30))
+                            }
                             if let t1 = convertMinutesToDate(startMinutes){
-                                startTime = t1.formatDateForNonBedtimeChart()
+                                startTime = t1.formatDateForNonBedtimeChart().roundDateToNearest30Low()
                             }
                             if let t2 = convertMinutesToDate(endMinutes){
-                                endTime = t2.formatDateForNonBedtimeChart()
+                                endTime = t2.formatDateForNonBedtimeChart().roundDateToNearest30High()
                             }
                             updateInterval()
                         }

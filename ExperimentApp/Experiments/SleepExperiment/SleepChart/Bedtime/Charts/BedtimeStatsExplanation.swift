@@ -11,12 +11,15 @@ struct BedtimeStatsExplanation: View {
     var body: some View {
         ScrollView{
             VStack(alignment: .leading, spacing: 15){
-                VStack(alignment: .leading){
+                VStack(alignment: .leading, spacing: 5){
                     Text("How is the optimal interval calculated?").font(.headline)
-                    Text("First, the range is calculated by taking the earliest and latest bedtime.")
-                    Text("Then, within each possible interval of the given size within the range, the average of the dependent variable is calculated.")
-                    Text("Lastly, the interval with the highest average will be taken as the optimal one, with priority given to earlier times.")
-                }
+                    Text("Given a range, we take 30 minute intervals and calculate the average of the dependent variable.")
+                    Text("The interval with the highest average will be marked optimal.")
+                    Text("Exceptions").font(.headline)
+                    Text("If there are less than 2 entries in an interval, it won't be considered for an optimal interval. You can change this requirement in the settings.")
+                    Text("If there are multiple intervals with the same highest average, we take the first one.")
+                }.padding()
+                /*
                 VStack(alignment: .leading){
                     Text("What does the confidence level mean?").font(.headline)
                     Text("The confidence level is how sure we are that the bedtimes within the optimal interval are actually, on average, better than the other bedtimes.")
@@ -29,6 +32,7 @@ struct BedtimeStatsExplanation: View {
                     Text("The entries are split into two groups: one which have bedtimes within the interval, and one with bedtimes outside the interval.")
                     Text("Using these two groups, a two sample t-test is conducted to test the hypothesis that the optimal interval has an average dependent variable which is greater than the other bedtimes.")
                 }
+                */
             }
         }
     }

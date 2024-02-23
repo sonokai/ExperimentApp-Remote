@@ -13,9 +13,13 @@ struct ProfileView: View {
         NavigationStack{
             Form{
                 Section("Finished experiments"){
-                    ForEach(appData.finishedExperiments){ finished in
-                        NavigationLink(destination: FinishedExperimentView(finishedExperiment: finished)){
-                            FinishedExperimentRow(finishedExperiment: finished)
+                    if(appData.finishedExperiments.isEmpty){
+                        Text("Finished experiments will show up here!")
+                    }else {
+                        ForEach(appData.finishedExperiments){ finished in
+                            NavigationLink(destination: FinishedExperimentView(finishedExperiment: finished)){
+                                FinishedExperimentRow(finishedExperiment: finished)
+                            }
                         }
                     }
                 }

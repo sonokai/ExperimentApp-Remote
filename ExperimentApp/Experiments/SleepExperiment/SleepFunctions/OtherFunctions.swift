@@ -107,13 +107,13 @@ extension SleepExperiment{
         if let date = Calendar.current.date(bySettingHour: minutes/60, minute: minutes % 60, second: 0, of: Date()){
             let dateFormatter = DateFormatter()
             dateFormatter.timeStyle = .short
-            dateFormatter.dateFormat = "H:mm a"
+            dateFormatter.dateFormat = "h:mm a"
             return dateFormatter.string(from: date)
         } else {
             if let date2 = Calendar.current.date(bySettingHour: ((minutes/60)-24), minute: minutes % 60, second: 0, of: Date()){
                 let dateFormatter = DateFormatter()
                 dateFormatter.timeStyle = .short
-                dateFormatter.dateFormat = "H:mm a"
+                dateFormatter.dateFormat = "h:mm a"
                 return dateFormatter.string(from: date2)
             }
             else{
