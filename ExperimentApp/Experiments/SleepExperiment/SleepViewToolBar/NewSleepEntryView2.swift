@@ -26,7 +26,7 @@ struct NewSleepEntryView2: View {
                     }
                 }.onAppear(){
                     experiment.isEditing = true
-                }
+                }.buttonStyle(.borderless)
         }
     }
 }

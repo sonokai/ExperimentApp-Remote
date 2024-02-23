@@ -76,6 +76,7 @@
 		6FA429AC2B85DF2400572078 /* SleepSetup4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA429AB2B85DF2400572078 /* SleepSetup4.swift */; };
 		6FA429AE2B86792800572078 /* SleepInsightEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA429AD2B86792800572078 /* SleepInsightEditView.swift */; };
 		6FA429B02B87206700572078 /* OnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA429AF2B87206700572078 /* OnboardView.swift */; };
+		6FA429B42B88392D00572078 /* SleepSetup3.5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA429B32B88392D00572078 /* SleepSetup3.5.swift */; };
 		6FA619B62AFDF9E500CD9572 /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619B52AFDF9E500CD9572 /* ErrorWrapper.swift */; };
 		6FA619B82AFDFA2F00CD9572 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619B72AFDFA2F00CD9572 /* ErrorView.swift */; };
 		6FA619D32B03409300CD9572 /* ChartFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA619D22B03409300CD9572 /* ChartFunctions.swift */; };
@@ -232,6 +233,7 @@
 		6FA429AB2B85DF2400572078 /* SleepSetup4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepSetup4.swift; sourceTree = "<group>"; };
 		6FA429AD2B86792800572078 /* SleepInsightEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepInsightEditView.swift; sourceTree = "<group>"; };
 		6FA429AF2B87206700572078 /* OnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardView.swift; sourceTree = "<group>"; };
+		6FA429B32B88392D00572078 /* SleepSetup3.5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepSetup3.5.swift; sourceTree = "<group>"; };
 		6FA619B52AFDF9E500CD9572 /* ErrorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
 		6FA619B72AFDFA2F00CD9572 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		6FA619D22B03409300CD9572 /* ChartFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartFunctions.swift; sourceTree = "<group>"; };
@@ -708,6 +710,7 @@
 				6F7750CB2A7C40BA003BFA65 /* SleepSetup1.swift */,
 				6F7750CD2A7C4374003BFA65 /* SleepSetup2.swift */,
 				6F7750CF2A7C4382003BFA65 /* SleepSetup3.swift */,
+				6FA429B32B88392D00572078 /* SleepSetup3.5.swift */,
 				6FA429AB2B85DF2400572078 /* SleepSetup4.swift */,
 			);
 			path = Setup;
@@ -964,6 +967,7 @@
 				6F970BE02B3B0272003B3FA8 /* SleepTimeStatsExplanation.swift in Sources */,
 				6FB517D42B37604B0054A44C /* WaketimeCorrelationData.swift in Sources */,
 				6FB517852B2E71910054A44C /* WaketimeBarChart.swift in Sources */,
+				6FA429B42B88392D00572078 /* SleepSetup3.5.swift in Sources */,
 				6FB517BA2B3470550054A44C /* SleepCalculatorView.swift in Sources */,
 				6F970BEA2B3D2FA8003B3FA8 /* BedtimeSettings.swift in Sources */,
 				6FB5176C2B2C311E0054A44C /* SimpleBedtimeHistory.swift in Sources */,

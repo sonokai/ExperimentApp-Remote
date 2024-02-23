@@ -45,7 +45,7 @@ struct TimeSelector: View {
                     SleepCalculatorView(hours: $hours, minutes: $minutes)
                         .frame(width: 325,height: 200)
                 }
-            }
+            }.padding()
         
     }
 }

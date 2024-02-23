@@ -17,9 +17,10 @@ struct SleepEntryDatePicker: View {
             ZStack{
                 DatePicker("Entry date", selection: $experiment.newSleepEntry.date, in: experiment.startDate.addingTimeInterval(-5000000)...Date(),displayedComponents: [.date])//.disabled(timeSelectorPopOver)
                 //if somoething else is being interacted with, you should not immediately open the datepicker
+               /*
                 if(timeSelectorPopOver){
-                    Color.black.opacity(1.0000)
-                }
+                    Color.black.opacity(0.0005)
+                }*/
             }
         }
     }
