@@ -13,6 +13,7 @@
 		59EEFAEA2A58E7F500DA7D84 /* ExperimentAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEFAE92A58E7F500DA7D84 /* ExperimentAppTests.swift */; };
 		59EEFAF42A58E7F500DA7D84 /* ExperimentAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEFAF32A58E7F500DA7D84 /* ExperimentAppUITests.swift */; };
 		59EEFAF62A58E7F500DA7D84 /* ExperimentAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EEFAF52A58E7F500DA7D84 /* ExperimentAppUITestsLaunchTests.swift */; };
+		59FE4BA92B86E0A30013C8DB /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FE4BA82B86E0A30013C8DB /* NotificationHandler.swift */; };
 		6F28AFEE2A9AA5D300FDCA0A /* DayExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFED2A9AA5D300FDCA0A /* DayExperiment.swift */; };
 		6F28AFF02A9BBE3E00FDCA0A /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFEF2A9BBE3E00FDCA0A /* AppData.swift */; };
 		6F28AFF22A9BBFA300FDCA0A /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F28AFF12A9BBFA300FDCA0A /* DataStore.swift */; };
@@ -167,6 +168,7 @@
 		59EEFAEF2A58E7F500DA7D84 /* ExperimentAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExperimentAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59EEFAF32A58E7F500DA7D84 /* ExperimentAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentAppUITests.swift; sourceTree = "<group>"; };
 		59EEFAF52A58E7F500DA7D84 /* ExperimentAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperimentAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		59FE4BA82B86E0A30013C8DB /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandler.swift; sourceTree = "<group>"; };
 		6F28AFED2A9AA5D300FDCA0A /* DayExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayExperiment.swift; sourceTree = "<group>"; };
 		6F28AFEF2A9BBE3E00FDCA0A /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		6F28AFF12A9BBFA300FDCA0A /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 		59EEFAD72A58E7F400DA7D84 /* ExperimentApp */ = {
 			isa = PBXGroup;
 			children = (
+				59FE4BA72B86E0810013C8DB /* UserNotifications */,
 				59EEFAD82A58E7F400DA7D84 /* ExperimentAppApp.swift */,
 				6F7750D62A7DD14E003BFA65 /* Todo.swift */,
 				6FDA3E4A2A691C110074A50C /* Models */,
@@ -380,6 +383,14 @@
 				59EEFAF52A58E7F500DA7D84 /* ExperimentAppUITestsLaunchTests.swift */,
 			);
 			path = ExperimentAppUITests;
+			sourceTree = "<group>";
+		};
+		59FE4BA72B86E0810013C8DB /* UserNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				59FE4BA82B86E0A30013C8DB /* NotificationHandler.swift */,
+			);
+			path = UserNotifications;
 			sourceTree = "<group>";
 		};
 		6F7750AC2A74ABAD003BFA65 /* SleepExperiment */ = {
@@ -866,6 +877,7 @@
 				6F970BE62B3BB8FC003B3FA8 /* FinishedExperimentView.swift in Sources */,
 				6FB517B72B346C9F0054A44C /* SleepEntryDatePicker.swift in Sources */,
 				6FB517C62B35EF4C0054A44C /* CustomDatePicker.swift in Sources */,
+				59FE4BA92B86E0A30013C8DB /* NotificationHandler.swift in Sources */,
 				6FB517D62B37609D0054A44C /* WaketimeData.swift in Sources */,
 				6F35C9B62AABD2980019D839 /* DescriptionView.swift in Sources */,
 				6FB517D82B38FB750054A44C /* SleepTimeCorrelationData.swift in Sources */,

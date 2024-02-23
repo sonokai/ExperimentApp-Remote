@@ -11,6 +11,9 @@ struct SleepSetup4: View {
     let finishAction: () -> Void
     var independentVariable: SleepExperiment.IndependentVariable
     var dependentVariable: SleepExperiment.DependentVariable
+    
+    let notify = NotificationHandler()
+    
     @Binding var index: Int
     var body: some View {
         VStack(alignment: .leading, spacing: 10){
@@ -56,6 +59,7 @@ struct SleepSetup4: View {
                 Spacer()
                 Button("Start experiment"){
                     finishAction()
+                    notify.askPermission()
                 }
             }
             Spacer()

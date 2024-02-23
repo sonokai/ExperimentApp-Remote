@@ -21,6 +21,8 @@ struct SleepIntroView2: View {
     @Binding var selectedTabIndex: Int
     
     @State var isCreatingExperiment: Bool = false
+    
+    let notify = NotificationHandler()
     var body: some View {
         VStack{
             ZStack{
@@ -34,6 +36,7 @@ struct SleepIntroView2: View {
                 SleepSetup4(finishAction: {
                     sleepExperiments.append(SleepExperiment(goalEntries: goalEntries, dependentVariable: dependentVariable, independentVariable: independentVariable, entries: [], name: "Sleep experiment"))
                     isCreatingExperiment = true
+                    notify.askPermission()
                     presentationMode.wrappedValue.dismiss()
                     
                 }, independentVariable: independentVariable, dependentVariable: dependentVariable, index: $currentIndex).onDisappear(){

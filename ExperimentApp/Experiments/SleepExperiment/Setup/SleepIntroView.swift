@@ -19,6 +19,8 @@ struct SleepIntroView: View {
     @Binding var selectedTabIndex: Int
     
     @State var isCreatingExperiment: Bool = false
+    
+    let notify = NotificationHandler()
     var body: some View {
         NavigationStack{
             Form{
@@ -40,6 +42,7 @@ struct SleepIntroView: View {
                         sleepExperiments.append(SleepExperiment(goalEntries: goalEntries, dependentVariable: dependentVariable, independentVariable: independentVariable, entries: [], name: name))
                         isCreatingExperiment = true
                         presentationMode.wrappedValue.dismiss()
+                        notify.askPermission()
                     }.onDisappear(){
                         selectedTabIndex = 0
                     }
