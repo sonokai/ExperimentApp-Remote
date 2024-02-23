@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct ExperimentAppApp: App {
     @AppStorage("isFirstLaunch") private var isFirstLaunch = true
+    
     @StateObject private var store = DataStore()
     @State private var errorWrapper: ErrorWrapper?
     
