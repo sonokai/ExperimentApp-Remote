@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct SleepIntroView2: View {
     @State var currentIndex = 1
@@ -43,8 +44,47 @@ struct SleepIntroView2: View {
                     }
                     sleepExperiments.append(SleepExperiment(goalEntries: goalEntries, dependentVariable: dependentVariable, independentVariable: independentVariable, entries: [], name: name))
                     isCreatingExperiment = true
-                    notify.askPermission()
+                    notify.checkNotificationAuthorizationStatus { status in
+                        switch status {
+                        case .authorized:
+                            print("Local notification permissions are authorized.")
+                        case .denied:
+                            print("Local notification permissions are denied.")
+                            notify.askPermission()
+                        case .notDetermined:
+                            print("Local notification permissions are not determined yet.")
+                            notify.askPermission()
+                        case .provisional:
+                            print("Local notification permissions are provisional.")
+                            notify.askPermission()
+                        case .ephemeral:
+                            notify.askPermission()
+                        @unknown default:
+                            print("Unknown permission status.")
+                            notify.askPermission()
+                        }
+                    }
+                    switch independentVariable {
+                    case .bedtime:
+                        
+                        notify.sendNotifications(hour: 22, minute: 0, duration: goalEntries, title: "Sleep Experiment - Bedtime", body: "Make sure to enter your bedtime and entry for today! :)")
+                        break
+                    case .waketime:
+                        
+                        notify.sendNotifications(hour: 6, minute: 0, duration: goalEntries, title: "Sleep Experiment", body: "Make sure to enter your waking time for today! :)", isSilent: true)
 
+                        notify.sendNotifications(hour: 22, minute: 0, duration: goalEntries, title: "Sleep Experiment - Waketime", body: "Make sure to fill out your entry for today! :)")
+                        break
+                    case .both:
+
+                        notify.sendNotifications(hour: 6, minute: 0, duration: goalEntries, title: "Sleep Experiment", body: "Make sure to enter your waking time for today! :)", isSilent: true)
+
+                        notify.sendNotifications(hour: 22, minute: 0, duration: goalEntries, title: "Sleep Experiment", body: "Make sure to enter your bedtime and entry for today!")
+                        break
+                    case .hoursSlept:
+                        
+                        notify.sendNotifications(hour: 22, minute: 0, duration: goalEntries, title: "Sleep Experiment - Time Slept", body: "Make sure to fill out your entry for today! :)")
+                    }
                     presentationMode.wrappedValue.dismiss()
                     
                 }, independentVariable: independentVariable, dependentVariable: dependentVariable, index: $currentIndex).opacity(currentIndex == 6 ? 1.0: 0.5)

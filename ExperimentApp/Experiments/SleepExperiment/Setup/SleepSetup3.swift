@@ -13,6 +13,8 @@ struct SleepSetup3: View {
     @Binding var index: Int
     
     
+    
+    
     var body: some View {
         VStack(alignment:.leading){
             Text("Entry goal").font(.largeTitle).bold()
