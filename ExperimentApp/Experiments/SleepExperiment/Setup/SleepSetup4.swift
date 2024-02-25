@@ -47,13 +47,14 @@ struct SleepSetup4: View {
             case .both:
                 Text("3. Analyze the results using the Logarithm app and find the best bedtime, wake time, and total sleep time.")
             case .hoursSlept:
-                Text("3. Analyze the results using the Logarithm app and find best amount of time to sleep per night.")
+                Text("3. Analyze the results using the Logarithm app and find the best amount of time to sleep per night.")
             }
             Text("If this all sounds good, then start the experiment.")
+            Spacer()
             HStack{
                 Button("Back"){
                     withAnimation{
-                        index = 3
+                        index = 5
                     }
                 }
                 Spacer()
@@ -62,7 +63,7 @@ struct SleepSetup4: View {
                     notify.askPermission()
                 }
             }
-            Spacer()
+            
             
         }.padding()
     }

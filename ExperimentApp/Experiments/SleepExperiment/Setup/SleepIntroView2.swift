@@ -26,23 +26,29 @@ struct SleepIntroView2: View {
     var body: some View {
         VStack{
             ZStack{
-                SleepSetup1(independentVariable: $independentVariable, index: $currentIndex).opacity(currentIndex == 1 ? 1.0: 0.5)
+                SleepExplanation(index: $currentIndex).opacity(currentIndex == 1 ? 1.0: 0.5)
                     .offset(x: CGFloat(1-currentIndex) * 380).padding()
-                SleepSetup2(dependentVariable: $dependentVariable, index: $currentIndex).opacity(currentIndex == 2 ? 1.0: 0.5)
+                SleepSetup1(independentVariable: $independentVariable, index: $currentIndex).opacity(currentIndex == 2 ? 1.0: 0.5)
                     .offset(x: CGFloat(2-currentIndex) * 380).padding()
-                SleepSetup3(goalEntries: $goalEntries, index: $currentIndex).opacity(currentIndex == 3 ? 1.0: 0.5)
+                SleepSetup2(dependentVariable: $dependentVariable, index: $currentIndex).opacity(currentIndex == 3 ? 1.0: 0.5)
                     .offset(x: CGFloat(3-currentIndex) * 380).padding()
-                
+                SleepSetup3(goalEntries: $goalEntries, index: $currentIndex).opacity(currentIndex == 4 ? 1.0: 0.5)
+                    .offset(x: CGFloat(4-currentIndex) * 380).padding()
+                SleepSetup3_5(text: $name, index: $currentIndex).opacity(currentIndex == 5 ? 1.0: 0.5)
+                    .offset(x: CGFloat(5-currentIndex) * 380).padding()
                 SleepSetup4(finishAction: {
                     selectedTabIndex = 0
-                    sleepExperiments.append(SleepExperiment(goalEntries: goalEntries, dependentVariable: dependentVariable, independentVariable: independentVariable, entries: [], name: "Sleep experiment"))
+                    if(name == ""){
+                        name = "Sleep Experiment"
+                    }
+                    sleepExperiments.append(SleepExperiment(goalEntries: goalEntries, dependentVariable: dependentVariable, independentVariable: independentVariable, entries: [], name: name))
                     isCreatingExperiment = true
                     notify.askPermission()
 
                     presentationMode.wrappedValue.dismiss()
                     
-                }, independentVariable: independentVariable, dependentVariable: dependentVariable, index: $currentIndex).opacity(currentIndex == 4 ? 1.0: 0.5)
-                    .offset(x: CGFloat(4-currentIndex) * 380).padding()
+                }, independentVariable: independentVariable, dependentVariable: dependentVariable, index: $currentIndex).opacity(currentIndex == 6 ? 1.0: 0.5)
+                    .offset(x: CGFloat(6-currentIndex) * 380).padding()
                 
             }
             Spacer()
@@ -58,6 +64,9 @@ struct SleepIntroView2: View {
                     .frame(width: 10, height: 10)
                 Circle()
                     .fill(Color.black.opacity(currentIndex == 4 ? 1:0.1))
+                    .frame(width: 10, height: 10)
+                Circle()
+                    .fill(Color.black.opacity(currentIndex == 5 ? 1:0.1))
                     .frame(width: 10, height: 10)
             }
         }/*.gesture(

@@ -65,23 +65,24 @@ struct SleepSetup2: View {
                     
                     
                 }.buttonStyle(.borderless)
+                Spacer()
                 HStack{
                     Button("Back"){
                         withAnimation{
-                            index = 1
+                            index = 2
                         }
                     }
                     Spacer()
-                    if(selected){
-                        Button("Next"){
-                            withAnimation{
-                                index = 3
-                            }
+                    
+                    Button("Next"){
+                        withAnimation{
+                            index = 4
                         }
-                    }
+                    }.disabled(!selected)
+                    
                 }
             }
-            Spacer()
+            
         }.padding()
     }
 }

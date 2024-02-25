@@ -40,15 +40,11 @@ struct SleepSetup3: View {
             }
             HStack{
                 Image(systemName: "medal.fill").foregroundColor(.yellow)
-                Text("50+ entries: Make a detailed analysis of the outcomes of different sleep patterns and conclude what the best habits for sleep are")
+                Text("50+ entries: Make a detailed analysis of what the best habits for your sleep are")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.caption)
                     .padding(1)
             }
-            
-            
-            
-            
             //review the statistics behind this
             HStack{
                 Slider(value: $sliderValue, in: 5...100, step: 0.1).onChange(of: sliderValue) { newValue in
@@ -59,20 +55,21 @@ struct SleepSetup3: View {
                 Text("\(goalEntries)")
                 
             }
+            Spacer()
             HStack{
                 Button("Back"){
                     withAnimation{
-                        index = 2
+                        index = 3
                     }
                 }
                 Spacer()
                 Button("Next"){
                     withAnimation{
-                        index = 4
+                        index = 5
                     }
                 }
             }
-            Spacer()
+            
         }.padding()
         
     }

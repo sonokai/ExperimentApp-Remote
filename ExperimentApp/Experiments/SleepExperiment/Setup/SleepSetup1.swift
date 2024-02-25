@@ -75,18 +75,21 @@ struct SleepSetup1: View {
                 }
                 .buttonStyle(BorderlessButtonStyle())
                 .padding(1)
+                Spacer()
                 HStack{
-                    
-                    Spacer()
-                    if(selected){
-                        Button("Next"){
-                            withAnimation{
-                                index = 2
-                            }
+                    Button("Back"){
+                        withAnimation{
+                            index = 1
                         }
-                    } else {
-                        Text("HIHIH").opacity(0)
                     }
+                    Spacer()
+                    
+                    Button("Next"){
+                        withAnimation{
+                            index = 3
+                        }
+                    }.disabled(!selected)
+                    
                 }
                 /*
                 VStack(alignment: .leading){
@@ -101,7 +104,7 @@ struct SleepSetup1: View {
                 }
                 Text(" - How convienient will it be to track the data?").font(.caption)
                  */
-                Spacer()
+              //  Spacer()
             }
         }.padding()
     }
