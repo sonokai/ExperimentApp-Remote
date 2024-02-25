@@ -43,7 +43,8 @@ struct NewSleepEntry: Identifiable, Codable{
                 return false
             }
         case .hoursSlept:
-            if hoursSlept == nil || minutesSlept == nil {
+            if hoursSlept == nil {
+                
                 return false
             }
         }

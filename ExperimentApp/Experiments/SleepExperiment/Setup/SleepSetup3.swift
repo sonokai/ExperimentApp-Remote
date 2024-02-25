@@ -51,9 +51,7 @@ struct SleepSetup3: View {
                     goalEntries = Int(newValue)
                     
                 }
-                
                 Text("\(goalEntries)")
-                
             }
             Spacer()
             HStack{
@@ -69,7 +67,6 @@ struct SleepSetup3: View {
                     }
                 }
             }
-            
         }.padding()
         
     }

@@ -78,11 +78,12 @@ struct SleepEntry: Identifiable, Codable {
         
         if let hours = newEntry.hoursSlept{
             self.hoursSlept = hours
-        }
-        if let minutes = newEntry.minutesSlept{
-            self.minutesSlept = minutes
+            self.minutesSlept = 0
         }
         
+        if let minutes = newEntry.minutesSlept{
+            self.minutesSlept = minutes
+        } 
       //  self.timeSlept = "0"
     }
     
