@@ -50,7 +50,7 @@ struct SleepSetup4: View {
                 Text("3. Analyze the results using the Logarithm app and find the best amount of time to sleep per night.")
             }
             Text("If this all sounds good, then start the experiment.")
-            Spacer()
+
             HStack{
                 Button("Back"){
                     withAnimation{
@@ -60,7 +60,6 @@ struct SleepSetup4: View {
                 Spacer()
                 Button("Start experiment"){
                     finishAction()
-                    notify.askPermission()
                 }
             }
             
