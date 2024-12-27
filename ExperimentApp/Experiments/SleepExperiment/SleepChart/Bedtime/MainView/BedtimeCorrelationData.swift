@@ -41,7 +41,7 @@ struct BedtimeCorrelationData_Previews: PreviewProvider {
         NavigationStack{
             Form{
                 Section("Data"){
-                    BedtimeCorrelationData(experiment: SleepExperiment.bedtimeSampleExperiment)
+                    BedtimeCorrelationData(experiment: SleepExperiment.bedtimeSampleExperiment2)
                 }
             }
         }

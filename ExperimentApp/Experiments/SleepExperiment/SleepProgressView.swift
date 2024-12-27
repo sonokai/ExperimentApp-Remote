@@ -13,7 +13,7 @@ struct SleepProgressView: View {
         ProgressView(value: Double(experiment.entries.count)/Double(experiment.goalEntries)){
             
             if(experiment.entries.count < experiment.goalEntries){
-                Text("\(experiment.entries.count)/\(experiment.goalEntries) goal entries (\(Int(Double(experiment.entries.count)/Double(experiment.goalEntries)*100))% Progress) ").padding(.bottom, 5)
+                Text("\(experiment.entries.count)/\(experiment.goalEntries) goal entries \(getProgress()) Progress").padding(.bottom, 5)
             }else {
                 HStack{
                     Text("\(experiment.entries.count)/\(experiment.goalEntries) entries").padding(.bottom, 5)
@@ -32,6 +32,9 @@ struct SleepProgressView: View {
                 }
             }
         }.padding(.vertical, 10)
+    }
+    func getProgress() -> Int{
+        return Int(Double(experiment.entries.count)/Double(experiment.goalEntries)*100)
     }
 }
 

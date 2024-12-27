@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,13 +28,15 @@
 		6F332B8D2B735867002D031D /* SleepChartCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F332B8C2B735867002D031D /* SleepChartCarousel.swift */; };
 		6F332B8F2B746102002D031D /* EmptyChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F332B8E2B746102002D031D /* EmptyChart.swift */; };
 		6F35C9B42AAA9C9B0019D839 /* DaySetup3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9B32AAA9C9B0019D839 /* DaySetup3.swift */; };
-		6F35C9B62AABD2980019D839 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9B52AABD2980019D839 /* DescriptionView.swift */; };
 		6F35C9B82AB2A25A0019D839 /* DayChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9B72AB2A25A0019D839 /* DayChart.swift */; };
 		6F35C9BA2AB2A6850019D839 /* DoubleSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9B92AB2A6850019D839 /* DoubleSliderView.swift */; };
 		6F35C9BC2AB451460019D839 /* SleepChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9BB2AB451460019D839 /* SleepChart.swift */; };
 		6F35C9C02AB658040019D839 /* WaketimeScatterPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9BF2AB658040019D839 /* WaketimeScatterPlot.swift */; };
 		6F35C9C22AB65E740019D839 /* BedtimeScatterPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F35C9C12AB65E740019D839 /* BedtimeScatterPlot.swift */; };
 		6F384F422B8AC018008AE410 /* SleepExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F384F412B8AC018008AE410 /* SleepExplanation.swift */; };
+		6F489AB22D1F41FC0070D534 /* Medal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F489AB12D1F41FC0070D534 /* Medal.swift */; };
+		6F702DB22BBA5069000081A3 /* DayInsightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F702DB12BBA5069000081A3 /* DayInsightView.swift */; };
+		6F702DB42BE41CC8000081A3 /* BestFitLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F702DB32BE41CC8000081A3 /* BestFitLine.swift */; };
 		6F7750A32A71A9CE003BFA65 /* SleepProcedureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */; };
 		6F7750A52A71B08C003BFA65 /* SleepEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750A42A71B08C003BFA65 /* SleepEditView.swift */; };
 		6F7750AB2A748AEA003BFA65 /* SleepEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750AA2A748AEA003BFA65 /* SleepEntry.swift */; };
@@ -51,14 +53,11 @@
 		6F7750CE2A7C4374003BFA65 /* SleepSetup2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750CD2A7C4374003BFA65 /* SleepSetup2.swift */; };
 		6F7750D02A7C4382003BFA65 /* SleepSetup3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750CF2A7C4382003BFA65 /* SleepSetup3.swift */; };
 		6F7750D42A7D12CA003BFA65 /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750D32A7D12CA003BFA65 /* SleepView.swift */; };
-		6F7750D72A7DD14E003BFA65 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7750D62A7DD14E003BFA65 /* Todo.swift */; };
 		6F970BDA2B3ABE4F003B3FA8 /* StatsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F970BD92B3ABE4F003B3FA8 /* StatsTable.swift */; };
 		6F970BDC2B3AF64E003B3FA8 /* BedtimeStatsExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F970BDB2B3AF64E003B3FA8 /* BedtimeStatsExplanation.swift */; };
 		6F970BDE2B3B0020003B3FA8 /* WaketimeStatsExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F970BDD2B3B0020003B3FA8 /* WaketimeStatsExplanation.swift */; };
 		6F970BE02B3B0272003B3FA8 /* SleepTimeStatsExplanation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F970BDF2B3B0272003B3FA8 /* SleepTimeStatsExplanation.swift */; };
-		6F970BE22B3B8A84003B3FA8 /* FinishedExperiment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F970BE12B3B8A84003B3FA8 /* FinishedExperiment.swift */; };
 		6F970BE42B3BB413003B3FA8 /* FinishedExperimentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F970BE32B3BB413003B3FA8 /* FinishedExperimentRow.swift */; };
-		6F970BE62B3BB8FC003B3FA8 /* FinishedExperimentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F970BE52B3BB8FC003B3FA8 /* FinishedExperimentView.swift */; };
 		6F970BE82B3D2F9B003B3FA8 /* ChartHeaderAndSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F970BE72B3D2F9B003B3FA8 /* ChartHeaderAndSettings.swift */; };
 		6F970BEA2B3D2FA8003B3FA8 /* BedtimeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F970BE92B3D2FA8003B3FA8 /* BedtimeSettings.swift */; };
 		6F970BEC2B3D4C35003B3FA8 /* SleepExperimentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F970BEB2B3D4C35003B3FA8 /* SleepExperimentError.swift */; };
@@ -186,13 +185,15 @@
 		6F332B8C2B735867002D031D /* SleepChartCarousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepChartCarousel.swift; sourceTree = "<group>"; };
 		6F332B8E2B746102002D031D /* EmptyChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyChart.swift; sourceTree = "<group>"; };
 		6F35C9B32AAA9C9B0019D839 /* DaySetup3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaySetup3.swift; sourceTree = "<group>"; };
-		6F35C9B52AABD2980019D839 /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		6F35C9B72AB2A25A0019D839 /* DayChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayChart.swift; sourceTree = "<group>"; };
 		6F35C9B92AB2A6850019D839 /* DoubleSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSliderView.swift; sourceTree = "<group>"; };
 		6F35C9BB2AB451460019D839 /* SleepChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepChart.swift; sourceTree = "<group>"; };
 		6F35C9BF2AB658040019D839 /* WaketimeScatterPlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimeScatterPlot.swift; sourceTree = "<group>"; };
 		6F35C9C12AB65E740019D839 /* BedtimeScatterPlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeScatterPlot.swift; sourceTree = "<group>"; };
 		6F384F412B8AC018008AE410 /* SleepExplanation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepExplanation.swift; sourceTree = "<group>"; };
+		6F489AB12D1F41FC0070D534 /* Medal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medal.swift; sourceTree = "<group>"; };
+		6F702DB12BBA5069000081A3 /* DayInsightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayInsightView.swift; sourceTree = "<group>"; };
+		6F702DB32BE41CC8000081A3 /* BestFitLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestFitLine.swift; sourceTree = "<group>"; };
 		6F7750A22A71A9CE003BFA65 /* SleepProcedureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepProcedureView.swift; sourceTree = "<group>"; };
 		6F7750A42A71B08C003BFA65 /* SleepEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepEditView.swift; sourceTree = "<group>"; };
 		6F7750AA2A748AEA003BFA65 /* SleepEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepEntry.swift; sourceTree = "<group>"; };
@@ -209,14 +210,11 @@
 		6F7750CD2A7C4374003BFA65 /* SleepSetup2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepSetup2.swift; sourceTree = "<group>"; };
 		6F7750CF2A7C4382003BFA65 /* SleepSetup3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepSetup3.swift; sourceTree = "<group>"; };
 		6F7750D32A7D12CA003BFA65 /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
-		6F7750D62A7DD14E003BFA65 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		6F970BD92B3ABE4F003B3FA8 /* StatsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsTable.swift; sourceTree = "<group>"; };
 		6F970BDB2B3AF64E003B3FA8 /* BedtimeStatsExplanation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeStatsExplanation.swift; sourceTree = "<group>"; };
 		6F970BDD2B3B0020003B3FA8 /* WaketimeStatsExplanation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimeStatsExplanation.swift; sourceTree = "<group>"; };
 		6F970BDF2B3B0272003B3FA8 /* SleepTimeStatsExplanation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepTimeStatsExplanation.swift; sourceTree = "<group>"; };
-		6F970BE12B3B8A84003B3FA8 /* FinishedExperiment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedExperiment.swift; sourceTree = "<group>"; };
 		6F970BE32B3BB413003B3FA8 /* FinishedExperimentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedExperimentRow.swift; sourceTree = "<group>"; };
-		6F970BE52B3BB8FC003B3FA8 /* FinishedExperimentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishedExperimentView.swift; sourceTree = "<group>"; };
 		6F970BE72B3D2F9B003B3FA8 /* ChartHeaderAndSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHeaderAndSettings.swift; sourceTree = "<group>"; };
 		6F970BE92B3D2FA8003B3FA8 /* BedtimeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedtimeSettings.swift; sourceTree = "<group>"; };
 		6F970BEB2B3D4C35003B3FA8 /* SleepExperimentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepExperimentError.swift; sourceTree = "<group>"; };
@@ -302,6 +300,10 @@
 		6FF3982C2AF45D850096B143 /* WaketimeResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaketimeResults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		6F489AB42D1F49ED0070D534 /* New Folder */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "New Folder"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		59EEFAD22A58E7F400DA7D84 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -350,9 +352,9 @@
 		59EEFAD72A58E7F400DA7D84 /* ExperimentApp */ = {
 			isa = PBXGroup;
 			children = (
+				6F489AB32D1F49E00070D534 /* Components */,
 				59FE4BA72B86E0810013C8DB /* UserNotifications */,
 				59EEFAD82A58E7F400DA7D84 /* ExperimentAppApp.swift */,
-				6F7750D62A7DD14E003BFA65 /* Todo.swift */,
 				6FDA3E4A2A691C110074A50C /* Models */,
 				6FDA3E472A6910C50074A50C /* Experiments */,
 				6FDA3E4F2A69E51A0074A50C /* Views */,
@@ -366,10 +368,6 @@
 			isa = PBXGroup;
 			children = (
 				59EEFADF2A58E7F500DA7D84 /* Preview Assets.xcassets */,
-				6FA619D62B042B1600CD9572 /* SleepExperimentSamples.swift */,
-				6F970C062B40127A003B3FA8 /* BedtimeSampleExperiments.swift */,
-				6F970C0A2B402424003B3FA8 /* WaketimeSampleExperiments.swift */,
-				6F970C0E2B40EA7A003B3FA8 /* SleepTimeSampleExperiments.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -399,10 +397,31 @@
 			path = UserNotifications;
 			sourceTree = "<group>";
 		};
+		6F384F432B8AD985008AE410 /* SleepExperimentSamples */ = {
+			isa = PBXGroup;
+			children = (
+				6FA619D62B042B1600CD9572 /* SleepExperimentSamples.swift */,
+				6F970C062B40127A003B3FA8 /* BedtimeSampleExperiments.swift */,
+				6F970C0A2B402424003B3FA8 /* WaketimeSampleExperiments.swift */,
+				6F970C0E2B40EA7A003B3FA8 /* SleepTimeSampleExperiments.swift */,
+			);
+			path = SleepExperimentSamples;
+			sourceTree = "<group>";
+		};
+		6F489AB32D1F49E00070D534 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				6F489AB42D1F49ED0070D534 /* New Folder */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		6F7750AC2A74ABAD003BFA65 /* SleepExperiment */ = {
 			isa = PBXGroup;
 			children = (
 				6F7750C92A7BA50E003BFA65 /* SleepExperiment.swift */,
+				6F970BE32B3BB413003B3FA8 /* FinishedExperimentRow.swift */,
+				6F384F432B8AD985008AE410 /* SleepExperimentSamples */,
 				6FB517B82B346FAF0054A44C /* SleepEntry */,
 				6F970BFD2B400F1A003B3FA8 /* SleepFunctions */,
 				6F7750D32A7D12CA003BFA65 /* SleepView.swift */,
@@ -424,6 +443,7 @@
 			children = (
 				6F28AFED2A9AA5D300FDCA0A /* DayExperiment.swift */,
 				6F7750B62A7B4772003BFA65 /* DayView.swift */,
+				6F702DB12BBA5069000081A3 /* DayInsightView.swift */,
 				6F28B07D2AA3824000FDCA0A /* DaySetupView.swift */,
 				6F28B07F2AA39E6100FDCA0A /* DaySetup1.swift */,
 				6F28B0812AA55D6F00FDCA0A /* DaySetup2.swift */,
@@ -676,10 +696,9 @@
 			isa = PBXGroup;
 			children = (
 				6F28AFEF2A9BBE3E00FDCA0A /* AppData.swift */,
-				6F970BE12B3B8A84003B3FA8 /* FinishedExperiment.swift */,
+				6F489AB12D1F41FC0070D534 /* Medal.swift */,
 				6F28AFF12A9BBFA300FDCA0A /* DataStore.swift */,
 				6F28AFF72A9E46EC00FDCA0A /* ExperimentNameView.swift */,
-				6F35C9B52AABD2980019D839 /* DescriptionView.swift */,
 				6F28AFFB2A9F6D8000FDCA0A /* SliderView.swift */,
 				6F35C9B92AB2A6850019D839 /* DoubleSliderView.swift */,
 				6FA619B72AFDFA2F00CD9572 /* ErrorView.swift */,
@@ -693,11 +712,10 @@
 			isa = PBXGroup;
 			children = (
 				6FB517BD2B34E3420054A44C /* ContentView.swift */,
+				6F702DB32BE41CC8000081A3 /* BestFitLine.swift */,
 				6FB517BF2B34E58B0054A44C /* ProfileView.swift */,
 				6F28AFF32A9BCD2100FDCA0A /* ExperimentView2.swift */,
 				6F28AFF52A9BF7BB00FDCA0A /* NewExperimentView.swift */,
-				6F970BE32B3BB413003B3FA8 /* FinishedExperimentRow.swift */,
-				6F970BE52B3BB8FC003B3FA8 /* FinishedExperimentView.swift */,
 				6FA429AF2B87206700572078 /* OnboardView.swift */,
 			);
 			path = Views;
@@ -733,6 +751,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				6F489AB42D1F49ED0070D534 /* New Folder */,
 			);
 			name = ExperimentApp;
 			productName = ExperimentApp;
@@ -783,7 +804,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					59EEFAD42A58E7F400DA7D84 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -858,8 +879,9 @@
 				6F7750A52A71B08C003BFA65 /* SleepEditView.swift in Sources */,
 				6F7750C62A7BA3F5003BFA65 /* SleepIntroView.swift in Sources */,
 				6FB517872B2E71E20054A44C /* WaketimeBarChartEntry.swift in Sources */,
+				6F702DB42BE41CC8000081A3 /* BestFitLine.swift in Sources */,
 				6FB517912B2E82A90054A44C /* SimpleWaketimeHistory.swift in Sources */,
-				6F970BE22B3B8A84003B3FA8 /* FinishedExperiment.swift in Sources */,
+				6F489AB22D1F41FC0070D534 /* Medal.swift in Sources */,
 				6F35C9BA2AB2A6850019D839 /* DoubleSliderView.swift in Sources */,
 				6F970C092B40131C003B3FA8 /* OtherFunctions.swift in Sources */,
 				6F7750A32A71A9CE003BFA65 /* SleepProcedureView.swift in Sources */,
@@ -884,12 +906,10 @@
 				6F7750D42A7D12CA003BFA65 /* SleepView.swift in Sources */,
 				6F28AFF22A9BBFA300FDCA0A /* DataStore.swift in Sources */,
 				6F28B0802AA39E6100FDCA0A /* DaySetup1.swift in Sources */,
-				6F970BE62B3BB8FC003B3FA8 /* FinishedExperimentView.swift in Sources */,
 				6FB517B72B346C9F0054A44C /* SleepEntryDatePicker.swift in Sources */,
 				6FB517C62B35EF4C0054A44C /* CustomDatePicker.swift in Sources */,
 				59FE4BA92B86E0A30013C8DB /* NotificationHandler.swift in Sources */,
 				6FB517D62B37609D0054A44C /* WaketimeData.swift in Sources */,
-				6F35C9B62AABD2980019D839 /* DescriptionView.swift in Sources */,
 				6FB517D82B38FB750054A44C /* SleepTimeCorrelationData.swift in Sources */,
 				6FB517B52B346BFA0054A44C /* SleepPicker.swift in Sources */,
 				6F7750AB2A748AEA003BFA65 /* SleepEntry.swift in Sources */,
@@ -903,6 +923,7 @@
 				6FB517F72B398D660054A44C /* SleepEntryButton.swift in Sources */,
 				6F7750B72A7B4772003BFA65 /* DayView.swift in Sources */,
 				6FB5177F2B2D5D910054A44C /* SleepDependentHistory.swift in Sources */,
+				6F702DB22BBA5069000081A3 /* DayInsightView.swift in Sources */,
 				59EEFAD92A58E7F400DA7D84 /* ExperimentAppApp.swift in Sources */,
 				6FB5179D2B2E96210054A44C /* SleepTimeHistory.swift in Sources */,
 				6F970C052B400FAA003B3FA8 /* IndependentVariableFunctions.swift in Sources */,
@@ -940,7 +961,6 @@
 				6F28AFF42A9BCD2100FDCA0A /* ExperimentView2.swift in Sources */,
 				6FB5178D2B2E7E970054A44C /* WakeTimeHistory.swift in Sources */,
 				6F28AFF62A9BF7BB00FDCA0A /* NewExperimentView.swift in Sources */,
-				6F7750D72A7DD14E003BFA65 /* Todo.swift in Sources */,
 				6F970C072B40127A003B3FA8 /* BedtimeSampleExperiments.swift in Sources */,
 				6F35C9C22AB65E740019D839 /* BedtimeScatterPlot.swift in Sources */,
 				6F970BE82B3D2F9B003B3FA8 /* ChartHeaderAndSettings.swift in Sources */,
@@ -1051,6 +1071,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1111,6 +1132,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1151,8 +1173,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com-example.ExperimentApp";
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.logarithmapp.Logarithm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1182,8 +1204,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com-example.ExperimentApp";
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.logarithmapp.Logarithm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1194,7 +1216,6 @@
 		59EEFAFD2A58E7F500DA7D84 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1213,7 +1234,6 @@
 		59EEFAFE2A58E7F500DA7D84 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1232,7 +1252,6 @@
 		59EEFB002A58E7F500DA7D84 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1249,7 +1268,6 @@
 		59EEFB012A58E7F500DA7D84 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;

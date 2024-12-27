@@ -16,7 +16,7 @@ struct SleepView: View {
     @State var showIndependentVariableData: Bool = true
     @State var showDependentVariableData: Bool = true
     @Environment(\.presentationMode) var presentationMode
-    let finishAction: (SleepExperiment) -> Void
+    
     @State var presentAlert: Bool = false
     @State var isFinished: Bool = false
     
@@ -125,7 +125,7 @@ struct SleepView: View {
             
         }.onDisappear(){
             if(isFinished){
-                finishAction(experiment)
+                experiment.finish()
             }
         }
     }
@@ -139,7 +139,7 @@ struct SleepView3_Previews: PreviewProvider {
         
         
         NavigationStack{
-            SleepView(experiment: .constant(SleepExperiment.bedtimeSampleExperiment), finishAction: { _ in})
+            SleepView(experiment: .constant(SleepExperiment.bedtimeSampleExperiment))
         }
     }
 }

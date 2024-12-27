@@ -16,9 +16,6 @@ struct DayExperiment: Identifiable, Codable{
     var notes: String = "Take notes here"
     var name: String = "Time of day Experiment"
     
-    
-    
-    
     init(id: UUID = UUID(), goalEntries: Int, independentVariable: IndependentVariable, dependentVariable: DependentVariable) {
         self.id = id
         self.goalEntries = goalEntries

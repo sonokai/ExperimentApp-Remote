@@ -36,6 +36,8 @@ struct TimeSleptPicker: View {
                                     if let hours = experiment.newSleepEntry.hoursSlept, let minutes = experiment.newSleepEntry.minutesSlept{
                                         hoursSlept = hours
                                         minutesSlept = minutes
+                                    } else {
+                                        hoursSlept = 0
                                     }
                                 }
                         }

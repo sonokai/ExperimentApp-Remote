@@ -8,13 +8,16 @@
 import SwiftUI
 
 struct FinishedExperimentRow: View {
-    var finishedExperiment: FinishedExperiment
+    var name: String
+    var startDate: Date
+    var endDate: Date
+    var medal: Medal
     var body: some View {
         VStack(alignment: .leading){
             HStack{
-                Text(finishedExperiment.name).font(.headline)
+                Text(name).font(.headline)
                 Spacer()
-                switch(finishedExperiment.medal){
+                switch(medal){
                 case .none:
                     Text("")
                 case .bronze:
@@ -27,13 +30,13 @@ struct FinishedExperimentRow: View {
                 
             }
             HStack{
-                Text("\(formatDateToString(finishedExperiment.startDate)) - \(formatDateToString(finishedExperiment.endDate))")
+                Text("\(formatDateToString(startDate)) - \(formatDateToString(endDate))")
             }
         }
     }
     func formatDateToString(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM d yyyy"
+        dateFormatter.dateFormat = "MMMM d, yyyy"
         let dateString = dateFormatter.string(from: date)
         return dateString
     }
@@ -42,6 +45,6 @@ struct FinishedExperimentRow: View {
 
 struct FinishedExperimentRow_Previews: PreviewProvider {
     static var previews: some View {
-        FinishedExperimentRow(finishedExperiment: FinishedExperiment.sample)
+        FinishedExperimentRow(name: "Activity", startDate: Date(timeIntervalSinceNow: -600000), endDate: Date(timeIntervalSinceNow: -30), medal: .none)
     }
 }

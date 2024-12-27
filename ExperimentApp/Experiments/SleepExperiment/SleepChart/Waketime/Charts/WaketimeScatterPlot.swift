@@ -101,9 +101,9 @@ struct WaketimeScatterPlot: View {
                 }
                 Section(header: WaketimeStatsHeader()){
                     
-                    Toggle("Show optimal interval", isOn: $showRange).disabled(!optimalIntervalIsValid)
+                    Toggle("Show optimal wake time", isOn: $showRange).disabled(!optimalIntervalIsValid)
                     HStack{
-                        Text("Optimal interval")
+                        Text("Optimal wake time")
                         Spacer()
                         if(optimalIntervalIsValid){
                             Text("\(interval.simplifyDateToTimeString()) - \(interval.addMinutesToDate(minutesToAdd: size).simplifyDateToTimeString())")
@@ -124,9 +124,9 @@ struct WaketimeScatterPlot: View {
                     */
                     HStack{
                         if(dependentVariable == .quality){
-                            Text("Quality of day of optimal interval")
+                            Text("Quality with optimal wake time")
                         } else{
-                            Text("Productivity of optimal interval")
+                            Text("Productivity with optimal wake time")
                         }
                         Spacer()
                         if(optimalIntervalIsValid){

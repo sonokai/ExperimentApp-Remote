@@ -139,5 +139,21 @@ extension SleepExperiment{
             }
         }
     }
+    mutating func finish(){
+        self.isFinished = true
+        self.endDate = Date()
+        var medal: Medal = .bronze
+        switch(entries.count){
+        case 0...15:
+            medal = .none
+        case 15...25:
+            medal = .bronze
+        case 25...50:
+            medal = .silver
+        default:
+            medal = .gold
+        }
+        self.medal = medal
+    }
 }
 

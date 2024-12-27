@@ -100,10 +100,10 @@ struct SleepTimeScatterPlot: View {
                     }
                 }
                 Section(header: SleepTimeStatsHeader()){
-                    Toggle("Show optimal interval", isOn: $showRange).disabled(!optimalIntervalIsValid)
+                    Toggle("Show optimal sleep time", isOn: $showRange).disabled(!optimalIntervalIsValid)
                     
                     HStack{
-                        Text("Optimal interval")
+                        Text("Optimal sleep time")
                         Spacer()
                         if(optimalIntervalIsValid){
                             Text("\(interval.simplifyDateToHMM()) - \(interval.addMinutesToDate(minutesToAdd: size).simplifyDateToHMM())")
@@ -124,9 +124,9 @@ struct SleepTimeScatterPlot: View {
                     */
                     HStack{
                         if(dependentVariable == .quality){
-                            Text("Quality of day of optimal interval ")
+                            Text("Quality of day of best sleep time ")
                         } else{
-                            Text("Productivity of optimal interval")
+                            Text("Productivity of best sleep time")
                         }
                         Spacer()
                         if(optimalIntervalIsValid){

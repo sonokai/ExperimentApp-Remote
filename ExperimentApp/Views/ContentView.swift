@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment (\.scenePhase) private var scenePhase
+    @Environment(\.scenePhase) private var scenePhase
     @AppStorage("selectedTab") var selectedTabIndex: Int = 0
     @StateObject private var viewModel = TabViewModel()
     @Binding var appData: AppData

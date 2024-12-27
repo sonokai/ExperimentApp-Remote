@@ -13,15 +13,15 @@ struct ProfileView: View {
         NavigationStack{
             Form{
                 Section("Finished experiments"){
-                    if(appData.finishedExperiments.isEmpty){
-                        Text("Finished experiments will show up here!")
-                    }else {
-                        ForEach(appData.finishedExperiments){ finished in
-                            NavigationLink(destination: FinishedExperimentView(finishedExperiment: finished)){
-                                FinishedExperimentRow(finishedExperiment: finished)
-                            }
+                    
+                    ForEach($appData.sleepExperiments){ $a in
+                        NavigationLink(destination: SleepView(experiment: $a)){
+                            FinishedExperimentRow(name: a.name, startDate: a.startDate, endDate: a.endDate ?? Date(), medal: a.medal)
                         }
                     }
+                    
+                    
+                    //Add your own
                 }
             }
         }

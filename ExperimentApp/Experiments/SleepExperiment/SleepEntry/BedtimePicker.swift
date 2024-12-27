@@ -21,7 +21,6 @@ struct BedtimePicker: View {
                     bedtime = initialValue
                 }
             }
-        
     }
     func getTime() -> String {
         let dateFormatter = DateFormatter()
@@ -36,4 +35,5 @@ struct BedtimePicker_Previews: PreviewProvider {
             BedtimePicker(experiment: .constant(SleepExperiment.bedtimebothExperiment), timeSelectorPopOver: .constant(false))
         }
     }
+    
 }

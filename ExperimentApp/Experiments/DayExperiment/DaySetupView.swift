@@ -21,7 +21,7 @@ struct DaySetupView: View {
     var body: some View {
         NavigationStack{
             Form{
-                DescriptionView(headline: "Let's set up your day experiment", description: "hahhahaha")
+               
                 DaySetup1(independentVariable: $independentVariable)
                 DaySetup2(dependentVariable: $dependentVariable, hasSelectedDependentVariable: $hasSelectedDependentVariable)
                 DaySetup3(goalEntries: $goalEntries)

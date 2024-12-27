@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SleepExplanation: View {
+    @Environment(\.presentationMode) var presentationMode
     @Binding var index: Int
     var body: some View {
         ScrollView{
@@ -33,6 +34,9 @@ struct SleepExplanation: View {
                 Text("Despite being unable to establish causality, we'll still be able to find patterns that predict better outcomes.")
                 Spacer()
                 HStack{
+                    Button("Back to explore"){
+                        presentationMode.wrappedValue.dismiss()
+                    }
                     Spacer()
                     Button("Let's begin"){
                         withAnimation{
